@@ -233,9 +233,11 @@ On server:
 [entities](https://community.bistudio.com/wiki/entities)
 
 ### set a vehicle position -- use to "teleport" players
+
 [setVehiclePosition](https://community.bistudio.com/wiki/setVehiclePosition)
+
     player setVehiclePosition [[1000,2000], ["Pos1","Pos2","Pos3"], 0, "CAN_COLLIDE"];
-    #Will place the player at either [1000,2000], or one of the three markers positions.
+    \# Will place the player at either [1000,2000], or one of the three markers positions.
 
 ### marker (type "empty") with variable name MPOS1 placed on map
     player setVehiclePosition [(getMarkerPos "MPOS1"),[],0,"NONE"];
