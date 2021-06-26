@@ -31,6 +31,11 @@ On server:
 \# You have to enter the following in to steamCMD:
 
     app_update 233780 -beta creatordlc " validate +quit
+    # NOTE! this puts the files in .local/share/Steam/steamapps/common/Arma 3 Server/vn
+    # So add symbolic link
+    cd serverfiles
+    ln -s /home/Arma3server/.local/share/Steam/steamapps/common/'Arma 3 Server'/vn vn
+
 
 And launch with the Arma startup parameter -mod=vn;  
 
