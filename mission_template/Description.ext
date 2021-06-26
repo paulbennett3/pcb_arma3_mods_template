@@ -1,0 +1,32 @@
+author = "Nazghash";
+onLoadName = "Stargate - Rescue";
+onLoadMission = "Gate to Vorash and assist SG-7";
+
+class Header
+{
+    gameType = Coop;
+    minPlayers = 1;
+    maxPlayers = 4;
+};
+
+briefingName = "Stargate 1-4 CO Rescue";
+
+respawn = "BASE"; // need marker with name respawn_west
+respawnButton = 1; // enable forced respawn
+respawnDelay = 60;
+reviveMode = 1;
+reviveRequiredTrait = 1; // must be medic to revive
+reviveRequiredItems = 2; // either medkit or FAK needed to revive
+reviveDelay = 10;
+showMap = 0;
+
+// Tasks
+class CfgTaskDescriptions
+{
+    class myTask1
+    {
+        title       = "myTaskTitle";
+        description = "myTaskDescription";
+        marker      = "myTaskDestinationMarker";
+    };
+};
