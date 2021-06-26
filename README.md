@@ -13,7 +13,6 @@ Basic scripts and utilities
 [???](https://steamcommunity.com/workshop/filedetails/?id=463939057)
 [CBA](https://cbateam.github.io/CBA_A3/docs/files/overview-txt.html)
 
-
 [Drongos Spooks and Anomalies](https://steamcommunity.com/workshop/filedetails/?id=2262255106)
 
 [Stargate ARMA](https://steamcommunity.com/sharedfiles/filedetails/?id=815366548&searchtext=stargate)
@@ -101,6 +100,26 @@ On server:
 
 ## IPTABLES
 [IP Tables for Beginners](https://www.howtogeek.com/177621/the-beginners-guide-to-iptables-the-linux-firewall/)
+
+---
+## Handy commands reference
+[SQF Syntax](https://community.bistudio.com/wiki/SQF_Syntax)
+[Control Structures](https://community.bistudio.com/wiki/Control_Structures)
+
+[Code Optimization](https://community.bistudio.com/wiki/Code_Optimisation)
+[Scripting Commands Index](https://community.bistudio.com/wiki/Category:Arma_3:_Scripting_Commands)
+[Functions Index](https://community.bistudio.com/wiki/Category:Arma_3:_Functions)
+[Event Scripts](https://community.bistudio.com/wiki/Event_Scripts)
+[Event Handlers](https://community.bistudio.com/wiki/Arma_3:_Event_Handlers)
+[Multiplayer Scripting](https://community.bistudio.com/wiki/Multiplayer_Scripting)
+[Remote Execution](https://community.bistudio.com/wiki/Arma_3:_Remote_Execution)
+[Task Framework](https://community.bistudio.com/wiki/Arma_3:_Task_Framework)
+[Task Framework Tutorial](https://community.bistudio.com/wiki/Arma_3:_Task_Framework_Tutorial)
+[Equipment Reference](https://community.bistudio.com/wiki/Arma_3:_CfgVehicles_Equipment)
+
+### Specific commands / scripts
+[BIS_fnc_taskPatrol - assign random patrol to group](https://community.bistudio.com/wiki/BIS_fnc_taskPatrol)
+[Unit Loadout Array](https://community.bistudio.com/wiki/Unit_Loadout_Array)
 
 
 ---
