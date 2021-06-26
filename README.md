@@ -24,10 +24,13 @@ Basic scripts and utilities
 
 ## DLC (like the Vietname 'S.O.G Prairie Fire')
 On pc: 
+
 in launcher, go to "DLC", enable!
 
 On server:
+
 \# You have to enter the following in to steamCMD:
+
     app_update 233780 -beta creatordlc " validate +quit
 
 And launch with the Arma startup parameter -mod=vn;  
@@ -36,7 +39,7 @@ And launch with the Arma startup parameter -mod=vn;
 # Dedicated Server Stuff
 
 ## Uploading Mods to Server
-On pc:
+On pc
     \# zip up the mod
     cd /mnt/d/SteamLibrary/steamapps/common/'Arma 3'/'!Workshop'/'@Stargate Arma'
     \# have to cd *into* the @directory, since it is a symbolic link ...
