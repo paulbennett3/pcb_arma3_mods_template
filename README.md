@@ -103,23 +103,22 @@ On server:
 
 ---
 ## Handy commands reference
-[SQF Syntax](https://community.bistudio.com/wiki/SQF_Syntax)
-[Control Structures](https://community.bistudio.com/wiki/Control_Structures)
-
-[Code Optimization](https://community.bistudio.com/wiki/Code_Optimisation)
-[Scripting Commands Index](https://community.bistudio.com/wiki/Category:Arma_3:_Scripting_Commands)
-[Functions Index](https://community.bistudio.com/wiki/Category:Arma_3:_Functions)
-[Event Scripts](https://community.bistudio.com/wiki/Event_Scripts)
-[Event Handlers](https://community.bistudio.com/wiki/Arma_3:_Event_Handlers)
-[Multiplayer Scripting](https://community.bistudio.com/wiki/Multiplayer_Scripting)
-[Remote Execution](https://community.bistudio.com/wiki/Arma_3:_Remote_Execution)
-[Task Framework](https://community.bistudio.com/wiki/Arma_3:_Task_Framework)
-[Task Framework Tutorial](https://community.bistudio.com/wiki/Arma_3:_Task_Framework_Tutorial)
-[Equipment Reference](https://community.bistudio.com/wiki/Arma_3:_CfgVehicles_Equipment)
+- [SQF Syntax](https://community.bistudio.com/wiki/SQF_Syntax)
+- [Control Structures](https://community.bistudio.com/wiki/Control_Structures)
+- [Code Optimization](https://community.bistudio.com/wiki/Code_Optimisation)
+- [Scripting Commands Index](https://community.bistudio.com/wiki/Category:Arma_3:_Scripting_Commands)
+- [Functions Index](https://community.bistudio.com/wiki/Category:Arma_3:_Functions)
+- [Event Scripts](https://community.bistudio.com/wiki/Event_Scripts)
+- [Event Handlers](https://community.bistudio.com/wiki/Arma_3:_Event_Handlers)
+- [Multiplayer Scripting](https://community.bistudio.com/wiki/Multiplayer_Scripting)
+- [Remote Execution](https://community.bistudio.com/wiki/Arma_3:_Remote_Execution)
+- [Task Framework](https://community.bistudio.com/wiki/Arma_3:_Task_Framework)
+- [Task Framework Tutorial](https://community.bistudio.com/wiki/Arma_3:_Task_Framework_Tutorial)
+- [Equipment Reference](https://community.bistudio.com/wiki/Arma_3:_CfgVehicles_Equipment)
 
 ### Specific commands / scripts
-[BIS_fnc_taskPatrol - assign random patrol to group](https://community.bistudio.com/wiki/BIS_fnc_taskPatrol)
-[Unit Loadout Array](https://community.bistudio.com/wiki/Unit_Loadout_Array)
+- [BIS_fnc_taskPatrol - assign random patrol to group](https://community.bistudio.com/wiki/BIS_fnc_taskPatrol)
+- [Unit Loadout Array](https://community.bistudio.com/wiki/Unit_Loadout_Array)
 
 
 ---
