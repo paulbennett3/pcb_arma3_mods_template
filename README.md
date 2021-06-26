@@ -4,6 +4,8 @@ Basic scripts and utilities
 # Notes and Snippets
 ### Stuff that hasn't found a home yet
 
+[Dedicated Server Stuff -- how to update!](https://community.bistudio.com/wiki/Arma_3:_Dedicated_Server)
+
 [Keybindings -- infantry, vehicle, helicopter, group / team commands](http://cdn.akamai.steamstatic.com/steam/apps/107410/manuals/Arma_3_keylayout_ENG.pdf?t=1478619759)
 
 ## Mods
@@ -21,6 +23,7 @@ Basic scripts and utilities
 
 [Equipment Reference - tags](https://community.bistudio.com/wiki/Arma_3:_CfgWeapons_Equipment)
 
+[SteamCMD Info and options](https://developer.valvesoftware.com/wiki/Command_Line_Options#SteamCMD)
 ## DLC (like the Vietname 'S.O.G Prairie Fire')
 On pc: 
 
