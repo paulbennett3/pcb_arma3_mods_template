@@ -39,37 +39,41 @@ And launch with the Arma startup parameter -mod=vn;
 # Dedicated Server Stuff
 
 ## Uploading Mods to Server
+
 On pc
-    \# zip up the mod
+
+    # zip up the mod
     cd /mnt/d/SteamLibrary/steamapps/common/'Arma 3'/'!Workshop'/'@Stargate Arma'
-    \# have to cd *into* the @directory, since it is a symbolic link ...
-    \# tar up the contents (make a new name with no spaces, upper case, ...)
+
+    # have to cd *into* the @directory, since it is a symbolic link ...
+    # tar up the contents (make a new name with no spaces, upper case, ...)
     tar czf @stargate_arma.tgz addons/ keys/ logo_small.paa ...   
-    \# not sure if .* will recursively add tgz file ... so list content explicitly.
+    # not sure if .* will recursively add tgz file ... so list content explicitly.
         but we want everything in the directory
-    \# send it to the server
+    # send it to the server
     scp @stargate_arma.tgz LOGIN@IPADDR:@stargate_arma.tgz   # root file!
-    \# this will take awhile -- ~200KB/s, for 2G - 3+ hours?!?
+    # this will take awhile -- ~200KB/s, for 2G - 3+ hours?!?
 
 On server:
-    \# as root!
+
+    # as root!
     chown Arma3server @stargate_arma.tgz
     cp ~/@stargate_arma.tgz /home/Arma3server/mods_zips/   # make this dir first!
     su - Arma3server
   
-    \# make mods directory in ~/serverfiles   (if you haven't already done this)
+    # make mods directory in ~/serverfiles   (if you haven't already done this)
     cp ~/mods_zips/@stargate_arma.tgz ~/serverfiles/mods/
     cd ~/serverfiles/mods
     tar xzf @stargate_arma.tgz
 
-    \# unzip our modfile (in mods_zips where we copied it -- or wherever we put it with scp ...)
-    \# copy contents to serverfiles/mods/@mymodname
-    \#   so now the first level subdirectories of @mymodname will be like "addons", "keys", ...
+    # unzip our modfile (in mods_zips where we copied it -- or wherever we put it with scp ...)
+    # copy contents to serverfiles/mods/@mymodname
+    #   so now the first level subdirectories of @mymodname will be like "addons", "keys", ...
     cp serverfiles/mods/@mymodname/keys/* serverfiles/keys/ 
  
-    \# Edit the config file to load the mod (name must be in all lower case!!!!)
+    # Edit the config file to load the mod (name must be in all lower case!!!!)
     vi ~/lgsm/config-lgsm/arma3server/arma3server.cfg
-      \# edit line
+      # edit line
              servermods=""
         Example:   
             servermods="mods/@drongossa\;mods/@drongosmap\;mods/@zombiesanddemons\;mods/@notwhattheyseem"
@@ -166,7 +170,7 @@ On server:
 - Type 115 - underslung .50 for short range big hits
 
 ### Backpack loadouts
-    \# Medic
+    # Medic
     {removeBackpack _x;} forEach thisList;
     {_x addbackpack "B_AssaultPack_blk";} forEach thisList;
     {_x addItemToBackpack "Medikit";} forEach thisList;
@@ -175,7 +179,7 @@ On server:
     {_x setUnitTrait ["medic", true];} forEach thisList;
     {_x setUnitTrait ["mage", false, true];} forEach thisList;
 
-    \# Sapper
+    # Sapper
     {removeBackpack _x;} forEach thisList;
     {_x addbackpack "B_AssaultPack_blk";} forEach thisList;
     {_x addItemToBackpack "MineDetector";} forEach thisList;
@@ -189,7 +193,7 @@ On server:
 
 
 
-    \# Misc
+    # Misc
     {removeBackpack _x;} forEach thisList;
     {_x addbackpack "B_AssaultPack_blk";} forEach thisList;
     {_x addItemToBackpack "ToolKit";} forEach thisList;
@@ -237,7 +241,7 @@ On server:
 [setVehiclePosition](https://community.bistudio.com/wiki/setVehiclePosition)
 
     player setVehiclePosition [[1000,2000], ["Pos1","Pos2","Pos3"], 0, "CAN_COLLIDE"];
-    \# Will place the player at either [1000,2000], or one of the three markers positions.
+    # Will place the player at either [1000,2000], or one of the three markers positions.
 
 ### marker (type "empty") with variable name MPOS1 placed on map
     player setVehiclePosition [(getMarkerPos "MPOS1"),[],0,"NONE"];
@@ -333,7 +337,7 @@ to access different doors you need to use different numbers at the end of the va
     [this, "Team Member"] call compile preprocessFile "scripts\pcb_loadout.sqf";
 
 ### Add respawn event handler to call loadout
-    \# should use role description from corpse(?) vice hardcoding "Team Member"
+    # should use role description from corpse(?) vice hardcoding "Team Member"
     this addEventHandler ["Respawn", {
 	params ["_unit", "_corpse"];
         [this, "Team Member"] call pcb_loadout;
@@ -379,7 +383,7 @@ to access different doors you need to use different numbers at the end of the va
     };
 
 ### force all playable units (including players!) to get out of vehicles
-    \#  note that "doGetOut" will work, but the AI just gets back in ...
+    #  note that "doGetOut" will work, but the AI just gets back in ...
     playableUnits orderGetIn false;
 
 # SGC Coords
