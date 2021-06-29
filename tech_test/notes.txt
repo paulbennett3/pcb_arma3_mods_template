@@ -1,8 +1,28 @@
-place a "respawn_west" marker near starting gate
-place initial gate
-gate markers labeled with "pcb_mstargate_N" whre N is a number
-use:
-private _marker = selectRandom (allMapMarkers select {"pcb_mstargate_" in _x}); 
-[_marker] call compile preprocessFile "scripts\pcb_place_stargate.sqf";
+# Requirements
+- place a "respawn_west" marker near starting gate
+- mark some object as "sgc_briefing" 
+    - this has the mission generator "addAction"'d to it
+    - also currently has loadouts "addAction"'d to it
+- place initial gate, set to earth (or leave random)
+ 
 
-mark some object as sgc_briefing  <- initial task spawns here ...
+# general
+- if it is only run *once*, use execVM
+- if it is used more than once, store as a function, then
+    - if no sleep commands, "call" it
+    - If it has sleep type commands, "spawn" it
+
+
+# Function example
+## in file "functions\fMyFunction.sqf";
+params ["_myParam"];  // declare parameters
+hint _myParam;        // do something 
+_myParam;             // return a value
+
+## compile it -- create a "preinit" function and define in cfgfunctions class of description.ext 
+pcb_f_myfunction = (compilefinal preprocessfile "functions\fMyFunction.sqf");
+
+## example usage
+private _result = ["parameter"] call pcb_f_myfunction;
+   OR
+["parameter"] spawn pcb_f_myfunction;

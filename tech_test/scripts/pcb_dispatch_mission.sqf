@@ -19,6 +19,6 @@ if (pcb_mission_complete) then {
        publicVariable "pcb_mission_list";
    };
 
-   _mission_name = ("scripts\missions\" + _mission_name) + ".sqf";
+   _mission_name = ("mission_scripts\" + _mission_name) + ".sqf";
    [] call compile preprocessFile _mission_name;
 };
