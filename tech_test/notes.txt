@@ -1,0 +1,8 @@
+place a "respawn_west" marker near starting gate
+place initial gate
+gate markers labeled with "pcb_mstargate_N" whre N is a number
+use:
+private _marker = selectRandom (allMapMarkers select {"pcb_mstargate_" in _x}); 
+[_marker] call compile preprocessFile "scripts\pcb_place_stargate.sqf";
+
+mark some object as sgc_briefing  <- initial task spawns here ...

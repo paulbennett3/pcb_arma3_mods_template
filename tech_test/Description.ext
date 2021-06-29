@@ -1,0 +1,33 @@
+author = "Nazghash";
+onLoadName = "Stargate - SG-13";
+onLoadMission = "The missions of SG-13";
+
+class Header
+{
+    gameType = Coop;
+    minPlayers = 1;
+    maxPlayers = 4;
+};
+
+briefingName = "Stargate 1-4 CO";
+
+respawn = "BASE"; // need marker with name respawn_west
+respawnButton = 1; // enable forced respawn
+respawnDelay = 10;
+reviveMode = 1;
+reviveRequiredTrait = 1; // must be medic to revive
+reviveRequiredItems = 2; // either medkit or FAK needed to revive
+reviveDelay = 10;
+showMap = 0;
+
+// Tasks
+class CfgTaskDescriptions
+{
+    class myTask1
+    {
+        title       = "myTaskTitle";
+        description = "myTaskDescription";
+        marker      = "myTaskDestinationMarker";
+    };
+};
+
