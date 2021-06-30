@@ -26,3 +26,7 @@ pcb_f_myfunction = (compilefinal preprocessfile "functions\fMyFunction.sqf");
 private _result = ["parameter"] call pcb_f_myfunction;
    OR
 ["parameter"] spawn pcb_f_myfunction;
+
+# RPT files
+/mnt/c/Users/nazgh/AppData/Local/Arma 3/Arma3x64_<date time>.RPT
+

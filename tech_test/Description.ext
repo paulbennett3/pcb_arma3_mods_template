@@ -20,6 +20,16 @@ reviveRequiredItems = 2; // either medkit or FAK needed to revive
 reviveDelay = 10;
 showMap = 0;
 
+// Compiling functions in Description.ext 
+// https://community.bistudio.com/wiki/Arma_3:_Functions_Library#Adding_a_Function
+class cfgFunctions
+{
+    class pcb
+    {
+        class 
+    };
+};
+
 // Tasks
 class CfgTaskDescriptions
 {
