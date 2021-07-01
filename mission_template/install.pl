@@ -21,6 +21,11 @@ if (! -e $path) {
     die "Failed to access path <$path>\n\n\n";
 }
 
+# verify there is a mission.sqm file in $path
+if (! -e "$path/mission.sqm") {
+    die "No 'mission.sqm' file on path <$path>\n";
+}
+
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #
 # at this point we should do things differently for SCP vice Stargate ...
