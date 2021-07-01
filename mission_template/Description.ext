@@ -1,0 +1,66 @@
+author = "Nazghash";
+onLoadName = "Stargate - SG-13";
+onLoadMission = "The missions of SG-13";
+
+class Header
+{
+    gameType = Coop;
+    minPlayers = 1;
+    maxPlayers = 4;
+};
+
+briefingName = "Stargate 1-4 CO";
+
+respawn = "BASE"; // need marker with name respawn_west
+respawnButton = 1; // enable forced respawn
+respawnDelay = 10;
+reviveMode = 1;
+reviveRequiredTrait = 1; // must be medic to revive
+reviveRequiredItems = 2; // either medkit or FAK needed to revive
+reviveDelay = 10;
+showMap = 0;
+
+// Tasks
+class CfgTaskDescriptions
+{
+    class myTask1
+    {
+        title       = "myTaskTitle";
+        description = "myTaskDescription";
+        marker      = "myTaskDestinationMarker";
+    };
+};
+
+// Functions
+class CfgFunctions
+{
+    class pcb
+    {
+        // will compile functions/fn_testfunc as pcb_fnc_testfunc (note the "fn_" prefix in filename not used here!) 
+
+        class utilities 
+        {
+            file = "functions"; // really "path" -- will compile stuff in <misison root>/file/
+
+            class add_interact_action_to_object {};
+            class add_loadout_actions_to_object {};
+            class chat_commands {};
+            class create_briefing_table {};
+            class delete_spawned_stuff {};
+            class dispatch_mission {};
+            class get_gate {};
+            class loadout {};
+            class place_stargate {};
+            class random_stargate_name {};
+            class random_stargate_position {};
+            class summon_squad {};
+        };
+
+        class missions
+        {
+            file = "missions"; // really "path" -- will compile stuff in <misison root>/file/
+            class explore {};
+            class resupply {};
+        };
+    };
+};
