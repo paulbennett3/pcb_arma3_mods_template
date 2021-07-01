@@ -1,4 +1,5 @@
-
+#! /usr/bin/perl
+#
 my $default_base_path = "/mnt/c/Documents\ and\ Settings/nazgh/My\ Documents/Arma\ 3/mpmissions/";
 my $default_pbo_path = "/mnt/d/SteamLibrary/steamapps/common/Arma\ 3/MPMissions/";
 
