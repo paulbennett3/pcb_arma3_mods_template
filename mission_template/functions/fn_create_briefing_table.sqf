@@ -2,6 +2,14 @@
 //   changing loadout
 //   Also add chat command handlers
 
+// possibly check if sgc_briefing exists, and it if doesn't,
+//  use that as hint to create SGC at a suitable location
+
+// if there isn't a marker named "respawn_west", create it at the location of the table
+if (! "respawn_west" in allMapMarkers) {
+    private _respawn = createMarker ["respawn_west", getPosATL sgc_briefing];
+};
+
 // set initial mission
 [] spawn {
     sleep 5;

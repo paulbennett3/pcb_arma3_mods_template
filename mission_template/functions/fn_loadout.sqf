@@ -11,6 +11,7 @@ removeBackpack _this;
 _this setUnitTrait ["medic", false]; 
 _this setUnitTrait ["engineer", false]; 
 _this setUnitTrait ["explosiveSpecialist", false]; 
+_this setUnitTrait ["scholar", false, true]; 
 
 _this forceAddUniform "SGA_SG1_Uniform_desert";
 _this addMagazine "50Rnd_570x28_SMG_03";

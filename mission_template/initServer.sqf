@@ -1,4 +1,7 @@
 
+// Set if this is an SCP or Stargate mod
+pcb_mod_name = "stargate";
+
 // global variable init
 pcb_spawned_stuff = [];
 pcb_mission_complete = True; // don't start in the middle of a mission ...
@@ -7,6 +10,7 @@ pcb_gate_blacklist = [ [getPosATL sgc_briefing, 2000] ];
 pcb_task_count = 0;
 
 // make our various globals public 
+publicVariable "pcb_mod_name";
 publicVariable "pcb_spawned_stuff";
 publicVariable "pcb_mission_complete";
 publicVariable "pcb_gate_blacklist";

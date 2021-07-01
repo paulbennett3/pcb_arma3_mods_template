@@ -20,6 +20,10 @@ reviveRequiredItems = 2; // either medkit or FAK needed to revive
 reviveDelay = 10;
 showMap = 0;
 
+// disable gps and map
+showGPS = 0;
+showMap = 1;  // leave on for debugging
+
 // Tasks
 class CfgTaskDescriptions
 {
@@ -50,6 +54,7 @@ class CfgFunctions
             class dispatch_mission {};
             class get_gate {};
             class loadout {};
+            class loadout_scp_stargate {};
             class place_stargate {};
             class random_stargate_name {};
             class random_stargate_position {};
