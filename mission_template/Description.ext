@@ -18,7 +18,6 @@ reviveMode = 1;
 reviveRequiredTrait = 1; // must be medic to revive
 reviveRequiredItems = 2; // either medkit or FAK needed to revive
 reviveDelay = 10;
-showMap = 0;
 
 // disable gps and map
 showGPS = 0;

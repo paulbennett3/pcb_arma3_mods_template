@@ -59,7 +59,7 @@ _this addvest "V_PlateCarrier1_blk";
 _this addItemToVest _ammo;
 _this addItemToVest _ammo;
 
-this addbackpack "B_AssaultPack_blk";
+_this addbackpack "B_AssaultPack_blk";
 
 switch (_role) do
 {
@@ -91,6 +91,7 @@ switch (_role) do
     };
     case "Machine Gunner":
     {
+        removemagazines _ammo;
         _gun = _gun_lmg;   // MX-SW  TWS-MG
         _scope = _scope_lmg;
         _ammo = _ammo_lmg;
@@ -108,19 +109,17 @@ switch (_role) do
     };
     case "Scholar":
     {
+        removeallweapons _this;  
+        removemagazines _ammo;
         _this setUnitTrait ["scholar", true, true];
 
         if (pcb_mod_name isEqualTo "stargate") then {
             //_this addMagazine "sga_zat_mag_closed";
             //_this addWeapon "sga_zat";
-            _this addMagazine "16Rnd_9x21_Mag";
-            _this addMagazine "16Rnd_9x21_Mag";
-            _this addMagazine "16Rnd_9x21_Mag";
-            _this addMagazine "16Rnd_9x21_Mag";
+            _ammo = "16Rnd_9x21_Mag";
+            _this _ammo;
             _this addWeapon "hgun_P07_blk_F";
-            _this addMagazine "30nd_9x21_Mag";
-            _this addMagazine "30nd_9x21_Mag";
-            _this linkItem "acc_flashlight_pistol";
+            _this addItem "acc_flashlight_pistol";
         } else {
            _gun = _gun_carbine;
         };
@@ -145,6 +144,7 @@ switch (_role) do
     case "Jaffa":
     {
         removeallweapons _this;
+        removemagazines _ammo;
         _this addMagazine "sga_staffweapon_mag_on";
         _this addWeapon "sga_staffweapon";
         _this addMagazine "sga_zat_mag_closed";
@@ -164,5 +164,5 @@ if (_role isEqualTo "Grenadier") then {
 };
 
 
-_// top up with some more ammo
+// top up with some more ammo
 (unitBackpack _this) addmagazineCargo [_ammo, 3];
