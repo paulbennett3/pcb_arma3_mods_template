@@ -1,6 +1,7 @@
 
 // Set if this is an SCP or Stargate mod
-pcb_mod_name = "stargate";
+//pcb_mod_name = "stargate";
+pcb_mod_name = "scp";
 
 // global variable init
 pcb_spawned_stuff = [];
