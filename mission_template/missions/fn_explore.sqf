@@ -48,7 +48,7 @@ _obj = createVehicle [_obj_str, thing_loc, [], 0, "NONE"];
 [
   _obj, 
   "study", 
-  { pcb_explored_count = pcb_explored_count + 1; hint str pcb_explored_count; publicVariable 'pcb_explored_count';},
+  { pcb_explored_count = pcb_explored_count + 1; publicVariable 'pcb_explored_count';},
   30
 ] call pcb_fnc_add_interact_action_to_object;
 
@@ -68,7 +68,8 @@ _obj = createVehicle [_obj_str, thing_loc, [], 0, "NONE"];
 };
 
 // set trigger for ending mission
-private _end_activation = "pcb_mission_complete = true; publicVariable 'pcb_mission_complete'; hint 'mission done';";
+private _end_activation = "pcb_mission_complete = true; publicVariable 'pcb_mission_complete'; ";
+_end_activation = _end_activation + "[] spawn {[task_name, 'SUCCEEDED'] call BIS_fnc_taskSetState;};";
 
 private _trg_e = createTrigger ["EmptyDetector", _loc];
 _trg_e setTriggerArea [5, 5, 0, false, 5];
@@ -95,7 +96,7 @@ private _activation = "[] spawn { [task_name, thing_loc] call BIS_fnc_taskSetDes
 private _env = selectRandom ["time", "fog", "rain"];
 switch (_env) do {
     case "time": { _activation = _activation + "skipTime (random 24); "; };
-    case "fog": { _activation = _activation + "0 setFog [.75, 0, 500]; "; };
+    case "fog": { _activation = _activation + "0 setFog [random 1, 0, 500]; "; };
     case "rain": { _activation = _activation + "0 setRain 1; "; };
     case "overcast": { _activation = _activation + "0 setOvercast 1; "; };
     case "none": { };
