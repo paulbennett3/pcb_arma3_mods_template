@@ -27,6 +27,8 @@ private _gun = "SMG_03C_TR_black";
 private _uniform = "SGA_SG1_Uniform_desert";
 private _scope = "optic_ACO_grn_smg";
 
+private _no_gun = false; // used to keep scholar and jaffa weapons
+
 if (pcb_mod_name isEqualTo "scp") then {
     _uniform = "U_B_CombatUniform_mcam";
     _ammo = "30Rnd_65x39_caseless_mag";
@@ -91,7 +93,7 @@ switch (_role) do
     };
     case "Machine Gunner":
     {
-        removemagazines _ammo;
+        _this removemagazines _ammo;
         _gun = _gun_lmg;   // MX-SW  TWS-MG
         _scope = _scope_lmg;
         _ammo = _ammo_lmg;
@@ -105,21 +107,24 @@ switch (_role) do
 
         // bipod?
         if (pcb_mod_name isEqualTo "scp") then { 
+           _this addItem "bipod_01_f_blk";
         };
     };
     case "Scholar":
     {
-        removeallweapons _this;  
-        removemagazines _ammo;
+        //_this removeWeapon _gun;
+        //_this removemagazines _ammo;
         _this setUnitTrait ["scholar", true, true];
 
         if (pcb_mod_name isEqualTo "stargate") then {
-            //_this addMagazine "sga_zat_mag_closed";
-            //_this addWeapon "sga_zat";
-            _ammo = "16Rnd_9x21_Mag";
-            _this _ammo;
-            _this addWeapon "hgun_P07_blk_F";
-            _this addItem "acc_flashlight_pistol";
+        //    //_this addMagazine "sga_zat_mag_closed";
+        //    //_this addWeapon "sga_zat";
+        //    _ammo = "16Rnd_9x21_Mag";
+        //    _this addMagazine _ammo;
+        //    _this addWeapon "hgun_P07_blk_F";
+        //    _this addHandgunItem "acc_flashlight_pistol";
+        //    
+        //    _no_gun = true;
         } else {
            _gun = _gun_carbine;
         };
@@ -128,7 +133,7 @@ switch (_role) do
     {
         _gun = _gun_marksman;  // MXM + DMS?
         _scope = _scope_marksman;
-        // bipod?
+        _this addItem "bipod_01_f_blk";
     };
     case "Grenadier":
     {
@@ -143,21 +148,25 @@ switch (_role) do
     };
     case "Jaffa":
     {
-        removeallweapons _this;
-        removemagazines _ammo;
+        _this removeWeapon _gun;
+        _this removemagazines _ammo;
         _this addMagazine "sga_staffweapon_mag_on";
         _this addWeapon "sga_staffweapon";
         _this addMagazine "sga_zat_mag_closed";
         _this addWeapon "sga_zat";
         _this setvariable["sga_skills",["Engineer"],true];
+        //_this setObjectTextureGlobal [0, "sga_jaffa\data\tat\chronos_silv_ca.paa"];
+        _no_gun = true;
     };
 };
 
 // down here to allow roles to change scope, gun
 _this addMagazine _ammo;
-_this addWeapon _gun;
-_this addPrimaryWeaponItem "acc_flashlight";
-_this addPrimaryWeaponItem _scope;
+if (! _no_gun) then {
+    _this addWeapon _gun;
+    _this addPrimaryWeaponItem "acc_flashlight";
+    _this addPrimaryWeaponItem _scope;
+};
 
 if (_role isEqualTo "Grenadier") then {
     this addWeaponItem [_gun, "1Rnd_HE_Grenade_shell"];

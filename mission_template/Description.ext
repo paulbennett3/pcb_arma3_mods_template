@@ -20,7 +20,7 @@ reviveRequiredItems = 2; // either medkit or FAK needed to revive
 reviveDelay = 10;
 
 // disable gps and map
-showGPS = 0;
+showGPS = 1;
 showMap = 1;  // leave on for debugging
 
 // Tasks
@@ -47,6 +47,7 @@ class CfgFunctions
 
             class add_interact_action_to_object {};
             class add_loadout_actions_to_object {};
+            class build_sgc {};
             class chat_commands {};
             class create_briefing_table {};
             class delete_spawned_stuff {};
