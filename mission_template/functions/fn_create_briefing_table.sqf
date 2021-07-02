@@ -5,11 +5,6 @@
 // possibly check if sgc_briefing exists, and it if doesn't,
 //  use that as hint to create SGC at a suitable location
 
-// if there isn't a marker named "respawn_west", create it at the location of the table
-if (! ("respawn_west" in allMapMarkers)) then {
-    private _respawn = createMarker ["respawn_west", getPosATL sgc_briefing];
-};
-
 // set initial mission
 [] spawn {
     sleep 5;
@@ -35,5 +30,5 @@ _trg setTriggerStatements ["this",
 [] spawn { 
     sgc_briefing addAction ["Get Mission", "[] call pcb_fnc_dispatch_mission", [], 1.5, true, true, "", "true", 5];
     [sgc_briefing] call pcb_fnc_add_loadout_actions_to_object;
+    hint ("foo " + str getPosATL sgc_briefing);
 };
-

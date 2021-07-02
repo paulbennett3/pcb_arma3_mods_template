@@ -17,5 +17,10 @@ publicVariable "pcb_mission_complete";
 publicVariable "pcb_gate_blacklist";
 publicVariable "pcb_task_count";
 
+// if there isn't a marker named "respawn_west", create it at the location of the table
+if (! ("respawn_west" in allMapMarkers)) then {
+    private _respawn = createMarker ["respawn_west", getPosATL sgc_briefing];
+};
+
 // set up our "briefing table" with commands etc
-[] call pcb_fnc_create_briefing_table;
+[[], pcb_fnc_create_briefing_table] remoteExec ["call", 0];
