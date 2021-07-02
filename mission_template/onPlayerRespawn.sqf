@@ -1,6 +1,6 @@
 params ["_newUnit", "_oldUnit", "_respawn", "_respawnDelay"];
 
-[_newUnit, "undefined"] remoteExecCall ["pcb_fnc_loadout"];
+[_newUnit, "undefined"] remoteExecCall ["pcb_fnc_loadout_scp_stargate"];
 
 // give the "become leader" action 
 _newUnit addAction ["Take Command",

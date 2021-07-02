@@ -30,10 +30,10 @@ private _scope = "optic_ACO_grn_smg";
 private _no_gun = false; // used to keep scholar and jaffa weapons
 
 if (pcb_mod_name isEqualTo "scp") then {
-    _uniform = "U_B_CombatUniform_mcam";
-    _ammo = "30Rnd_65x39_caseless_mag";
+    _uniform = "YSA_Uniform_URBAN_MARPAT";
+    _ammo = "30Rnd_65x39_caseless_black_mag";
     _gun = "arifle_MX_Black_F";
-    _scope = "optic_tws";
+    _scope = "optic_Arco_blk_F";
 
     _gun_grenadier = "arifle_MX_GL_Black_F";
     _gun_carbine = "arifle_MXC_Black_F";
@@ -42,25 +42,22 @@ if (pcb_mod_name isEqualTo "scp") then {
     _scope_marksman = "optic_tws_mg";
 
     _gun_lmg = "arifle_MX_SW_Black_F";   // MX-SW  TWS-MG
-    _scope_lmg = "optic_tws_mg";
-    _ammo_lmg = "100Rnd_65x39_caseless_mag";
+    _helmet = "H_HelmetSpecB_blk";
 
     _this linkItem "NVGoggles_OPFOR";  // night vision!
 };
 
-_this addgoggles "G_Shades_Black";
+
+_this forceAddUniform _uniform;
 _this linkItem "ItemMap";
 _this linkItem "ItemWatch";
 _this linkItem "ItemCompass";
 _this linkItem "ItemRadio";
+_this addGoggles "G_Shades_Black";
 _this addMagazines ["HandGrenade", 2];
 _this addItemToUniform "FirstAidKit";
-_this addItemToUniform _ammo;
-_this addItemToUniform _ammo;
-_this addvest "V_PlateCarrier1_blk";
-_this addItemToVest _ammo;
-_this addItemToVest _ammo;
 
+_this addVest "V_PlateCarrier1_blk";
 _this addbackpack "B_AssaultPack_blk";
 
 switch (_role) do
@@ -71,13 +68,23 @@ switch (_role) do
 
         _this addItemTobackpack "Medikit";
         (unitBackpack _this) addmagazineCargo ["DemoCharge_Remote_Mag", 2]; 
-        _this addHeadgear "H_Cap_red";
+
+        if (pcb_mod_name isEqualTo "stargate") then { 
+            _this addHeadgear "H_Cap_red";
+        } else {
+            _this addHeadgear _helmet;
+        };
     };
     case "Leader":
     {
         (unitBackpack _this) addmagazineCargo ["DemoCharge_Remote_Mag", 2]; 
         _this addWeapon "Binocular";
-        _this addHeadgear "H_Cap_blu";
+
+        if (pcb_mod_name isEqualTo "stargate") then { 
+            _this addHeadgear "H_Cap_blu";
+        } else {
+            _this addHeadgear _helmet;
+        };
     };
     case "Engineer":
     {
@@ -88,43 +95,35 @@ switch (_role) do
         _this addItemTobackpack "ToolKit";
         _this addItemTobackpack "MineDetector";
         (unitBackpack _this) addmagazineCargo ["DemoCharge_Remote_Mag", 2]; 
-        _this addHeadgear "H_Bandanna_surfer_grn";
         _this addItem "B_UavTerminal"; // for MALP driving
+
+        if (pcb_mod_name isEqualTo "stargate") then { 
+            _this addHeadgear "H_Bandanna_surfer_grn";
+        } else {
+             _this addHeadgear _helmet;
+        };
     };
     case "Machine Gunner":
     {
         _this removemagazines _ammo;
         _gun = _gun_lmg;   // MX-SW  TWS-MG
         _scope = _scope_lmg;
-        _ammo = _ammo_lmg;
-
-        //_this addMagazine "RPG7_F";
-        //_this addWeapon "launch_RPG7_F";
-        //(unitBackpack _this) addmagazineCargo ["RPG7_F", 2]; 
 
         (unitBackpack _this) addmagazineCargo ["DemoCharge_Remote_Mag", 2]; 
-        _this addHeadgear "H_Cap_blk";
 
-        // bipod?
-        if (pcb_mod_name isEqualTo "scp") then { 
+        if (pcb_mod_name isEqualTo "stargate") then { 
+            _this addHeadgear "H_Cap_blk";
+        } else {
            _this addItem "bipod_01_f_blk";
+           _this addHeadgear _helmet;
         };
     };
     case "Scholar":
     {
-        //_this removeWeapon _gun;
-        //_this removemagazines _ammo;
         _this setUnitTrait ["scholar", true, true];
 
         if (pcb_mod_name isEqualTo "stargate") then {
-        //    //_this addMagazine "sga_zat_mag_closed";
-        //    //_this addWeapon "sga_zat";
-        //    _ammo = "16Rnd_9x21_Mag";
-        //    _this addMagazine _ammo;
-        //    _this addWeapon "hgun_P07_blk_F";
-        //    _this addHandgunItem "acc_flashlight_pistol";
-        //    
-        //    _no_gun = true;
+            _this addHeadgear "H_Cap_blk";
         } else {
            _gun = _gun_carbine;
         };
@@ -134,6 +133,12 @@ switch (_role) do
         _gun = _gun_marksman;  // MXM + DMS?
         _scope = _scope_marksman;
         _this addItem "bipod_01_f_blk";
+
+        if (pcb_mod_name isEqualTo "stargate") then { 
+        } else {
+           _this addItem "bipod_01_f_blk";
+           _this addHeadgear _helmet;
+        };
     };
     case "Grenadier":
     {
@@ -145,6 +150,11 @@ switch (_role) do
         _this addItemToVest "3Rnd_UGL_FlareGreen_F";
   
         // flares? smoke?
+
+        if (pcb_mod_name isEqualTo "stargate") then { 
+        } else {
+           _this addHeadgear _helmet;
+        };
     };
     case "Jaffa":
     {
@@ -157,6 +167,11 @@ switch (_role) do
         _this setvariable["sga_skills",["Engineer"],true];
         //_this setObjectTextureGlobal [0, "sga_jaffa\data\tat\chronos_silv_ca.paa"];
         _no_gun = true;
+
+        if (pcb_mod_name isEqualTo "stargate") then { 
+        } else {
+           _this addHeadgear _helmet;
+        };
     };
 };
 
@@ -175,3 +190,8 @@ if (_role isEqualTo "Grenadier") then {
 
 // top up with some more ammo
 (unitBackpack _this) addmagazineCargo [_ammo, 3];
+_this addItemToUniform _ammo;
+_this addItemToUniform _ammo;
+_this addItemToVest _ammo;
+_this addItemToVest _ammo;
+
