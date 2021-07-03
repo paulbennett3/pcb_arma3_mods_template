@@ -134,6 +134,7 @@ switch (_role) do
             _this addHeadgear "H_Cap_blk";
         } else {
            _gun = _gun_carbine;
+           _this addHeadgear _helmet;
         };
     };
     case "Marksman":

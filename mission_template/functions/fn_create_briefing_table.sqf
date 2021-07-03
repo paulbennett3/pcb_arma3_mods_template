@@ -30,5 +30,4 @@ _trg setTriggerStatements ["this",
 [] spawn { 
     sgc_briefing addAction ["Get Mission", "[] call pcb_fnc_dispatch_mission", [], 1.5, true, true, "", "true", 5];
     [sgc_briefing] call pcb_fnc_add_loadout_actions_to_object;
-    hint ("foo " + str getPosATL sgc_briefing);
 };

@@ -1,7 +1,7 @@
 
 // Set if this is an SCP or Stargate mod
-//pcb_mod_name = "stargate";
-pcb_mod_name = "scp";
+pcb_mod_name = "stargate";
+//pcb_mod_name = "scp";
 
 pcb_gate_blacklist = [];
 publicVariable "pcb_gate_blacklist";
