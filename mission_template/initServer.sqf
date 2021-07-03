@@ -1,7 +1,13 @@
 
 // Set if this is an SCP or Stargate mod
-pcb_mod_name = "stargate";
-//pcb_mod_name = "scp";
+//pcb_mod_name = "stargate";
+pcb_mod_name = "scp";
+
+pcb_gate_blacklist = [];
+publicVariable "pcb_gate_blacklist";
+if (pcb_mod_name isEqualTo "scp") then {
+    [] call pcb_fnc_spawn_scp_base;
+};
 
 // global variable init
 pcb_spawned_stuff = [];
@@ -14,8 +20,8 @@ pcb_task_count = 0;
 publicVariable "pcb_mod_name";
 publicVariable "pcb_spawned_stuff";
 publicVariable "pcb_mission_complete";
-publicVariable "pcb_gate_blacklist";
 publicVariable "pcb_task_count";
+
 
 // if there isn't a marker named "respawn_west", create it at the location of the table
 if (! ("respawn_west" in allMapMarkers)) then {

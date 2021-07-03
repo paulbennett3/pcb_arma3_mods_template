@@ -58,6 +58,7 @@ class CfgFunctions
             class place_stargate {};
             class random_stargate_name {};
             class random_stargate_position {};
+            class spawn_scp_base {};
             class summon_squad {};
         };
 
