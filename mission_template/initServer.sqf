@@ -29,4 +29,4 @@ if (! ("respawn_west" in allMapMarkers)) then {
 };
 
 // set up our "briefing table" with commands etc
-[[], pcb_fnc_create_briefing_table] remoteExec ["call", 0];
+remoteExec ["pcb_fnc_create_briefing_table", 0];
