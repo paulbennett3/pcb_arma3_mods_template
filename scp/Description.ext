@@ -1,0 +1,49 @@
+author = "Nazghash";
+onLoadName = "SCP Random";
+onLoadMission = "SCP Random - Altis";
+
+class Header
+{
+    gameType = Coop;
+    minPlayers = 1;
+    maxPlayers = 4;
+};
+
+briefingName = "SCP - Mo Altis, Mo Random";
+
+respawn = "BASE";
+respawnButton = 1;
+respawnDelay = 10;
+reviveMode = 1;
+reviveRequiredTrait = 1;
+reviveRequiredItems = 0;
+reviveDelay = 10;
+
+class CfgFunctions
+{
+    class pcb
+    {
+        class utilities
+        {
+            file = "functions";
+            class addAction_packable {};
+            class advancedTowingInit {};
+            class background {};
+            class crate_loadout {};
+            class get_empty_pos {};
+            class get_next_UID {};
+            class get_random_helicopter {};
+            class objective_locate_object {};
+            class preinit_setup { preInit = 1; };
+            class random_start_pos {};
+            class start_base_setup {};
+            class send_mail {};
+            class server_state_manager {};
+            class setPosAGLS {};
+            class set_mission_environment {};
+            class spawn_packable_base {};
+            class spawn_support_units {};
+            class swap_object {};
+        };
+    };
+};
