@@ -28,11 +28,14 @@ class CfgFunctions
             file = "functions";
             class addAction_packable {};
             class advancedTowingInit {};
+            class average_dir {};
             class background {};
             class crate_loadout {};
+            class director {};
             class get_empty_pos {};
             class get_next_UID {};
-            class get_random_helicopter {};
+            class get_random_vehicle {};
+            class in_front_arc {};
             class objective_locate_object {};
             class preinit_setup { preInit = 1; };
             class random_start_pos {};

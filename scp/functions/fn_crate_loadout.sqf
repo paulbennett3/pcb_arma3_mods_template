@@ -13,6 +13,26 @@ clearItemCargoGlobal _obj;
 clearWeaponCargo _obj;
 clearMagazineCargo _obj;
 
+// we want to determine if this unit can hold cargo, so we add some, wait, then see if it is
+// there ...
+// !!!!!!!!!!!!!!!  add me !!!!!!!!!!!!!
+
+/* ---------------------------------------
+// from createVehicle page -- add inventory to things that don't have inventory ...
+_cargo = "Supply500" createVehicle [0,0,0];
+_cargo attachTo [_obj, [0,0,0.85]];
+
+// optional for objects that can take damage
+_obj addEventHandler ["Killed",
+{
+	{
+		detach _x,
+		deleteVehicle _x;
+	}
+	forEach attachedObjects (_this select 0);
+}];
+---------------------------------------- */
+
 // weapon
 _obj addItemCargoGlobal ["arifle_MXC_F", 4];
 _obj addItemCargoGlobal ["arifle_MXM_F", 4];
@@ -91,3 +111,6 @@ _obj addItemCargoGlobal ["ItemMap", 4];
 _obj addItemCargoGlobal ["NVGoggles_OPFOR", 4];
 _obj addItemCargoGlobal ["ItemCompass", 4];
 _obj addItemCargoGlobal ["ChemicalDetector_01_watch_F", 4];
+
+// _obj addBackpackCargo [" backpack type name ", count];
+// how to add vests ?!?

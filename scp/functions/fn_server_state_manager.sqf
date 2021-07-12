@@ -26,7 +26,9 @@ publicVariable "message_box";
 
    while { true } do {
        sleep 1;
-       if ((count message_box) > 0) then {
+       // if ((count message_box) > 0) then {
+       waitUntil { sleep 1; (count message_box) > 0};  // suspends script until condition true
+       if (true) then {
            private _msg = message_box deleteAt 0;
 //hint str _msg;
            publicVariable "message_box";
