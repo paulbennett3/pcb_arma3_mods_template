@@ -1,5 +1,5 @@
 /* ---------------------------------------------------------------------
-                     start base setup
+                     start base - Helicopter Insertion
 
 Move the players to the randomly selected starting point.
 Spawn in helicopters, luggage, ...
@@ -52,27 +52,22 @@ _marker_respawn setMarkerType "respawn_inf";
 // spawn vehicles
 // ------------------------------------------------------------------
 private _vehicle_list = [];
-if ((random 1) > 0.85) then {
-    private _heli_type = selectRandom [
-        "vn_b_air_uh1d_01_04",
-        "vn_b_air_uh1d_01_06",
-        "vn_b_air_uh1d_01_07",
-        "vn_o_air_mi2_01_01",
-        "vn_o_air_mi2_01_02",
-        "vn_i_air_ch34_02_02",
-        "B_Heli_Transport_03_unarmed_F",
-        "O_Heli_Transport_04_covered_F",
-        "O_Heli_Light_02_unarmed_F",
-        "I_Heli_light_03_unarmed_F",
-        "B_Heli_Light_01_F",
-        "C_Heli_Light_01_civil_F"
-    ];
+private _heli_type = selectRandom [
+    "vn_b_air_uh1d_01_04",
+    "vn_b_air_uh1d_01_06",
+    "vn_b_air_uh1d_01_07",
+    "vn_o_air_mi2_01_01",
+    "vn_o_air_mi2_01_02",
+    "vn_i_air_ch34_02_02",
+    "B_Heli_Transport_03_unarmed_F",
+    "O_Heli_Transport_04_covered_F",
+    "O_Heli_Light_02_unarmed_F",
+    "I_Heli_light_03_unarmed_F",
+    "B_Heli_Light_01_F",
+    "C_Heli_Light_01_civil_F"
+];
 
-    _vehicle_list pushBack ["Helicopter",_heli_type];
-} else {
-    //_vehicle_list pushBack ["Ground Vehicle", "B_T_Truck_01_transport_F"];
-    _vehicle_list pushBack ["Ground Vehicle", ["car", "large"] call pcb_fnc_get_random_vehicle];
-};
+_vehicle_list pushBack ["Helicopter",_heli_type];
 
 {
     private _label = _x select 0;

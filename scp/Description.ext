@@ -27,16 +27,15 @@ class CfgFunctions
         {
             file = "functions";
             class addAction_packable {};
+            class add_base_actions {};
             class advancedTowingInit {};
-            class average_dir {};
             class background {};
             class crate_loadout {};
-            class director {};
             class get_empty_pos {};
             class get_next_UID {};
             class get_random_vehicle {};
-            class in_front_arc {};
             class objective_locate_object {};
+            class players_in_area {};
             class preinit_setup { preInit = 1; };
             class random_start_pos {};
             class start_base_setup {};
@@ -44,9 +43,33 @@ class CfgFunctions
             class server_state_manager {};
             class setPosAGLS {};
             class set_mission_environment {};
+            class set_scp_loadout {};
+            class set_scp_vehicle_loadout {};
             class spawn_packable_base {};
+            class spawn_random_vehicle {};
+            class spawn_spare_helicopters {};
+            class spawn_spare_vehicles {};
             class spawn_support_units {};
             class swap_object {};
         };
+        class director 
+        {
+            file = "functions\director";
+            class do_director_spawn {};
+            class director {};
+        }; 
+        class encounters
+        {
+            file = "functions\encounters";
+            class enc_civ {};
+            class enc_bandits {};
+            class enc_vehicle_patrol {};
+        }
+        class scenarios
+        {
+            file = "functions\scenarios";
+            class start_base_heli_insert {};
+            class war_bluefor_opfor {};
+        }; 
     };
 };

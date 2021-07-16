@@ -51,6 +51,7 @@ _act = "Unpack";
 
 // create our object
 private _obj = createVehicle [_spawn_type, [0,0,0], [], 0, "NONE"];
+_obj setVariable ["BIS_enableRandomization", false];
 [_obj, _pos] call pcb_fnc_setPosAGLS;
 _obj setDir _dir;
 

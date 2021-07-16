@@ -32,7 +32,11 @@ private _roll = random 1;
 if (_roll < 0.25) then {
     _start_type = "Airfield";
 } else {
-    _start_type = "Coast";
+    if (_roll < 0.75) then {
+        _start_type = "Coast";
+    } else {
+        _start_type = "Hilltop";
+    }
 };
 
 switch (_start_type) do {
@@ -53,6 +57,20 @@ switch (_start_type) do {
         //start_pos = [[], 0, -1, 10, 0, 0.1, 1, [], []] call BIS_fnc_findSafePos;
         //start_pos = [_center, 0, -1, 10, 0, 0.1, 1, [], []] call BIS_fnc_findSafePos;
         start_pos = [_center, 0, 10000, 10, 0, 0.1, 1, [], []] call BIS_fnc_findSafePos;
+    };
+    case "Hilltop": {
+        // pick a good hilltop ...
+        // First we pick a center uniformly at random over the world size
+        private _center = [nil, ["water"]] call BIS_fnc_randomPos; 
+
+        // center, radius, expression, precision, count
+        private _expression = "5*hills + meadow - 3*trees - 3*forests - houses - windy - waterDepth";
+        start_pos = selectBestPlaces [_center, 5000, _expression, 25, 1]; 
+        if ((count start_pos) == 0) then {
+            start_pos = _center;
+        } else {
+            start_pos = start_pos select 0;
+        };
     };
     default {
         start_pos = (All_airfields select 0) select 0;

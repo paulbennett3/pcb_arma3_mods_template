@@ -1,22 +1,9 @@
 params ["_newUnit", "_oldUnit", "_respawn", "_respawnDelay"];
 
-// give the "become leader" action
-private _cmd = {
-    params ['_target', '_caller', '_actionId', '_arguments']; 
-    playableUnits join _caller; 
-    [group _caller, _caller] remoteExec ['selectLeader', groupOwner group  _caller, true];
-};
+[_newUnit] call pcb_fnc_set_scp_loadout;
 
-_newUnit addAction [
-    "Take Command",
-    _cmd,
-    [], 1.5, false, true, "", "true", -1
-];
-
-// set traits
-_newUnit setUnitTrait ["engineer", true]; 
-_newUnit setUnitTrait ["explosiveSpecialist", true]; 
-
-// strip
-//removeallweapons _newUnit; 
-//removeAllAssignedItems _newUnit; 
+// Transfer any roles from _oldUnit to _newUnit
+if (_oldUnit getUnitTrait "Occult") then { _newUnit setUnitTrait ["Occult", true, true]; };
+if (_oldUnit getUnitTrait "Medic") then { _newUnit setUnitTrait ["Medic", true]; };
+if (_oldUnit getUnitTrait "engineer") then { _newUnit setUnitTrait ["engineer", true]; };
+if (_oldUnit getUnitTrait "explosiveSpecialist") then { _newUnit setUnitTrait ["explosiveSpecialist", true]; };

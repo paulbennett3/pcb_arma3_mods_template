@@ -41,12 +41,18 @@ private _small_helis = [
 
 private _large_cars = [ 
     "C_Van_02_medevac_F",
-    "C_Van_02_vehicle_F",
     "C_Van_02_transport_F",
     "C_Truck_02_fuel_F",
     "C_Truck_02_box_F",
     "C_Truck_02_transport_F",
-    "C_Truck_02_covered_F"
+    "C_Truck_02_covered_F",
+    "vn_b_wheeled_m54_01",
+    "vn_b_wheeled_m54_02",
+    "vn_b_wheeled_m54_01_airport",
+    "B_Truck_01_transport_F",
+    "B_Truck_01_covered_F",
+    "O_Truck_03_transport_F",
+    "O_Truck_02_transport_F"
 ];
 private _med_cars = [ 
     "C_Van_01_fuel_F",

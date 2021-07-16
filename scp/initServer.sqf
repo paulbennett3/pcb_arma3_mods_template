@@ -11,3 +11,5 @@ publicVariable "pcb_DEBUG";
 [] call pcb_fnc_start_base_setup;
 [] call pcb_fnc_director;
 [] call pcb_fnc_background;
+"Group" setDynamicSimulationDistance 1000;
+"EmptyVehicle" setDynamicSimulationDistance 250;

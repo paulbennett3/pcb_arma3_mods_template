@@ -98,27 +98,6 @@ while {_placed < _nanomalies} do {
     _placed = _placed + 1;
 };
 
-/* ----------------------------------------------------------------
-                    Configure and Place SpawnerMen
----------------------------------------------------------------- */
-/*
-// EAST
-diag_log "Placing DSA SpawnerMen ...";
-diag_log "   EAST";
-// _cmd = "DSA_SpawnerMen = this; this setVariable ['BIS_fnc_initModules_disableAutoActivation', false, true]; DSA_SpawnerMen setVariable ['DSA_Side', 'WEST', true]; DSA_SpawnerMen setVariable ['DSA_Radius', 500, true]; DSA_SpawnerMen setVariable ['DSA_GroupCount', '7,9', true]; DSA_SpawnerMen setVariable ['DSA_GroupSize', '3, 9', true]; DSA_SpawnerMen setVariable ['DSA_AItypes', '''GUARD'',''PATROL'',''LONG PATROL'',''DISMISS''', true];"; 
-_cmd = "DSA_SpawnerMen = this; this setVariable ['BIS_fnc_initModules_disableAutoActivation', false, true]; DSA_SpawnerMen setVariable ['DSA_Side', 'EAST', true]; DSA_SpawnerMen setVariable ['DSA_Radius', 1000, true]; DSA_SpawnerMen setVariable ['DSA_GroupCount', '1,3', true]; DSA_SpawnerMen setVariable ['DSA_GroupSize', '3, 9', true]; DSA_SpawnerMen setVariable ['DSA_AItypes', '''PATROL'',''LONG PATROL''', true];"; 
-
-//"DSA_SpawnerMen" createUnit [ epicenter, _moduleGroup, _cmd];
-
-// CIV 
-diag_log "Placing DSA SpawnerMen ...";
-diag_log "   CIVILIAN";
-_cmd = "DSA_SpawnerMen = this; this setVariable ['BIS_fnc_initModules_disableAutoActivation', false, true]; DSA_SpawnerMen setVariable ['DSA_Side', 'CIVILIAN', true]; DSA_SpawnerMen setVariable ['DSA_Radius', 500, true]; DSA_SpawnerMen setVariable ['DSA_GroupCount', '5,9', true]; DSA_SpawnerMen setVariable ['DSA_GroupSize', '1, 5', true]; DSA_SpawnerMen setVariable ['DSA_AItypes', '''PATROL'',''GUARD''', true];"; 
-
-"DSA_SpawnerMen" createUnit [ epicenter, _moduleGroup, _cmd];
-*/
-
-
 
 /* ####################################################################
                     Generate a semi-random starting position
