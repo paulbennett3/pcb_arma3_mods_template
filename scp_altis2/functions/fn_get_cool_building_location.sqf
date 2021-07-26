@@ -6,14 +6,7 @@ returns object found
 ********************************************************* */
 params ["_target_obj", ["_radius", worldSize]];
 
-private _types = ["Cargo_Tower_base_F", "Land_Offices_01_V1_F", "Land_Hospital_Main_F", 
-                  "Land_LightHouse_F", "Land_Castle_01_tower_F", "Land_d_Windmill01_F", "Land_i_Barracks_V1_F",
-                  "Land_i_Barracks_V2_F", "Land_u_Barracks_V2_F", "Land_Cargo_Tower_V1_F", "Land_Cargo_Tower_V1_No1_F",
-                  "Land_Cargo_Tower_V1_No2_F", "Land_Cargo_Tower_V1_No3_F", "Land_Cargo_Tower_V1_No4_F",
-                  "Land_Cargo_Tower_V1_No5_F", "Land_Cargo_Tower_V1_No6_F", "Land_Cargo_Tower_V1_No7_F",
-                  "Land_Cargo_Tower_V2_F", "Land_Cargo_Tower_V3_F", "Land_Medevac_house_V1_F", "Land_Medevac_HQ_V1_F",
-                  "Land_Dome_Big_F", "Land_Dome_Small_F", "Land_Research_HQ_F"
-];
+private _types = types_hash get "cool buildings";
 private _tries = 10;
 private _pos = [0,0,0];
 private _obj = objNull;

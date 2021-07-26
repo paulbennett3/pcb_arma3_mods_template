@@ -9,7 +9,7 @@ class Header
     maxPlayers = 4;
 };
 
-briefingName = "SCP - Mo Altis, Mo Random";
+briefingName = "SCP - Wendigogos";
 
 respawn = 3;
 respawnButton = 1;
@@ -67,6 +67,7 @@ class CfgFunctions
             class spawn_spare_vehicles {};
             class spawn_support_units {};
             class swap_object {};
+            class types {};
         };
         class director 
         {

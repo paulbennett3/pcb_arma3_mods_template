@@ -21,6 +21,8 @@ Returns:
                     "marker_list" (array) : list of "markers" to delete
                     ???
 
+!!! Make this actually spawn stuff, and ideally "garrison" the
+ location ...
 ******************************************************************* */
 params ["_UID"];
 
@@ -31,7 +33,6 @@ private _state = createHashMapFromArray [
     ["marker_list", []]
 ];
 private _result = [_ok, _state];
-
 
 
 private _possible_objects = [
