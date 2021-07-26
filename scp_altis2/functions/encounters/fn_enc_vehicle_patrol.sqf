@@ -7,6 +7,8 @@ Spawn a single vehicle (with crew) to patrol
 params ["_player", "_type", "_side"];
 private _did_spawn = false;
 
+hint ("<" + (str _type) + ">");
+
 private _vobj = _player;
 private _vtemp = [_player] call pcb_fnc_player_in_vehicle;
 if (_vtemp select 0) then { _vobj = (_vtemp select 1) select 0; };

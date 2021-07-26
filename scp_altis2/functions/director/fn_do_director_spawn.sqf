@@ -88,7 +88,7 @@ switch (_option) do {
             _did_spawn = [_player, _types, independent, 3, 25, false] call pcb_fnc_enc_infantry;
         };
     case "ambulance": {
-            _did_spawn = [_player, types_hash get "ambulance", civilian] call pcb_fnc_enc_vehicle_patrol;
+            _did_spawn = [_player, (types_hash get "ambulance") select 0, civilian] call pcb_fnc_enc_vehicle_patrol;
         };
     case "civ_vehicle": {
             private _type = selectRandom (types_hash get "civ vehicles");
@@ -121,6 +121,6 @@ switch (_option) do {
         };
 };
 diag_log ("Spawn success? " + (str _did_spawn));
-hint ("Spawn success? <" + (str _option) + "> " + (str _did_spawn));
+//hint ("Spawn success? <" + (str _option) + "> " + (str _did_spawn));
 
 _did_spawn;

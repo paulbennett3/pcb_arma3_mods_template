@@ -35,19 +35,11 @@ private _state = createHashMapFromArray [
 private _result = [_ok, _state];
 
 
-private _possible_objects = [
-//    ["eye_of_ra_wl", "occult"],
-    ["Catacomb_Stone_casket", "occult"],
-//    ["vn_dragon_01", "occult"],
-//    ["vn_dragon_02", "occult"],
-    ["Land_vn_shrine_01", "occult"],
-    ["Land_vn_vase_loam_3_ep1", "occult"],
-    ["sga_skull_post", "occult"]
-];
+//private _possible_objects = types_hash get "large items"; 
+private _possible_objects = types_hash get "small items"; 
+
 private _target = objNull;
-private _object_genre = selectRandom _possible_objects;
-private _object_type = _object_genre select 0;
-private _genre = _object_genre select 1;
+private _object_type = selectRandom _possible_objects;
 private _building = objNull;
 private _pos = [0,0,0];
 private _tries = 100;
@@ -74,11 +66,7 @@ while {_tries > 0} do {
 if ((_tries > -10) or (isNull _target)) exitWith { _result };
 
 private _desc = objNull;
-if (_genre isEqualTo "occult") then {
-    _desc = [ "Destroy the infernal artifact causing the dead to rise. [Occult Tech]", "Destroy artifact", ""];
-} else {
-    _desc = [ "Disable or destroy the machine causing the dead to rise. [Occult Tech]", "Destroy machine", ""];
-};
+_desc = [ "Destroy the infernal artifact causing the dead to rise.", "Destroy artifact", ""];
 _destroyable = false;
 _state = createHashMapFromArray [
     ["target", _target],
@@ -107,17 +95,7 @@ private _welcome_comittee = true;
 
 // needs _pos and _building defined
 if (_welcome_comittee) then {
-    private _types = [
-                "RyanZombieC_man_1", "RyanZombieC_man_hunter_1_F", "RyanZombie19", "RyanZombie23",
-                "RyanZombie29", "RyanZombieC_man_polo_4_F", "RyanZombieC_scientist_F", "RyanZombieB_Soldier_lite_F",
-                "RyanZombieB_Soldier_02_f_1_1", "RyanZombieB_Soldier_02_fmediumOpfor", "RyanZombieB_Soldier_02_f_1mediumOpfor",
-                "RyanZombieB_Soldier_02_f_1_1mediumOpfor", "RyanZombieB_Soldier_03_fmediumOpfor",
-                "RyanZombieB_Soldier_03_f_1mediumOpfor", "RyanZombieB_Soldier_03_f_1_1mediumOpfor",
-                "RyanZombieB_Soldier_04_fmediumOpfor", "RyanZombieB_Soldier_04_f_1mediumOpfor",
-                "RyanZombieB_Soldier_04_f_1_1mediumOpfor", "RyanZombieB_Soldier_lite_FmediumOpfor",
-                "RyanZombieB_Soldier_lite_F_1mediumOpfor", "RyanZombieB_Soldier_02_fmediumOpfor",
-                "RyanZombieB_Soldier_02_f_1mediumOpfor", "RyanZombieB_Soldier_02_f_1_1mediumOpfor"
-    ];
+    private _types = types_hash get "zombies";
 
     // make a list of all the stuff we spawn
     private _obj_list = [];

@@ -35,6 +35,10 @@ hint ("Scenario Zombies <" + (str _action) + ">");
 
 switch (_action) do {
     case "create": {
+        if (! isNil "scenarioCreated") exitWith {};
+        scenario_created = true;
+        publicVariable "scenario_created";
+
         // adjust start position if desired
         [] call pcb_fnc_random_start_pos;
 

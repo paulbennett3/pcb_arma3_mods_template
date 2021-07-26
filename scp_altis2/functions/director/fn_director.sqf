@@ -20,6 +20,9 @@ Structure is:
 
 if (! isServer) exitWith {};
 
+if (! isNil "director_flag") exitWith {};
+director_flag = true; publicVariable "director_flag";
+
 // *****************************************************
 // set some global variables regarding encounter create
 // *****************************************************

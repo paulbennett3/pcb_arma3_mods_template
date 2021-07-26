@@ -6,6 +6,9 @@ together.
 ******************************************************************* */
 
 [] spawn {
+    if (! isNil "mission_generator_flag") exitWith {};
+    mission_generator_flag = true; publicVariable "mission_generator_flag";
+
     diag_log "Mission Generator spawned";
     hint "Mission Generator started (spawned)";
 
@@ -14,6 +17,12 @@ together.
     publicVariable "mission_active";
 
     active_mission_info = createHashMap;  // index with "mission ID" -- for state needed for cleanup, or complex missions
+
+    // fire off the director for tracking background stuff
+    [] call pcb_fnc_director;
+
+    // fire off background processes (spare vehicles etc)
+    [] call pcb_fnc_background;
 
     // call our scenario to populate mission_list, total_missions, generate start base, etc
     private _scenarios = [];
@@ -50,12 +59,6 @@ together.
         } else {
             _first_mission = false;
         };
-
-        // fire off the director for tracking background stuff
-        [] call pcb_fnc_director;
-
-        // fire off background processes (spare vehicles etc)
-        [] call pcb_fnc_background;
 
         // do we have any missions left to run?
         if (total_missions > 0) then {

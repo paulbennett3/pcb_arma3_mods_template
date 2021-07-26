@@ -9,6 +9,7 @@ Spawn some infantry
 
 params ["_player", "_types", "_side", ["_min_n", 1], ["_max_n", 6], ["_exact", false], ["_pos", [0,0]]];
 private _did_spawn = false;
+hint ("<" + (str _types) + ">");
 
 private _vobj = _player;
 
