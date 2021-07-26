@@ -58,7 +58,7 @@ while {_tries > 0} do {
     private _positions = [_building] call BIS_fnc_buildingPositions; 
     if ((count _positions) > 5) then {
         _pos = selectRandom _positions;
-        if (((_pos select 0) > 0) or ((_pos select 1) > 0)) then {
+        if ([_pos] call pcb_fnc_is_valid_position) then {
             //_target = _object_type createVehicle _pos; 
             _target = createVehicle [_object_type,_pos, [], 0, "NONE"]; 
             sleep 1;

@@ -27,7 +27,11 @@ _trg setTriggerStatements ["this",
 
 
 // set up the "briefing" table for missions, loadouts, ..
-[] spawn { 
-    sgc_briefing addAction ["Get Mission", "[] call pcb_fnc_dispatch_mission", [], 1.5, true, true, "", "true", 5];
-    [sgc_briefing] call pcb_fnc_add_loadout_actions_to_object;
-};
+//[] spawn { 
+//    sgc_briefing addAction ["Get Mission", "[] call pcb_fnc_dispatch_mission", [], 1.5, true, true, "", "true", 5];
+//    [sgc_briefing] call pcb_fnc_add_loadout_actions_to_object;
+//};
+hint "about to add";
+sgc_briefing addAction ["Get Mission", "[] call pcb_fnc_dispatch_mission", [], 1.5, true, true, "", "true", 5];
+[sgc_briefing] call pcb_fnc_add_loadout_actions_to_object;
+hint "added action to table";

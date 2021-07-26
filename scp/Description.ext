@@ -30,6 +30,7 @@ class CfgFunctions
             class add_base_actions {};
             class advancedTowingInit {};
             class background {};
+            class chemicalDetector {};
             class crate_loadout {};
             class get_empty_pos {};
             class get_next_UID {};

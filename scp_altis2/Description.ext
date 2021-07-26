@@ -42,6 +42,7 @@ class CfgFunctions
             class get_empty_pos {};
             class get_next_UID {};
             class get_random_vehicle {};
+            class is_valid_position {};
             class make_destroyable {};
             class make_packable {};
             class monitor_ratings {};
@@ -89,10 +90,12 @@ class CfgFunctions
             class mis_destroy {};
             class mis_interact {};
             class mis_transport {};
+            class mis_nop {};  // no-op mission -- for use with scn_drongo
         }; 
         class scenarios
         {
             file = "functions\scenarios";
+            class scn_drongo {};
             class scn_zombies {};
         }; 
     };

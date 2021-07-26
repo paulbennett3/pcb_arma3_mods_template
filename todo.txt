@@ -1,6 +1,4 @@
 - SCP base
-- background stuff (patrols, buildings, things-of-interest) for missions
-- "complications" for missions (Jaffa et al patrols, earthquakes, ...)
 - SCP -- triangulate "source" based on N missions surrounding it
 - scripted SGC base
 - more than 1 action added to items (study, research, ...)
@@ -9,9 +7,7 @@
 - add animations for search, study, ...
 - hint in task for role(s) needed  "Explore P3X-432 -- study the Statue (scholar)"
 - subtasks (find, study, multiple things to do, ...)
-- limit area of operations to about 1.5k so stuff is more "dense"
 - mission state / world state hashmaps as public variables
-- setVariable on objects / vehicle (attach data structure / hashmap with whatever object data needed) - ala Matlab Handle graphics -- note -- objects are local to each client!
 - SCP "campaign" -- start with little tech / resources, "earn" points (to buy? unlock?) better tech and support 
     - for example, completing missions (with no loss?), or doing "extra" things (exploring? clearing zombie hordes?)
 - "realism" toggle -- on = delays for things, more actions, few if any "convenience" functions
@@ -23,32 +19,31 @@
     - add command(s):
          - deploy boats, move cargo to heli-pad, ...
 - More "phasmaphobia" missions (ie, "boss" or "source" indicated by different spawns / phenomena)
-- High Command addCommand - land, take off
 - script / otherwise figure out getting AI to take more ammo
-- food or other consumables?
-- better weather randomization
-   - vary fog base
-   - have it change over the course of the mission (since sometimes we have 2+ hour missions ...)
-- "self destruct" addCommand for vehicles so they can be destroyed without pissing off friendlies
 - crew served weapons (in crate?)
 - SCP operators as "independent", with ongoing west / east conflict?
-- addAction to "strip" (leave uniform, vest, backpack?)
-- allow for single player mode in the multiplayer missions (ie, taking control of AI units -- unit switch?)
-- random selection of vehicles
-    - cargo heli, possible a military heli
-    - civ cars, possibly technicals
 - effect to squelch / destroy electronics (lights, radios, gps, UAV, NVG, vehicles, ...)
 - sling loadable shit
 - "repellent" (smoke + "stay out of area" trigger for monsters)
+- more "spawn in military bases" (in addition to crates).  Also, more random chance, and extend to
+    entire ellipse again (ie, balance out elipse density with p(spawn))
+- background: Jet or Heli (or barrage) on some position (fairly brief, but exciting!)
+- set move speed for patrols?  Might have to change how these are spawned.  Maybe "getWaypoint" on group 
+    after BIS_fnc_patrol (or whatever) -- would have to iterate through waypoint indices ...
+- test if claymores auto-trigger on enemy
+- work on parachute stuff -- para-insertion (NPCs, loads, etc)
+     - start in heli, load from its cargo, drop (NPC in charge of heli, not assigned to player so
+       the only option is "out").  Over a military base? Hot zone?  Where to put respawn point?
+- fix current animal "follow". Doesn't seem to work ?!?
+- add more variety of animal spawn -- "packs", wandering, ...
+- Put all type strings in one file, filter by add on (steal code from Drongo)
+- Threat detector -- tie to Zombies?
+- Build my own "AI" for units (steal ideas from Drongo)
+- "Short" missions (ie, one action then done) - para-insert, blow something up / investigate / et al, then exfil
+- Firing range missions (spawn targets at random distances)
+- Tower defense mission (start in one of the cool bases, spawn in ammo, support troops, goal is to hold
+        for N amount of time versus randomly spawned zombies and anomalies ...)
 
 
-Now
-- delete HC heli transport
-- fix assign of vehicle (both escort heli working?)
-- bigger backpack in crate (use engineer unit backpack?)
-
-
-Reminders
-- run discord on other laptop
-- use other laptop as server?
+   
 

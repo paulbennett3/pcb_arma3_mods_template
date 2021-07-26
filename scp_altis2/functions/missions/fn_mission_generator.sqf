@@ -18,6 +18,7 @@ together.
     // call our scenario to populate mission_list, total_missions, generate start base, etc
     private _scenarios = [];
     _scenarios pushBackUnique "functions\scenarios\fn_scn_zombies.sqf";
+    //_scenarios pushBackUnique "functions\scenarios\fn_scn_drongo.sqf";
 
     private _scenario = compile preprocessFileLineNumbers (selectRandom _scenarios);
 

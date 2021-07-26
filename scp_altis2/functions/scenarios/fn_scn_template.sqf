@@ -36,9 +36,16 @@ hint ("Scenario Template <" + (str _action) + ">");
 switch (_action) do {
     case "create": {
         // adjust start position if desired
+        [] call pcb_fnc_random_start_pos;
+
+        // start spawning spare vehicles etc
+        [] call pcb_fnc_background;
+ 
+        // manipulate the starting weather et al
+        [] call pcb_fnc_set_mission_environment;
 
         // create the "base camp" + spawning point
-        
+        [] call pcb_fnc_start_base_setup;
 
         // this is the array of possible missions to choose from.  Might be modified as things progress
         mission_list = []; // we "register" missions here, last one first, 

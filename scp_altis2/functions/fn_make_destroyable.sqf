@@ -9,6 +9,8 @@ if (! isServer) exitWith {};
 
 // for debug -- hide the UAVs or not
 private _hide = true;
+//private _type = "B_UAV_01_F";
+private _type = "O_UAV_01_F";
 
 // object to work with
 private _bb = boundingBox _obj;
@@ -30,22 +32,22 @@ private _foo = {
     deleteVehicle (_this select 0); 
     deleteVehicle _foo; 
 };
-_uav = "B_UAV_01_F" createVehicle (getPosATL _obj);
+_uav = _type createVehicle (getPosATL _obj);
 _uav attachTo [_obj, [1, 0, 0]];
 _uav hideObject _hide; [_uav, _hide] remoteExec ["hideObject", 0, true];
 _uav addMPEventHandler [ "mpkilled", _foo ];
 
-_uav = "B_UAV_01_F" createVehicle (getPosATL _obj);
+_uav = _type createVehicle (getPosATL _obj);
 _uav attachTo [_obj, [-1, 0, 0]];
 _uav hideObject _hide; [_uav, _hide] remoteExec ["hideObject", 0, true];
 _uav addMPEventHandler [ "mpkilled", _foo ];
 
-_uav = "B_UAV_01_F" createVehicle (getPosATL _obj);
+_uav = _type createVehicle (getPosATL _obj);
 _uav attachTo [_obj, [0, 1, 0]];
 _uav hideObject _hide; [_uav, _hide] remoteExec ["hideObject", 0, true];
 _uav addMPEventHandler [ "mpkilled", _foo ];
 
-_uav = "B_UAV_01_F" createVehicle (getPosATL _obj); 
+_uav = _type createVehicle (getPosATL _obj); 
 _uav attachTo [_obj, [0, -1, 0]];
 _uav hideObject _hide; [_uav, _hide] remoteExec ["hideObject", 0, true];
 _uav addMPEventHandler [ "mpkilled", _foo ];
