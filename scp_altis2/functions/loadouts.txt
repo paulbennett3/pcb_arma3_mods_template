@@ -1,0 +1,109 @@
+// repair specialist
+comment "Add weapons";
+this addWeapon "arifle_MX_F";
+this addPrimaryWeaponItem "acc_pointer_IR";
+this addPrimaryWeaponItem "optic_Holosight";
+this addPrimaryWeaponItem "30Rnd_65x39_caseless_mag";
+this addWeapon "hgun_P07_F";
+this addHandgunItem "16Rnd_9x21_Mag";
+
+comment "Add items to containers";
+this addItemToUniform "FirstAidKit";
+for "_i" from 1 to 2 do {this addItemToUniform "30Rnd_65x39_caseless_mag";};
+this addItemToUniform "Chemlight_green";
+for "_i" from 1 to 3 do {this addItemToVest "30Rnd_65x39_caseless_mag";};
+for "_i" from 1 to 2 do {this addItemToVest "16Rnd_9x21_Mag";};
+for "_i" from 1 to 2 do {this addItemToVest "HandGrenade";};
+this addItemToVest "SmokeShell";
+this addItemToVest "SmokeShellGreen";
+this addItemToVest "SmokeShellBlue";
+this addItemToVest "SmokeShellOrange";
+this addItemToVest "Chemlight_green";
+this addItemToBackpack "ToolKit";
+this addHeadgear "H_HelmetB_light_sand";
+this addGoggles "G_Tactical_Clear";
+
+-------------------------------------
+// missile spec
+
+comment "Add weapons";
+this addWeapon "arifle_MXC_F";
+this addPrimaryWeaponItem "acc_pointer_IR";
+this addPrimaryWeaponItem "optic_Holosight";
+this addPrimaryWeaponItem "30Rnd_65x39_caseless_mag";
+this addWeapon "launch_B_Titan_short_F";
+this addSecondaryWeaponItem "Titan_AT";
+this addWeapon "hgun_P07_F";
+this addHandgunItem "16Rnd_9x21_Mag";
+
+comment "Add items to containers";
+this addItemToUniform "FirstAidKit";
+for "_i" from 1 to 2 do {this addItemToUniform "30Rnd_65x39_caseless_mag";};
+this addItemToUniform "Chemlight_green";
+for "_i" from 1 to 3 do {this addItemToVest "30Rnd_65x39_caseless_mag";};
+for "_i" from 1 to 2 do {this addItemToVest "16Rnd_9x21_Mag";};
+this addItemToVest "SmokeShell";
+this addItemToVest "SmokeShellGreen";
+this addItemToVest "Chemlight_green";
+for "_i" from 1 to 2 do {this addItemToBackpack "Titan_AT";};
+this addHeadgear "H_HelmetB_light_desert";
+this addGoggles "G_Tactical_Clear";
+
+// Grenadier
+
+comment "Add weapons";
+this addWeapon "arifle_MX_GL_F";
+this addPrimaryWeaponItem "optic_Aco";
+this addPrimaryWeaponItem "30Rnd_65x39_caseless_mag";
+this addWeapon "hgun_P07_F";
+this addHandgunItem "16Rnd_9x21_Mag";
+
+comment "Add items to containers";
+this addItemToUniform "FirstAidKit";
+for "_i" from 1 to 2 do {this addItemToUniform "30Rnd_65x39_caseless_mag";};
+this addItemToUniform "Chemlight_green";
+for "_i" from 1 to 3 do {this addItemToVest "30Rnd_65x39_caseless_mag";};
+for "_i" from 1 to 2 do {this addItemToVest "16Rnd_9x21_Mag";};
+for "_i" from 1 to 5 do {this addItemToVest "1Rnd_HE_Grenade_shell";};
+for "_i" from 1 to 2 do {this addItemToVest "HandGrenade";};
+for "_i" from 1 to 2 do {this addItemToVest "MiniGrenade";};
+this addItemToVest "SmokeShell";
+this addItemToVest "SmokeShellGreen";
+this addItemToVest "Chemlight_green";
+for "_i" from 1 to 2 do {this addItemToVest "1Rnd_Smoke_Grenade_shell";};
+this addItemToVest "1Rnd_SmokeBlue_Grenade_shell";
+this addItemToVest "1Rnd_SmokeGreen_Grenade_shell";
+this addItemToVest "1Rnd_SmokeOrange_Grenade_shell";
+this addHeadgear "H_HelmetSpecB_blk";
+this addGoggles "G_Combat";
+
+// -----------------------------------------------------
+// Engineer
+
+comment "Add weapons";
+this addWeapon "arifle_MXC_F";
+this addPrimaryWeaponItem "acc_pointer_IR";
+this addPrimaryWeaponItem "optic_Holosight";
+this addPrimaryWeaponItem "30Rnd_65x39_caseless_mag";
+this addWeapon "hgun_P07_F";
+this addHandgunItem "16Rnd_9x21_Mag";
+
+comment "Add items to containers";
+this addItemToUniform "FirstAidKit";
+for "_i" from 1 to 2 do {this addItemToUniform "30Rnd_65x39_caseless_mag";};
+this addItemToUniform "Chemlight_green";
+for "_i" from 1 to 3 do {this addItemToVest "30Rnd_65x39_caseless_mag";};
+for "_i" from 1 to 2 do {this addItemToVest "16Rnd_9x21_Mag";};
+for "_i" from 1 to 2 do {this addItemToVest "HandGrenade";};
+this addItemToVest "SmokeShell";
+this addItemToVest "SmokeShellGreen";
+this addItemToVest "SmokeShellBlue";
+this addItemToVest "SmokeShellOrange";
+this addItemToVest "Chemlight_green";
+this addItemToBackpack "ToolKit";
+this addItemToBackpack "MineDetector";
+this addItemToBackpack "SatchelCharge_Remote_Mag";
+for "_i" from 1 to 2 do {this addItemToBackpack "DemoCharge_Remote_Mag";};
+this addHeadgear "H_HelmetB_desert";
+this addGoggles "G_Tactical_Clear";
+

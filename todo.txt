@@ -1,0 +1,54 @@
+- SCP base
+- background stuff (patrols, buildings, things-of-interest) for missions
+- "complications" for missions (Jaffa et al patrols, earthquakes, ...)
+- SCP -- triangulate "source" based on N missions surrounding it
+- scripted SGC base
+- more than 1 action added to items (study, research, ...)
+- underwater explore with MALP, diving gear
+- Foe - "cultist", man in black
+- add animations for search, study, ...
+- hint in task for role(s) needed  "Explore P3X-432 -- study the Statue (scholar)"
+- subtasks (find, study, multiple things to do, ...)
+- limit area of operations to about 1.5k so stuff is more "dense"
+- mission state / world state hashmaps as public variables
+- setVariable on objects / vehicle (attach data structure / hashmap with whatever object data needed) - ala Matlab Handle graphics -- note -- objects are local to each client!
+- SCP "campaign" -- start with little tech / resources, "earn" points (to buy? unlock?) better tech and support 
+    - for example, completing missions (with no loss?), or doing "extra" things (exploring? clearing zombie hordes?)
+- "realism" toggle -- on = delays for things, more actions, few if any "convenience" functions
+- dynamic groups / scripted High Command (passing orders around, getting assigned control of units, ...)
+- Inital start on destroyer (random location?), Heli-lift (with AI backup) and set up base
+    - basic base
+    - repair, refuel, re-arm depo (vehicles)
+    - ???
+    - add command(s):
+         - deploy boats, move cargo to heli-pad, ...
+- More "phasmaphobia" missions (ie, "boss" or "source" indicated by different spawns / phenomena)
+- High Command addCommand - land, take off
+- script / otherwise figure out getting AI to take more ammo
+- food or other consumables?
+- better weather randomization
+   - vary fog base
+   - have it change over the course of the mission (since sometimes we have 2+ hour missions ...)
+- "self destruct" addCommand for vehicles so they can be destroyed without pissing off friendlies
+- crew served weapons (in crate?)
+- SCP operators as "independent", with ongoing west / east conflict?
+- addAction to "strip" (leave uniform, vest, backpack?)
+- allow for single player mode in the multiplayer missions (ie, taking control of AI units -- unit switch?)
+- random selection of vehicles
+    - cargo heli, possible a military heli
+    - civ cars, possibly technicals
+- effect to squelch / destroy electronics (lights, radios, gps, UAV, NVG, vehicles, ...)
+- sling loadable shit
+- "repellent" (smoke + "stay out of area" trigger for monsters)
+
+
+Now
+- delete HC heli transport
+- fix assign of vehicle (both escort heli working?)
+- bigger backpack in crate (use engineer unit backpack?)
+
+
+Reminders
+- run discord on other laptop
+- use other laptop as server?
+
