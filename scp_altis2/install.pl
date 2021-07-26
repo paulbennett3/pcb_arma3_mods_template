@@ -44,19 +44,6 @@ map
         die "\n\n\n\nERROR! $full not in Description.ext\n";	     
     } 
 } `ls functions/fn*.sqf`;
-map
-{
-    chomp;
-    my $full = $_;
-    my @fields = split /\//, $full;
-    my $name = $fields[$#fields];
-    $name =~ s/^fn_//;
-    $name =~ s/\.sqf$//;
-    if (! `grep $name Description.ext`) {
-        die "\n\n\n\nERROR! $full not in Description.ext\n";	     
-    } 
-} `ls missions/fn*.sqf`;
-
 
 
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -74,9 +61,6 @@ print `cp Description.ext "$path"`;
 
 print "copying functions ...\n";
 print `cp -R functions "$path"`;
-
-print "copying missions ...\n";
-print `cp -R missions "$path"`;
 
 };
 
