@@ -4,11 +4,9 @@
 Top level -- used to generate the sequence of missions and chain them
 together.
 ******************************************************************* */
+if (! isServer) exitWith {};
 
 [] spawn {
-    if (! isNil "mission_generator_flag") exitWith {};
-    mission_generator_flag = true; publicVariable "mission_generator_flag";
-
     diag_log "Mission Generator spawned";
     hint "Mission Generator started (spawned)";
 
@@ -20,9 +18,6 @@ together.
 
     // fire off the director for tracking background stuff
     [] call pcb_fnc_director;
-
-    // fire off background processes (spare vehicles etc)
-    [] call pcb_fnc_background;
 
     // call our scenario to populate mission_list, total_missions, generate start base, etc
     private _scenarios = [];

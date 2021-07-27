@@ -62,6 +62,10 @@ print `cp Description.ext "$path"`;
 print "copying functions ...\n";
 print `cp -R functions "$path"`;
 
+print "copying scripts ...\n";
+print `cp -R scripts "$path"`;
+
+
 };
 
 # #################################################

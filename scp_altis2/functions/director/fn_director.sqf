@@ -20,9 +20,6 @@ Structure is:
 
 if (! isServer) exitWith {};
 
-if (! isNil "director_flag") exitWith {};
-director_flag = true; publicVariable "director_flag";
-
 // *****************************************************
 // set some global variables regarding encounter create
 // *****************************************************
@@ -72,18 +69,6 @@ if (pcb_DEBUG) then {
             hint ("director tick " + (str _count) + " " + (str _n_active_enc));
         };
 
-        // should we spawn an encounter?
-        if ((_count - _last_encounter_tick) > TICKS_BETWEEN_ENCOUNTERS) then {
-            if ((random 1) < P_ENCOUNTER) then {
-                if (_n_active_enc < ENC_MAX_ACTIVE_ENC) then {
-                    private _did_spawn = [] call pcb_fnc_do_director_spawn;    
-                    if (_did_spawn) then {
-                        _last_encounter_tick = _count;
-                    };
-                };
-            };
-        };
-
         // keep a list of hashmap UIDs to delete when done iterating
         private _delete_keys = [];
 
@@ -94,10 +79,11 @@ if (pcb_DEBUG) then {
             // don't delete "static" entries
             if (! (_y select 0)) then {
                 // are there any players within range?
-                if (! ([([getPosATL (_y select 1)] + (triggerArea (_y select 1)))] call pcb_fnc_players_in_area)) then {
+                private _area = [getPos ((_y select 2) select 0)] + (triggerArea (_y select 1));
+                if (! ([_area] call pcb_fnc_players_in_area)) then {
                     // delete the hashmap entry!
                     if (pcb_DEBUG) then {
-                        hint ("Deleting encounter " + (str _y));
+                        hint ("Deleting encounter - no players in area " + (str _y) + " <" + (str _area) + ">" + (str (getPosATL ((_y select 2) select 0))));
                     };
                     diag_log ("Deleting encounter " + (str _y));
 
@@ -131,6 +117,18 @@ if (pcb_DEBUG) then {
             spawned_encounters deleteAt _x;
         } forEach _delete_keys;
         publicVariable "spawned_encounters";
+
+        // should we spawn an encounter?
+        if ((_count - _last_encounter_tick) > TICKS_BETWEEN_ENCOUNTERS) then {
+            if ((random 1) < P_ENCOUNTER) then {
+                if (_n_active_enc < ENC_MAX_ACTIVE_ENC) then {
+                    private _did_spawn = [] call pcb_fnc_do_director_spawn;    
+                    if (_did_spawn) then {
+                        _last_encounter_tick = _count;
+                    };
+                };
+            };
+        };
     };
 };
 

@@ -14,7 +14,7 @@ _g1 (list) : [
              ]
 _g2 (list) : see above
 ****************************************************************** */
-params ["_player", "_g1", "_g2"];
+params ["_label", "_player", "_g1", "_g2"];
 
 private _did_spawn = false;
 
@@ -42,14 +42,14 @@ private _tries = 10;
 // did we get a valid position?
 while { _tries > 0 } do {
     _pos = [_whitelist, _blacklist] call BIS_fnc_randomPos;
-    if (((_pos select 0) == 0) and ((_pos select 1) == 0)) then {
+    if (!([_pos] call pcb_fnc_is_valid_position)) then {
         _tries = _tries - 1;
     } else {
         _tries = 0;
     };
 };
 
-if (((_pos select 0) == 0) and ((_pos select 1) == 0)) exitWith { diag_log "fn_enc_compound- not valid position"; false };
+if (!([_pos] call pcb_fnc_is_valid_position)) exitWith { diag_log "fn_enc_compound- not valid position"; false };
 
 // are there any players in the area?
 if ([ [_pos, ENC_MIN_PLAYER_DIST_CREATE] ] call pcb_fnc_players_in_area) exitWith { diag_log "fn_enc_compound - players in range"; false };
@@ -121,7 +121,7 @@ if (_roll < 0.50) then {
 };
 
 private _UID = "S" + str ([] call pcb_fnc_get_next_UID);
-_entry = [false, _trg, _obj_list, false, objNull, objNull];
+_entry = [false, _trg, _obj_list, false, objNull, objNull, _label];
 
 // record our encounter in the list so we can delete it later
 spawned_encounters set [_UID, _entry];

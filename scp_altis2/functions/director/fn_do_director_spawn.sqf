@@ -39,9 +39,7 @@ private _options = [
 ];
 
 private _option = selectRandom _options;
-
 diag_log ("Spawning " + (str _option));
-hint ("Spawning " + (str _option));
 switch (_option) do {
     case "animal_follower" : {
         private _types = [0,0,0,0,1,1,1,1,2,2,2,2,2,2,2,3,4,5,6,7,8];
@@ -55,14 +53,13 @@ switch (_option) do {
             _trg setTriggerStatements ["this", "", ""];
             private _obj_list = [ _animal, _trg];
             private _UID = "S" + str ([] call pcb_fnc_get_next_UID);
-            _entry = [false, _trg, _obj_list, false, objNull, objNull];
+            _entry = [false, _trg, _obj_list, false, objNull, objNull, _option];
             spawned_encounters set [_UID, _entry];
             publicVariable "spawned_encounters"; 
         }
     };
     case "compound": {
         private _types_lists = [
-            types_hash get "spooks",
             types_hash get "demons",
             types_hash get "looters",
             types_hash get "zombies"
@@ -72,55 +69,54 @@ switch (_option) do {
         private _g1 = [ _types1, east, 5, 9];
         private _g2 = [ _types2, independent, 5, 9];
 
-        _did_spawn = [_player, _g1, _g2] call pcb_fnc_enc_compound;
+        _did_spawn = [_option, _player, _g1, _g2] call pcb_fnc_enc_compound;
     };
     case "spooks": {
             private _types = types_hash get "spooks";
             private _type = [selectRandom _types];
-            _did_spawn = [_player, _type, independent, 1, 3, false] call pcb_fnc_enc_infantry;
+            _did_spawn = [_option, _player, _type, independent, 1, 3, false] call pcb_fnc_enc_infantry;
         };
     case "demon": {
-            private _type = selectRandom (types_hash get "demons");
-            _did_spawn = [_player, [_type], independent, 1, 3, false] call pcb_fnc_enc_infantry;
+            private _types = types_hash get "demons";
+            _did_spawn = [_option, _player, _types, independent, 1, 3, false] call pcb_fnc_enc_infantry;
         };
     case "zombies": {
             private _types = types_hash get "zombies"; 
-            _did_spawn = [_player, _types, independent, 3, 25, false] call pcb_fnc_enc_infantry;
+            _did_spawn = [_option, _player, _types, independent, 3, 25, false] call pcb_fnc_enc_infantry;
         };
     case "ambulance": {
-            _did_spawn = [_player, (types_hash get "ambulance") select 0, civilian] call pcb_fnc_enc_vehicle_patrol;
+            _did_spawn = [_option, _player, (types_hash get "ambulance") select 0, civilian] call pcb_fnc_enc_vehicle_patrol;
         };
     case "civ_vehicle": {
             private _type = selectRandom (types_hash get "civ vehicles");
 
-            _did_spawn = [_player, _type, civilian] call pcb_fnc_enc_vehicle_patrol;
+            _did_spawn = [_option, _player, _type, civilian] call pcb_fnc_enc_vehicle_patrol;
         };
     case "civ_foot": {
             private _types = types_hash get "civilians";
-            _did_spawn = [_player, _types, civilian] call pcb_fnc_enc_infantry;
+            _did_spawn = [_option, _player, _types, civilian] call pcb_fnc_enc_infantry;
         };
     case "bandit_foot": {
             private _types = types_hash get "looters";
-            _did_spawn = [_player, _types, independent] call pcb_fnc_enc_infantry;
+            _did_spawn = [_option, _player, _types, independent] call pcb_fnc_enc_infantry;
         };
     case "bandit_car": {
             private _type = selectRandom (types_hash get "civ vehicles");
-            _did_spawn = [_player, _type, independent] call pcb_fnc_enc_vehicle_patrol;
+            _did_spawn = [_option, _player, _type, independent] call pcb_fnc_enc_vehicle_patrol;
         };
     case "police_foot": {
             private _types = types_hash get "police"; 
-            _did_spawn = [_player, _types, west] call pcb_fnc_enc_infantry;
+            _did_spawn = [_option, _player, _types, west] call pcb_fnc_enc_infantry;
         };
     case "police_vehicle": {
             private _type = selectRandom (types_hash get "police vehicles");
-            _did_spawn = [_player, _type, west] call pcb_fnc_enc_vehicle_patrol;
+            _did_spawn = [_option, _player, _type, west] call pcb_fnc_enc_vehicle_patrol;
         };
     case "civ_air": {
             private _type = selectRandom (types_hash get "civ air"); 
-            _did_spawn = [_player, _type, civilian] call pcb_fnc_enc_vehicle_patrol;
+            _did_spawn = [_option, _player, _type, civilian] call pcb_fnc_enc_vehicle_patrol;
         };
 };
 diag_log ("Spawn success? " + (str _did_spawn));
-//hint ("Spawn success? <" + (str _option) + "> " + (str _did_spawn));
 
 _did_spawn;

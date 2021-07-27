@@ -9,9 +9,6 @@ besides / in addition to the mission(s)
 -------------------------------------------------------------------- */
 
 if (! isServer) exitWith {};
-// only let this run once!!!!
-if (! isNil "background_flag") exitWith {};
-background_flag = true; publicVariable "background_flag";
 
 // ------------------------------------------------
 // create our "Active" area where sites will be
@@ -67,6 +64,8 @@ if (true) then {
 [active_area] spawn {
     params ["_active_area"];
 
+    sleep 5;
+
     // -----------------------------------------------
     // get a list of all "buildings" -- using worldSize, so pretty much everything on map 
     // this generates a list of on the order of 18,000 objects on Altis!  SUBSAMPLE!!!!
@@ -75,7 +74,7 @@ if (true) then {
     // -----------------------------------------------
     private _buildings = nearestTerrainObjects [
         start_pos,
-        ["House", "Fuelstation", "Lighthouse", "Church", "Hospital", "Transmitter"],
+        types_hash get "svbuildings",
         worldSize
     ];
 

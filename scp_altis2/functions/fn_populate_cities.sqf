@@ -74,10 +74,10 @@ private _military_objects_in_area = _military_objects inAreaArray "mEPI";
     private _positions = [_building] call BIS_fnc_buildingPositions;
     if ((count _positions) > 1) then {
         private _pos = selectRandom _positions;
-        if (((_pos select 0) > 0) or ((_pos select 1) > 0)) then {
+        if ([_pos] call pcb_fnc_is_valid_position) then {
             private _object_type = selectRandom _crates;
-            //_target = _object_type createVehicle _pos;
-            _target = createVehicle [_object_type, _pos, [], 0, "NONE"];
+            _target = _object_type createVehicle [0, 0, 0];
+            _target setPos _pos;
             sleep 0.1;
         };
     };

@@ -7,36 +7,36 @@ Spawn some infantry
    ???
 ****************************************************************** */
 
-params ["_player", "_types", "_side", ["_min_n", 1], ["_max_n", 6], ["_exact", false], ["_pos", [0,0]]];
+params ["_label", "_player", "_types", "_side", ["_min_n", 1], ["_max_n", 6], ["_exact", false], ["_pos", [0,0]]];
 private _did_spawn = false;
-hint ("<" + (str _types) + ">");
 
 private _vobj = _player;
 
 // did our caller not specify a position? If they didn't, pick one
-if (((_pos select 0) == 0) and ((_pos select 1) == 0)) then {
+if (! ([_pos] call pcb_fnc_is_valid_position)) then {
     private _vtemp = [_player] call pcb_fnc_player_in_vehicle;
     if (_vtemp select 0) then { _vobj = (_vtemp select 1) select 0; };
     private _whitelist = [ [_vobj getRelPos [ENC_DIST, 0], ENC_RADIUS] ];
     private _blacklist = [ "water" ];
-    private _pos = [0, 0];
+    _pos = [0, 0];
     private _tries = 10;
 
     // did we get a valid position?
     while { _tries > 0 } do {
         _pos = [_whitelist, _blacklist] call BIS_fnc_randomPos;
-        if (((_pos select 0) == 0) and ((_pos select 1) == 0)) then {
+        if (! ([_pos] call pcb_fnc_is_valid_position)) then {
             _tries = _tries - 1;
         } else {
             _tries = 0;
         };
     };
 
-    if (((_pos select 0) == 0) and ((_pos select 1) == 0)) exitWith { diag_log "fn_enc_infantry - not valid position"; false };
+    if (! ([_pos] call pcb_fnc_is_valid_position)) exitWith { diag_log "fn_enc_infantry - not valid position"; false };
 
     // are there any players in the area?
     if ([ [_pos, ENC_MIN_PLAYER_DIST_CREATE] ] call pcb_fnc_players_in_area) exitWith { diag_log "fn_enc_infantry - players in range"; false };
 };
+//hint ("Spawning " + _label + " at " + (str _pos) + ">");
 
 private _action = objNull;
 private _entry = objNull;
@@ -116,7 +116,7 @@ if (true) then {
         [_group, getPosATL _building] call BIS_fnc_taskDefend;
     };
 
-    _entry = [false, _trg, _obj_list, false, objNull, objNull];
+    _entry = [false, _trg, _obj_list, false, objNull, objNull, _label];
 
     // record our encounter in the list so we can delete it later
     spawned_encounters set [_UID, _entry];

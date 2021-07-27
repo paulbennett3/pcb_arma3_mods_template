@@ -229,6 +229,18 @@ private _crates = [
 ];
 types_hash set ["resupply crates", _crates];
 
+// --------------------------------
+// SVBuildings (from CfgVehicles!) 
+//  "spare vehicle buildings" -- ie, the
+//   buildings to spawn spare cars near
+// --------------------------------
+private _svbuildings = [
+    "House", "Fuelstation", "Lighthouse", "Church", "Hospital", "Transmitter"
+];
+types_hash set ["svbuildings", _svbuildings];
+
+
+
 
 // Helicopters
 

@@ -4,7 +4,7 @@
 Spawn a single vehicle (with crew) to patrol
    patrol (can be anywhere on road)
 ****************************************************************** */
-params ["_player", "_type", "_side"];
+params ["_label", "_player", "_type", "_side"];
 private _did_spawn = false;
 
 hint ("<" + (str _type) + ">");
@@ -21,14 +21,14 @@ private _pos = [0, 0];
 private _tries = 10;
 while { _tries > 0 } do {
     _pos = [_whitelist, _blacklist, _code] call BIS_fnc_randomPos;
-    if (((_pos select 0) == 0) and ((_pos select 1) == 0)) then {
+    if (!([_pos] call pcb_fnc_is_valid_position)) then {
         _tries = _tries - 1;
     } else {
         _tries = 0;
     };
 };
 
-if (((_pos select 0) == 0) and ((_pos select 1) == 0)) exitWith { diag_log "fn_enc_vehicle_patrol - invalid position"; false };
+if (!([_pos] call pcb_fnc_is_valid_position)) exitWith { diag_log "fn_enc_vehicle_patrol - invalid position"; false };
 
 // are there any players in the area?
 if ([ [_pos, ENC_MIN_PLAYER_DIST_CREATE] ] call pcb_fnc_players_in_area) exitWith { diag_log "fn_enc_vehicle_patrol - players to close"; false };
@@ -81,7 +81,7 @@ if (true) then {
     // create a patrol
     [_group, _pos, 1000] call BIS_fnc_taskPatrol; 
     
-    _entry = [false, _trg, _obj_list, false, objNull, objNull];
+    _entry = [false, _trg, _obj_list, false, objNull, objNull, _label];
 
     if (pcb_DEBUG) then {
         private _m = createMarker [_UID, _obj_list select 0];

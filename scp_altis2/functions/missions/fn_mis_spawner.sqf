@@ -52,10 +52,10 @@ while {_tries > 0} do {
     if ((count _positions) > 5) then {
         _pos = selectRandom _positions;
         if ([_pos] call pcb_fnc_is_valid_position) then {
-            //_target = _object_type createVehicle _pos; 
-            _target = createVehicle [_object_type,_pos, [], 0, "NONE"]; 
+            _target = _object_type createVehicle [0,0,0]; 
+            _target setPos _pos; 
             sleep 1;
-            if ((! (isNull _target)) and (alive _target)) then {
+            if ((! (isNull _target)) and (alive _target) and ([(getPosATL _target)] call pcb_fnc_is_valid_position)) then {
                 _tries = -10;
             };
         };
