@@ -37,20 +37,20 @@ private _code = {
     // civilians
     if ((random 1) < 0.25) then {
         private _types = types_hash get "civilians";
-        private _n = 10 + (ceil (random 10));
+        private _n = 2 + (ceil (random 10));
         [_types, _n, _x, civilian] call _code;
 
     };   
     // looters
     if ((random 1) < 0.25) then {
         private _types = types_hash get "looters";
-        private _n = 3 + (ceil (random 7));
+        private _n = 1 + (ceil (random 5));
         [_types, _n, _x, independent] call _code;
     };   
     // zombies
     if ((random 1) < 0.25) then {
         private _types = types_hash get "zombies";
-        private _n = 10 + (ceil (random 20));
+        private _n = 3 + (ceil (random 5));
         [_types, _n, _x, east] call _code;
     };   
         
@@ -91,12 +91,12 @@ private _military_objects_in_area = _military_objects inAreaArray "mEPI";
     private _roll = random 1; 
     if (_roll < 0.5) then {
         private _ztypes = types_hash get "zombies";
-        private _n = 5 + (ceil (random 5));
+        private _n = 1 + (ceil (random 5));
         [_ztypes, _n, _x, east] call _code;
     };
     if ((_roll >= 0.5) and (_roll < 0.7)) then {
         private _types = types_hash get "looters"; 
-        private _n = 3 + (ceil (random 3));
+        private _n = 1 + (ceil (random 3));
         [_types, _n, _x, east] call _code;
     };
     

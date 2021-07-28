@@ -35,8 +35,7 @@ private _state = createHashMapFromArray [
 private _result = [_ok, _state];
 
 
-//private _possible_objects = types_hash get "large items"; 
-private _possible_objects = types_hash get "small items"; 
+private _possible_objects = types_hash get "occult large items"; 
 
 private _target = objNull;
 private _object_type = selectRandom _possible_objects;
@@ -46,18 +45,15 @@ private _tries = 100;
 while {_tries > 0} do {
     _tries = _tries - 1;
 
-    _building = [epicenter, 5000] call pcb_fnc_get_cool_building_location;
-
-    private _positions = [_building] call BIS_fnc_buildingPositions; 
-    if ((count _positions) > 5) then {
-        _pos = selectRandom _positions;
-        if ([_pos] call pcb_fnc_is_valid_position) then {
-            _target = _object_type createVehicle [0,0,0]; 
-            _target setPos _pos; 
-            sleep 1;
-            if ((! (isNull _target)) and (alive _target) and ([(getPosATL _target)] call pcb_fnc_is_valid_position)) then {
-                _tries = -10;
-            };
+    // center, minDist, maxDist, objDist, waterMode, maxGrad, shoreMode, blacklistPos, defaultPos
+    private _center = [epicenter, 500, 5000, 10, 0, 0.1, 0, [], []] call BIS_fnc_findSafePos;
+    _pos = ((selectBestPlaces [_center, 500, "5*forest + trees + hills - meadow - 3*houses", 10, 1]) select 0) select 0;
+    if ([_pos] call pcb_fnc_is_valid_position) then {
+        _target = _object_type createVehicle [0,0,0]; 
+        _target setPos _pos; 
+        sleep 1;
+        if ((! (isNull _target)) and (alive _target) and ([(getPosATL _target)] call pcb_fnc_is_valid_position)) then {
+            _tries = -10;
         };
     };
 }; 
@@ -66,7 +62,7 @@ while {_tries > 0} do {
 if ((_tries > -10) or (isNull _target)) exitWith { _result };
 
 private _desc = objNull;
-_desc = [ "Destroy the infernal artifact causing the dead to rise.", "Destroy artifact", ""];
+_desc = [ "Destroy the cursed source causing the dead to rise.", "Destroy source", ""];
 _destroyable = false;
 _state = createHashMapFromArray [
     ["target", _target],
@@ -82,51 +78,76 @@ _state = createHashMapFromArray [
 private _temp = [_state] call pcb_fnc_mis_destroy;
 
 // add some "environment"
-[_pos, 50, 50 ] remoteExec ["BIS_fnc_crows", 0];
+private _crows = [_pos, 50, ceil (random 20) ] remoteExec ["BIS_fnc_crows", 0];
+private _flies = [_pos, 0.1, 5] remoteExec ["BIS_fnc_flies", 0];
 
 // save our state in our target "for later"
 _target setVariable ["_state", _state, true];
 
-// ---------------------------------------
-// spawn a welcoming comittee ...
-// ---------------------------------------
-private _welcome_comittee = true;
-//private _welcome_comittee = false;
+// ------------------------------------------
+//   Spawn spawner
+// ------------------------------------------
+private _types = types_hash get "zombies";
+[_target, _types, _pos, _UID] spawn {
+    params ["_target", "_types", "_pos", "_UID"];
 
-// needs _pos and _building defined
-if (_welcome_comittee) then {
-    private _types = types_hash get "zombies";
-
-    // make a list of all the stuff we spawn
+    sleep 10;
+    // private _n_spawn = 30;
+    private _n_spawn = 5 + (ceil (random 20));
+    private _delay = 30;
     private _obj_list = [];
-
-    private _group_size = 10 + (random 20);
-
-    // create a group
     private _group = createGroup east;
-    for [{_i = 0 }, {_i < _group_size}, {_i = _i + 1}] do {
-        private _type = objNull;
-        _type = selectRandom _types;
+    _group enableDynamicSimulation true;
+    _group deleteGroupWhenEmpty false;  // can go empty, but will respawn ...
+    while { (alive _target) && (! isNull _target) } do {
+        sleep _delay;
 
-        private _veh = _group createUnit [_type, _pos, [], 10, 'NONE'];
-        [_veh] joinSilent _group;
-        _veh triggerDynamicSimulation false;
-        _obj_list pushBack _veh;
-        sleep .1;
+        private _keep_list = [];
+        private _del_list = [];
+
+        {
+           if ((! isNull _x) && (alive _x)) then {
+               _keep_list pushBackUnique _x;
+           } else {
+               _del_list pushBackUnique _x;
+           };
+        } forEach _obj_list;
+
+        _obj_list = _keep_list;
+
+        {
+            deleteVehicle _x;
+        } forEach _del_list;
+
+        if ((count _obj_list) < _n_spawn) then {
+            if (pcb_DEBUG) then {
+                hint (_UID + " spawner spawning <" + (str (count _obj_list)) + "> ...");
+            };
+            private _type = selectRandom _types;
+            private _veh = _group createUnit [_type, _pos, [], 1, 'NONE'];
+            [_veh] joinSilent _group;
+            _veh triggerDynamicSimulation false;
+            _obj_list pushBack _veh;
+        };
     };
 
-    // there is a limit to the number of groups, so we will mark this to delete
-    //  when empty
-    _group deleteGroupWhenEmpty true;
-
-    // toggle dynamic simulation on -- shouldn't really matter since we delete when far
-    // away, but there is a chance to have lots of units ...
-    _group enableDynamicSimulation true;
-
-    // create a garrison waypoint
-    [_group, getPosATL _building] call BIS_fnc_taskDefend;
+    // target destroyed, so do cleanup
+    {
+        deleteVehicle _x;
+    } forEach _obj_list;
 };
 
+/* ----------------------------------------------------------------
+                 Configure and Place Anomalies 
+---------------------------------------------------------------- */
+if (true) then {
+    diag_log "Placing DSA Anomalies ...";
+
+    private _moduleGroup = createGroup sideLogic;
+    _cmd = "DSA_SpawnerAnomaly = this; this setVariable ['BIS_fnc_initModules_disableAutoActivation', false, true]; DSA_SpawnerAnomaly setVariable ['DSA_Type', '''Launchpad'',''Leech'',''Trapdoor'',''Zapper''', true]; DSA_SpawnerAnomaly setVariable ['DSA_RandomTypes', '''Launchpad'',''Leech'',''Trapdoor'',''Zapper''', true]; DSA_SpawnerAnomaly setVariable ['DSA_Radius',500, true]; DSA_SpawnerAnomaly setVariable ['DSA_CountCluster','1,3', true]; DSA_SpawnerAnomaly setVariable ['DSA_Count','1,3', true]; DSA_SpawnerAnomaly setVariable ['DSA_RadiusCluster', 30, true]; ";
+
+    "DSA_SpawnerAnomaly" createUnit [ _pos, _moduleGroup, _cmd];
+};
 
 // -------------------------------------
 _ok = true;

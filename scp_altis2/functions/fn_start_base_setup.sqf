@@ -114,7 +114,8 @@ _vehicle_list pushBack ["Heli", "B_Heli_Transport_03_unarmed_F"];
                               !!!!!!!!!!!!!!!!! TESTING !!!!!!!!!!!!!!!!!
 ########################################################################################################## */
 
-//[] call compile preprocessFileLineNumbers "scripts\test_object_in_building.sqf";
+//[] call compile preprocessFileLineNumbers "scripts\test_destroyable_object.sqf";
+//[] call compile preprocessFileLineNumbers "scripts\test_mines.sqf";
 
 //private _loot = [start_pos] call pcb_fnc_loot_crate;
 

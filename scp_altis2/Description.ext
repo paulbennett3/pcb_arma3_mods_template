@@ -34,6 +34,8 @@ class CfgFunctions
             class advancedTowingInit {};
             class animal_follower {};
             class background {};
+            class boom_animal {};
+            class boom_guy {};
             class chemicalDetector {};
             class crate_loadout {};
             class destroy_building {};

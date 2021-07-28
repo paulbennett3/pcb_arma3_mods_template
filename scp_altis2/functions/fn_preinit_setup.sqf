@@ -26,17 +26,6 @@ _marker setMarkerColor "ColorRed";
 private _moduleGroup = createGroup sideLogic;
 
 
-/* ----------------------------------------------------------------
-                Find good places to stick anomalies
-
-_places will have (up to?) _nplaces position entries
----------------------------------------------------------------- */
-diag_log "finding selection of good places ...";
-private _filter = "3*forest + 2*trees + meadow + 3*houses - 5*sea - 5*waterDepth";  
-private _nplaces = 20;
-private _places = selectBestPlaces [epicenter, 5000, _filter, 50, _nplaces];
-diag_log " ... done finding!";
-
 
 /* ----------------------------------------------------------------
                     Configure and Place Core
@@ -88,6 +77,13 @@ _cmd = "DSA_DetectableSpooks = this; this setVariable ['BIS_fnc_initModules_disa
 
 Do multiple!
 ---------------------------------------------------------------- */
+/*
+diag_log "finding selection of good places ...";
+private _filter = "3*forest + 2*trees + meadow + 3*houses - 5*sea - 5*waterDepth";  
+private _nplaces = 20;
+private _places = selectBestPlaces [epicenter, 5000, _filter, 50, _nplaces];
+diag_log " ... done finding!";
+
 diag_log "Placing DSA Anomalies ...";
 
 _cmd = "DSA_SpawnerAnomaly = this; this setVariable ['BIS_fnc_initModules_disableAutoActivation', false, true]; DSA_SpawnerAnomaly setVariable ['DSA_Type', '''Launchpad'',''Leech'',''Trapdoor'',''Zapper''', true]; DSA_SpawnerAnomaly setVariable ['DSA_RandomTypes', '''Launchpad'',''Leech'',''Trapdoor'',''Zapper''', true]; DSA_SpawnerAnomaly setVariable ['DSA_Radius',500, true]; DSA_SpawnerAnomaly setVariable ['DSA_CountCluster','1,3', true]; DSA_SpawnerAnomaly setVariable ['DSA_Count','1,3', true]; DSA_SpawnerAnomaly setVariable ['DSA_RadiusCluster', 30, true]; ";
@@ -103,3 +99,4 @@ while {_placed < _nanomalies} do {
     "DSA_SpawnerAnomaly" createUnit [ _rpos, _moduleGroup, _cmd];
     _placed = _placed + 1;
 };
+*/

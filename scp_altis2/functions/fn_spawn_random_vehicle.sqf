@@ -50,7 +50,7 @@ private _rpos = [
 if (((_rpos select 0) != 0) or ((_rpos select 1) != 0)) then {
     private _type = ["car", "any"] call pcb_fnc_get_random_vehicle;
     _veh = createVehicle [_type, _rpos, [], 0, "NONE"];
-    _veh setVariable ["BIS_enableRandomization", false];
+    // _veh setVariable ["BIS_enableRandomization", false];
     _veh setDir (random 360);
 
     // doesn't count if it blows up on spawn in ...

@@ -7,8 +7,6 @@ Spawn a single vehicle (with crew) to patrol
 params ["_label", "_player", "_type", "_side"];
 private _did_spawn = false;
 
-hint ("<" + (str _type) + ">");
-
 private _vobj = _player;
 private _vtemp = [_player] call pcb_fnc_player_in_vehicle;
 if (_vtemp select 0) then { _vobj = (_vtemp select 1) select 0; };
@@ -66,14 +64,6 @@ if (true) then {
     //  when empty
     _group deleteGroupWhenEmpty true;
 
-    // create a trigger on the first object in the list (so it will track patrols, for example)
-    // we use it to detect if there are players "near"
-    _trg = createTrigger ["EmptyDetector", _obj_list select 0, true];
-    _trg setTriggerArea [ENC_MIN_PLAYER_DIST_DELETE, ENC_MIN_PLAYER_DIST_DELETE, 0, false];
-    _trg setTriggerActivation ["ANYPLAYER", "PRESENT", true];
-    _trg setTriggerStatements ["this", "", ""];
-    _obj_list pushBack _trg;
-
     // toggle dynamic simulation on -- shouldn't really matter since we delete when far
     // away, but there is a chance to have lots of units ...
     _group enableDynamicSimulation true;
@@ -81,7 +71,7 @@ if (true) then {
     // create a patrol
     [_group, _pos, 1000] call BIS_fnc_taskPatrol; 
     
-    _entry = [false, _trg, _obj_list, false, objNull, objNull, _label];
+    _entry = [false, objNull, _obj_list, false, objNull, objNull, _label];
 
     if (pcb_DEBUG) then {
         private _m = createMarker [_UID, _obj_list select 0];

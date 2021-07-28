@@ -101,13 +101,5 @@ if (true) then {
         [_active_area] call pcb_fnc_populate_cities;
     };
 
-
-    // ---------------------------------------------------------
-    // generate a random number of "sites" / "scenes" to place
-    // ---------------------------------------------------------
-//    [_active_area, _buildings] spawn {
-//        params ["_active_area", "_buildings"];
-//        [_active_area, _buildings] call pcb_fnc_background_war_bluefor_opfor;
-//    };
 };
 

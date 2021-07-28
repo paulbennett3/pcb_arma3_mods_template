@@ -11,11 +11,9 @@ removeHeadgear _this;
 removeGoggles _this;
 
 comment "Add weapons";
-//_this addWeapon "arifle_MX_SW_F";
 _this addWeapon "arifle_MX_F";
 _this addPrimaryWeaponItem "acc_flashlight";
 _this addPrimaryWeaponItem "100Rnd_65x39_caseless_mag";
-//_this addPrimaryWeaponItem "bipod_01_F_snd";
 _this addWeapon "hgun_Pistol_heavy_01_F";
 _this addHandgunItem "acc_flashlight_pistol";
 _this addHandgunItem "11Rnd_45ACP_Mag";

@@ -20,6 +20,9 @@ private _options = [
     "bandit_foot",
     "bandit_car",
     "bandit_car",
+    "boom_animal",
+    "boom_guy",
+    "boom_guy",
     "civ_foot",
     "civ_foot",
     "civ_vehicle",
@@ -47,16 +50,36 @@ switch (_option) do {
         _did_spawn = _result select 1;
         if (_did_spawn) then {
             private _animal = _result select 0;
-            private _trg = createTrigger ["EmptyDetector", _animal, true];
-            _trg setTriggerArea [ENC_MIN_PLAYER_DIST_DELETE, ENC_MIN_PLAYER_DIST_DELETE, 0, false];
-            _trg setTriggerActivation ["ANYPLAYER", "PRESENT", true];
-            _trg setTriggerStatements ["this", "", ""];
-            private _obj_list = [ _animal, _trg];
+            private _obj_list = [ _animal];
             private _UID = "S" + str ([] call pcb_fnc_get_next_UID);
-            _entry = [false, _trg, _obj_list, false, objNull, objNull, _option];
+            _entry = [false, objNull, _obj_list, false, objNull, objNull, _option];
             spawned_encounters set [_UID, _entry];
             publicVariable "spawned_encounters"; 
-        }
+        };
+    };
+    case "boom_animal" : {
+        private _result = [_player getRelPos [90, 0], 1] call pcb_fnc_boom_animal;
+        _did_spawn = _result select 0;
+        if (_did_spawn) then {
+            private _animal = _result select 1;
+            private _obj_list = [ _animal];
+            private _UID = "S" + str ([] call pcb_fnc_get_next_UID);
+            _entry = [false, objNull, _obj_list, false, objNull, objNull, _option];
+            spawned_encounters set [_UID, _entry];
+            publicVariable "spawned_encounters"; 
+        };
+    };
+    case "boom_guy" : {
+        private _result = [_player getRelPos [500 + (ceil (random 500)), 0]] call pcb_fnc_boom_guy;
+        _did_spawn = _result select 0;
+        if (_did_spawn) then {
+            private _obj = _result select 1;
+            private _obj_list = [ _obj];
+            private _UID = "S" + str ([] call pcb_fnc_get_next_UID);
+            _entry = [false, objNull, _obj_list, false, objNull, objNull, _option];
+            spawned_encounters set [_UID, _entry];
+            publicVariable "spawned_encounters"; 
+        };
     };
     case "compound": {
         private _types_lists = [
@@ -66,8 +89,8 @@ switch (_option) do {
         ];
         private _types1 = selectRandom _types_lists;
         private _types2 = selectRandom _types_lists;
-        private _g1 = [ _types1, east, 5, 9];
-        private _g2 = [ _types2, independent, 5, 9];
+        private _g1 = [ _types1, east, 3, 7];
+        private _g2 = [ _types2, independent, 3, 7];
 
         _did_spawn = [_option, _player, _g1, _g2] call pcb_fnc_enc_compound;
     };
@@ -82,7 +105,7 @@ switch (_option) do {
         };
     case "zombies": {
             private _types = types_hash get "zombies"; 
-            _did_spawn = [_option, _player, _types, independent, 3, 25, false] call pcb_fnc_enc_infantry;
+            _did_spawn = [_option, _player, _types, independent, 1, 10, false] call pcb_fnc_enc_infantry;
         };
     case "ambulance": {
             _did_spawn = [_option, _player, (types_hash get "ambulance") select 0, civilian] call pcb_fnc_enc_vehicle_patrol;

@@ -58,6 +58,11 @@ if (pcb_DEBUG) then {
     spawned_encounters = createHashMap;
 
     private _last_encounter_tick = 1;
+
+    private _trg = createTrigger ["EmptyDetector", playableUnits select 0, true];
+    _trg setTriggerArea [ENC_MIN_PLAYER_DIST_DELETE, ENC_MIN_PLAYER_DIST_DELETE, 0, false];
+    _trg setTriggerActivation ["ANYPLAYER", "PRESENT", true];
+    _trg setTriggerStatements ["this", "", ""];
    
     while {true} do {
         sleep _sleep_time;
@@ -79,7 +84,7 @@ if (pcb_DEBUG) then {
             // don't delete "static" entries
             if (! (_y select 0)) then {
                 // are there any players within range?
-                private _area = [getPos ((_y select 2) select 0)] + (triggerArea (_y select 1));
+                private _area = [getPos ((_y select 2) select 0)] + (triggerArea _trg);
                 if (! ([_area] call pcb_fnc_players_in_area)) then {
                     // delete the hashmap entry!
                     if (pcb_DEBUG) then {
@@ -123,9 +128,13 @@ if (pcb_DEBUG) then {
             if ((random 1) < P_ENCOUNTER) then {
                 if (_n_active_enc < ENC_MAX_ACTIVE_ENC) then {
                     private _did_spawn = [] call pcb_fnc_do_director_spawn;    
-                    if (_did_spawn) then {
+                    if ((! isNil "_did_spawn") && { _did_spawn }) then {
                         _last_encounter_tick = _count;
                     };
+                    if (isNil "_did_spawn") then {
+// hint "failed to assign _did_spawn";
+                    };
+ 
                 };
             };
         };

@@ -8,43 +8,53 @@ For defining types and groups thereof
 types_hash = createHashMap;
 
 // --------------------------------
-// Large Items - outdoors only!
+// Occult Large Items - outdoors only!
+//   for use with investigate, spawn,
+//   destroy ...
+// best place in forest or on hilltop
 // --------------------------------
-private _large_items = [
+private _occult_large_items = [
     "Land_Grave_obelisk_F",
     "Land_Grave_forest_F",
     "Land_Grave_dirt_F",
+    "Land_Grave_rocks_F",
+    "Land_Castle_01_tower_F",
     "Land_AncientPillar_damaged_F",
+    "Land_AncientPillar_fallen_F",
+    "Land_Water_source_F",
+    "Land_TreeBin_F",
+    "Land_WoodenBox_F",
+    "Land_Calvary_01_V1_F",
     "Land_Maroula_F",
-    "Land_Cages_F",
-    "Land_Sacks_heap_F",
-    "Land_PaperBox_closed_F",
-    "Land_PaperBox_open_full_F",
-    "Land_DataTerminal_01_F",
-    "Land_CargoBox_V1_F",
-    "Land_WaterBarrel_F",
-    "Land_WaterTank_F",
-    "Land_Cargo20_EMP_F",
-    "Land_Device_assembled_F",
-    "Land_Device_disassembled_F",
-    "Catacomb_Stone_casket",
-    "vn_dragon_01",
-    "vn_dragon_02",
-    "Land_vn_shrine_01",
-    "Land_vn_vase_loam_3_ep1",
-    "sga_skull_post"
+    "Land_AncientHead_01_F",
+    "Land_AncientStatue_01_F",
+    "Land_AncientStatue_02_F",
+    "Land_StoneTanoa_01_F",
+    "Land_RaiStone_01_F"
 ];
-types_hash set ["large items", _large_items];
+types_hash set ["occult large items", _occult_large_items];
+
 
 // --------------------------------
-//     small items -- ok for inside
+// Tech Large Items - outdoors only!
+//   for use with investigate, spawn,
+//   destroy ...
+// best place in forest or on hilltop
+//   or near "research" lab ...
+// --------------------------------
+private _tech_large_items = [
+    "Land_PowerGenerator_F",
+    "Land_Device_assembled_F",
+    "Land_Device_disassembled_F"
+];
+types_hash set ["tech large items", _tech_large_items];
+
+
+// --------------------------------
+//    tech small items -- ok for inside
 // --------------------------------
 private _small_items = [
-    "Land_FirePlace_F",
-    "Land_Campfire_F",
-    "Land_Sleeping_bag_folded_F",
-    "Land_CarBattery_02_F",
-    "Land_CarBattery_01_F",
+    "Land_DataTerminal_01_F",
     "Land_FMradio_F",
     "Land_HandyCam_F",
     "Land_Laptop_F",
@@ -53,14 +63,7 @@ private _small_items = [
     "Land_PortableLongRangeRadio_F",
     "Land_Tablet_02_F",
     "Land_SurvivalRadio_F",
-    "Land_Sack_F",
-    "Land_Ammobox_rounds_F",
-    "Land_MetalBarrel_F",
-    "Land_BarrelSand_F",
-    "Land_BarrelTrash_grey_F",
-    "Land_Suitcase_F",
-    "Land_CanisterPlastic_F",
-    "Land_GasCanister_F"
+    "Land_Suitcase_F"
 ];
 types_hash set ["small items", _small_items];
 

@@ -91,14 +91,6 @@ if (true) then {
     // away, but there is a chance to have lots of units ...
     _group enableDynamicSimulation true;
 
-    // create a trigger on the first object in the list (so it will track patrols, for example)
-    // we use it to detect if there are players "near"
-    _trg = createTrigger ["EmptyDetector", _obj_list select 0, true];
-    _trg setTriggerArea [ENC_MIN_PLAYER_DIST_DELETE, ENC_MIN_PLAYER_DIST_DELETE, 0, false]; 
-    _trg setTriggerActivation ["ANYPLAYER", "PRESENT", true];
-    _trg setTriggerStatements ["this", "", ""];
-    _obj_list pushBack _trg;
-
     if (pcb_DEBUG) then {
         private _m = createMarker [_UID, _obj_list select 0];
         _m setMarkerShapeLocal "ELLIPSE";
@@ -116,7 +108,7 @@ if (true) then {
         [_group, getPosATL _building] call BIS_fnc_taskDefend;
     };
 
-    _entry = [false, _trg, _obj_list, false, objNull, objNull, _label];
+    _entry = [false, objNull, _obj_list, false, objNull, objNull, _label];
 
     // record our encounter in the list so we can delete it later
     spawned_encounters set [_UID, _entry];

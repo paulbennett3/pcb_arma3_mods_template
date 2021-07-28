@@ -78,12 +78,6 @@ for [{_i = 0 }, {_i < _group1_size}, {_i = _i + 1}] do {
 _group1 deleteGroupWhenEmpty true;
 _group1 enableDynamicSimulation true;
 
-_trg = createTrigger ["EmptyDetector", _obj_list select 0, true];
-_trg setTriggerArea [ENC_MIN_PLAYER_DIST_DELETE, ENC_MIN_PLAYER_DIST_DELETE, 0, false]; 
-_trg setTriggerActivation ["ANYPLAYER", "PRESENT", true];
-_trg setTriggerStatements ["this", "", ""];
-_obj_list pushBack _trg;
-
 // ----------------
 // build group 2
 // ----------------
@@ -121,7 +115,7 @@ if (_roll < 0.50) then {
 };
 
 private _UID = "S" + str ([] call pcb_fnc_get_next_UID);
-_entry = [false, _trg, _obj_list, false, objNull, objNull, _label];
+_entry = [false, objNull, _obj_list, false, objNull, objNull, _label];
 
 // record our encounter in the list so we can delete it later
 spawned_encounters set [_UID, _entry];
