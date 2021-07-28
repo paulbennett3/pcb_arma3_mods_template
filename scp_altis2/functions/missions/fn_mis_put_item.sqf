@@ -15,16 +15,19 @@ Returns:
 State Object:
    "target"     (type string -- item or magazine!)  thing to put
    "in_area"    (boolean) - true if item must be in area, false if in container
+   "is_obj"    (boolean) - true if item is an object (vehicle, unit, ...), false if it is an inventory item ("FlashDrive") ... 
    "container"  (obj)     container for placing thing (objNull if in_area true)
    "taskpos"    (position) location of container (and target)
    "taskradius" (number) radius of "acceptable area" if in_area is true 
    "taskdesc"   [(string),(string),(string)]  task description, task name, task marker
    "taskpid"    (string)  parent id of task (defaults to objNull for no parent)
 
+!!! Note: if "is_obj" is true, then "in_area" must be true (ie, can't put a tank in a box ...)
 
 Example:
     private _state = createHashMapFromArray [
         ["target", "FlashDrive"],
+        ["is_obj", false],
         ["in_area", false],
         ["container", _crate],
         ["taskpos", getPosATL _crate],
@@ -74,25 +77,34 @@ private _pos = (_state get "taskpos");
         // is it in the area?
         private _center = _state get "taskpos";
         private _radius = _state get "taskradius";
+        private _area = [_center, _radius, _radius, 0, false, -1];
         
         private _done = false;
         while { sleep 5; ! _done } do {
-            // first, are there any players in the area?
-            if ([[_center, _radius]] call pcb_fnc_players_in_area) then {
-                // technically, if a player is in the area and another player has the
-                // item but is *not* in the area, this will still fire.  *shrug*
-                {
-                    if (_thing in (itemsWithMagazines _x)) then {
-                        // gotta be in one of these ...
-                        _x removeItemFromBackpack _thing; 
-                        _x removeItemFromVest _thing; 
-                        _x removeItemFromUniform _thing; 
-
-                        _state set ["failed", false];
-                        [_state] call pcb_fnc_end_mission;
-                        _done = true;
-                    };
-                } forEach playableUnits;
+            if (_state get "is_obj") then {
+                if ((_state get "target") inArea _area) then {
+                    _state set ["failed", false];
+                    [_state] call pcb_fnc_end_mission;
+                    _done = true;
+                }; 
+            } else {
+                // first, are there any players in the area?
+                if ([[_center, _radius]] call pcb_fnc_players_in_area) then {
+                    // technically, if a player is in the area and another player has the
+                    // item but is *not* in the area, this will still fire.  *shrug*
+                    {
+                        if (_thing in (itemsWithMagazines _x)) then {
+                            // gotta be in one of these ...
+                            _x removeItemFromBackpack _thing; 
+                            _x removeItemFromVest _thing; 
+                            _x removeItemFromUniform _thing; 
+    
+                            _state set ["failed", false];
+                            [_state] call pcb_fnc_end_mission;
+                            _done = true;
+                        };
+                    } forEach playableUnits;
+                };
             };
         };
     } else {
@@ -127,10 +139,13 @@ private _pos = (_state get "taskpos");
 // -------------------------------------------------------------
 // if it isn't an area, handle container fall down go boom ...
 // -------------------------------------------------------------
-if (! (_state get "in_area")) then {
+if ((! (_state get "in_area")) || (_state get "is_obj")) then {
+    private _tgt = _state get "container";
+    if (_state get "is_obj") then { _tgt = _state get "target"; };
+
     // handle container getting destroyed
     [
-        (_state get "container"),
+        _tgt,
         [
             "Deleted",
             {
@@ -143,7 +158,7 @@ if (! (_state get "in_area")) then {
         ]
     ] remoteExec ["addEventHandler", 0, true];
     [
-        (_state get "container"),
+        _tgt,
         [
             "MPKilled",
             {
@@ -155,7 +170,7 @@ if (! (_state get "in_area")) then {
         ]
     ] remoteExec ["addMPEventHandler", 0, true];
     [
-        (_state get "container"),
+        _tgt,
         [
             "Explosion",
             {
@@ -172,9 +187,8 @@ if (! (_state get "in_area")) then {
     // -------------------------------------------------------------------
     // stick our state in the container so we can get it from event handlers
     // -------------------------------------------------------------------
-    private _container = _state get "container";
-    if ((! isNil "_container") && (! isNull _container)) then {
-        (_state get "container") setVariable ["_state", _state, true];
+    if ((! isNil "_tgt") && (! isNull _tgt)) then {
+        _tgt setVariable ["_state", _state, true];
     };
 };
 
