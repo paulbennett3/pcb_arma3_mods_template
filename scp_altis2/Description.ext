@@ -29,6 +29,7 @@ class CfgFunctions
         {
             file = "functions";
             class addAction_packable {};
+            class add_anomalies {};
             class add_base_actions {};
             class add_interact_action_to_object {};
             class advancedTowingInit {};
@@ -101,6 +102,8 @@ class CfgFunctions
             // --------------------------------------------------------------
             // true missions -- just need UID (and start_pos, epicenter, ...)
             // --------------------------------------------------------------
+            class mis_desk_evidence {};
+            class mis_investigate {};
             class mis_spawner {};
         }; 
         class scenarios

@@ -36,7 +36,7 @@ private _state = createHashMapFromArray [
         "markername"]],
     ["taskpid", objNull]
 ];
-private _result = [_state] call pcb_fnc_mis_get_item;
+private _result = [_state] call pcb_fnc_mis_ll_get_item;
 
 private _vpos1 = (playableUnits select 0) getRelPos [30, 180];
 private _truck = "vn_c_bicycle_01" createVehicle _vpos1;
@@ -64,6 +64,6 @@ private _state2 = createHashMapFromArray [
     ["taskpid", objNull],
     ["callback", [true, _code, _args]]
 ];
-private _result = [_state2] call pcb_fnc_mis_put_item;
+private _result = [_state2] call pcb_fnc_mis_ll_put_item;
 
 

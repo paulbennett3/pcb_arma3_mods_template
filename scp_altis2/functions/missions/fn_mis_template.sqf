@@ -29,7 +29,7 @@ params ["_UID"];
 private _ok = false;
 
 private _state = createHashMapFromArray [
-    ["UID", _UID]
+    ["UID", _UID],
     ["obj_list", []],
     ["marker_list", []]
 ];

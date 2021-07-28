@@ -39,7 +39,6 @@ private _possible_objects = types_hash get "occult large items";
 
 private _target = objNull;
 private _object_type = selectRandom _possible_objects;
-private _building = objNull;
 private _pos = [0,0,0];
 private _tries = 100;
 while {_tries > 0} do {
@@ -142,14 +141,7 @@ private _types = types_hash get "zombies";
 /* ----------------------------------------------------------------
                  Configure and Place Anomalies 
 ---------------------------------------------------------------- */
-if (true) then {
-    diag_log "Placing DSA Anomalies ...";
-
-    private _moduleGroup = createGroup sideLogic;
-    _cmd = "DSA_SpawnerAnomaly = this; this setVariable ['BIS_fnc_initModules_disableAutoActivation', false, true]; DSA_SpawnerAnomaly setVariable ['DSA_Type', '''Launchpad'',''Leech'',''Trapdoor'',''Zapper''', true]; DSA_SpawnerAnomaly setVariable ['DSA_RandomTypes', '''Launchpad'',''Leech'',''Trapdoor'',''Zapper''', true]; DSA_SpawnerAnomaly setVariable ['DSA_Radius',500, true]; DSA_SpawnerAnomaly setVariable ['DSA_CountCluster','1,3', true]; DSA_SpawnerAnomaly setVariable ['DSA_Count','1,7', true]; DSA_SpawnerAnomaly setVariable ['DSA_RadiusCluster', 30, true]; ";
-
-    "DSA_SpawnerAnomaly" createUnit [ _pos, _moduleGroup, _cmd];
-};
+[_pos, 3, 7] call pcb_fnc_add_anomalies;
 
 // -------------------------------------
 _ok = true;

@@ -18,12 +18,15 @@ Returns:
    updated version of hash map 
 
 State Object:
-   "target"     (object)  person / thing to inhume
+   "target"     (object)  person / thing to interact with
                    Assumed to already exist and be positioned!!!
    "taskpos"   (position) : where the task takes place 
    "taskdesc"   [(string),(string),(string)]  task description, task name, task marker
    "taskpid"    (string)  parent id of task (defaults to objNull for no parent)
-   "is_destroyable"  (bool)    if true, kill it. If false, use UAVs to allow it to be blown up
+   "action"     (string) action to put on item for interaction
+   "code"       (code) code to execute when interaction is successful
+                      params ["_target", "_caller", "_actionId", "_arguments"] <- codeCompleted from BIS_fnc_holdActionAdd
+   "duration"   (number) amount of time interaction (holding space) will take
    "callback"  [has_callback, callback_func, callback_args] 
            where:
                has_callback (bool)  true if there is a callback function (to call on delete)
@@ -44,7 +47,7 @@ Example:
         ["code", { hint 'you should study more'; }],
         ["duration", 15]
     ];
-    _state = [_state] call pcb_fnc_mis_destroy;
+    _state = [_state] call pcb_fnc_mis_ll_interact;
 
 ------------------------------------------------------------------ */
 
@@ -53,7 +56,7 @@ private _ok = false;
 
 diag_log str [_state];
 if (pcb_DEBUG) then {
-    hint ("INTERACT " + (str (_state get "target")) + _action);
+    hint ("INTERACT " + (str (_state get "target")));
 };
 
 // ---------------
@@ -66,7 +69,7 @@ if (isNull (_state get "taskpid")) then {
     _state set ["taskid", [_tid, (_state get "taskpid")]];
 };
 
-private _pos = (_state get "targetpos");
+private _pos = (_state get "taskpos");
 
 [true, (_state get "taskid"), (_state get "taskdesc"), _pos, "ASSIGNED", 2] call BIS_fnc_taskCreate;
  
@@ -80,6 +83,46 @@ private _code = {
 
 // add our state variable to the target so we can grab it later
 (_state get "target") setVariable ["_state", _state, true];
+
+// handle container getting destroyed
+[
+    (_state get "target"),
+    [
+        "Deleted",
+        {
+            params ["_entity"];
+            private _state = _entity getVariable "_state";
+
+            _state set ["failed", true];
+            [_state] call pcb_fnc_end_mission;
+        }
+    ]
+] remoteExec ["addEventHandler", 0, true];
+[
+    (_state get "target"),
+    [
+        "MPKilled",
+        {
+            params ["_unit", "_killer", "_instigator", "_useEffect"];
+            private _state = _unit getVariable "_state";
+            _state set ["failed", true];
+            [_state] call pcb_fnc_end_mission;
+        }
+    ]
+] remoteExec ["addMPEventHandler", 0, true];
+[
+    (_state get "target"),
+    [
+        "Explosion",
+        {
+            params ["_vehicle", "_damage"];
+            private _state = _vehicle getVariable "_state";
+
+            _state set ["failed", true];
+            [_state] call pcb_fnc_end_mission;
+        }
+    ]
+] remoteExec ["addEventHandler", 0, true];
 
 
 // --------------------------------------
