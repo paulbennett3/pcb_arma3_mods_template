@@ -32,10 +32,10 @@ start_pos = objNull;
 private _start_type = objNull;
 private _roll = random 1;
 
-if (_roll < 0.35) then {
+if (_roll < 0.45) then {
     _start_type = "Airfield";
 } else {
-    if (_roll < 0.85) then {
+    if (_roll < 1) then {
         _start_type = "Coast";
     } else {
         _start_type = "Hilltop";

@@ -1,0 +1,31 @@
+# ----------------------------------------------
+# Base Missions
+#
+#  These are tools for building missions with
+# ----------------------------------------------
+Clear
+    Remove list of items from area (kill or move)
+Destroy
+    Destroy / kill a target
+Interact
+    Interact with a target ("hold space to ...")
+
+
+# --------------------------------
+# Compound / specialized Missions
+# --------------------------------
+Template
+    Example (probably should just start from Spawner ...)
+
+Spawner
+    Generates an object that "spawns" zombies
+
+
+#####################
+# Ideas
+#####################
+Investigate (study?) Occult Site (lab, ritual site, ...)
+Retrieve item (laptop, flashdrive, ...), take to base
+Transport (sling loadable) cargo from X to Y
+Clear <area -- town, base, ...> of ...
+

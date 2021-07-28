@@ -94,17 +94,8 @@ hint ("creating task with " + (str (_state get "taskdesc")) + " at " + (str _pos
         private _objs = (_state get "targetlist") inAreaArray (_state get "trigger");
         if ((count _objs) < 1) then {
             _done = true;
-            [_state get "taskid", "SUCCEEDED"] call BIS_fnc_taskSetState;
-
-            // add a marker for reference
-            private _mn = "M" + str ([] call pcb_fnc_get_next_UID);
-            private _m = createMarker [_mn, (_state get "taskpos")];
-            _m setMarkerType "hd_objective_noShadow";
-
-            sleep 1;
-            // signal the mission generator we finished
-            mission_active = false; 
-            publicVariable "mission_active";
+            _state set ["failed", false];
+            [_state] call pcb_fnc_end_mission;
         };
     };
 };

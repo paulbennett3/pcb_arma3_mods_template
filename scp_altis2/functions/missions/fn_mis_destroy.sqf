@@ -27,6 +27,7 @@ State Object:
 Example:
     private _state = createHashMapFromArray [
         ["target", _idol],
+        ["taskpos", getPosATL _idol],
         ["taskdesc", [
             "Destroy the stone statue at the Old Mill in Derbyshire",
             "Destroy Idol",
@@ -65,35 +66,12 @@ if (isNull (_state get "taskpid")) then {
 } else {
     _state set ["taskid", [_tid, (_state get "taskpid")]];
 };
-_state set ["taskstate", "ASSIGNED"];
+private _pos = (_state get "taskpos");
 
-private _pos = (_state get "targetpos");
-
-[true, (_state get "taskid"), (_state get "taskdesc"), _pos, (_state get "taskstate"), 2] call BIS_fnc_taskCreate;
+[true, (_state get "taskid"), (_state get "taskdesc"), _pos, "ASSIGNED", 2] call BIS_fnc_taskCreate;
 
 // add our state variable to the target so we can grab it later
 (_state get "target") setVariable ["_state", _state, true];
-
-private _end_code = {
-    params ["_state"];
-
-    // check if this code has already been called ...
-    if ([_state get "taskid"] call BIS_fnc_taskCompleted) exitWith {};
-
-    [_state get "taskid", "SUCCEEDED"] call BIS_fnc_taskSetState;
-
-    // add a marker for reference
-    private _mn = "M" + str ([] call pcb_fnc_get_next_UID);
-    private _m = createMarker [_mn, (_state get "targetpos")];
-    _m setMarkerType "hd_objective_noShadow";
-    hint "Destroy mission called end code";
-    diag_log "Destroy mission called end code";
-
-    mission_active = false;
-    publicVariable "mission_active";
- };
-
-_state set ["end_code", _end_code];
 
 // -------------------------------------
 // Set up a way to tell task is complete
@@ -114,8 +92,8 @@ if (((_state get "target") isKindOf "Man") or
             {
                 params ["_unit", "_killer", "_instigator", "_useEffect"];
                 private _state = _unit getVariable "_state";
-                private _end_code = _state get "end_code";
-                [_state] call _end_code;
+                _state set ["failed", false];
+                [_state] call pcb_fnc_end_mission;
             }
         ]    
     ] remoteExec ["addMPEventHandler", 0, true];
@@ -127,8 +105,8 @@ if (((_state get "target") isKindOf "Man") or
                 params ["_vehicle", "_damage"];
                 private _state = _vehicle getVariable "_state";
 
-                private _end_code = _state get "end_code";
-                [_state] call _end_code;
+                _state set ["failed", false];
+                [_state] call pcb_fnc_end_mission;
             }
         ]    
     ] remoteExec ["addEventHandler", 0, true];
@@ -144,8 +122,8 @@ if ( ! (_state get "is_destroyable")) then {
                 params ["_entity"];
                 private _state = _entity getVariable "_state";
 
-                private _end_code = _state get "end_code";
-                [_state] call _end_code;
+                _state set ["failed", false];
+                [_state] call pcb_fnc_end_mission;
             }
         ]    
     ] remoteExec ["addEventHandler", 0, true];
@@ -158,8 +136,8 @@ if ( ! (_state get "is_destroyable")) then {
                 params ["_vehicle", "_damage"];
                 private _state = _vehicle getVariable "_state";
 
-                private _end_code = _state get "end_code";
-                [_state] call _end_code;
+                _state set ["failed", false];
+                [_state] call pcb_fnc_end_mission;
             }
         ]    
     ] remoteExec ["addEventHandler", 0, true];

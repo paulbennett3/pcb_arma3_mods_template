@@ -87,11 +87,14 @@ class CfgFunctions
         class missions 
         {
             file = "functions\missions";
+            class end_mission {};
             class mission_generator {};
             class mis_spawner {};
             class mis_clear {};
             class mis_destroy {};
+            class mis_get_item {};
             class mis_interact {};
+            class mis_put_item {};
             class mis_transport {};
             class mis_nop {};  // no-op mission -- for use with scn_drongo
         }; 

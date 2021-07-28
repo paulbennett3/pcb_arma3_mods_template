@@ -66,7 +66,7 @@ _desc = [ "Destroy the cursed source causing the dead to rise.", "Destroy source
 _destroyable = false;
 _state = createHashMapFromArray [
     ["target", _target],
-    ["targetpos", _pos],
+    ["taskpos", _pos],
     ["taskdesc", _desc],
     ["taskpid", objNull],
     ["is_destroyable", _destroyable],
@@ -79,7 +79,7 @@ private _temp = [_state] call pcb_fnc_mis_destroy;
 
 // add some "environment"
 private _crows = [_pos, 50, ceil (random 20) ] remoteExec ["BIS_fnc_crows", 0];
-private _flies = [_pos, 0.1, 5] remoteExec ["BIS_fnc_flies", 0];
+//private _flies = [_pos, 0.1, 5] remoteExec ["BIS_fnc_flies", 0];
 
 // save our state in our target "for later"
 _target setVariable ["_state", _state, true];
@@ -92,8 +92,7 @@ private _types = types_hash get "zombies";
     params ["_target", "_types", "_pos", "_UID"];
 
     sleep 10;
-    // private _n_spawn = 30;
-    private _n_spawn = 5 + (ceil (random 20));
+    private _n_spawn = 5 + (ceil (random 10));
     private _delay = 30;
     private _obj_list = [];
     private _group = createGroup east;
@@ -124,12 +123,15 @@ private _types = types_hash get "zombies";
                 hint (_UID + " spawner spawning <" + (str (count _obj_list)) + "> ...");
             };
             private _type = selectRandom _types;
-            private _veh = _group createUnit [_type, _pos, [], 1, 'NONE'];
+            private _veh = _group createUnit [_type, [_pos select 0, _pos select 1], [], 30, 'NONE'];
             [_veh] joinSilent _group;
             _veh triggerDynamicSimulation false;
             _obj_list pushBack _veh;
+            [_group, _pos] call BIS_fnc_taskDefend;
         };
     };
+
+    sleep 10;
 
     // target destroyed, so do cleanup
     {
@@ -144,7 +146,7 @@ if (true) then {
     diag_log "Placing DSA Anomalies ...";
 
     private _moduleGroup = createGroup sideLogic;
-    _cmd = "DSA_SpawnerAnomaly = this; this setVariable ['BIS_fnc_initModules_disableAutoActivation', false, true]; DSA_SpawnerAnomaly setVariable ['DSA_Type', '''Launchpad'',''Leech'',''Trapdoor'',''Zapper''', true]; DSA_SpawnerAnomaly setVariable ['DSA_RandomTypes', '''Launchpad'',''Leech'',''Trapdoor'',''Zapper''', true]; DSA_SpawnerAnomaly setVariable ['DSA_Radius',500, true]; DSA_SpawnerAnomaly setVariable ['DSA_CountCluster','1,3', true]; DSA_SpawnerAnomaly setVariable ['DSA_Count','1,3', true]; DSA_SpawnerAnomaly setVariable ['DSA_RadiusCluster', 30, true]; ";
+    _cmd = "DSA_SpawnerAnomaly = this; this setVariable ['BIS_fnc_initModules_disableAutoActivation', false, true]; DSA_SpawnerAnomaly setVariable ['DSA_Type', '''Launchpad'',''Leech'',''Trapdoor'',''Zapper''', true]; DSA_SpawnerAnomaly setVariable ['DSA_RandomTypes', '''Launchpad'',''Leech'',''Trapdoor'',''Zapper''', true]; DSA_SpawnerAnomaly setVariable ['DSA_Radius',500, true]; DSA_SpawnerAnomaly setVariable ['DSA_CountCluster','1,3', true]; DSA_SpawnerAnomaly setVariable ['DSA_Count','1,7', true]; DSA_SpawnerAnomaly setVariable ['DSA_RadiusCluster', 30, true]; ";
 
     "DSA_SpawnerAnomaly" createUnit [ _pos, _moduleGroup, _cmd];
 };

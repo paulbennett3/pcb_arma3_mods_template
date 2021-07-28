@@ -20,6 +20,7 @@ Returns:
 State Object:
    "target"     (object)  person / thing to inhume
                    Assumed to already exist and be positioned!!!
+   "taskpos"   (position) : where the task takes place 
    "taskdesc"   [(string),(string),(string)]  task description, task name, task marker
    "taskpid"    (string)  parent id of task (defaults to objNull for no parent)
    "is_destroyable"  (bool)    if true, kill it. If false, use UAVs to allow it to be blown up
@@ -37,11 +38,11 @@ Example:
             "Destroy the stone statue at the Old Mill in Derbyshire",
             "Destroy Idol",
             "markername"]],
+        ["taskpos", getPosATL _idol],
         ["taskpid", objNull],
         ["action", "study"],
         ["code", { hint 'you should study more'; }],
-        ["duration", 15],
-        ["is_destroyable", false]
+        ["duration", 15]
     ];
     _state = [_state] call pcb_fnc_mis_destroy;
 
@@ -64,26 +65,16 @@ if (isNull (_state get "taskpid")) then {
 } else {
     _state set ["taskid", [_tid, (_state get "taskpid")]];
 };
-_state set ["taskstate", "ASSIGNED"];
 
 private _pos = (_state get "targetpos");
 
-[true, (_state get "taskid"), (_state get "taskdesc"), _pos, (_state get "taskstate"), 2] call BIS_fnc_taskCreate;
+[true, (_state get "taskid"), (_state get "taskdesc"), _pos, "ASSIGNED", 2] call BIS_fnc_taskCreate;
  
 private _code = {
     params ["_target", "_caller", "_actionId", "_arguments"];
     private _state = _target getVariable "_state";
-
-    [_state get "taskid", "SUCCEEDED"] call BIS_fnc_taskSetState;
-
-    // add a marker for reference
-    private _mn = "M" + str ([] call pcb_fnc_get_next_UID);
-    private _m = createMarker [_mn, (_state get "targetpos")];
-    _m setMarkerType "hd_objective_noShadow";
-
-    sleep 1;
-    mission_active = false;
-    publicVariable "mission_active";
+    _state set ["failed", false];
+    [_state] call pcb_fnc_end_mission;
 };
 [_target, _state get "action", _state get "code", _state get "duration"] call pcb_fnc_add_interact_action_to_object;
 

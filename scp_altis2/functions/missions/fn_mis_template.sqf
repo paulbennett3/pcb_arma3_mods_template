@@ -37,6 +37,8 @@ private _state = createHashMapFromArray [
 // -------------------------------------
 
 // do stuff here ...
+// when done, 
+// [_state] call pcb_fnc_end_mission;
 
 // -------------------------------------
 _ok = true;

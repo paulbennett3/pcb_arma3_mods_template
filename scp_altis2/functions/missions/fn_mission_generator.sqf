@@ -11,6 +11,8 @@ if (! isServer) exitWith {};
     hint "Mission Generator started (spawned)";
 
     // start our mission counter and mission array
+    mission_success = true; // assume true, set to false if failed ...
+    publicVariable "mission_success";
     mission_active = false; // set to true when mission created.  Mission sets it to false when completed.
     publicVariable "mission_active";
 
