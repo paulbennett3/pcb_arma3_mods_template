@@ -39,6 +39,15 @@ private _result = [_state] call pcb_fnc_mis_get_item;
 private _vpos1 = (playableUnits select 0) getRelPos [30, 180];
 private _truck = "vn_c_bicycle_01" createVehicle _vpos1;
 private _vpos = (playableUnits select 0) getRelPos [100, 180];
+private _code = {
+    params ["_state", "_args"];
+    private _player = playableUnits select 0;
+    hint ("rocks fall, everybody dies! <" + (str _args) + ">");
+    _player setDamage 1;
+    _state set ["failed", true];
+    _state
+};
+private _args = ["foo", 3];
 private _state2 = createHashMapFromArray [
     ["target", _truck],
     ["in_area", true],
@@ -50,7 +59,8 @@ private _state2 = createHashMapFromArray [
         "Bring the truck",
         "Bring evidence",
         "markername"]],
-    ["taskpid", objNull]
+    ["taskpid", objNull],
+    ["callback", [true, _code, _args]]
 ];
 private _result = [_state2] call pcb_fnc_mis_put_item;
 
