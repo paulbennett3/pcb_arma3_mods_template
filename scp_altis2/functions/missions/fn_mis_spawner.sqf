@@ -75,7 +75,7 @@ _state = createHashMapFromArray [
     ["marker_list", []]
 ];
 
-private _temp = [_state] call pcb_fnc_mis_destroy;
+private _temp = [_state] call pcb_fnc_mis_ll_destroy;
 
 // add some "environment"
 private _crows = [_pos, 50, ceil (random 20) ] remoteExec ["BIS_fnc_crows", 0];

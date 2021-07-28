@@ -19,7 +19,9 @@ private _desk = "OfficeTable_01_old_F" createVehicle [0,0,0];
 [_desk, "Land_Notepad_F", [.45, -.05, .425], 292] call _attachIt;
 
 private _cargo = "FlashDisk";
-_desk addItemCargo [_cargo, 1];
+_desk addItemCargoGlobal [_cargo, 1];
+_desk addItemCargoGlobal ["Land_Suitcase_F", 1];
+_desk addBackpackCargoGlobal ["Land_Suitcase_F", 1];
 
 _desk setPos (selectRandom _positions);
 _desk setDir 180; _desk setPosASL getPosASL _desk;

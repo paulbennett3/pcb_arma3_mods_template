@@ -87,16 +87,21 @@ class CfgFunctions
         class missions 
         {
             file = "functions\missions";
-            class end_mission {};
             class mission_generator {};
+            // --------------------------------------------------------------
+            //              "low level" building blocks
+            // --------------------------------------------------------------
+            class end_mission {};
+            class mis_ll_clear {};
+            class mis_ll_destroy {};
+            class mis_ll_get_item {};
+            class mis_ll_interact {};
+            class mis_ll_nop {};  // no-op mission -- for use with scn_drongo
+            class mis_ll_put_item {};
+            // --------------------------------------------------------------
+            // true missions -- just need UID (and start_pos, epicenter, ...)
+            // --------------------------------------------------------------
             class mis_spawner {};
-            class mis_clear {};
-            class mis_destroy {};
-            class mis_get_item {};
-            class mis_interact {};
-            class mis_put_item {};
-            class mis_transport {};
-            class mis_nop {};  // no-op mission -- for use with scn_drongo
         }; 
         class scenarios
         {
