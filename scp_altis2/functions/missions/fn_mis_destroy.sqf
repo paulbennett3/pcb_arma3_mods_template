@@ -147,7 +147,7 @@ if ( ! (_state get "is_destroyable")) then {
 // -------------------------------------------------------------------
 // stick our state in the target so we can get it from event handlers
 // -------------------------------------------------------------------
-(_state get "target") setVariable ["_state", _state];
+(_state get "target") setVariable ["_state", _state, true];
 
 
 // -----------------------------------------

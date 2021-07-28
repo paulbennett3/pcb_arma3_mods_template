@@ -35,4 +35,21 @@ private _state = createHashMapFromArray [
     ["taskpid", objNull]
 ];
 private _result = [_state] call pcb_fnc_mis_get_item;
-//["desk", "desk", getPosATL _desk, 1] call pcb_fnc_objective_locate_object;
+
+private _vpos = (playableUnits select 0) getRelPos [100, 180];
+private _crate = "Land_PortableDesk_01_black_F" createVehicle _vpos;
+private _state2 = createHashMapFromArray [
+    ["target", _cargo],
+    ["in_area", false],
+    ["container", _crate],
+    ["taskpos", getPosATL _crate],
+    ["taskradius", 5],
+    ["taskdesc", [
+        "Bring the flash drive with evidence of occult activity to the SCP base and put in crate",
+        "Bring evidence",
+        "markername"]],
+    ["taskpid", objNull]
+];
+private _result = [_state2] call pcb_fnc_mis_put_item;
+
+

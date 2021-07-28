@@ -141,7 +141,7 @@ private _pos = (_state get "taskpos");
 // -------------------------------------------------------------------
 // stick our state in the container so we can get it from event handlers
 // -------------------------------------------------------------------
-(_state get "container") setVariable ["_state", _state];
+(_state get "container") setVariable ["_state", _state, true];
 
 // -----------------------------------------
 _ok = true;
