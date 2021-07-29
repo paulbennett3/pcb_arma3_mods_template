@@ -28,6 +28,8 @@ private _temp = [];
     private _uav = _type createVehicle (getPosATL _obj); 
     _uav attachTo [_obj, _x];
     _uav hideObject _hide; [_uav, _hide] remoteExec ["hideObject", 0, true];
+// should use:
+//    _uav hideObjectGlobal _hide;
     _uav addMPEventHandler [ "mpkilled", _foo ];
     _uav triggerDynamicSimulation false;
     _temp pushBack _uav;

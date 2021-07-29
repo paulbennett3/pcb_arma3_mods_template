@@ -16,7 +16,7 @@ private _run = (_info select _index) select 1;
 
 private _target = createAgent [_type, _pos, [], 5, "NONE"];
 _target setVariable ["BIS_fnc_animalBehaviour_disable", true];
-_target hideObject _hide;
+// _target hideObject _hide;
 
 private _mine = createMine ["APERSMine", [0,0,0], [], 0];
 _mine attachTo [_target, [0, 0, 0]];

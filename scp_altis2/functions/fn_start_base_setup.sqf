@@ -100,9 +100,10 @@ _vehicle_list pushBack ["Heli", "B_Heli_Transport_03_unarmed_F"];
 {
     private _label = _x select 0;
     private _type = _x select 1;
-    _vpos = [start_pos, 100, _blacklist_pos] call pcb_fnc_get_empty_pos;
+    _vpos = [start_pos, 30, _blacklist_pos] call pcb_fnc_get_empty_pos;
     _blacklist_pos pushBack _vpos;
-    private _veh = createVehicle [_type, _vpos, [], 0, "NONE"];
+    private _veh = _type createVehicle [0,0,0];
+    _veh setPos _vpos;
     _veh setVariable ["BIS_enableRandomization", false];
     [_veh] call pcb_fnc_set_scp_vehicle_loadout;
     private _cid = "T" + str ([] call pcb_fnc_get_next_UID);
@@ -114,10 +115,14 @@ _vehicle_list pushBack ["Heli", "B_Heli_Transport_03_unarmed_F"];
                               !!!!!!!!!!!!!!!!! TESTING !!!!!!!!!!!!!!!!!
 ########################################################################################################## */
 
-//[] call compile preprocessFileLineNumbers "scripts\test_destroyable_object.sqf";
-//[] call compile preprocessFileLineNumbers "scripts\test_mines.sqf";
-//[] call compile preprocessFileLineNumbers "scripts\test_desk.sqf";
-//[] call compile preprocessFileLineNumbers "scripts\test_mission.sqf";
+[] spawn {
+    sleep 30;
+    //[] call compile preprocessFileLineNumbers "scripts\test_destroyable_object.sqf";
+    //[] call compile preprocessFileLineNumbers "scripts\test_mines.sqf";
+    //[] call compile preprocessFileLineNumbers "scripts\test_desk.sqf";
+    //[] call compile preprocessFileLineNumbers "scripts\test_mission.sqf";
+    [] call compile preprocessFileLineNumbers "scripts\test_goblins.sqf";
+};
 
 //private _loot = [start_pos] call pcb_fnc_loot_crate;
 

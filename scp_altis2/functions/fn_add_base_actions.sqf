@@ -171,6 +171,29 @@ private _cmd = {
     ]
 ] remoteExec ["addAction", 0, true];   // Server only!
 
+// ------------------------------------
+//            Abandon Task
+// ------------------------------------
+private _cmd = {
+    params ['_target', '_caller', '_actionId', '_arguments'];
+    private _tid = (playableUnits select 0) call BIS_fnc_taskCurrent;
+    private _state = createHashMap;
+    _state set ["taskid", _tid];
+    _state set ["failed", true];
+    _state set ["taskpos", _tid call BIS_fnc_taskDestination];
+    [_state] call pcb_fnc_end_mission;
+    diag_log "Mission abandoned!";
+};
+
+[
+    _obj,
+    [
+        "Abandon Task",
+        _cmd,
+        [], 1.5, false, false, "", "true", 5
+    ]
+] remoteExec ["addAction", 0, true];   // Server only!
+
 
 // ------------------------------------
 //            Call Support Units 

@@ -106,6 +106,7 @@ class CfgFunctions
             // --------------------------------------------------------------
             class mis_desk_evidence {};
             class mis_investigate {};
+            class mis_monster_hunt {};
             class mis_spawner {};
         }; 
         class scenarios

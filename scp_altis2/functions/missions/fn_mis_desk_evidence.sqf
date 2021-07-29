@@ -39,7 +39,7 @@ if (pcb_DEBUG) then {
 // find building
 // -------------------
 private _building = [epicenter, 5000] call pcb_fnc_get_cool_building_location;
-if (isNull _building) exitWith { hint "failed to find building!"; [false, _state] };
+if ((isNil "_building") || (isNull _building)) exitWith { hint "failed to find building!"; [false, _state] };
 private _positions = [_building] call BIS_fnc_buildingPositions;
 private _pos = selectRandom _positions;
 if ((isNil "_pos") || (! ([_pos] call pcb_fnc_is_valid_position))) exitWith { [false, _state] };
@@ -75,8 +75,8 @@ _state set ["taskpid", objNull];
 
 // add some anomalies
 [getPosATL _desk, 1, 5] call pcb_fnc_add_anomalies;
-[_pos] call pcb_fnc_occult_decorate;
-[_pos, _building] call pcb_fnc_mission_encounter;
+[_pos, _building] call pcb_fnc_occult_decorate;
+[_pos] call pcb_fnc_mission_encounter;
 
 private _result = [_state] call pcb_fnc_mis_ll_get_item;
 _result

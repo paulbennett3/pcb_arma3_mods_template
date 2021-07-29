@@ -48,7 +48,7 @@ private _ok = false;
 
 diag_log str [_state];
 if (pcb_DEBUG) then {
-    hint ("CLEAR " + (str (_state get "target")));
+    hint ("CLEAR " + (str (_state get "targetlist")));
 };
 
 
@@ -62,6 +62,7 @@ _trg setTriggerArea  [
 ];       
 _trg setTriggerType "NONE";
 _state set ["trigger", _trg];
+
 _state set ["obj_list", [_trg]];
 _trg setVariable ["_state", _state, true];
 
@@ -75,12 +76,13 @@ if (isNull (_state get "taskpid")) then {
 } else {
     _state set ["taskid", [_tid, (_state get "taskpid")]];
 };
-_state set ["taskstate", "ASSIGNED"];
 
 private _pos = (_state get "taskpos");
 
-hint ("creating task with " + (str (_state get "taskdesc")) + " at " + (str _pos));
-[true, (_state get "taskid"), (_state get "taskdesc"), _pos, (_state get "taskstate"), 2] call BIS_fnc_taskCreate;
+if (pcb_DEBUG) then {
+    hint ("creating task with " + (str (_state get "taskdesc")) + " at " + (str _pos));
+};
+[true, (_state get "taskid"), (_state get "taskdesc"), _pos, "ASSIGNED", 2] call BIS_fnc_taskCreate;
 
 
 // -----------------------------------------
@@ -90,7 +92,7 @@ hint ("creating task with " + (str (_state get "taskdesc")) + " at " + (str _pos
     params ["_state"];
     private _done = false;
     while {sleep 1; ! _done} do {
-        // check of any of our targets are in the area
+        // check if any of our targets are in the area
         private _objs = (_state get "targetlist") inAreaArray (_state get "trigger");
         if ((count _objs) < 1) then {
             _done = true;
