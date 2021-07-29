@@ -89,10 +89,12 @@ class CfgFunctions
         {
             file = "functions\missions";
             class mission_generator {};
+            class end_mission {};
+            class occult_decorate {};
+            class mission_encounter {};
             // --------------------------------------------------------------
             //              "low level" building blocks
             // --------------------------------------------------------------
-            class end_mission {};
             class mis_ll_clear {};
             class mis_ll_destroy {};
             class mis_ll_get_item {};

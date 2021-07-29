@@ -243,6 +243,57 @@ private _svbuildings = [
 types_hash set ["svbuildings", _svbuildings];
 
 
+// --------------------------------
+// Blood splatters
+// --------------------------------
+private _blood = [
+    "BloodPool_01_Large_New_F",
+    "BloodPool_01_Large_Old_F",
+    "BloodPool_01_Medium_New_F",
+    "BloodPool_01_Medium_Old_F",
+    "BloodSplatter_01_Large_New_F",
+    "BloodSplatter_01_Large_Old_F",
+    "BloodSplatter_01_Medium_New_F",
+    "BloodSplatter_01_Medium_Old_F",
+    "BloodSplatter_01_Small_New_F",
+    "BloodSplatter_01_Small_Old_F",
+    "BloodSpray_01_New_F",
+    "BloodSpray_01_Old_F",
+    "BloodTrail_01_New_F",
+    "BloodTrail_01_Old_F"
+];
+types_hash set ["blood", _blood];
+
+private _bones = [
+    "Land_HumanSkeleton_F",
+    "Land_HumanSkull_F"
+];
+types_hash set ["bones", _bones];
+
+private _detritus = [
+    "Land_Pumpkin_01_F",
+    "Campfire_burning_F",
+    "Land_FirePlace_F",
+    "Land_WoodenLog_F",
+    "Land_WoodPile_F",
+    "Leaflet_05_F",
+    "Leaflet_05_Old_F",
+    "Land_Garbage_square3_F",
+    "Land_Garbage_square5_F",
+    "Land_Garbage_line_F",
+    "Oil_Spill_F",
+    "Land_Cages_F",
+    "Land_Axe_F",
+    "Land_Bucket_F",
+    "Land_File_F",
+    "Land_MetalWire_F",
+    "Land_Rope_01_F",
+    "Land_Shovel_F",
+    "Land_vn_garbage_square3_f",
+    "vn_b_item_trapkit_gh"
+];
+types_hash set ["detritus", _detritus];
+
 
 
 // Helicopters

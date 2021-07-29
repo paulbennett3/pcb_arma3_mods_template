@@ -41,6 +41,8 @@ if (pcb_DEBUG) then {
 private _building = [epicenter, 5000] call pcb_fnc_get_cool_building_location;
 if (isNull _building) exitWith { hint "failed to find building!"; [false, _state] };
 private _positions = [_building] call BIS_fnc_buildingPositions;
+private _pos = selectRandom _positions;
+if ((isNil "_pos") || (! ([_pos] call pcb_fnc_is_valid_position))) exitWith { [false, _state] };
 
 // -------------------
 // create and decorate the desk
@@ -59,7 +61,7 @@ private _desk = "OfficeTable_01_old_F" createVehicle [0,0,0];
 private _cargo = "FlashDisk";
 _desk addItemCargoGlobal [_cargo, 1];
 
-_desk setPos (selectRandom _positions);
+_desk setPos _pos;
 _desk setDir 180; _desk setPosASL getPosASL _desk;
 
 _state set ["target", _cargo];
@@ -73,6 +75,8 @@ _state set ["taskpid", objNull];
 
 // add some anomalies
 [getPosATL _desk, 1, 5] call pcb_fnc_add_anomalies;
+[_pos] call pcb_fnc_occult_decorate;
+[_pos, _building] call pcb_fnc_mission_encounter;
 
 private _result = [_state] call pcb_fnc_mis_ll_get_item;
 _result

@@ -142,6 +142,8 @@ private _types = types_hash get "zombies";
                  Configure and Place Anomalies 
 ---------------------------------------------------------------- */
 [_pos, 3, 7] call pcb_fnc_add_anomalies;
+[_pos] call pcb_fnc_occult_decorate;
+[_pos] call pcb_fnc_mission_encounter;
 
 // -------------------------------------
 _ok = true;
