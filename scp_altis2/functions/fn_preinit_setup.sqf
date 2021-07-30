@@ -6,6 +6,8 @@ This is done to script Drongo's fantastic mods at random locations.
 --------------------------------------------------------------------------- */
 
 if (! isServer) exitWith {};
+mission_radius = 5000;
+publicVariable "mission_radius";
 
 // Pick a random location (not in the water) to place the "epicenter"
 // center, minDist, maxDist, objDist, waterMode, maxGrad, shoreMode, blacklistPos, defaultPos
@@ -49,7 +51,7 @@ private _use_drongo_missions = false;
 if (_use_drongo_missions) then {
     diag_log "Placing DSA MissionGenerator";
 
-    _cmd = "DSA_MissionGenerator = this; this setVariable ['BIS_fnc_initModules_disableAutoActivation', false, true]; DSA_MissionGenerator setVariable ['DSA_RadiusAO', 5000, true]; DSA_MissionGenerator setVariable ['DSA_RadiusMission', 5000, true]; DSA_MissionGenerator setVariable ['DSA_MissionTypes', '''Kill'',''Purge'',''Destroy'',''Recover'',''Investigate'',''InvestigateBuilding'',''Rescue''', true]; DSA_MissionGenerator setVariable ['DSA_MissionCount', '3,7' , true]; DSA_MissionGenerator setVariable ['DSA_ChainMissions', 'TRUE', true]; DSA_MissionGenerator setVariable ['DSA_RequireExfil', 'TRUE', true]; DSA_MissionGenerator setVariable ['DSA_KillAllSpooks', 'FALSE', true]; DSA_MissionGenerator setVariable ['DSA_MissionScatter', 20, true]; DSA_MissionGenerator setVariable ['DSA_TaskNotification', 'TRUE', true]; DSA_MissionGenerator setVariable ['DSA_UseMarkers', 'FALSE', true]; DSA_MissionGenerator setVariable ['DSA_EndAllDown', 'FALSE', true]; DSA_MissionGenerator setVariable ['DSA_EndOnComplete', 'TRUE', true]; DSA_MissionGenerator setVariable ['DSA_MissionSpookTypes', '''Wendigo'',''Vampire'',''411'',''Shadowman'',''Hatman'',''Rake'',''Mindflayer'',''Abomination'',''Snatcher''', true]; DSA_MissionGenerator setVariable ['DSA_UseDMP', 'TRUE', true]; DSA_MissionGenerator setVariable ['DSA_SoundWin', '', true]; DSA_MissionGenerator setVariable ['DSA_SoundLose', '', true];";
+    _cmd = "DSA_MissionGenerator = this; this setVariable ['BIS_fnc_initModules_disableAutoActivation', false, true]; DSA_MissionGenerator setVariable ['DSA_RadiusAO'," + (str mission_radius) + ", true]; DSA_MissionGenerator setVariable ['DSA_RadiusMission', " + (str mission_radius) + ", true]; DSA_MissionGenerator setVariable ['DSA_MissionTypes', '''Kill'',''Purge'',''Destroy'',''Recover'',''Investigate'',''InvestigateBuilding'',''Rescue''', true]; DSA_MissionGenerator setVariable ['DSA_MissionCount', '3,7' , true]; DSA_MissionGenerator setVariable ['DSA_ChainMissions', 'TRUE', true]; DSA_MissionGenerator setVariable ['DSA_RequireExfil', 'TRUE', true]; DSA_MissionGenerator setVariable ['DSA_KillAllSpooks', 'FALSE', true]; DSA_MissionGenerator setVariable ['DSA_MissionScatter', 20, true]; DSA_MissionGenerator setVariable ['DSA_TaskNotification', 'TRUE', true]; DSA_MissionGenerator setVariable ['DSA_UseMarkers', 'FALSE', true]; DSA_MissionGenerator setVariable ['DSA_EndAllDown', 'FALSE', true]; DSA_MissionGenerator setVariable ['DSA_EndOnComplete', 'TRUE', true]; DSA_MissionGenerator setVariable ['DSA_MissionSpookTypes', '''Wendigo'',''Vampire'',''411'',''Shadowman'',''Hatman'',''Rake'',''Mindflayer'',''Abomination'',''Snatcher''', true]; DSA_MissionGenerator setVariable ['DSA_UseDMP', 'TRUE', true]; DSA_MissionGenerator setVariable ['DSA_SoundWin', '', true]; DSA_MissionGenerator setVariable ['DSA_SoundLose', '', true];";
 
     "DSA_MissionGenerator" createUnit [
    	    epicenter,
@@ -81,7 +83,7 @@ Do multiple!
 diag_log "finding selection of good places ...";
 private _filter = "3*forest + 2*trees + meadow + 3*houses - 5*sea - 5*waterDepth";  
 private _nplaces = 20;
-private _places = selectBestPlaces [epicenter, 5000, _filter, 50, _nplaces];
+private _places = selectBestPlaces [epicenter, mission_radius, _filter, 50, _nplaces];
 diag_log " ... done finding!";
 
 diag_log "Placing DSA Anomalies ...";

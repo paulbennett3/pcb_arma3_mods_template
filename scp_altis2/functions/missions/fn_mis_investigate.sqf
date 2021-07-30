@@ -44,7 +44,7 @@ while {_tries > 0} do {
     _tries = _tries - 1;
 
     // center, minDist, maxDist, objDist, waterMode, maxGrad, shoreMode, blacklistPos, defaultPos
-    private _center = [epicenter, 500, 5000, 5, 0, 0.1, 0, [], []] call BIS_fnc_findSafePos;
+    private _center = [epicenter, 500, mission_radius, 5, 0, 0.1, 0, [], []] call BIS_fnc_findSafePos;
     _pos = ((selectBestPlaces [_center, 500, "5*forest + trees + hills - meadow - 3*houses", 10, 1]) select 0) select 0;
     if ([_pos] call pcb_fnc_is_valid_position) then {
         _target = _object_type createVehicle [0,0,0];
@@ -72,7 +72,9 @@ _state set ["taskdesc", [
         "Investigate [Occult]",
         "markername"]];
 _state set ["taskpos", getPosATL _target];
-_state set ["taskpid", objNull];
+private _taskpid = "";
+if (! isNil "PARENT_TASK") then { _taskpid = PARENT_TASK; };
+_state set ["taskpid", _taskpid];
 _state set ["action", "study"];
 _state set ["code", _code];
 _state set ["duration", 15];

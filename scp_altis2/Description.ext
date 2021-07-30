@@ -98,12 +98,14 @@ class CfgFunctions
             class mis_ll_clear {};
             class mis_ll_destroy {};
             class mis_ll_get_item {};
+            class mis_ll_goto {};
             class mis_ll_interact {};
             class mis_ll_nop {};  // no-op mission -- for use with scn_drongo
             class mis_ll_put_item {};
             // --------------------------------------------------------------
             // true missions -- just need UID (and start_pos, epicenter, ...)
             // --------------------------------------------------------------
+            class mis_building_search {};
             class mis_desk_evidence {};
             class mis_investigate {};
             class mis_monster_hunt {};

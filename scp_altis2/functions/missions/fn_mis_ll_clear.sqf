@@ -21,7 +21,7 @@ State Object:
    "targetlist"   (list of objects)  person / thing to inhume
                    Assumed to already exist and be positioned!!!
    "taskdesc"   [(string),(string),(string)]  task description, task name, task marker
-   "taskpid"    (string)  parent id of task (objNull for no parent)
+   "taskpid"    (string)  parent id of task ("" for no parent)
    "taskpos"  (position)  location
    "taskradius" (number) distance from pos that targets must stay within 
 
@@ -33,7 +33,7 @@ Example:
             "Kill the wendigos. If you can.",
             "Kill wendigos",
             "markername"]],
-        ["taskpid", objNull],
+        ["taskpid", ""],
         ["taskpos", _pos],
         ["taskradius", 1000]
     ];
@@ -71,7 +71,7 @@ _trg setVariable ["_state", _state, true];
 // set up our task
 // ---------------
 private _tid = "MIS_CLEA_" + (str ([] call pcb_fnc_get_next_UID));
-if (isNull (_state get "taskpid")) then {
+if ((_state get "taskpid") isEqualTo "") then {
     _state set ["taskid", _tid];
 } else {
     _state set ["taskid", [_tid, (_state get "taskpid")]];

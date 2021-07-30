@@ -68,7 +68,7 @@ switch (_start_type) do {
 
         // center, radius, expression, precision, count
         private _expression = "5*hills + meadow - 3*trees - 3*forests - houses - waterDepth";
-        start_pos = selectBestPlaces [_center, 5000, _expression, 25, 1]; 
+        start_pos = selectBestPlaces [_center, mission_radius, _expression, 25, 1]; 
         if ((count start_pos) == 0) then {
             start_pos = _center;
         } else {

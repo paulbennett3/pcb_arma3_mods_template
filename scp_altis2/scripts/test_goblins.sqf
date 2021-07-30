@@ -42,9 +42,9 @@ private _n = 2;
     private _lightpoint = "#lightpoint" createVehicle [0,0,0];
     _lightpoint attachTo [_entity, [0, 0, 0.5]];
     _lightpoint setLightColor [1,0,0.75]; 
-    _lightpoint setLightUseFlare true;
-    _lightpoint setLightFlareSize 1;
-    _lightpoint setLightFlareMaxDistance 100;
+//    _lightpoint setLightUseFlare true;  // !!! flare not visible by day, even with setLightDayLight true ...
+//    _lightpoint setLightFlareSize 1;
+//    _lightpoint setLightFlareMaxDistance 100;
     _lightpoint setLightAmbient [1, 0, 0.75];
     _lightpoint setLightIntensity 4; // units ?!?
     _lightpoint setLightDayLight true;

@@ -45,7 +45,7 @@ while {_tries > 0} do {
     _tries = _tries - 1;
 
     // center, minDist, maxDist, objDist, waterMode, maxGrad, shoreMode, blacklistPos, defaultPos
-    private _center = [epicenter, 500, 5000, 10, 0, 0.1, 0, [], []] call BIS_fnc_findSafePos;
+    private _center = [epicenter, 500, mission_radius, 10, 0, 0.1, 0, [], []] call BIS_fnc_findSafePos;
     _pos = ((selectBestPlaces [_center, 500, "5*forest + trees + hills - meadow - 3*houses", 10, 1]) select 0) select 0;
     if ([_pos] call pcb_fnc_is_valid_position) then {
         _target = _object_type createVehicle [0,0,0]; 
@@ -63,11 +63,13 @@ if ((_tries > -10) or (isNull _target)) exitWith { _result };
 private _desc = objNull;
 _desc = [ "Destroy the cursed source causing the dead to rise.", "Destroy source", ""];
 _destroyable = false;
+private _taskpid = "";
+if (! isNil "PARENT_TASK") then { _taskpid = PARENT_TASK; };
 _state = createHashMapFromArray [
     ["target", _target],
     ["taskpos", _pos],
     ["taskdesc", _desc],
-    ["taskpid", objNull],
+    ["taskpid", _taskpid],
     ["is_destroyable", _destroyable],
     ["UID", _UID],
     ["obj_list", []],

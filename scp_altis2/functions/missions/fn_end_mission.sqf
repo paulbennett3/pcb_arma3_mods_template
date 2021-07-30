@@ -28,8 +28,13 @@ Parameters:
 
 params ["_state"];
 
+private _taskid = _state get "taskid";
+if (! ((_state get "taskpid") isEqualTo "")) then { 
+    _taskid = _taskid select 0;
+};
+
 // check if this code has already been called ...
-if ([_state get "taskid"] call BIS_fnc_taskCompleted) exitWith {};
+if ([_taskid] call BIS_fnc_taskCompleted) exitWith {};
 
 private _callback_list = _state get "callback";
 if (! isNil "_callback_list") then {
@@ -51,9 +56,9 @@ if (! isNil "_state_failed") then {
 };
 
 if (_failed) then {
-    [_state get "taskid", "FAILED"] call BIS_fnc_taskSetState;
+    [_taskid, "FAILED"] call BIS_fnc_taskSetState;
 } else {
-    [_state get "taskid", "SUCCEEDED"] call BIS_fnc_taskSetState;
+    [_taskid, "SUCCEEDED"] call BIS_fnc_taskSetState;
 };
 
 // add a marker for reference

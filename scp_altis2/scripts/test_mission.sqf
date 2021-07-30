@@ -34,7 +34,7 @@ private _state = createHashMapFromArray [
         "Retrieve the flash drive with evidence of occult research from the desk in the lab module",
         "Get evidence",
         "markername"]],
-    ["taskpid", objNull]
+    ["taskpid", ""]
 ];
 private _result = [_state] call pcb_fnc_mis_ll_get_item;
 
@@ -61,7 +61,7 @@ private _state2 = createHashMapFromArray [
         "Bring the truck",
         "Bring evidence",
         "markername"]],
-    ["taskpid", objNull],
+    ["taskpid", ""],
     ["callback", [true, _code, _args]]
 ];
 private _result = [_state2] call pcb_fnc_mis_ll_put_item;

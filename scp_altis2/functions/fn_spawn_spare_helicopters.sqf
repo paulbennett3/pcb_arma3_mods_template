@@ -44,4 +44,5 @@ spare_heli_spawner = true; publicVariable "spare_heli_spawner";
     };
 
     sleep .1;
-} forEach (nearestObjects [playableUnits select 0, ["HeliH"], worldSize]);
+} forEach ((playableUnits select 0) nearObjects ["Helipad_Base_F", worldSize]);
+// } forEach (nearestObjects [playableUnits select 0, ["HeliH"], worldSize]);

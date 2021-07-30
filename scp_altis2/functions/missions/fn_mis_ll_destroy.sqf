@@ -20,7 +20,7 @@ State Object:
    "target"     (object)  person / thing to inhume
                    Assumed to already exist and be positioned!!!
    "taskdesc"   [(string),(string),(string)]  task description, task name, task marker
-   "taskpid"    (string)  parent id of task (defaults to objNull for no parent)
+   "taskpid"    (string)  parent id of task ("" for no parent)
    "is_destroyable"  (bool)    if true, kill it. If false, use UAVs to allow it to be blown up
 
 
@@ -32,7 +32,7 @@ Example:
             "Destroy the stone statue at the Old Mill in Derbyshire",
             "Destroy Idol",
             "markername"]],
-        ["taskpid", objNull],
+        ["taskpid", ""]],
         ["is_destroyable", false]
     ];
     _result = [_state] call pcb_fnc_mis_destroy;
@@ -61,7 +61,7 @@ if (!(_state get "is_destroyable")) then {
 // set up our task
 // ---------------
 private _tid = "MIS_DEST_" + (str ([] call pcb_fnc_get_next_UID));
-if (isNull (_state get "taskpid")) then {
+if ((_state get "taskpid") isEqualTo "") then {
     _state set ["taskid", _tid];
 } else {
     _state set ["taskid", [_tid, (_state get "taskpid")]];

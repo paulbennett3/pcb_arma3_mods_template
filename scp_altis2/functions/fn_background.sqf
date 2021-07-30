@@ -14,7 +14,7 @@ if (! isServer) exitWith {};
 // create our "Active" area where sites will be
 // ------------------------------------------------
 if (true) then {
-    private _radius = 5000;  // mission radius
+    private _radius = mission_radius;  // mission radius
 
     // need an object for getRelDir and getRelPos ...
     private _temp = createVehicle ["Chemlight_green", start_pos, [], 0, "NONE"];

@@ -22,7 +22,7 @@ State Object:
                    Assumed to already exist and be positioned!!!
    "taskpos"   (position) : where the task takes place 
    "taskdesc"   [(string),(string),(string)]  task description, task name, task marker
-   "taskpid"    (string)  parent id of task (defaults to objNull for no parent)
+   "taskpid"    (string)  parent id of task ("" for no parent)
    "action"     (string) action to put on item for interaction
    "code"       (code) code to execute when interaction is successful
                       params ["_target", "_caller", "_actionId", "_arguments"] <- codeCompleted from BIS_fnc_holdActionAdd
@@ -42,7 +42,7 @@ Example:
             "Destroy Idol",
             "markername"]],
         ["taskpos", getPosATL _idol],
-        ["taskpid", objNull],
+        ["taskpid", ""],
         ["action", "study"],
         ["code", { hint 'you should study more'; }],
         ["duration", 15]
@@ -63,7 +63,7 @@ if (pcb_DEBUG) then {
 // set up our task
 // ---------------
 private _tid = "MIS_INTE_" + (str ([] call pcb_fnc_get_next_UID));
-if (isNull (_state get "taskpid")) then {
+if ((_state get "taskpid") isEqualTo "") then {
     _state set ["taskid", _tid];
 } else {
     _state set ["taskid", [_tid, (_state get "taskpid")]];

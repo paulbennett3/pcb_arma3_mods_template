@@ -116,12 +116,13 @@ _vehicle_list pushBack ["Heli", "B_Heli_Transport_03_unarmed_F"];
 ########################################################################################################## */
 
 [] spawn {
-    sleep 30;
+    sleep 10;
     //[] call compile preprocessFileLineNumbers "scripts\test_destroyable_object.sqf";
     //[] call compile preprocessFileLineNumbers "scripts\test_mines.sqf";
     //[] call compile preprocessFileLineNumbers "scripts\test_desk.sqf";
     //[] call compile preprocessFileLineNumbers "scripts\test_mission.sqf";
-    [] call compile preprocessFileLineNumbers "scripts\test_goblins.sqf";
+    //[] call compile preprocessFileLineNumbers "scripts\test_goblins.sqf";
+    //[] call compile preprocessFileLineNumbers "scripts\test_goto.sqf";
 };
 
 //private _loot = [start_pos] call pcb_fnc_loot_crate;

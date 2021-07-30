@@ -38,7 +38,7 @@ if (pcb_DEBUG) then {
 // -------------------
 // find building
 // -------------------
-private _building = [epicenter, 5000] call pcb_fnc_get_cool_building_location;
+private _building = [epicenter, mission_radius] call pcb_fnc_get_cool_building_location;
 if ((isNil "_building") || (isNull _building)) exitWith { hint "failed to find building!"; [false, _state] };
 private _positions = [_building] call BIS_fnc_buildingPositions;
 private _pos = selectRandom _positions;
@@ -71,7 +71,9 @@ _state set ["taskdesc", [
         "Retrieve the flash drive with evidence of occult research",
         "Get evidence",
         "markername"]];
-_state set ["taskpid", objNull];
+private _taskpid = "";
+if (! isNil "PARENT_TASK") then { _taskpid = PARENT_TASK; };
+_state set ["taskpid", _taskpid];
 
 // add some anomalies
 [getPosATL _desk, 1, 5] call pcb_fnc_add_anomalies;

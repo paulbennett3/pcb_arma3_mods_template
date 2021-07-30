@@ -20,7 +20,7 @@ State Object:
    "taskpos"    (position) location of container (and target)
    "taskradius" (number) radius of "acceptable area" if in_area is true 
    "taskdesc"   [(string),(string),(string)]  task description, task name, task marker
-   "taskpid"    (string)  parent id of task (defaults to objNull for no parent)
+   "taskpid"    (string)  parent id of task ("" for no parent)
 
 !!! Note: if "is_obj" is true, then "in_area" must be true (ie, can't put a tank in a box ...)
 
@@ -36,7 +36,7 @@ Example:
             "Put the flash drive in the desk in the research lab",
             "Plant evidence",
             "markername"]],
-        ["taskpid", objNull],
+        ["taskpid", ""],
     ];
     _result = [_state] call pcb_fnc_mis_put_item;
     _ok = _result select 0; _state = _result select 1;
@@ -57,7 +57,7 @@ if (pcb_DEBUG) then {
 // set up our task
 // ---------------
 private _tid = "MIS_IPUT_" + (str ([] call pcb_fnc_get_next_UID));
-if (isNull (_state get "taskpid")) then {
+if ((_state get "taskpid") isEqualTo "") then {
     _state set ["taskid", _tid];
 } else {
     _state set ["taskid", [_tid, (_state get "taskpid")]];

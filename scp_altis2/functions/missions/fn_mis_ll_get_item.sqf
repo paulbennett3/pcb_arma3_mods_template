@@ -16,7 +16,7 @@ State Object:
    "container"  (obj)     container holding thing
    "taskpos"    (position) location of container (and target)
    "taskdesc"   [(string),(string),(string)]  task description, task name, task marker
-   "taskpid"    (string)  parent id of task (defaults to objNull for no parent)
+   "taskpid"    (string)  parent id of task (defaults to "" for no parent)
 
 
 Example:
@@ -28,7 +28,7 @@ Example:
             "Get the flash driver from the desk in the research lab",
             "Retreive evidence",
             "markername"]],
-        ["taskpid", objNull],
+        ["taskpid", ""],
     ];
     _result = [_state] call pcb_fnc_mis_get_item;
     _ok = _result select 0; _state = _result select 1;
@@ -49,7 +49,7 @@ if (pcb_DEBUG) then {
 // set up our task
 // ---------------
 private _tid = "MIS_IGET_" + (str ([] call pcb_fnc_get_next_UID));
-if (isNull (_state get "taskpid")) then {
+if ((_state get "taskpid") isEqualTo "") then {
     _state set ["taskid", _tid];
 } else {
     _state set ["taskid", [_tid, (_state get "taskpid")]];

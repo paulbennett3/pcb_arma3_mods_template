@@ -35,7 +35,7 @@ private _pos = [0, 0, 0];
 private _loc_type = objNull;
 if ((random 100) < 65) then {
     // city
-    _pos = selectRandom ([epicenter, 5000] call pcb_fnc_get_city_positions);
+    _pos = selectRandom ([epicenter, mission_radius] call pcb_fnc_get_city_positions);
     _loc_type = "city";
     // then find a random building, and positions within ...
     private _building = selectRandom (nearestObjects [_pos, ["House", "Building"], 100]);
@@ -50,7 +50,7 @@ if ((random 100) < 65) then {
         _tries = _tries - 1;
 
         // center, minDist, maxDist, objDist, waterMode, maxGrad, shoreMode, blacklistPos, defaultPos
-        private _center = [epicenter, 500, 5000, 5, 0, 0.1, 0, [], []] call BIS_fnc_findSafePos;
+        private _center = [epicenter, 500, mission_radius, 5, 0, 0.1, 0, [], []] call BIS_fnc_findSafePos;
         _pos = ((selectBestPlaces [_center, 500, "5*forest + trees + hills - 5*meadow - 3*houses", 10, 1]) select 0) select 0;
         if ([_pos] call pcb_fnc_is_valid_position) then {
             _tries = -10;
@@ -82,7 +82,9 @@ _state set ["taskdesc", [
     "Purge area",
     "markername"
 ]];
-_state set ["taskpid", objNull];
+private _taskpid = "";
+if (! isNil "PARENT_TASK") then { _taskpid = PARENT_TASK; };
+_state set ["taskpid", _taskpid];
 _state set ["taskpos", _pos];
 _state set ["taskradius", 1000];
 sleep 1;
