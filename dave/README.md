@@ -14,6 +14,8 @@ For example, if you start a new mission in the editor, and "save as multiplayer"
 
 Put both files in that folder.  Note that this is a different directory than where the .pbo files live, but that might not matter to you.
 
+Since the "spare helis" script uses the playableUnits variable, which is only defined in multiplayer games, this will give you an error if you try to run this as single player. I get it all the time ...  I should figure out how to fix that, but it is low on the very long list. :-)
+
 ## Downloading files from Git
 
 Perhaps the easiest way for you to grab a file from Git (without using the git client):
