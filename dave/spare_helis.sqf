@@ -33,7 +33,7 @@ private _helipads = (playableUnits select 0) nearObjects ["Helipad_Base_F", worl
 {
     private _pos = getPosATL _x;
     private _type = selectRandom _types;
-    _veh = createVehicle [_type, _pos, [], 0, "NONE"];
+    private _veh = createVehicle [_type, _pos, [], 0, "NONE"];
     _veh setVariable ["BIS_enableRandomization", false];
     _veh setDir (random 360);
     sleep .1;
