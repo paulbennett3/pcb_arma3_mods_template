@@ -5,10 +5,11 @@ Put helicopters on all the helipads on the map
 ****************************************************************** */
 // only let this run once!!!!
 if (! isNil "spare_heli_spawner") exitWith {};
-spare_heli_spawner = true; publicVariable "spare_heli_spawner";
+spare_heli_spawner = true; 
+publicVariable "spare_heli_spawner";
 
 // List of types allowed to be spawned in
-private _types = selectRandom [
+private _types = [
     "vn_b_air_uh1d_01_04",
     "vn_b_air_uh1d_01_06",
     "vn_b_air_uh1d_01_07",
@@ -20,7 +21,7 @@ private _types = selectRandom [
     "O_Heli_Light_02_unarmed_F",
     "I_Heli_light_03_unarmed_F",
     "B_Heli_Light_01_F",
-    "C_Heli_Light_01_civil_F"
+    "C_Heli_Light_01_civil_F"  // NOTE no comma on last element in list !!!!
 ]; 
 
 // get a list of all the helipads
