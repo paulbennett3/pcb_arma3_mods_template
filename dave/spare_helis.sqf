@@ -16,6 +16,10 @@ publicVariable "spare_heli_spawner";
 //   paste that in, adding quotes and commas as appropriate.  Note that you
 //   can do multiple models at once this way -- just select 'em all ...
 //   The airports or the plains of Almyra are great for this, just sayin'.
+//
+//  Also, if you want a particular heli to have a higher than strictly uniform chance,
+//   just add multiple duplicate lines of it.  I'll leave it to you to figure
+//   out the exact probabilities if you are so inclined, I'm on "vacation".
 private _types = [
     "vn_b_air_uh1d_01_04",
     "vn_b_air_uh1d_01_06",
