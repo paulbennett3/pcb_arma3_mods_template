@@ -9,6 +9,13 @@ spare_heli_spawner = true;
 publicVariable "spare_heli_spawner";
 
 // List of types allowed to be spawned in
+//  Feel free to remove items from this list (just make sure
+//    to add commas after lines, except for the very last one).
+//  The easy way to get model strings is to place a model in the
+//   editor, then right-click it and select "Log" -> "Log Classes to Clipboard", then
+//   paste that in, adding quotes and commas as appropriate.  Note that you
+//   can do multiple models at once this way -- just select 'em all ...
+//   The airports or the plains of Almyra are great for this, just sayin'.
 private _types = [
     "vn_b_air_uh1d_01_04",
     "vn_b_air_uh1d_01_06",
