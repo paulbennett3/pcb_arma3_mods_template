@@ -17,13 +17,14 @@ if (true) then {
     private _radius = mission_radius;  // mission radius
 
     // need an object for getRelDir and getRelPos ...
-    private _temp = createVehicle ["Chemlight_green", start_pos, [], 0, "NONE"];
+    start_chemlight = createVehicle ["Chemlight_green", start_pos, [], 0, "NONE"];
+    publicVariable "start_chemlight";
 
     // create the active area "ellipse" -- we use this as an area later
-    private _dir = _temp getRelDir epicenter;
+    private _dir = start_chemlight getRelDir epicenter;
     private _dist = start_pos distance epicenter;
     private _half_dist = _dist / 2;
-    private _midpoint = _temp getRelPos [_half_dist, _dir];
+    private _midpoint = start_chemlight getRelPos [_half_dist, _dir];
     private _a = _radius;
     private _b = _radius + _dist;
 

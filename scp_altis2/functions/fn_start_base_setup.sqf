@@ -49,6 +49,9 @@ _cargo attachTo [_start_crate, [0,0,0.85]];
 // place initial spawn marker
 private _marker_respawn = createMarker ["respawn_west", _vpos]; 
 _marker_respawn setMarkerType "respawn_inf";
+private _marker_respawn_veh = createMarker ["respawn_vehicle_west", start_pos]; 
+_marker_respawn_veh setMarkerType "respawn_air";
+
 
 // make a nice little base encampment relative to crate
 private _attachIt = {
@@ -67,6 +70,9 @@ private _desk = "Land_PortableDesk_01_black_F" createVehicle (_start_crate getRe
 [_desk, "Land_Tablet_01_F", [.65, -.15, .45], 27] call _attachIt;
 [_desk, "Land_PortableLight_double_F", [7, -.5, 0.6], 115] call _attachIt;
 [_desk, "Land_CanvasCover_01_F", [2, 2, 1.5], 0] call _attachIt;
+
+base_desk = _desk;
+publicVariable "base_desk";
 
 //_desk setVehiclePosition [_start_crate getRelPos [3, 45], [], 0, "NONE"];
 _desk setVehiclePosition [_start_crate getRelPos [3, 225], [], 0, "NONE"];
@@ -95,7 +101,8 @@ _start_crate setPosASL getPosASL _start_crate;  // synch for MP
 // ------------------------------------------------------------------
 private _vehicle_list = [];
 _vehicle_list pushBack ["Ground Vehicle", "B_T_Truck_01_transport_F"];
-_vehicle_list pushBack ["Heli", "B_Heli_Transport_03_unarmed_F"];
+//_vehicle_list pushBack ["Heli", "B_Heli_Transport_03_unarmed_F"];
+_vehicle_list pushBack ["Heli", "B_Heli_Light_01_F"];
 
 {
     private _label = _x select 0;
@@ -104,10 +111,11 @@ _vehicle_list pushBack ["Heli", "B_Heli_Transport_03_unarmed_F"];
     _blacklist_pos pushBack _vpos;
     private _veh = _type createVehicle [0,0,0];
     _veh setPos _vpos;
-    _veh setVariable ["BIS_enableRandomization", false];
+//    _veh setVariable ["BIS_enableRandomization", false];
     [_veh] call pcb_fnc_set_scp_vehicle_loadout;
     private _cid = "T" + str ([] call pcb_fnc_get_next_UID);
     [[_cid, _pid], _label, _vpos, 15] call pcb_fnc_objective_locate_object;
+    _veh respawnVehicle [30, 1 + (ceil (random 3))];
 } forEach _vehicle_list;
 
 
@@ -123,6 +131,7 @@ _vehicle_list pushBack ["Heli", "B_Heli_Transport_03_unarmed_F"];
     //[] call compile preprocessFileLineNumbers "scripts\test_mission.sqf";
     //[] call compile preprocessFileLineNumbers "scripts\test_goblins.sqf";
     //[] call compile preprocessFileLineNumbers "scripts\test_goto.sqf";
+    //[] call compile preprocessFileLineNumbers "scripts\test_infected.sqf";
 };
 
 //private _loot = [start_pos] call pcb_fnc_loot_crate;

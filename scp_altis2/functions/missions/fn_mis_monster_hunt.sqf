@@ -86,7 +86,7 @@ private _taskpid = "";
 if (! isNil "PARENT_TASK") then { _taskpid = PARENT_TASK; };
 _state set ["taskpid", _taskpid];
 _state set ["taskpos", _pos];
-_state set ["taskradius", 1000];
+_state set ["taskradius", 1500];
 sleep 1;
 _result = [_state] call pcb_fnc_mis_ll_clear;
 

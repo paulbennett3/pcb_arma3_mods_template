@@ -43,3 +43,10 @@ _this linkItem "ItemRadio";
 _this linkItem "B_UavTerminal";
 _this linkItem "NVGogglesB_blk_F";
 
+/*
+//private _texture = "#(rgb,8,8,3)color(1,1,1,1)"; // white texture
+//private _texture = "#(rgb,8,8,3)color(0,0,0,1)"; // black texture
+private _texture = "#(rgb,8,8,3)color(0,0.1,0,1)"; // black texture
+_newUnit setObjectTextureGlobal [0, _texture]; // set it on player
+uniformContainer _newUnit setVariable ["texture", _texture, true]; // store it on uniform
+*/

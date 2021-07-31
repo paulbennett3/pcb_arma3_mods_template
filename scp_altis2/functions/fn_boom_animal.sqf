@@ -4,7 +4,7 @@
 Create an animal that moves towards a random man / vehicle within 100m.
 The animal has a smoke/flame emitter, and a mine attached to it ...
 ********************************************************************** */
-params ["_pos", ["_index", 1], ["_hide", true]];
+params ["_pos", ["_index", 1], ["_hide", true], ["_range", 1000]];
 private _info = [
     ["Sheep_random_F", "Sheep_Run"],
     ["Cock_random_F", "Cock_Run"],
@@ -51,15 +51,18 @@ _target setVariable ["emitter", _emitter];
     ]
 ] remoteExec ["addEventHandler", 0, true];
 
-[_target, _run] spawn {
+[_target, _run, _range] spawn {
     params ["_animal", "_run"];
     // Force to sprint
     _animal playMove _run;
 
-    private _goal = selectRandom (_animal nearEntities [["Man", "Car"], 100]);
+    private _goal = selectRandom (_animal nearEntities [["Man", "Car"], _range]);
+
+    if (isNull _goal) then { (_animal getVariable "mine") setDamage 1; };
+
     while { sleep 1; alive _animal } do {
-        if ((_goal distance _animal) > 100) then {
-            _goal = selectRandom (_animal nearEntities [["Man", "Car"], 100]);
+        if ((_goal distance _animal) > _range) then {
+            _goal = selectRandom (_animal nearEntities [["Man", "Car"], _range]);
         };
 
         _animal moveTo (getPosATL _goal);

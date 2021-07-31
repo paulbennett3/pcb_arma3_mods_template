@@ -1,18 +1,14 @@
-/* *********************************************************
-                    mission encounter
-********************************************************* */
-params ["_pos", ["_chance", 50]];
+private _pos = (playableUnits select 0) getRelPos [120, 90];
 
-private _obj_list = [];
-private _type = objNull;
-private _n = 1 + (floor (random 3));
+private _n = 10;
 private _did = false;
+private _obj_list = [];
+private _type = "";
 
 // chance of encounter
-if ((random 100) < _chance) then {
+if (true) then {
     _did = true;
-    private _spooks = types_hash get "spooks";
-    _type = selectRandom _spooks;
+    private _spooks = types_hash get "civ infected";
 
     private _group = createGroup east;
     private _tries = 50;
@@ -20,6 +16,7 @@ if ((random 100) < _chance) then {
         _tries = _tries - 1;
         private _keep = [];
         for [{_i = 0 }, {_i < _n}, {_i = _i + 1}] do {
+            _type = selectRandom _spooks;
             private _veh = _group createUnit [_type, _pos, [], 5, 'NONE'];
             _veh triggerDynamicSimulation false; // won't wake up enemy units
             _keep pushBack _veh;
@@ -46,7 +43,6 @@ if ((random 100) < _chance) then {
     // toggle dynamic simulation on -- shouldn't really matter since we delete when far
     // away, but there is a chance to have lots of units ...
     _group enableDynamicSimulation true;
-    [_group, _pos] call BIS_fnc_taskDefend;
+    //[_group, _pos] call BIS_fnc_taskDefend;
+    [_group, start_pos] call BIS_fnc_taskAttack;
 };
-
-[_obj_list, _type, _n, _did]

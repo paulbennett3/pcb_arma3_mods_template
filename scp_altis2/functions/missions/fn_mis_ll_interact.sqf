@@ -59,9 +59,12 @@ if (pcb_DEBUG) then {
     hint ("INTERACT " + (str (_state get "target")));
 };
 
+private _target = _state get "target";
+
 // ---------------
 // set up our task
 // ---------------
+
 private _tid = "MIS_INTE_" + (str ([] call pcb_fnc_get_next_UID));
 if ((_state get "taskpid") isEqualTo "") then {
     _state set ["taskid", _tid];
@@ -83,6 +86,14 @@ private _code = {
 
 // add our state variable to the target so we can grab it later
 (_state get "target") setVariable ["_state", _state, true];
+
+// keep moving our destination with target
+[_target, _tid] spawn {
+    params ["_target", "_tid"];
+    while { sleep 5; (alive _target) && (!(_tid call BIS_fnc_taskCompleted)) } do {
+        [_tid, getPosATL _target] call BIS_fnc_taskSetDestination;
+    };
+};
 
 // handle container getting destroyed
 [

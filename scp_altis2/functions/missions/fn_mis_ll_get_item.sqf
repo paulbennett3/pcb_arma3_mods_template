@@ -57,6 +57,8 @@ if ((_state get "taskpid") isEqualTo "") then {
 private _pos = (_state get "taskpos");
 [true, (_state get "taskid"), (_state get "taskdesc"), _pos, "ASSIGNED", 2] call BIS_fnc_taskCreate;
 
+
+// -------------------------------------
 // -------------------------------------
 // Set up a way to tell task is complete
 // -------------------------------------

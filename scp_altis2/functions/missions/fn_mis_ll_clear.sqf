@@ -58,7 +58,7 @@ private _trg = createTrigger ["EmptyDetector", _state get "taskpos", true];
 _trg setTriggerArea  [
     _state get "taskradius", 
     _state get "taskradius",
-    0, false, 6
+    0, false, -1 
 ];       
 _trg setTriggerType "NONE";
 _state set ["trigger", _trg];
@@ -96,7 +96,12 @@ if (pcb_DEBUG) then {
         private _objs = (_state get "targetlist") inAreaArray (_state get "trigger");
         if ((count _objs) < 1) then {
             _done = true;
-            _state set ["failed", false];
+            _state set ["failed", true];
+            {
+                if (! (alive _x)) then {  
+                    _state set ["failed", false];
+                };
+            } forEach (_state get "targetlist");
             [_state] call pcb_fnc_end_mission;
         };
     };

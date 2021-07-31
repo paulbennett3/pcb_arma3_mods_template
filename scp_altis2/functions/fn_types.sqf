@@ -13,7 +13,7 @@ types_hash = createHashMap;
 //   destroy ...
 // best place in forest or on hilltop
 // --------------------------------
-private _occult_large_items = [
+types_hash set ["occult large items", [
     "Land_Grave_obelisk_F",
     "Land_Grave_forest_F",
     "Land_Grave_dirt_F",
@@ -31,8 +31,7 @@ private _occult_large_items = [
     "Land_AncientStatue_02_F",
     "Land_StoneTanoa_01_F",
     "Land_RaiStone_01_F"
-];
-types_hash set ["occult large items", _occult_large_items];
+]];
 
 
 // --------------------------------
@@ -42,18 +41,17 @@ types_hash set ["occult large items", _occult_large_items];
 // best place in forest or on hilltop
 //   or near "research" lab ...
 // --------------------------------
-private _tech_large_items = [
+types_hash set ["tech large items", [
     "Land_PowerGenerator_F",
     "Land_Device_assembled_F",
     "Land_Device_disassembled_F"
-];
-types_hash set ["tech large items", _tech_large_items];
+]];
 
 
 // --------------------------------
 //    tech small items -- ok for inside
 // --------------------------------
-private _small_items = [
+types_hash set ["small items", [
     "Land_DataTerminal_01_F",
     "Land_FMradio_F",
     "Land_HandyCam_F",
@@ -64,13 +62,12 @@ private _small_items = [
     "Land_Tablet_02_F",
     "Land_SurvivalRadio_F",
     "Land_Suitcase_F"
-];
-types_hash set ["small items", _small_items];
+]];
 
 // --------------------------------
 // Civilians
 // --------------------------------
-private _civ_list = [
+types_hash set ["civilians", [
     "Max_Tak_woman1", "Max_Tak_woman2", "Max_Tak_woman3", "Max_Tak_woman4",
     "Max_Tak_woman5", "Max_Tak_woman6", "Max_Taky_woman1", "Max_Taky_woman2",
     "Max_Taky_woman3", "Max_Taky_woman4", "Max_Taky_woman5", "Max_Tak2_woman1",
@@ -84,13 +81,25 @@ private _civ_list = [
     "C_IDAP_Man_AidWorker_08_F", "C_IDAP_Man_AidWorker_05_F", "C_IDAP_Man_AidWorker_04_F",
     "C_IDAP_Man_AidWorker_03_F", "C_man_p_beggar_F_afro", "C_Man_casual_2_F_afro",
     "C_man_polo_1_F_afro", "C_man_shorts_2_F_afro", "C_Man_casual_8_F_asia", "C_man_polo_4_F_asia"
-];
-types_hash set ["civilians", _civ_list];
+]];
+
+types_hash set ["civ infected", [
+    "C_Man_casual_1_F_afro_sick",
+    "C_Man_casual_3_F_afro_sick",
+    "C_man_sport_2_F_afro_sick",
+    "C_Man_casual_4_F_afro_sick",
+    "C_Man_casual_5_F_afro_sick",
+    "C_Man_casual_6_F_afro_sick",
+    "C_man_polo_1_F_afro_sick",
+    "C_man_polo_2_F_afro_sick",
+    "C_man_polo_3_F_afro_sick",
+    "C_man_polo_6_F_afro_sick"
+]];
 
 // --------------------------------
 // Zombies
 // --------------------------------
-private _zombies = [
+types_hash set ["zombies", [
     "RyanZombieC_man_1", "RyanZombieC_man_hunter_1_F", "RyanZombie19", "RyanZombie23",
     "RyanZombie29", "RyanZombieC_man_polo_4_F", "RyanZombieC_scientist_F", "RyanZombieB_Soldier_lite_F",
     "RyanZombieB_Soldier_02_f_1_1", "RyanZombieB_Soldier_02_fmediumOpfor", "RyanZombieB_Soldier_02_f_1mediumOpfor",
@@ -100,24 +109,22 @@ private _zombies = [
     "RyanZombieB_Soldier_04_f_1_1mediumOpfor", "RyanZombieB_Soldier_lite_FmediumOpfor",
     "RyanZombieB_Soldier_lite_F_1mediumOpfor", "RyanZombieB_Soldier_02_fmediumOpfor",
     "RyanZombieB_Soldier_02_f_1mediumOpfor", "RyanZombieB_Soldier_02_f_1_1mediumOpfor"
-];
-types_hash set ["zombies", _zombies];
+]];
 
 
 // --------------------------------
 // Demons
 // --------------------------------
-private _demons = [
+types_hash set ["demons", [
     "RyanZombieboss1", "RyanZombieboss10", "RyanZombieboss11", "RyanZombieboss12",
     "RyanZombieboss13", "RyanZombieboss15", "RyanZombieboss30", "RyanZombieboss16",
     "RyanZombieboss28"
-];
-types_hash set ["demons", _demons];
+]];
 
 // --------------------------------
 // Spooks
 // --------------------------------
-private _spooks = [
+types_hash set ["spooks", [
     "DSA_411",
     "DSA_Abomination",
     "DSA_Crazy",
@@ -128,88 +135,80 @@ private _spooks = [
     "DSA_Snatcher",
     "DSA_Vampire",
     "DSA_Wendigo"
-];
-types_hash set ["spooks", _spooks];
+]];
 
 // --------------------------------
 // Looters
 // --------------------------------
-private _looters = [
+types_hash set ["looters", [
     "I_L_Looter_Pistol_F", "I_L_Looter_SG_F", "I_L_Looter_Rifle_F", "I_L_Looter_SMG_F",
     "I_L_Criminal_SG_F", "I_L_Criminal_SMG_F", "I_L_Looter_Pistol_F", "I_L_Looter_SG_F",
     "I_L_Looter_Rifle_F", "I_C_Soldier_Bandit_4_F", "I_C_Soldier_Bandit_3_F", "I_C_Soldier_Bandit_7_F",
     "I_C_Soldier_Bandit_5_F", "I_C_Soldier_Bandit_6_F", "I_C_Soldier_Bandit_2_F", "I_C_Soldier_Bandit_8_F",
     "I_C_Soldier_Bandit_1_F", "I_L_Looter_Pistol_F", "I_L_Looter_SG_F", "I_L_Looter_Rifle_F"
-];
-types_hash set ["looters", _looters];
+]];
 
 // --------------------------------
 // Civilian Vehicles
 // --------------------------------
-private _civ_vehicles = [
+types_hash set ["civ vehicles", [
     "C_Hatchback_01_F", "C_Offroad_02_unarmed_F", "C_Offroad_01_F", "C_Offroad_01_comms_F",
     "C_Offroad_01_covered_F", "C_Offroad_01_repair_F", "C_Quadbike_01_F", "C_SUV_01_F",
     "C_Tractor_01_F", "C_Van_01_transport_F", "C_Van_01_box_F", "C_Van_02_vehicle_F",
     "C_Van_02_service_F", "C_Van_02_transport_F", "C_Truck_02_fuel_F", "C_Truck_02_box_F",
     "C_Truck_02_transport_F", "C_Truck_02_covered_F"
-];
-types_hash set ["civ vehicles", _civ_vehicles];
+]];
 
 
 // --------------------------------
 //   Police Foot
 // --------------------------------
-private _police = [
+types_hash set ["police", [
     "B_GEN_Commander_F",
     "B_GEN_Soldier_F"
-];
-types_hash set ["police", _police];
+]];
 
 // --------------------------------
 //   Police Vehicles
 // --------------------------------
-private _police_vehicles = [
+types_hash set ["police vehicles", [
     "B_GEN_Offroad_01_gen_F",
     "B_GEN_Van_02_vehicle_F",
     "B_GEN_Van_02_transport_F",
     "B_GEN_Offroad_01_comms_F"
-];
-types_hash set ["police vehicles", _police_vehicles];
+]];
 
 // --------------------------------
 //  Civilian Air
 // --------------------------------
-private _civ_air = [
+types_hash set ["civ air", [
     "C_Plane_Civil_01_F",
     "C_Heli_Light_01_civil_F"
-];
-types_hash set ["civ air", _civ_air];
+]];
 
 // --------------------------------
 //   Ambulance
 // --------------------------------
-private _ambulance = [
+types_hash set ["ambulance", [
     "C_Van_02_medevac_F"
-];
-types_hash set ["ambulance", _ambulance];
+]];
 
 // --------------------------------
 // Military Base Buildings
 // --------------------------------
-private _mil_buildings = [
+types_hash set ["military buildings", [
     "Cargo_Tower_base_F", "Land_i_Barracks_V1_F",
     "Land_i_Barracks_V2_F", "Land_u_Barracks_V2_F", "Land_Cargo_Tower_V1_F", "Land_Cargo_Tower_V1_No1_F",
     "Land_Cargo_Tower_V1_No2_F", "Land_Cargo_Tower_V1_No3_F", "Land_Cargo_Tower_V1_No4_F",
     "Land_Cargo_Tower_V1_No5_F", "Land_Cargo_Tower_V1_No6_F", "Land_Cargo_Tower_V1_No7_F",
     "Land_Cargo_Tower_V2_F", "Land_Cargo_Tower_V3_F", "Land_Medevac_house_V1_F", "Land_Medevac_HQ_V1_F",
     "Land_Dome_Big_F", "Land_Dome_Small_F", "Land_Research_HQ_F"
-];
-types_hash set ["military buildings", _mil_buildings];
+]];
 
 // --------------------------------
 // Cool Buildings (overlaps with Military buildings)
 // --------------------------------
-private _cool_buildings = [
+types_hash set ["cool buildings", [
     "Cargo_Tower_base_F", "Land_Offices_01_V1_F", "Land_Hospital_Main_F",
     "Land_LightHouse_F", "Land_Castle_01_tower_F", "Land_d_Windmill01_F", "Land_i_Barracks_V1_F",
     "Land_i_Barracks_V2_F", "Land_u_Barracks_V2_F", "Land_Cargo_Tower_V1_F", "Land_Cargo_Tower_V1_No1_F",
@@ -217,36 +216,33 @@ private _cool_buildings = [
     "Land_Cargo_Tower_V1_No5_F", "Land_Cargo_Tower_V1_No6_F", "Land_Cargo_Tower_V1_No7_F",
     "Land_Cargo_Tower_V2_F", "Land_Cargo_Tower_V3_F", "Land_Medevac_house_V1_F", "Land_Medevac_HQ_V1_F",
     "Land_Dome_Big_F", "Land_Dome_Small_F", "Land_Research_HQ_F"
-];
-types_hash set ["cool buildings", _cool_buildings];
+]];
 
 
 // --------------------------------
 //  Resupply crates (already loaded)
 // --------------------------------
-private _crates = [
+types_hash set ["resupply crates", [
     "O_CargoNet_01_ammo_F",
     "C_IDAP_CargoNet_01_supplies_F",
     "I_E_CargoNet_01_ammo_F",
     "B_CargoNet_01_ammo_F"
-];
-types_hash set ["resupply crates", _crates];
+]];
 
 // --------------------------------
 // SVBuildings (from CfgVehicles!) 
 //  "spare vehicle buildings" -- ie, the
 //   buildings to spawn spare cars near
 // --------------------------------
-private _svbuildings = [
+types_hash set ["svbuildings", [
     "House", "Fuelstation", "Lighthouse", "Church", "Hospital", "Transmitter"
-];
-types_hash set ["svbuildings", _svbuildings];
+]];
 
 
 // --------------------------------
 // Blood splatters
 // --------------------------------
-private _blood = [
+types_hash set ["blood", [
     "BloodPool_01_Large_New_F",
     "BloodPool_01_Large_Old_F",
     "BloodPool_01_Medium_New_F",
@@ -261,16 +257,14 @@ private _blood = [
     "BloodSpray_01_Old_F",
     "BloodTrail_01_New_F",
     "BloodTrail_01_Old_F"
-];
-types_hash set ["blood", _blood];
+]];
 
-private _bones = [
+types_hash set ["bones", [
     "Land_HumanSkeleton_F",
     "Land_HumanSkull_F"
-];
-types_hash set ["bones", _bones];
+]];
 
-private _detritus = [
+types_hash set ["detritus", [
     "Land_Pumpkin_01_F",
     "Campfire_burning_F",
     "Land_FirePlace_F",
@@ -291,8 +285,7 @@ private _detritus = [
     "Land_Shovel_F",
     "Land_vn_garbage_square3_f",
     "vn_b_item_trapkit_gh"
-];
-types_hash set ["detritus", _detritus];
+]];
 
 
 

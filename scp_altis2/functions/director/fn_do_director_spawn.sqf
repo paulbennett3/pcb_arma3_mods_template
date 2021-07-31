@@ -20,7 +20,6 @@ private _options = [
     "bandit_foot",
     "bandit_car",
     "bandit_car",
-    "boom_animal",
     "boom_guy",
     "boom_guy",
     "civ_foot",
@@ -58,7 +57,7 @@ switch (_option) do {
         };
     };
     case "boom_animal" : {
-        private _result = [_player getRelPos [90, 0], 1] call pcb_fnc_boom_animal;
+        private _result = [_player getRelPos [300, 0], 1] call pcb_fnc_boom_animal;
         _did_spawn = _result select 0;
         if (_did_spawn) then {
             private _animal = _result select 1;
@@ -104,8 +103,10 @@ switch (_option) do {
             _did_spawn = [_option, _player, _types, independent, 1, 3, false] call pcb_fnc_enc_infantry;
         };
     case "zombies": {
-            private _types = types_hash get "zombies"; 
-            _did_spawn = [_option, _player, _types, independent, 1, 10, false] call pcb_fnc_enc_infantry;
+            //private _types = types_hash get "zombies"; 
+            //_did_spawn = [_option, _player, _types, independent, 1, 10, false] call pcb_fnc_enc_infantry;
+            private _types = types_hash get "civ infected"; 
+            _did_spawn = [_option, _player, _types, civilian, 1, 10, false] call pcb_fnc_enc_infantry;
         };
     case "ambulance": {
             _did_spawn = [_option, _player, (types_hash get "ambulance") select 0, civilian] call pcb_fnc_enc_vehicle_patrol;

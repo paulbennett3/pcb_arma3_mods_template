@@ -36,6 +36,9 @@ switch (_action) do {
             //_trait = "scholar";
             _trait = "Occult";
         };
+    case "interview": {
+            _icon = "\a3\missions_f_oldman\data\img\holdactions\holdAction_talk_ca.paa";
+        };
 };
 
 private _start_cond = "(_this distance _target < 3)";

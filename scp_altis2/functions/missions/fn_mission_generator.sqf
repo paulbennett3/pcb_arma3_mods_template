@@ -8,7 +8,9 @@ if (! isServer) exitWith {};
 
 [] spawn {
     diag_log "Mission Generator spawned";
-    hint "Mission Generator started (spawned)";
+    if (pcb_DEBUG) then {
+        hint "Mission Generator started (spawned)";
+    };
 
     // start our mission counter and mission array
     mission_success = true; // assume true, set to false if failed ...

@@ -102,9 +102,12 @@ private _pos = (_state get "taskpos");
                             _state set ["failed", false];
                             [_state] call pcb_fnc_end_mission;
                             _done = true;
+                        } else {
+systemChat ((str _x) + " doesn't have " + _thing);
                         };
                     } forEach playableUnits;
                 };
+systemChat "No players in area";
             };
         };
     } else {

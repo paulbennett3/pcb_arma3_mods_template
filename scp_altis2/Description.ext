@@ -107,7 +107,11 @@ class CfgFunctions
             // --------------------------------------------------------------
             class mis_building_search {};
             class mis_desk_evidence {};
+            class mis_deliver_evidence {};
+            class mis_exfil {};
+            class mis_get_laptop_from_base {};
             class mis_investigate {};
+            class mis_interview {};
             class mis_monster_hunt {};
             class mis_spawner {};
         }; 
