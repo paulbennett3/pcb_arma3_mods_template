@@ -10,7 +10,7 @@ The spare_helis.sqf script will spawn a different random type of helicopter (fro
 
 To install, place both initServer.sqf and spare_helis.sqf in your mission root directory. 
 
-For example, if you start a new mission in the editor, and "save as multiplayer" it as "mymission", it will make a folder in your Documents folder something like "...\Documents\Arma 3\mpmissions\mymission\". 
+For example, if you start a new mission in the editor, and "save as multiplayer" it as "mymission", it will make a folder in your Documents folder something like "...\Documents\Arma 3\mpmissions\mymission.MAPNAME\". Note that it adds ".MAPNAME" to the file name you picked, so something like "mymission.Altis". 
 
 Put both files in that folder.  Note that this is a different directory than where the .pbo files live, but that might not matter to you.
 
