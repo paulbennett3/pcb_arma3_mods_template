@@ -45,10 +45,9 @@ private _cmd = {
 // ------------------------------------
 private _cmd = {
     params ['_target', '_caller', '_actionId', '_arguments'];
-    _caller setUnitTrait ["Occult", false, true];
     _caller setUnitTrait ["medic", false];
     _caller setUnitTrait ["engineer", true];
-    _caller setUnitTrait ["explosiveSpecialist", true];
+    _caller setUnitTrait ["explosiveSpecialist", false];
 
     [ ((str _caller) + " is now an Engineer") ] remoteExec ["diag_log", 2];
     [ ((str _caller) + " is now an Engineer") ] remoteExec ["hint", 0];
@@ -68,7 +67,6 @@ private _cmd = {
 // ------------------------------------
 private _cmd = {
     params ['_target', '_caller', '_actionId', '_arguments'];
-    _caller setUnitTrait ["Occult", false, true];
     _caller setUnitTrait ["medic", true];
     _caller setUnitTrait ["engineer", false];
     _caller setUnitTrait ["explosiveSpecialist", false];
@@ -86,22 +84,21 @@ private _cmd = {
 ] remoteExec ["addAction", 0, true];   // Server only!
 
 // ------------------------------------
-//            Set Role: Occult Tech
+//            Set Role: Explosives Expert
 // ------------------------------------
 private _cmd = {
     params ['_target', '_caller', '_actionId', '_arguments'];
-    _caller setUnitTrait ["Occult", true, true];
     _caller setUnitTrait ["medic", false];
     _caller setUnitTrait ["engineer", false];
-    _caller setUnitTrait ["explosiveSpecialist", false];
-    [ ((str _caller) + " is now an Occult Tech") ] remoteExec ["hint", 0];
-    [ ((str _caller) + " is now an Occult Tech") ] remoteExec ["diag_log", 2];
+    _caller setUnitTrait ["explosiveSpecialist", true];
+    [ ((str _caller) + " is now an Explosives Specialist") ] remoteExec ["hint", 0];
+    [ ((str _caller) + " is now an Explosives Specialist") ] remoteExec ["diag_log", 2];
 };
 
 [
     _obj,
     [
-        "Role: Occult Tech",
+        "Role: Explosives Spec.",
         _cmd,
         [], 1.5, false, false, "", "true", 5
     ]
@@ -112,7 +109,6 @@ private _cmd = {
 // ------------------------------------
 private _cmd = {
     params ['_target', '_caller', '_actionId', '_arguments'];
-    _caller setUnitTrait ["Occult", true, true];
     _caller setUnitTrait ["medic", true];
     _caller setUnitTrait ["engineer", true];
     _caller setUnitTrait ["explosiveSpecialist", true];

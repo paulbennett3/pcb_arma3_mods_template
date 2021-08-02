@@ -68,8 +68,8 @@ private _code = {
 
 _state set ["target", _target];
 _state set ["taskdesc", [
-        "Investigate the site for signs of occult activity [Occult Tech Req.]",
-        "Investigate [Occult]",
+        "Investigate the site for signs of occult activity",
+        "Investigate",
         "markername"]];
 _state set ["taskpos", getPosATL _target];
 private _taskpid = "";

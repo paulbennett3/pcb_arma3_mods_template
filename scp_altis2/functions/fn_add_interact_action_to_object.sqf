@@ -22,7 +22,7 @@ switch (_action) do {
     case "study": {
             _icon = "\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_search_ca.paa";
             // _trait = "scholar";
-            _trait = "Occult";
+            //_trait = "Occult";
         };
     case "unpack": {
             _icon = "\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_unloaddevice_ca.paa";
