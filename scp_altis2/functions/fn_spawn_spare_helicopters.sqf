@@ -33,6 +33,19 @@ spare_heli_spawner = true; publicVariable "spare_heli_spawner";
     _veh = createVehicle [_type, _pos, [], 0, "NONE"];
     _veh setVariable ["BIS_enableRandomization", false];
     _veh setDir (random 360);
+    sleep .1;
+
+    // add a repair facility
+    private _repair = types_hash get "static repair";
+    _type = selectRandom _repair;
+    _veh = createVehicle [_type, _x getRelPos [7, 90], [], 0, "NONE"];
+
+    // add a "cargo" pod
+    private _cargo = types_hash get "static cargo";
+    _type = selectRandom _cargo;
+    _veh = createVehicle [_type, _x getRelPos [7, 180], [], 0, "NONE"];
+
+
 
     if (pcb_DEBUG) then {
         private _mn = "M" + str ([] call pcb_fnc_get_next_UID);

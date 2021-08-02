@@ -50,8 +50,12 @@ if ((isNil "_building") || (isNull _building)) exitWith { hint "failed to find b
 private _pos = getPosATL _building;
 if ((isNil "_pos") || (! ([_pos] call pcb_fnc_is_valid_position))) exitWith { [false, _state] };
 
-private _cargo = "Laptop_closed";
+private _cargo = "Laptop_Closed";
 
+_state set ["target", _cargo];
+_state set ["is_obj", false];
+_state set ["in_area", true];
+_state set ["container", objNull];
 _state set ["taskpos", getPosATL _building];
 _state set ["taskradius", 50];
 _state set ["taskdesc", [
@@ -60,7 +64,7 @@ _state set ["taskdesc", [
     "markername"]];
 _state set ["taskpid", ""];
 _state set ["callback", [false, objNull, objNull]];
-private _result = [_state] call pcb_fnc_mis_ll_goto;
+private _result = [_state] call pcb_fnc_mis_ll_put_item;
 
 // add some anomalies
 [getPosATL _building, 1, 5] call pcb_fnc_add_anomalies;

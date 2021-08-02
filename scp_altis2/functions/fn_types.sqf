@@ -100,15 +100,67 @@ types_hash set ["civ infected", [
 // Zombies
 // --------------------------------
 types_hash set ["zombies", [
-    "RyanZombieC_man_1", "RyanZombieC_man_hunter_1_F", "RyanZombie19", "RyanZombie23",
-    "RyanZombie29", "RyanZombieC_man_polo_4_F", "RyanZombieC_scientist_F", "RyanZombieB_Soldier_lite_F",
-    "RyanZombieB_Soldier_02_f_1_1", "RyanZombieB_Soldier_02_fmediumOpfor", "RyanZombieB_Soldier_02_f_1mediumOpfor",
-    "RyanZombieB_Soldier_02_f_1_1mediumOpfor", "RyanZombieB_Soldier_03_fmediumOpfor",
-    "RyanZombieB_Soldier_03_f_1mediumOpfor", "RyanZombieB_Soldier_03_f_1_1mediumOpfor",
-    "RyanZombieB_Soldier_04_fmediumOpfor", "RyanZombieB_Soldier_04_f_1mediumOpfor",
-    "RyanZombieB_Soldier_04_f_1_1mediumOpfor", "RyanZombieB_Soldier_lite_FmediumOpfor",
-    "RyanZombieB_Soldier_lite_F_1mediumOpfor", "RyanZombieB_Soldier_02_fmediumOpfor",
-    "RyanZombieB_Soldier_02_f_1mediumOpfor", "RyanZombieB_Soldier_02_f_1_1mediumOpfor"
+"RyanZombieCrawler1", "RyanZombieCrawler2", "RyanZombieCrawler3",
+"RyanZombieCrawler4", "RyanZombieCrawler5", "RyanZombieCrawler6",
+"RyanZombieCrawler7", "RyanZombieCrawler8", "RyanZombieCrawler9",
+"RyanZombieCrawler10", "RyanZombieCrawler11", "RyanZombieCrawler12",
+"RyanZombieCrawler13", "RyanZombieCrawler14", "RyanZombieCrawler15",
+"RyanZombieCrawler16", "RyanZombieCrawler17", "RyanZombieCrawler18",
+"RyanZombieCrawler19", "RyanZombieCrawler20", "RyanZombieCrawler21",
+"RyanZombieCrawler22", "RyanZombieCrawler23", "RyanZombieCrawler24",
+"RyanZombieCrawler25", "RyanZombieCrawler26", "RyanZombieCrawler27",
+"RyanZombieCrawler28", "RyanZombieCrawler29", "RyanZombieCrawler30",
+"RyanZombieCrawler31", "RyanZombieCrawler32", "RyanZombieC_man_1",
+"RyanZombieC_man_polo_1_F", "RyanZombieC_man_polo_2_F", "RyanZombieC_man_polo_4_F",
+"RyanZombieC_man_polo_5_F", "RyanZombieC_man_polo_6_F", "RyanZombieC_man_p_fugitive_F",
+"RyanZombieC_man_w_worker_F", "RyanZombieC_scientist_F", "RyanZombieC_man_hunter_1_F",
+"RyanZombieC_man_pilot_F", "RyanZombieC_journalist_F", "RyanZombieC_Orestes",
+"RyanZombieC_Nikos", "RyanZombie15", "RyanZombie16",
+"RyanZombie17", "RyanZombie18", "RyanZombie19",
+"RyanZombie20", "RyanZombie21", "RyanZombie22",
+"RyanZombie23", "RyanZombie24", "RyanZombie25",
+"RyanZombie26", "RyanZombie27", "RyanZombie28",
+"RyanZombie29", "RyanZombie30", "RyanZombie31",
+"RyanZombie32", "RyanZombieC_man_1medium", "RyanZombieC_man_polo_1_Fmedium",
+"RyanZombieC_man_polo_2_Fmedium", "RyanZombieC_man_polo_4_Fmedium",
+"RyanZombieC_man_polo_5_Fmedium", "RyanZombieC_man_polo_6_Fmedium",
+"RyanZombieC_man_p_fugitive_Fmedium", "RyanZombieC_man_w_worker_Fmedium",
+"RyanZombieC_scientist_Fmedium", "RyanZombieC_man_hunter_1_Fmedium",
+"RyanZombieC_man_pilot_Fmedium", "RyanZombieC_journalist_Fmedium",
+"RyanZombieC_Orestesmedium", "RyanZombieC_Nikosmedium",
+"RyanZombie15medium", "RyanZombie16medium", "RyanZombie17medium",
+"RyanZombie18medium", "RyanZombie19medium", "RyanZombie20medium",
+"RyanZombie21medium", "RyanZombie22medium", "RyanZombie23medium",
+"RyanZombie24medium", "RyanZombie25medium", "RyanZombie26medium",
+"RyanZombie27medium", "RyanZombie28medium", "RyanZombie29medium",
+"RyanZombie30medium", "RyanZombie31medium", "RyanZombie32medium",
+"RyanZombieC_man_1slow", "RyanZombieC_man_polo_1_Fslow", "RyanZombieC_man_polo_2_Fslow",
+"RyanZombieC_man_polo_4_Fslow", "RyanZombieC_man_polo_5_Fslow", "RyanZombieC_man_polo_6_Fslow",
+"RyanZombieC_man_p_fugitive_Fslow", "RyanZombieC_man_w_worker_Fslow", "RyanZombieC_scientist_Fslow",
+"RyanZombieC_man_hunter_1_Fslow", "RyanZombieC_man_pilot_Fslow", "RyanZombieC_journalist_Fslow",
+"RyanZombieC_Orestesslow", "RyanZombieC_Nikosslow", "RyanZombie15slow", "RyanZombie16slow",
+"RyanZombie17slow", "RyanZombie18slow", "RyanZombie19slow", "RyanZombie20slow",
+"RyanZombie21slow", "RyanZombie22slow", "RyanZombie23slow", "RyanZombie24slow",
+"RyanZombie25slow", "RyanZombie26slow", "RyanZombie27slow", "RyanZombie28slow",
+"RyanZombie29slow", "RyanZombie30slow", "RyanZombie31slow", "RyanZombie32slow",
+"RyanZombieC_man_1walker", "RyanZombieC_man_polo_1_Fwalker", "RyanZombieC_man_polo_2_Fwalker",
+"RyanZombieC_man_polo_4_Fwalker", "RyanZombieC_man_polo_5_Fwalker", "RyanZombieC_man_polo_6_Fwalker",
+"RyanZombieC_man_p_fugitive_Fwalker", "RyanZombieC_man_w_worker_Fwalker", "RyanZombieC_scientist_Fwalker",
+"RyanZombieC_man_hunter_1_Fwalker", "RyanZombieC_man_pilot_Fwalker", "RyanZombieC_journalist_Fwalker",
+"RyanZombieC_Oresteswalker", "RyanZombieC_Nikoswalker", "RyanZombie15walker",
+"RyanZombie16walker", "RyanZombie17walker", "RyanZombie18walker", "RyanZombie19walker",
+"RyanZombie20walker", "RyanZombie21walker", "RyanZombie22walker", "RyanZombie23walker",
+"RyanZombie24walker", "RyanZombie25walker", "RyanZombie26walker", "RyanZombie27walker",
+"RyanZombie28walker", "RyanZombie29walker", "RyanZombie30walker", "RyanZombie31walker",
+"RyanZombie32walker", "RyanZombieSpider1", "RyanZombieSpider2", "RyanZombieSpider3",
+"RyanZombieSpider4", "RyanZombieSpider5", "RyanZombieSpider6", "RyanZombieSpider7",
+"RyanZombieSpider8", "RyanZombieSpider9", "RyanZombieSpider10", "RyanZombieSpider11",
+"RyanZombieSpider12", "RyanZombieSpider13", "RyanZombieSpider14", "RyanZombieSpider15",
+"RyanZombieSpider16", "RyanZombieSpider17", "RyanZombieSpider18", "RyanZombieSpider19",
+"RyanZombieSpider20", "RyanZombieSpider21", "RyanZombieSpider22", "RyanZombieSpider23",
+"RyanZombieSpider24", "RyanZombieSpider25", "RyanZombieSpider26", "RyanZombieSpider27",
+"RyanZombieSpider28", "RyanZombieSpider29", "RyanZombieSpider30", "RyanZombieSpider31",
+"RyanZombieSpider32"
 ]];
 
 
@@ -287,7 +339,20 @@ types_hash set ["detritus", [
     "vn_b_item_trapkit_gh"
 ]];
 
+types_hash set ["static repair", [
+    "Land_Pod_Heli_Transport_04_repair_F",
+    "Land_RepairDepot_01_tan_F",
+    "Land_RepairDepot_01_green_F",
+    "Land_RepairDepot_01_civ_F",
+    "B_Slingload_01_Repair_F"
+]];
 
+types_hash set ["static cargo", [
+    "B_Slingload_01_Medevac_F",
+    "B_Slingload_01_Fuel_F",
+    "B_Slingload_01_Cargo_F",
+    "Land_Pod_Heli_Transport_04_box_F"
+]];
 
 // Helicopters
 

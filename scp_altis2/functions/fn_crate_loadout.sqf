@@ -34,13 +34,19 @@ _obj addItemCargoGlobal ["arifle_MX_F", 4];
 _obj addItemCargoGlobal ["arifle_MX_GL_F", 4];
 _obj addItemCargoGlobal ["arifle_MX_SW_F", 4];
 _obj addItemCargoGlobal ["hgun_P07_F", 4];
-_obj addItemCargoGlobal ["launch_Titan_F", 1];
 _obj addItemCargoGlobal ["launch_Titan_short_F", 1];
 _obj addItemCargoGlobal ["vn_izh54_p", 2];
 _obj addItemCargoGlobal ["Binocular", 2];
 _obj addItemCargoGlobal ["Laserdesignator", 4];
 _obj addItemCargoGlobal ["Rangefinder", 4];
 _obj addItemCargoGlobal ["vn_m79_p", 2];
+_obj addItemCargoGlobal ["vn_m72", 2];
+_obj addItemCargoGlobal ["vn_m79", 2];
+
+_obj addItemCargoGlobal ["vn_m72_mag", 2];
+
+
+
 sleep .1;
 // mag
 _obj addMagazineAmmoCargo ["100Rnd_65x39_caseless_mag_Tracer", 40, 100];
@@ -53,7 +59,7 @@ _obj addMagazineAmmoCargo ["vn_molotov_grenade_mag", 8, 1];
 _obj addMagazineAmmoCargo ["vn_m14_grenade_mag", 8, 1];
 _obj addMagazineAmmoCargo ["vn_m18_green_mag", 8, 1];
 
-_obj addMagazineAmmoCargo ["1Rnd_HE_Grenade_shell", 20, 1];
+_obj addMagazineAmmoCargo ["1Rnd_HE_Grenade_shell", 40, 1];
 _obj addMagazineAmmoCargo ["1Rnd_SmokeGreen_Grenade_shell", 5, 1];
 _obj addMagazineAmmoCargo ["1Rnd_SmokeYellow_Grenade_shell", 5, 1];
 _obj addMagazineAmmoCargo ["APERSBoundingMine_Range_Mag", 2, 1];
@@ -72,6 +78,8 @@ _obj addMagazineAmmoCargo ["UGL_FlareGreen_F", 4, 1];
 _obj addMagazineAmmoCargo ["UGL_FlareWhite_F", 4, 1];
 _obj addMagazineAmmoCargo ["vn_izh54_mag", 10, 1];
 _obj addMagazineAmmoCargo ["Chemlight_green", 4, 1];
+//_obj addMagazineAmmoCargo ["vn_40mm_m576_buck_mag", 20];
+//_obj addMagazineAmmoCargo ["vn_40mm_m381_he_mag", 40];
 // item
 _obj addItemCargoGlobal ["acc_flashlight", 4];
 _obj addItemCargoGlobal ["acc_pointer_IR", 4];

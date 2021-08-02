@@ -49,12 +49,9 @@ private _code = {
     };   
     // zombies
     if ((random 1) < 0.25) then {
-        //private _types = types_hash get "zombies";
-        //private _n = 3 + (ceil (random 5));
-        //[_types, _n, _x, east] call _code;
-        private _types = types_hash get "civ infected";
-        private _n = 3 + (ceil (random 5));
-        [_types, _n, _x, civilian] call _code;
+        private _types = types_hash get "zombies";
+        private _n = 1 + (ceil (random 5));
+        [_types, _n, _x, east] call _code;
     };   
         
     if (pcb_DEBUG) then {
@@ -92,13 +89,12 @@ private _military_objects_in_area = _military_objects inAreaArray "mEPI";
         _m setMarkerColor "ColorRED";
     };
     private _roll = random 1; 
-    if (_roll < 0.5) then {
-        //private _ztypes = types_hash get "zombies";
-        private _ztypes = types_hash get "civ infected";
+    if (_roll < 0.25) then {
+        private _ztypes = types_hash get "zombies";
         private _n = 1 + (ceil (random 5));
         [_ztypes, _n, _x, east] call _code;
     };
-    if ((_roll >= 0.5) and (_roll < 0.7)) then {
+    if ((_roll >= 0.25) and (_roll < 0.5)) then {
         private _types = types_hash get "looters"; 
         private _n = 1 + (ceil (random 3));
         [_types, _n, _x, east] call _code;

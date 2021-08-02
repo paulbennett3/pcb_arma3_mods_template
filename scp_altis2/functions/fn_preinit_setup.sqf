@@ -74,31 +74,3 @@ _cmd = "DSA_DetectableSpooks = this; this setVariable ['BIS_fnc_initModules_disa
 ];
 
 
-/* ----------------------------------------------------------------
-                 Configure and Place Anomalies 
-
-Do multiple!
----------------------------------------------------------------- */
-/*
-diag_log "finding selection of good places ...";
-private _filter = "3*forest + 2*trees + meadow + 3*houses - 5*sea - 5*waterDepth";  
-private _nplaces = 20;
-private _places = selectBestPlaces [epicenter, mission_radius, _filter, 50, _nplaces];
-diag_log " ... done finding!";
-
-diag_log "Placing DSA Anomalies ...";
-
-_cmd = "DSA_SpawnerAnomaly = this; this setVariable ['BIS_fnc_initModules_disableAutoActivation', false, true]; DSA_SpawnerAnomaly setVariable ['DSA_Type', '''Launchpad'',''Leech'',''Trapdoor'',''Zapper''', true]; DSA_SpawnerAnomaly setVariable ['DSA_RandomTypes', '''Launchpad'',''Leech'',''Trapdoor'',''Zapper''', true]; DSA_SpawnerAnomaly setVariable ['DSA_Radius',500, true]; DSA_SpawnerAnomaly setVariable ['DSA_CountCluster','1,3', true]; DSA_SpawnerAnomaly setVariable ['DSA_Count','1,3', true]; DSA_SpawnerAnomaly setVariable ['DSA_RadiusCluster', 30, true]; ";
-
-private _nanomalies = ceil (_nplaces * (random 1)); 
-private _placed = 0;
-private _rpos = objNull;
-while {_placed < _nanomalies} do {
-    
-    diag_log ("    " + (str _placed));
-    _rpos = (_places select _placed) select 0;
- 
-    "DSA_SpawnerAnomaly" createUnit [ _rpos, _moduleGroup, _cmd];
-    _placed = _placed + 1;
-};
-*/

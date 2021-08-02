@@ -32,7 +32,7 @@ start_pos = objNull;
 private _start_type = objNull;
 private _roll = random 1;
 
-if (_roll < 0.45) then {
+if (_roll < 0.65) then {
     _start_type = "Airfield";
 } else {
     if (_roll < 1) then {
@@ -41,6 +41,7 @@ if (_roll < 0.45) then {
         _start_type = "Hilltop";
     }
 };
+systemChat _start_type;
 
 switch (_start_type) do {
     case "Airfield": {
@@ -59,7 +60,7 @@ switch (_start_type) do {
         //start_pos = _center;
         //start_pos = [[], 0, -1, 10, 0, 0.1, 1, [], []] call BIS_fnc_findSafePos;
         //start_pos = [_center, 0, -1, 10, 0, 0.1, 1, [], []] call BIS_fnc_findSafePos;
-        start_pos = [_center, 0, 10000, 10, 0, 0.1, 1, [], []] call BIS_fnc_findSafePos;
+        start_pos = [_center, 0, 10000, 5, 0, 0.025, 1, [], []] call BIS_fnc_findSafePos;
     };
     case "Hilltop": {
         // pick a good hilltop ...

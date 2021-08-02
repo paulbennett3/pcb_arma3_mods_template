@@ -35,7 +35,7 @@ if (pcb_DEBUG) then {
     hint "Get Laptop running";
 };
 
-private _cargo = "Laptop_closed";
+private _cargo = "Laptop_Closed";
 base_desk addItemCargoGlobal [_cargo, 1];
 
 _state set ["target", _cargo];

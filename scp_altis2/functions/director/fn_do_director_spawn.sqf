@@ -16,12 +16,14 @@ if ((count (_player nearEntities 2000)) > 150) exitWith { false };
 private _options = [
     "animal_follower",
     "compound",
+    "compound",
     "ambulance",
     "bandit_foot",
-    "bandit_car",
+    "bandit_foot",
     "bandit_car",
     "boom_guy",
-    "boom_guy",
+    "civ_foot",
+    "civ_foot",
     "civ_foot",
     "civ_foot",
     "civ_vehicle",
@@ -29,13 +31,12 @@ private _options = [
     "civ_vehicle",
     "civ_vehicle",
     "police_vehicle",
-    "police_vehicle",
     "police_foot",
-    "police_foot",
+    "zombies",
+    "zombies",
     "zombies",
     "spooks",
     "demon",
-    "civ_air",
     "civ_air",
     "civ_air"
 ];
@@ -82,7 +83,6 @@ switch (_option) do {
     };
     case "compound": {
         private _types_lists = [
-            types_hash get "demons",
             types_hash get "looters",
             types_hash get "zombies"
         ];
@@ -100,13 +100,11 @@ switch (_option) do {
         };
     case "demon": {
             private _types = types_hash get "demons";
-            _did_spawn = [_option, _player, _types, independent, 1, 3, false] call pcb_fnc_enc_infantry;
+            _did_spawn = [_option, _player, _types, independent, 1, 2, false] call pcb_fnc_enc_infantry;
         };
     case "zombies": {
-            //private _types = types_hash get "zombies"; 
-            //_did_spawn = [_option, _player, _types, independent, 1, 10, false] call pcb_fnc_enc_infantry;
-            private _types = types_hash get "civ infected"; 
-            _did_spawn = [_option, _player, _types, civilian, 1, 10, false] call pcb_fnc_enc_infantry;
+            private _types = types_hash get "zombies"; 
+            _did_spawn = [_option, _player, _types, independent, 2, 7, false] call pcb_fnc_enc_infantry;
         };
     case "ambulance": {
             _did_spawn = [_option, _player, (types_hash get "ambulance") select 0, civilian] call pcb_fnc_enc_vehicle_patrol;

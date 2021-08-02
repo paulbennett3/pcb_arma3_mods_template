@@ -100,18 +100,19 @@ _start_crate setPosASL getPosASL _start_crate;  // synch for MP
 // spawn vehicles
 // ------------------------------------------------------------------
 private _vehicle_list = [];
-_vehicle_list pushBack ["Ground Vehicle", "B_T_Truck_01_transport_F"];
+_vehicle_list pushBack ["Ground Transport", "B_T_Truck_01_transport_F"];
+_vehicle_list pushBack ["Repair Vehicle", "I_G_Offroad_01_repair_F"];
 //_vehicle_list pushBack ["Heli", "B_Heli_Transport_03_unarmed_F"];
 _vehicle_list pushBack ["Heli", "B_Heli_Light_01_F"];
 
 {
     private _label = _x select 0;
     private _type = _x select 1;
-    _vpos = [start_pos, 30, _blacklist_pos] call pcb_fnc_get_empty_pos;
+    _vpos = [start_pos, 50, _blacklist_pos] call pcb_fnc_get_empty_pos;
     _blacklist_pos pushBack _vpos;
     private _veh = _type createVehicle [0,0,0];
     _veh setPos _vpos;
-//    _veh setVariable ["BIS_enableRandomization", false];
+    _veh setVariable ["BIS_enableRandomization", false];
     [_veh] call pcb_fnc_set_scp_vehicle_loadout;
     private _cid = "T" + str ([] call pcb_fnc_get_next_UID);
     [[_cid, _pid], _label, _vpos, 15] call pcb_fnc_objective_locate_object;

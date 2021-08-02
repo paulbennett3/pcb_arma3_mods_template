@@ -10,6 +10,14 @@ _center is a position
 
 params ["_center", "_max_dist", "_blacklistPos"];
 
-private _pos = [_center, 0, _max_dist, 10, 0, 1.0, 0, _blacklistPos] call BIS_fnc_findSafePos;
+private _pos = [0,0];
+private _tries = 50;
+while { _tries > 0 } do {
+    _tries = _tries - 1;
+    _pos = [_center, 0, _max_dist, 5, 0, 0.05, 0, _blacklistPos] call BIS_fnc_findSafePos;
+    if (([_pos] call pcb_fnc_is_valid_position)) then {
+        _tries = -10;
+    };
+};
 
 _pos;
