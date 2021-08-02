@@ -45,51 +45,6 @@ private _other = createHashMapFromArray [
     ["respawn_unknown", 1]
 ];
 
-// https://community.bistudio.com/wiki/Arma_3:_CfgPatches_CfgVehicles#A3_Structures_F_Mil_Cargo
-private _mil_building_types = [
-    "Land_Cargo_House_V1_F",
-    "Land_Cargo_House_V2_F",
-    "Land_Cargo_House_V3_F",
-    "Land_Cargo_HQ_V1_F",
-    "Land_Cargo_HQ_V2_F",
-    "Land_Cargo_HQ_V3_F",
-    "Land_Cargo_Patrol_V1_F",
-    "Land_Cargo_Patrol_V2_F",
-    "Land_Cargo_Patrol_V3_F",
-    "Land_Cargo_Tower_V1_F",
-    "Land_Cargo_Tower_V1_No1_F",
-    "Land_Cargo_Tower_V1_No2_F",
-    "Land_Cargo_Tower_V1_No3_F",
-    "Land_Cargo_Tower_V1_No4_F",
-    "Land_Cargo_Tower_V1_No5_F",
-    "Land_Cargo_Tower_V1_No6_F",
-    "Land_Cargo_Tower_V1_No7_F",
-    "Land_Cargo_Tower_V2_F",
-    "Land_Cargo_Tower_V3_F",
-    "Land_Medevac_house_V1_F",
-    "Land_Medevac_HQ_V1_F",
-    "Land_i_Barracks_V1_F",
-    "Land_i_Barracks_V2_F",
-    "Land_u_Barracks_V2_F",
-    "Land_HBarrier_1_F",
-    "Land_HBarrier_3_F",
-    "Land_HBarrier_5_F",
-    "Land_HBarrier_Big_F",
-    "Land_HBarrierBig_F",
-    "Land_HBarrierTower_F",
-    "Land_HBarrierWall4_F",
-    "Land_HBarrierWall6_F",
-    "Land_HBarrierWall_corner_F",
-    "Land_HBarrierWall_corridor_F",
-    "Land_Razorwire_F",
-    "Land_Radar_F",
-    "Land_Radar_Small_F",
-    "Land_Dome_Big_F",
-    "Land_Dome_Small_F",
-    "Land_Research_house_V1_F",
-    "Land_Research_HQ_F"
-];
-
 
  private _allLocationTypes = [];
 "_allLocationTypes pushBack configName _x" configClasses (configFile >> "CfgLocationTypes");
@@ -129,16 +84,65 @@ private _mil_building_types = [
 
 } forEach nearestLocations [(playableUnits select 0), _allLocationTypes, worldSize];
 
+
+
+
+
+// https://community.bistudio.com/wiki/Arma_3:_CfgPatches_CfgVehicles#A3_Structures_F_Mil_Cargo
+private _mil_building_types = [
+    "Land_Cargo_House_V1_F",
+    "Land_Cargo_House_V2_F",
+    "Land_Cargo_House_V3_F",
+    "Land_Cargo_HQ_V1_F",
+    "Land_Cargo_HQ_V2_F",
+    "Land_Cargo_HQ_V3_F",
+    "Land_Cargo_Patrol_V1_F",
+    "Land_Cargo_Patrol_V2_F",
+    "Land_Cargo_Patrol_V3_F",
+    "Land_Cargo_Tower_V1_F",
+    "Land_Cargo_Tower_V1_No1_F",
+    "Land_Cargo_Tower_V1_No2_F",
+    "Land_Cargo_Tower_V1_No3_F",
+    "Land_Cargo_Tower_V1_No4_F",
+    "Land_Cargo_Tower_V1_No5_F",
+    "Land_Cargo_Tower_V1_No6_F",
+    "Land_Cargo_Tower_V1_No7_F",
+    "Land_Cargo_Tower_V2_F",
+    "Land_Cargo_Tower_V3_F",
+    "Land_Medevac_house_V1_F",
+    "Land_Medevac_HQ_V1_F",
+    "Land_i_Barracks_V1_F",
+    "Land_i_Barracks_V2_F",
+    "Land_u_Barracks_V2_F",
+    "Land_Radar_F",
+    "Land_Radar_Small_F",
+    "Land_Dome_Big_F",
+    "Land_Dome_Small_F",
+    "Land_Research_house_V1_F",
+    "Land_Research_HQ_F"
+];
+
+
 [_mil_building_types] spawn {
-    private _count = 0;
-    params ["_mil_building_types"];
+    params ["_types"];
+
+    [
+        _types, 
+        getPosATL (playableUnits select 0), 
+        worldSize, 
+        200, 
+        3
+    ] call compile preprocessFileLineNumbers "fn_find_object_clusters.sqf";
+    sleep 5;
+    waitUntil { sleep 1; not (isNil "cluster_search_done") };
+    waitUntil { sleep 1; cluster_search_done };
+
     {
-        private _marker = createMarker [(str _x), getPosATL _x];
+        private _cluster = cluster_search_results get _x;
+        private _center = _cluster get "center";
+        private _marker = createMarker ["MILCLUST" + (str _x), _center];
         _marker setMarkerType "KIA";
-        sleep 0.1;
-        _count = _count + 1;
-    } forEach nearestObjects [(playableUnits select 0), _mil_building_types, worldSize];
-    systemChat ("counted " + (str _count));
-};
+    } forEach (keys cluster_search_results);
+ };
 
 

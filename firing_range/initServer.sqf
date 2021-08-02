@@ -4,6 +4,8 @@
 
 if (! isServer) exitWith {};
 
+[] call compile preprocessFileLineNumbers "fn_show_cities.sqf";
+
 start_pos = getPosATL (playableUnits select 0);
 
 // spawn our crate
