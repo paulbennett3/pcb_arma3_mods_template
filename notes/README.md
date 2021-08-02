@@ -16,11 +16,11 @@
     - 2x 100rnd magazines (1 in weapon, 1 spare)
     - RCO scope
     - Flashlight or Laser Designator
-- Carbine (MXC) + Role Specific                       - 153 MU
+- Carbine (MXC) + M79                                 - 153 MU
     - 2x 100rnd magazines (1 in weapon, 1 spare)
     - RCO scope
     - Flashlight or Laser Designator
-- Pistol (.45?) + Role Specific                       -  88 MU
+- Pistol (.45?) + M79                                 -  88 MU
     - 3x magazines (1 in weapon, 2 spare)
     - Flashlight if available
     - Optics if available
@@ -64,7 +64,7 @@
 - 129   MX + 100rnd Magazine (no scope, flashlight maybe?)
 - 105   MXC + 100rnd Magazine (no scope, flashlight maybe?)
 -  60   M72 LAW
--  48   M71 + 40mm HE
+-  48   M79 + 40mm HE
 -  40   .45 ACP + 11rnd Magazine (flashlight, no scope)
 -  40   Uniform
 -  26   Laser Designator
