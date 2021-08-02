@@ -270,6 +270,20 @@ types_hash set ["cool buildings", [
     "Land_Dome_Big_F", "Land_Dome_Small_F", "Land_Research_HQ_F"
 ]];
 
+// --------------------------------
+//            city types
+//
+// Location name types used with
+// nearestLocations to find "cities"
+//   along with size and importance
+// --------------------------------
+types_hash set ["city types", [
+    //"NameLocal",
+    //"NameMarine",
+    "NameCity",
+    "NameCityCapital",
+    "NameVillage"    
+]];
 
 // --------------------------------
 //  Resupply crates (already loaded)

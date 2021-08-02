@@ -1,0 +1,26 @@
+
+//private _loot = [start_pos] call pcb_fnc_loot_crate;
+
+/*
+{
+    private _mn = "MC" + (str ([] call pcb_fnc_get_next_UID));
+    private _m = createMarker [_mn, _x];
+    _m setMarkerType "KIA";
+} forEach ([getPosATL (playableUnits select 0), 10000] call pcb_fnc_get_city_positions);
+*/
+// --------------------------
+
+/*
+private _target = "groundWeaponHolder" createVehicle ((playableUnits select 0) getRelPos [30, 0]);
+_target addItemCargoGlobal ["dmpSmartphone" , 1];
+[_target, "study", { hint "thanks for studying me"; }, 15] call pcb_fnc_add_interact_action_to_object;
+["TSMART", "Smartphone", getPosATL _target, 1] call pcb_fnc_objective_locate_object;
+*/
+
+/*
+//private _texture = "#(rgb,8,8,3)color(1,1,1,1)"; // white texture
+//private _texture = "#(rgb,8,8,3)color(0,0,0,1)"; // black texture
+private _texture = "#(rgb,8,8,3)color(0,0.1,0,1)"; // black texture
+_newUnit setObjectTextureGlobal [0, _texture]; // set it on player
+uniformContainer _newUnit setVariable ["texture", _texture, true]; // store it on uniform
+*/

@@ -137,7 +137,6 @@ _vehicle_list pushBack ["Heli", "B_Heli_Light_01_F"];
 
 //private _loot = [start_pos] call pcb_fnc_loot_crate;
 
-// --------------------------
 /*
 {
     private _mn = "MC" + (str ([] call pcb_fnc_get_next_UID));

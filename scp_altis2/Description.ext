@@ -120,6 +120,8 @@ class CfgFunctions
             file = "functions\scenarios";
             class scn_drongo {};
             class scn_zombies {};
+            class oo {};
+            class oo_new {};
         }; 
     };
 };
