@@ -40,6 +40,7 @@ class CfgFunctions
             class chemicalDetector {};
             class crate_loadout {};
             class destroy_building {};
+            class find_object_clusters {};
             class get_cool_building_location {};
             class get_city_positions {};
             class get_empty_pos {};
@@ -56,6 +57,7 @@ class CfgFunctions
             class populate_cities {};
             class preinit_setup { preInit = 1; };
             class random_start_pos {};
+            class show_cities {};
             class start_base_setup {};
             class send_mail {};
             class server_state_manager {};
