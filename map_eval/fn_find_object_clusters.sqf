@@ -55,6 +55,9 @@ publicVariable "cluster_search_done";
     private _RADIUS = _cluster_radius;
     private _MIN_CLUSTER_SIZE = _min_cluster_size;
     private _cluster_count = -1;
+    private _merge_list = []; // for tracking clusters that overlap, so we should merge them
+
+    private _found_objects = nearestObjects [_target, _types, _search_radius];
 
     {
         private _pos = getPosATL _x;
@@ -65,9 +68,9 @@ publicVariable "cluster_search_done";
             if (! ((str _x) in _exclude)) then {
                 // make a list of all the objects in the cluster-in-potentia
                 private _cluster_objs = [];
-                private _cnum = -1;
 
                 private _objects = nearestObjects [_pos, _types, _RADIUS];
+
                 private _bc_n = count _objects;
  
                 for [{_i = 0 }, {_i < _bc_n}, {_i = _i + 1}] do { 
@@ -78,32 +81,44 @@ publicVariable "cluster_search_done";
                             _cluster_objs pushBackUnique _obj;
                             _exclude set [(str _obj), [_obj, _cluster_count]]; // mark which cluster it is in
                         } else {
-                            _cnum = (_exclude get (str _obj)) select 1; 
+                            private _cnum = (_exclude get (str _obj)) select 1; 
+                            _merge_list pushBackUnique [_cluster_count, _cnum];
                         };
                     };
                 };
-                // did we find a cluster to extend?
-                if (_cnum > -1) then {
-                    
-                } else {
-                    // this appears to be a new cluster, yay!
-                    _cluster_count = _cluster_count + 1;
-                    _clusters set [_cluster_count, _cluster_objs];  // key is cluster number, value is list of objs in cluster
-                };
+                _clusters set [_cluster_count, _cluster_objs];  // key is cluster number, value is list of objs in cluster
+                _cluster_count = _cluster_count + 1;
 
                sleep 0.1;
             };
         };
-    } forEach nearestObjects [_target, _types, _search_radius];
+    } forEach _found_objects;
+
 
     // if we found any clusters, evaluate them!
     if (_cluster_count > -1) then {
+        // first we need to merge any overlapping clusters 
+        //  Since we count up, we'll do this in reverse ...
+        for [{_i = ((count _merge_list) - 1) }, {_i > -1}, {_i = _i - 1}] do { 
+            private _merge_pair = _merge_list select _i;
+            private _lowest = selectMin _merge_pair;
+            private _highest = selectMax _merge_pair;
+            private _chighest = _clusters get _highest;
+            for [{_j = 0 }, {_j < (count _chighest)}, {_j = _j + 1}] do { 
+                (_clusters get _lowest) pushBackUnique (_chighest select _j);
+            };
+            // we merged _higest into _lowest, so set _highest to empty
+            _clusters set [_highest, []];
+        };
+        
         {
             private _obj_list = _clusters get _x;
 
             private _bc_n = count _obj_list;
             private _bc_x = 0;
             private _bc_y = 0;
+            private _xs = [];
+            private _ys = [];
             if (_bc_n >= _MIN_CLUSTER_SIZE) then {
                 // loop over all objects in cluster
                 for [{_i = 0 }, {_i < _bc_n}, {_i = _i + 1}] do { 
@@ -111,15 +126,25 @@ publicVariable "cluster_search_done";
                     private _pos = getPosATL _obj;
                     _bc_x = _bc_x + (_pos select 0);
                     _bc_y = _bc_y + (_pos select 1);
+                    _xs pushBackUnique (_pos select 0);
+                    _ys pushBackUnique (_pos select 1);
                 };
 
-             
                 private _barycenter = [(_bc_x / _bc_n), (_bc_y / _bc_n)];
+                private _min_x = selectMin _xs;
+                private _min_y = selectMin _ys;
+                private _max_x = selectMax _xs;
+                private _max_y = selectMax _ys;
+                private _a = (_max_x - _min_x) / 2;
+                private _b = (_max_y - _min_y) / 2;
 
                 private _temp = createHashMap;
                 _temp set ["cluster_number", _x]; 
                 _temp set ["center", _barycenter]; 
                 _temp set ["obj_list", _obj_list]; 
+                _temp set ["n_obj", count _obj_list]; 
+                _temp set ["a", _a]; 
+                _temp set ["b", _b]; 
                 cluster_search_results set [_x, _temp];
              };
         } forEach (keys _clusters);
