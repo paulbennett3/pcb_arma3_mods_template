@@ -82,7 +82,7 @@ private _pos = (_state get "taskpos");
 if (pcb_DEBUG) then {
     hint ("creating task with " + (str (_state get "taskdesc")) + " at " + (str _pos));
 };
-[true, (_state get "taskid"), (_state get "taskdesc"), _pos, "ASSIGNED", 2] call BIS_fnc_taskCreate;
+[true, (_state get "taskid"), (_state get "taskdesc"), _pos, "ASSIGNED"] call BIS_fnc_taskCreate;
 
 
 // -----------------------------------------

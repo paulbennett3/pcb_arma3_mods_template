@@ -8,16 +8,28 @@ expands the search until one is found.
 _center is a position
 ---------------------------------------------------- */
 
-params ["_center", "_max_dist", "_blacklistPos"];
+params ["_center", "_veh_type"];
 
-private _pos = [0,0];
+private _pos = _center;
+private _args = [-1, -1, 0.05, 3, 0, false, objNull];
 private _tries = 50;
+private _offset = 5;
+private _min_dist = 0;
+
 while { _tries > 0 } do {
     _tries = _tries - 1;
-    _pos = [_center, 0, _max_dist, 5, 0, 0.05, 0, _blacklistPos] call BIS_fnc_findSafePos;
-    if (([_pos] call pcb_fnc_is_valid_position)) then {
-        _tries = -10;
+    _pos = _center findEmptyPosition [_min_dist, _min_dist + 10, _veh_type ];
+    _min_dist = _min_dist + _offset;
+    if ([_pos] call pcb_fnc_is_valid_position) then {
+        _pos = _pos isFlatEmpty _args;
+
+        if ([_pos] call pcb_fnc_is_valid_position) then {
+            _tries = -10;
+        };
     };
 };
 
 _pos;
+
+
+

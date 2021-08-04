@@ -32,7 +32,7 @@ start_pos = objNull;
 private _start_type = objNull;
 private _roll = random 1;
 
-if (_roll < 0.65) then {
+if (_roll < 0.95) then {
     _start_type = "Airfield";
 } else {
     if (_roll < 1) then {
@@ -51,6 +51,10 @@ switch (_start_type) do {
         private _start_airfield_pos = start_airfield select 0;
         private _start_airfield_dir = start_airfield select 1;
         start_pos = _start_airfield_pos;
+        private _dir_x = _start_airfield_dir select 0;
+        private _dir_y = _start_airfield_dir select 2; // yes, it is (x, z, y). WTF?!?
+        start_dir = 180 + (_dir_x atan2 _dir_y); 
+        if (start_dir > 360) then { start_dir = start_dir - 360; };
     };
     case "Coast": {
         // pick random bit of coastline ...
@@ -61,6 +65,7 @@ switch (_start_type) do {
         //start_pos = [[], 0, -1, 10, 0, 0.1, 1, [], []] call BIS_fnc_findSafePos;
         //start_pos = [_center, 0, -1, 10, 0, 0.1, 1, [], []] call BIS_fnc_findSafePos;
         start_pos = [_center, 0, 10000, 5, 0, 0.025, 1, [], []] call BIS_fnc_findSafePos;
+        start_dir = random 360;
     };
     case "Hilltop": {
         // pick a good hilltop ...
@@ -80,14 +85,20 @@ switch (_start_type) do {
         if ((count _hilltops) > 0) then {
             hint "Hilltop!";
             start_pos = locationPosition (selectRandom _hilltops);
+            start_dir = random 360;
         };
     };
     default {
         start_pos = (All_airfields select 0) select 0;
+        private _dir_x = _start_airfield_dir select 0;
+        private _dir_y = _start_airfield_dir select 2; // yes, it is (x, z, y). WTF?!?
+        start_dir = 180 + (_dir_x atan2 _dir_y); 
+        if (start_dir > 360) then { start_dir = start_dir - 360; };
     };
 };
 
 publicVariable "start_pos";
+publicVariable "start_dir";
 
 // add a marker for where the start is
 private _marker = createMarker ["mstart_pos", start_pos];

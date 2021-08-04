@@ -52,7 +52,8 @@ switch (_action) do {
         [] call pcb_fnc_set_mission_environment;
 
         // create the "base camp" + spawning point
-        [] call pcb_fnc_start_base_setup;
+        //[] call pcb_fnc_start_base_setup;
+        [] call pcb_fnc_start_base_setup2;
 
         // Do we want a parent task (ie, missions as sub-tasks)?
         PARENT_TASK = "TGATHER";  // set to objNull if we don't

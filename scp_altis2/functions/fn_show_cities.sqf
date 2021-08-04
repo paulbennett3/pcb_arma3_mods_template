@@ -43,7 +43,7 @@
 
     [
         _types, 
-        getPosATL (playableUnits select 0), 
+        world_center, 
         worldSize, 
         200, 
         3
@@ -125,7 +125,7 @@ private _civ_building_types = [
 
     [
         _types, 
-        getPosATL (playableUnits select 0), 
+        world_center, 
         worldSize, 
         200, 
         12 

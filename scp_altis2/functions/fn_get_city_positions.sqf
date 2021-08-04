@@ -12,6 +12,6 @@ private _positions = [];
 
 {
     _positions pushBack (locationPosition _x);
-systemChat ((str _x) + " :: " + (str (size _x)));
+//systemChat ((str _x) + " :: " + (str (size _x)));
 } forEach nearestLocations [_pos, _types, _radius];
 _positions

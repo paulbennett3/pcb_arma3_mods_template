@@ -68,7 +68,7 @@ if ((_state get "taskpid") isEqualTo "") then {
 };
 private _pos = (_state get "taskpos");
 
-[true, (_state get "taskid"), (_state get "taskdesc"), _pos, "ASSIGNED", 2] call BIS_fnc_taskCreate;
+[true, (_state get "taskid"), (_state get "taskdesc"), _pos, "ASSIGNED"] call BIS_fnc_taskCreate;
 
 // add our state variable to the target so we can grab it later
 (_state get "target") setVariable ["_state", _state, true];

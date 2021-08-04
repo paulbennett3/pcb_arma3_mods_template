@@ -21,8 +21,6 @@ if (! isServer) exitWith {};
 // ------------------------------------
 private _cmd = {
     params ['_target', '_caller', '_actionId', '_arguments'];
-    // (group _caller) selectLeader _caller;
-    // playableUnits join _caller;
     (group _caller) selectLeader _caller;
     [(group _caller), _caller] remoteExec ["selectLeader", 0, true];
     [ ((str _caller) + " is now Leader") ] remoteExec ["diag_log", 2];
