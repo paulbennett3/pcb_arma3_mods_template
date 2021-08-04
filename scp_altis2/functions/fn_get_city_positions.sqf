@@ -7,18 +7,11 @@ within area
 ****************************************************************** */
 params ["_pos", ["_radius", worldSize]];
 
-// "Name",
-//    "NameLocal",
-//    "NameMarine",
-private _types = [
-    "NameCity",
-    "NameCityCapital",
-    "NameVillage"
-];
-
+private _types = types_hash get "city types";
 private _positions = [];
 
 {
     _positions pushBack (locationPosition _x);
+//systemChat ((str _x) + " :: " + (str (size _x)));
 } forEach nearestLocations [_pos, _types, _radius];
 _positions

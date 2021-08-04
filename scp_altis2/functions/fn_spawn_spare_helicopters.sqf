@@ -9,39 +9,31 @@ spare_heli_spawner = true; publicVariable "spare_heli_spawner";
 
 {
     private _pos = getPosATL _x;
-    private _type = selectRandom [
-        "vn_b_air_uh1d_01_04",
-        "vn_b_air_uh1d_01_06",
-        "vn_b_air_uh1d_01_07",
-        "vn_o_air_mi2_01_01",
-        "vn_o_air_mi2_01_02",
-        "vn_i_air_ch34_02_02",
-        "B_Heli_Transport_03_unarmed_F",
-        "O_Heli_Transport_04_covered_F",
-        "O_Heli_Light_02_unarmed_F",
-        "I_Heli_light_03_unarmed_F",
-        "B_Heli_Light_01_F",
-        "B_Heli_Light_01_F",
-        "B_Heli_Light_01_F",
-        "C_Heli_Light_01_civil_F",
-        "C_Heli_Light_01_civil_F",
-        "C_Heli_Light_01_civil_F",
-        "C_Heli_Light_01_civil_F",
-        "C_Heli_Light_01_civil_F"
-    ]; 
+    private _near_military = [_pos] call pcb_fnc_near_military;
+
+    private _type = selectRandom (types_hash get "heli mil");
+    if (not _near_military) then {
+        _type = selectRandom (types_hash get "heli civ");
+    };
 
     _veh = createVehicle [_type, _pos, [], 0, "NONE"];
-    _veh setVariable ["BIS_enableRandomization", false];
+//    _veh setVariable ["BIS_enableRandomization", false];
     _veh setDir (random 360);
     sleep .1;
 
     // add a repair facility
-    private _repair = types_hash get "static repair";
+    private _repair = types_hash get "static repair civ";
+    if ([_pos] call pcb_fnc_near_military) then {
+        _repair = types_hash get "static repair mil";
+    };
     _type = selectRandom _repair;
     _veh = createVehicle [_type, _x getRelPos [7, 90], [], 0, "NONE"];
 
     // add a "cargo" pod
-    private _cargo = types_hash get "static cargo";
+    private _cargo = types_hash get "static cargo civ";
+    if ([_pos] call pcb_fnc_near_military) then {
+        _cargo = types_hash get "static cargo mil";
+    };
     _type = selectRandom _cargo;
     _veh = createVehicle [_type, _x getRelPos [7, 180], [], 0, "NONE"];
 
@@ -57,5 +49,5 @@ spare_heli_spawner = true; publicVariable "spare_heli_spawner";
     };
 
     sleep .1;
-} forEach ((playableUnits select 0) nearObjects ["Helipad_Base_F", worldSize]);
+} forEach (world_center nearObjects ["Helipad_Base_F", worldSize]);
 // } forEach (nearestObjects [playableUnits select 0, ["HeliH"], worldSize]);

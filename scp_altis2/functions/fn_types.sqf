@@ -246,15 +246,98 @@ types_hash set ["ambulance", [
 ]];
 
 // --------------------------------
+// City Buildings
+// --------------------------------
+types_hash set ["city buildings", [
+    "Land_Offices_01_V1_F",
+    "Land_Church_01_V1_F",
+    "Land_Hospital_main_F",
+    "Land_Hospital_side1_F",
+    "Land_Hospital_side2_F",
+    "Land_WIP_F",
+    "Land_d_House_Big_01_V1_F",
+    "Land_i_House_Big_01_V1_F",
+    "Land_i_House_Big_01_V2_F",
+    "Land_i_House_Big_01_V3_F",
+    "Land_u_House_Big_01_V1_F",
+    "Land_d_House_Big_02_V1_F",
+    "Land_i_House_Big_02_V1_F",
+    "Land_i_House_Big_02_V2_F",
+    "Land_i_House_Big_02_V3_F",
+    "Land_u_House_Big_02_V1_F",
+    "Land_d_Shop_01_V1_F",
+    "Land_i_Shop_01_V1_F",
+    "Land_i_Shop_01_V2_F",
+    "Land_i_Shop_01_V3_F",
+    "Land_u_Shop_01_V1_F",
+    "Land_d_Shop_02_V1_F",
+    "Land_i_Shop_02_V1_F",
+    "Land_i_Shop_02_V2_F",
+    "Land_i_Shop_02_V3_F",
+    "Land_u_Shop_02_V1_F",
+    "Land_d_House_Small_01_V1_F",
+    "Land_i_House_Small_01_V1_F",
+    "Land_i_House_Small_01_V2_F",
+    "Land_i_House_Small_01_V3_F",
+    "Land_u_House_Small_01_V1_F",
+    "Land_d_House_Small_02_V1_F",
+    "Land_i_House_Small_02_V1_F",
+    "Land_i_House_Small_02_V2_F",
+    "Land_i_House_Small_02_V3_F",
+    "Land_u_House_Small_02_V1_F",
+    "Land_i_House_Small_03_V1_F",
+    "Land_d_Stone_HouseBig_V1_F",
+    "Land_i_Stone_HouseBig_V1_F",
+    "Land_i_Stone_HouseBig_V2_F",
+    "Land_i_Stone_HouseBig_V3_F",
+    "Land_d_Stone_Shed_V1_F",
+    "Land_i_Stone_Shed_V1_F",
+    "Land_i_Stone_Shed_V2_F",
+    "Land_i_Stone_Shed_V3_F",
+    "Land_d_Stone_HouseSmall_V1_F",
+    "Land_i_Stone_HouseSmall_V1_F",
+    "Land_i_Stone_HouseSmall_V2_F",
+    "Land_i_Stone_HouseSmall_V3_F",
+    "Land_Unfinished_Building_01_F",
+    "Land_Unfinished_Building_02_F",
+    "Land_CarService_F"
+]];
+
+// --------------------------------
 // Military Base Buildings
 // --------------------------------
 types_hash set ["military buildings", [
-    "Cargo_Tower_base_F", "Land_i_Barracks_V1_F",
-    "Land_i_Barracks_V2_F", "Land_u_Barracks_V2_F", "Land_Cargo_Tower_V1_F", "Land_Cargo_Tower_V1_No1_F",
-    "Land_Cargo_Tower_V1_No2_F", "Land_Cargo_Tower_V1_No3_F", "Land_Cargo_Tower_V1_No4_F",
-    "Land_Cargo_Tower_V1_No5_F", "Land_Cargo_Tower_V1_No6_F", "Land_Cargo_Tower_V1_No7_F",
-    "Land_Cargo_Tower_V2_F", "Land_Cargo_Tower_V3_F", "Land_Medevac_house_V1_F", "Land_Medevac_HQ_V1_F",
-    "Land_Dome_Big_F", "Land_Dome_Small_F", "Land_Research_HQ_F"
+        "Land_Cargo_House_V1_F",
+        "Land_Cargo_House_V2_F",
+        "Land_Cargo_House_V3_F",
+        "Land_Cargo_HQ_V1_F",
+        "Land_Cargo_HQ_V2_F",
+        "Land_Cargo_HQ_V3_F",
+        "Land_Cargo_Patrol_V1_F",
+        "Land_Cargo_Patrol_V2_F",
+        "Land_Cargo_Patrol_V3_F",
+        "Land_Cargo_Tower_V1_F",
+        "Land_Cargo_Tower_V1_No1_F",
+        "Land_Cargo_Tower_V1_No2_F",
+        "Land_Cargo_Tower_V1_No3_F",
+        "Land_Cargo_Tower_V1_No4_F",
+        "Land_Cargo_Tower_V1_No5_F",
+        "Land_Cargo_Tower_V1_No6_F",
+        "Land_Cargo_Tower_V1_No7_F",
+        "Land_Cargo_Tower_V2_F",
+        "Land_Cargo_Tower_V3_F",
+        "Land_Medevac_house_V1_F",
+        "Land_Medevac_HQ_V1_F",
+        "Land_i_Barracks_V1_F",
+        "Land_i_Barracks_V2_F",
+        "Land_u_Barracks_V2_F",
+        "Land_Radar_F",
+        "Land_Radar_Small_F",
+        "Land_Dome_Big_F",
+        "Land_Dome_Small_F",
+        "Land_Research_house_V1_F",
+        "Land_Research_HQ_F",
+        "Land_MilOffices_V1_F"
 ]];
 
 // --------------------------------
@@ -270,6 +353,20 @@ types_hash set ["cool buildings", [
     "Land_Dome_Big_F", "Land_Dome_Small_F", "Land_Research_HQ_F"
 ]];
 
+// --------------------------------
+//            city types
+//
+// Location name types used with
+// nearestLocations to find "cities"
+//   along with size and importance
+// --------------------------------
+types_hash set ["city types", [
+    //"NameLocal",
+    //"NameMarine",
+    "NameCity",
+    "NameCityCapital",
+    "NameVillage"    
+]];
 
 // --------------------------------
 //  Resupply crates (already loaded)
@@ -278,7 +375,38 @@ types_hash set ["resupply crates", [
     "O_CargoNet_01_ammo_F",
     "C_IDAP_CargoNet_01_supplies_F",
     "I_E_CargoNet_01_ammo_F",
-    "B_CargoNet_01_ammo_F"
+    "B_CargoNet_01_ammo_F",
+    "B_CargoNet_01_ammo_F",
+    "B_CargoNet_01_ammo_F",
+    "Box_IND_Ammo_F",
+    "Box_T_East_Ammo_F",
+    "Box_East_Ammo_F",
+    "Box_EAF_Ammo_F",
+    "Box_NATO_Ammo_F",
+    "Box_NATO_Ammo_F",
+    "Box_NATO_Ammo_F",
+    "Box_Syndicate_Ammo_F",
+    "Box_IND_Wps_F",
+    "Box_T_East_Wps_F",
+    "Box_East_Wps_F",
+    "Box_EAF_Wps_F",
+    "Box_T_NATO_Wps_F",
+    "Box_T_NATO_Wps_F",
+    "Box_T_NATO_Wps_F",
+    "Box_T_NATO_Wps_F",
+    "Box_NATO_Wps_F",
+    "Box_NATO_Wps_F",
+    "Box_NATO_Wps_F",
+    "Box_NATO_Wps_F",
+    "Box_Syndicate_Wps_F",
+    "I_supplyCrate_F",
+    "O_supplyCrate_F",
+    "C_T_supplyCrate_F",
+    "IG_supplyCrate_F",
+    "Box_GEN_Equip_F",
+    "C_IDAP_supplyCrate_F",
+    "I_EAF_supplyCrate_F",
+    "B_supplyCrate_F"
 ]];
 
 // --------------------------------
@@ -339,22 +467,53 @@ types_hash set ["detritus", [
     "vn_b_item_trapkit_gh"
 ]];
 
-types_hash set ["static repair", [
+// Cargo and repair units for funsies
+types_hash set ["static repair civ", [
+    "Land_RepairDepot_01_civ_F"
+]];
+
+types_hash set ["static cargo civ", [
+    "B_Slingload_01_Fuel_F"
+]];
+
+
+types_hash set ["static repair mil", [
     "Land_Pod_Heli_Transport_04_repair_F",
     "Land_RepairDepot_01_tan_F",
     "Land_RepairDepot_01_green_F",
-    "Land_RepairDepot_01_civ_F",
     "B_Slingload_01_Repair_F"
 ]];
 
-types_hash set ["static cargo", [
+types_hash set ["static cargo mil", [
     "B_Slingload_01_Medevac_F",
     "B_Slingload_01_Fuel_F",
     "B_Slingload_01_Cargo_F",
+    "B_Slingload_01_Ammo_F",
+    "Land_Pod_Heli_Transport_04_ammo_F",
     "Land_Pod_Heli_Transport_04_box_F"
 ]];
 
 // Helicopters
+types_hash set ["heli civ", [
+    "C_Heli_Light_01_civil_F"
+]];
+
+types_hash set ["heli mil", [
+    "vn_b_air_uh1d_01_04",
+    "vn_b_air_uh1d_01_06",
+    "vn_b_air_uh1d_01_07",
+    "vn_o_air_mi2_01_01",
+    "vn_o_air_mi2_01_02",
+    "vn_i_air_ch34_02_02",
+    "B_Heli_Transport_03_unarmed_F",
+    "O_Heli_Transport_04_covered_F",
+    "O_Heli_Light_02_unarmed_F",
+    "I_Heli_light_03_unarmed_F",
+    "B_Heli_Light_01_F",
+    "O_T_VTOL_02_infantry_dynamicLoadout_F",
+    "O_T_VTOL_02_vehicle_dynamicLoadout_F"
+]];
+
 
 
 // Trucks 

@@ -11,12 +11,13 @@ removeHeadgear _this;
 removeGoggles _this;
 
 comment "Add weapons";
-_this addWeapon "arifle_MX_F";
+_this addWeapon "arifle_MXC_F";
 _this addPrimaryWeaponItem "acc_flashlight";
+_this addPrimaryWeaponItem "optic_Hamr";
 _this addPrimaryWeaponItem "100Rnd_65x39_caseless_mag";
-_this addWeapon "hgun_Pistol_heavy_01_F";
-_this addHandgunItem "acc_flashlight_pistol";
-_this addHandgunItem "11Rnd_45ACP_Mag";
+_this addWeapon "hgun_Rook40_F";
+_this addHandgunItem "30Rnd_9x21_Green_Mag";
+
 
 comment "Add containers";
 _this forceAddUniform "U_B_CTRG_Soldier_Arid_F";
@@ -26,12 +27,9 @@ _this addBackpack "B_Kitbag_rgr";
 comment "Add items to containers";
 _this addItemToUniform "FirstAidKit";
 _this addItemToUniform "DSA_Detector";
-_this addItemToUniform "Chemlight_green";
-for "_i" from 1 to 2 do {_this addItemToVest "HandGrenade";};
-_this addItemToVest "SmokeShell";
 for "_i" from 1 to 2 do {_this addItemToVest "DemoCharge_Remote_Mag";};
-for "_i" from 1 to 2 do {_this addItemToVest "11Rnd_45ACP_Mag";};
-for "_i" from 1 to 5 do {_this addItemToBackpack "100Rnd_65x39_caseless_mag_Tracer";};
+_this addItemToVest "30Rnd_9x21_Green_Mag";
+for "_i" from 1 to 2 do {_this addItemToBackpack "100Rnd_65x39_caseless_mag_Tracer";};
 _this addHeadgear "H_HelmetB_TI_arid_F";
 _this addGoggles "G_Balaclava_TI_G_blk_F";
 
@@ -43,10 +41,3 @@ _this linkItem "ItemRadio";
 _this linkItem "B_UavTerminal";
 _this linkItem "NVGogglesB_blk_F";
 
-/*
-//private _texture = "#(rgb,8,8,3)color(1,1,1,1)"; // white texture
-//private _texture = "#(rgb,8,8,3)color(0,0,0,1)"; // black texture
-private _texture = "#(rgb,8,8,3)color(0,0.1,0,1)"; // black texture
-_newUnit setObjectTextureGlobal [0, _texture]; // set it on player
-uniformContainer _newUnit setVariable ["texture", _texture, true]; // store it on uniform
-*/

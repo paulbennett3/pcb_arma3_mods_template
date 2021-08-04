@@ -1,0 +1,53 @@
+
+//private _loot = [start_pos] call pcb_fnc_loot_crate;
+
+/*
+{
+    private _mn = "MC" + (str ([] call pcb_fnc_get_next_UID));
+    private _m = createMarker [_mn, _x];
+    _m setMarkerType "KIA";
+} forEach ([getPosATL (playableUnits select 0), 10000] call pcb_fnc_get_city_positions);
+*/
+// --------------------------
+
+/*
+private _target = "groundWeaponHolder" createVehicle ((playableUnits select 0) getRelPos [30, 0]);
+_target addItemCargoGlobal ["dmpSmartphone" , 1];
+[_target, "study", { hint "thanks for studying me"; }, 15] call pcb_fnc_add_interact_action_to_object;
+["TSMART", "Smartphone", getPosATL _target, 1] call pcb_fnc_objective_locate_object;
+*/
+
+/*
+//private _texture = "#(rgb,8,8,3)color(1,1,1,1)"; // white texture
+//private _texture = "#(rgb,8,8,3)color(0,0,0,1)"; // black texture
+private _texture = "#(rgb,8,8,3)color(0,0.1,0,1)"; // black texture
+_newUnit setObjectTextureGlobal [0, _texture]; // set it on player
+uniformContainer _newUnit setVariable ["texture", _texture, true]; // store it on uniform
+*/
+
+/*
+    // add article to diary with link to webpage that opens on screen (press escape to exit)
+    TAG_fnc_myArticle = {
+      [
+        [
+          ["title", "My Article"],
+          ["text", "Flavour text"]
+        ]
+      ] call BIS_fnc_showAANArticle
+    };
+
+    player createDiaryRecord ["diary", ["articles", "<execute expression='[] call TAG_fnc_myArticle'>My Article 1</execute>"]];
+*/
+/*
+    // Create diary entries (shows up under "briefing" tab on map display).  They display in stack order (ie, first one placed is at the bottom)
+    // Uses "structured text", so can add images et al 
+    (playableUnits select 0) createDiaryRecord ["diary", ["article1", "This is a fascinating article."]];
+    (playableUnits select 0) createDiaryRecord ["diary", ["article2", "This is also fascinating article, amazing!."]];
+*/
+
+/*
+    // spawn a crate and add the "Virtual Arsenal" (the "edit loadout" tool in editor) when crate opened
+    //  great for a "(re)spawn at major fully equipped base"
+    private _crate2 = "Land_PlasticCase_01_large_olive_CBRN_F" createVehicle ((playableUnits select 0) getRelPos [25, 90]);
+    _crate2 addaction ["Open Virtual Arsenal", { ["Open",true] call BIS_fnc_arsenal; }];
+*/

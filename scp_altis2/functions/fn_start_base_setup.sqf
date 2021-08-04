@@ -137,7 +137,6 @@ _vehicle_list pushBack ["Heli", "B_Heli_Light_01_F"];
 
 //private _loot = [start_pos] call pcb_fnc_loot_crate;
 
-// --------------------------
 /*
 {
     private _mn = "MC" + (str ([] call pcb_fnc_get_next_UID));
@@ -153,3 +152,8 @@ _target addItemCargoGlobal ["dmpSmartphone" , 1];
 [_target, "study", { hint "thanks for studying me"; }, 15] call pcb_fnc_add_interact_action_to_object;
 ["TSMART", "Smartphone", getPosATL _target, 1] call pcb_fnc_objective_locate_object;
 */
+
+
+private _ppos = (playableUnits select 0) getRelPos [100, 45];
+[_ppos] call pcb_fnc_cargo_base;
+["CARGO", "Cargo", _ppos,  1] call pcb_fnc_objective_locate_object;

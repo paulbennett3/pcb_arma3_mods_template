@@ -33,14 +33,14 @@ private _state = createHashMapFromArray [
 
 if (pcb_DEBUG) then {
     hint "Building search running";
-    ["Building search running"] remoteExec ["systemChat", 0, true];    
+//    ["Building search running"] remoteExec ["systemChat", 0, true];    
 };
 
 // pick a random cool building
 private _target = [epicenter, mission_radius, false, 5] call pcb_fnc_get_cool_building_location; 
 // get a specific position in the building
 private _pos = selectRandom (_target buildingPos -1);
-["Building search running <" + (str _target) + ">"] remoteExec ["systemChat", 0, true];    
+//["Building search running <" + (str _target) + ">"] remoteExec ["systemChat", 0, true];    
 
 // test if we have utterly failed ...
 if ((! ([_pos] call pcb_fnc_is_valid_position)) or (isNull _target)) exitWith { [false, _state] };

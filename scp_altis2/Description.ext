@@ -28,35 +28,38 @@ class CfgFunctions
         class utilities
         {
             file = "functions";
-            class addAction_packable {};
             class add_anomalies {};
             class add_base_actions {};
+            class add_high_command_unit {};
             class add_interact_action_to_object {};
             class advancedTowingInit {};
             class animal_follower {};
             class background {};
-            class boom_animal {};
             class boom_guy {};
+            class cargo_base {};
             class chemicalDetector {};
             class crate_loadout {};
             class destroy_building {};
+            class find_object_clusters {};
             class get_cool_building_location {};
             class get_city_positions {};
             class get_empty_pos {};
             class get_next_UID {};
             class get_random_vehicle {};
             class is_valid_position {};
-            class make_destroyable {};
-            class make_packable {};
-            class monitor_ratings {};
             class loot_crate {};
+            class make_destroyable {};
+            class monitor_ratings {};
+            class near_military {};
             class objective_locate_object {};
             class player_in_vehicle {};
             class players_in_area {};
             class populate_cities {};
             class preinit_setup { preInit = 1; };
             class random_start_pos {};
+            class show_cities {};
             class start_base_setup {};
+            class start_base_setup2 {};
             class send_mail {};
             class server_state_manager {};
             class setPosAGLS {};
@@ -69,7 +72,6 @@ class CfgFunctions
             class spawn_spare_helicopters {};
             class spawn_spare_vehicles {};
             class spawn_support_units {};
-            class swap_object {};
             class types {};
         };
         class director 
@@ -120,6 +122,8 @@ class CfgFunctions
             file = "functions\scenarios";
             class scn_drongo {};
             class scn_zombies {};
+            class oo {};
+            class oo_new {};
         }; 
     };
 };

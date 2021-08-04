@@ -74,7 +74,7 @@ if ((_state get "taskpid") isEqualTo "") then {
 
 private _pos = (_state get "taskpos");
 
-[true, (_state get "taskid"), (_state get "taskdesc"), _pos, "ASSIGNED", 2] call BIS_fnc_taskCreate;
+[true, (_state get "taskid"), (_state get "taskdesc"), _pos, "ASSIGNED"] call BIS_fnc_taskCreate;
  
 private _code = {
     params ["_target", "_caller", "_actionId", "_arguments"];
