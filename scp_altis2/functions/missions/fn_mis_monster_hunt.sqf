@@ -42,6 +42,7 @@ if ((random 100) < 65) then {
     if (! isNil "_building") then {
         _pos = getPosATL _building;
     };
+    [_building] call pcb_fnc_add_loot_boxes_to_building;
 } else {
     _loc_type = "forest";
     // forest

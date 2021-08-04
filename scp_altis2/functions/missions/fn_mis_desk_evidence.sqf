@@ -81,5 +81,7 @@ _state set ["taskpid", _taskpid];
 [_pos, _building] call pcb_fnc_occult_decorate;
 [_pos] call pcb_fnc_mission_encounter;
 
+[_building] call pcb_fnc_add_loot_boxes_to_building;
+
 private _result = [_state] call pcb_fnc_mis_ll_get_item;
 _result

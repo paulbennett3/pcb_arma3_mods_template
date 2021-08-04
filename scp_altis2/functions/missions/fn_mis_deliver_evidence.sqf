@@ -71,4 +71,6 @@ private _result = [_state] call pcb_fnc_mis_ll_put_item;
 //[getPosATL _target] call pcb_fnc_occult_decorate;
 [getPosATL _building, 30] call pcb_fnc_mission_encounter;
 
+[_building] call pcb_fnc_add_loot_boxes_to_building;
+
 _result

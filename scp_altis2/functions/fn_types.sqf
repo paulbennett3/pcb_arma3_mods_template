@@ -65,6 +65,39 @@ types_hash set ["small items", [
 ]];
 
 // --------------------------------
+//    Boxes - ok for inside
+// --------------------------------
+types_hash set ["boxes", [
+    "Land_PlasticCase_01_large_F",
+    "Land_PlasticCase_01_large_black_F",
+    "Land_PlasticCase_01_large_CBRN_F",
+    "Land_PlasticCase_01_large_gray_F",
+    "Land_PlasticCase_01_large_olive_F",
+    "Land_PlasticCase_01_large_olive_CBRN_F",
+    "Land_vn_plasticcase_01_large_idap_f",
+    "Land_PlasticCase_01_medium_F",
+    "Land_PlasticCase_01_medium_black_F",
+    "Land_PlasticCase_01_medium_CBRN_F",
+    "Land_vn_plasticcase_01_medium_gray_f",
+    "Land_PlasticCase_01_medium_olive_F",
+    "Land_PlasticCase_01_medium_olive_CBRN_F",
+    "Land_PlasticCase_01_medium_idap_F",
+    "Land_PlasticCase_01_small_F",
+    "Land_PlasticCase_01_small_black_F",
+    "Land_PlasticCase_01_small_black_CBRN_F",
+    "Land_PlasticCase_01_small_CBRN_F",
+    "Land_PlasticCase_01_small_gray_F",
+    "Land_PlasticCase_01_small_olive_F",
+    "Land_PlasticCase_01_small_olive_CBRN_F",
+    "Land_PlasticCase_01_small_idap_F",
+    "Land_vn_plasticcase_01_small_idap_f",
+    "Land_PortableCabinet_01_closed_black_F",
+    "Land_PortableCabinet_01_closed_olive_F",
+    "Land_PortableCabinet_01_closed_sand_F"
+]];
+
+
+// --------------------------------
 // Civilians
 // --------------------------------
 types_hash set ["civilians", [
@@ -372,6 +405,9 @@ types_hash set ["city types", [
 //  Resupply crates (already loaded)
 // --------------------------------
 types_hash set ["resupply crates", [
+    "vn_o_ammobox_full_06",
+    "vn_b_ammobox_sog",
+    "vn_o_ammobox_full_07",
     "O_CargoNet_01_ammo_F",
     "C_IDAP_CargoNet_01_supplies_F",
     "I_E_CargoNet_01_ammo_F",

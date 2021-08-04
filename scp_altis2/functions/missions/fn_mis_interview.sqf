@@ -124,6 +124,7 @@ _target setVariable ["_state", _state, true];  // gets overwritten in ll interac
 [getPosATL _target, 1, 5] call pcb_fnc_add_anomalies;
 //[getPosATL _target] call pcb_fnc_occult_decorate;
 [getPosATL _target, 10] call pcb_fnc_mission_encounter;
+[_building] call pcb_fnc_add_loot_boxes_to_building;
 
 private _result = [_state] call pcb_fnc_mis_ll_interact;
 

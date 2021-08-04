@@ -59,6 +59,9 @@ _state set ["taskpid", _taskpid];
 
 _target setVariable ["_state", _state, true];  // gets overwritten in ll interact, but oh well
 
+// put some loot boxes in the building
+[_target] call pcb_fnc_add_loot_boxes_to_building;
+
 // add some anomalies
 [getPosATL _target, 1, 5] call pcb_fnc_add_anomalies;
 [_pos] call pcb_fnc_occult_decorate;
