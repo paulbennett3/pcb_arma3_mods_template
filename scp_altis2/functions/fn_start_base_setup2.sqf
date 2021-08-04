@@ -164,12 +164,20 @@ _vehicle_list pushBack ["VTOL", "B_T_VTOL_01_infantry_F"];
     private _type = _x select 1;
     _next_pos = (playableUnits select 0) getPos [_offset, start_dir]; _offset = _offset + 30;
     private _veh = _type createVehicle _next_pos;
+    if (unitIsUAV _veh) then {
+        createVehicleCrew _veh;
+    } else {
+        [_veh] call pcb_fnc_set_scp_vehicle_loadout;
+    };
+
     //_veh setVariable ["BIS_enableRandomization", false];
-    [_veh] call pcb_fnc_set_scp_vehicle_loadout;
     private _cid = "T" + str ([] call pcb_fnc_get_next_UID);
     [[_cid, _pid], _label, _vpos, 15] call pcb_fnc_objective_locate_object;
     _veh respawnVehicle [10, 3 + (ceil (random 3))];
     _veh setDir start_dir;
+
+    // make the vehicle available for use by the players group
+    (group (playableUnits select 0)) addVehicle _veh;
 
     sleep 1;
 } forEach _vehicle_list;
@@ -182,4 +190,27 @@ if (_sc_dir < 0) then { _sc_dir = _sc_dir + 360; };
 private _sc = "B_Slingload_01_Ammo_F" createVehicle (_start_crate getPos [20, _sc_dir]); _sc setDir start_dir;
 _sc = "B_Slingload_01_Fuel_F" createVehicle (_start_crate getPos [25, _sc_dir]); _sc setDir start_dir;
 _sc = "B_Slingload_01_Repair_F" createVehicle (_start_crate getPos [30, _sc_dir]); _sc setDir start_dir;
+
+// ------------------------------------------------------------------
+//    High Command Units
+// ------------------------------------------------------------------
+private _hc_types_inf = [
+    "B_T_Soldier_TL_F",
+    "B_T_Soldier_AR_F",
+    "B_T_Soldier_AAR_F",
+    "B_T_Medic_F",
+    "B_T_Engineer_F",
+    "B_T_soldier_M_F",
+    "B_T_Soldier_UAV_F",
+    "B_T_Soldier_LAT2_F"
+];
+_next_pos = (playableUnits select 0) getPos [_offset, start_dir]; _offset = _offset + 30;
+[_next_pos, playableUnits select 0, _hc_types_inf, "Squad 1", "teamRed", "infantry"] call pcb_fnc_add_high_command_unit;
+
+_next_pos = (playableUnits select 0) getPos [_offset, start_dir]; _offset = _offset + 30;
+[_next_pos, playableUnits select 0, _hc_types_inf, "Squad 2", "teamBlue", "infantry"] call pcb_fnc_add_high_command_unit;
+
+_next_pos = (playableUnits select 0) getPos [_offset, start_dir]; _offset = _offset + 30;
+[_next_pos, playableUnits select 0, _hc_types_inf, "Squad 3", "teamGreen", "infantry"] call pcb_fnc_add_high_command_unit;
+
 

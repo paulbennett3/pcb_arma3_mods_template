@@ -28,14 +28,13 @@ class CfgFunctions
         class utilities
         {
             file = "functions";
-            class addAction_packable {};
             class add_anomalies {};
             class add_base_actions {};
+            class add_high_command_unit {};
             class add_interact_action_to_object {};
             class advancedTowingInit {};
             class animal_follower {};
             class background {};
-            class boom_animal {};
             class boom_guy {};
             class cargo_base {};
             class chemicalDetector {};
@@ -50,7 +49,6 @@ class CfgFunctions
             class is_valid_position {};
             class loot_crate {};
             class make_destroyable {};
-            class make_packable {};
             class monitor_ratings {};
             class near_military {};
             class objective_locate_object {};
@@ -74,7 +72,6 @@ class CfgFunctions
             class spawn_spare_helicopters {};
             class spawn_spare_vehicles {};
             class spawn_support_units {};
-            class swap_object {};
             class types {};
         };
         class director 
