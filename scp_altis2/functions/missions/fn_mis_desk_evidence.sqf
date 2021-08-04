@@ -60,6 +60,7 @@ private _desk = "OfficeTable_01_old_F" createVehicle [0,0,0];
 
 private _cargo = "FlashDisk";
 _desk addItemCargoGlobal [_cargo, 1];
+[_desk, 2 + (ceil (random 5))] call pcb_fnc_loot_crate;
 
 _desk setPos _pos;
 _desk setDir 180; _desk setPosASL getPosASL _desk;

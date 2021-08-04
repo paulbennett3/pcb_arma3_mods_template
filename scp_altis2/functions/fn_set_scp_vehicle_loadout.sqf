@@ -16,10 +16,10 @@ clearMagazineCargo _obj;
 // weapon
 _obj addItemCargoGlobal ["arifle_MXC_F", 2];
 _obj addItemCargoGlobal ["hgun_Rook40_F", 2];
-_obj addItemCargoGlobal ["Binocular", 1];
+_obj addItemCargoGlobal ["Laserdesignator", 1];
 // mag
-_obj addMagazineAmmoCargo ["100Rnd_65x39_caseless_mag_Tracer", 10, 100];
-_obj addMagazineAmmoCargo ["30Rnd_9x21_Green_Mag", 6, 30];
+_obj addMagazineAmmoCargo ["100Rnd_65x39_caseless_mag_Tracer", 20, 100];
+_obj addMagazineAmmoCargo ["30Rnd_9x21_Green_Mag", 10, 30];
 _obj addMagazineAmmoCargo ["DemoCharge_Remote_Mag", 4, 1];
 // item
 _obj addItemCargoGlobal ["FirstAidKit", 5];

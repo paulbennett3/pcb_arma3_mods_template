@@ -40,6 +40,9 @@ _obj addItemCargoGlobal ["Rangefinder", 4];
 _obj addItemCargoGlobal ["vn_m72", 8];
 _obj addItemCargoGlobal ["vn_m79", 8];
 _obj addItemCargoGlobal ["vn_m72_mag", 8];
+_obj addItemCargoGlobal ["vn_m1897", 4];
+_obj addItemCargoGlobal ["vn_m1897_fl_mag", 4]; // magazineAmmo?!?
+_obj addItemCargoGlobal ["vn_m1897_buck_mag", 4]; // magazineAmmo?!?
 
 sleep .1;
 // mag
