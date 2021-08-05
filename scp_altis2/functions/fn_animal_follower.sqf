@@ -37,6 +37,15 @@ _did_spawn = true;
 
 // Disable animal behaviour
 _animal setVariable ["BIS_fnc_animalBehaviour_disable", true];
+_animal setVariable ["master", _player, true];
+_animal setVariable ["ride", false, true];
+
+// add the animal to the player object (and allow for more than one follower ...)
+private _animals = _player getVariable "animals";
+if (isNil "_animals") then {
+    _player setVariable ["animals", [], true];
+};
+(_player getVariable "animals") pushBackUnique _animal;
 
 // Following loop
 [_animal, _type_info, _player] spawn {
@@ -46,33 +55,95 @@ _animal setVariable ["BIS_fnc_animalBehaviour_disable", true];
     _animal playMove _state;
 
     while { sleep 1; alive _animal } do {
-        private _pos_player = getPosATL _player;
-        private _dist = _pos_player distance (getPosATL _animal);
+        if (! (_animal getVariable "ride")) then {
+            private _pos_player = getPosATL _player;
+            private _dist = _pos_player distance (getPosATL _animal);
 
-        // far away, so run
-        if (_dist > 10) then {
-            if (! (_state isEqualTo (_type_info select 3))) then {
-               _state = (_type_info select 3);
-               _animal playMove _state;
+            // far, far away, so head off to the farm in the country
+            if (_dist > 2000) exitWith {
+                deleteVehicle _animal; true    // sad ...
             };
-	    _animal moveTo _pos_player;
-        };
-        if ((_dist <= 10) and (_dist > 2)) then {
-            // close, so just walk
-            if (! (_state isEqualTo (_type_info select 2))) then {
-               _state = (_type_info select 2);
-               _animal playMove _state;
-            };
-	    _animal moveTo _pos_player;
-        };
-        if (_dist <= 2) then {
-            if (! (_state isEqualTo (_type_info select 1))) then {
-               _state = (_type_info select 1);
-               _animal playMove _state;
-            };
-        };
 
+            // far away, so run
+            if (_dist > 10) then {
+                if (! (_state isEqualTo (_type_info select 3))) then {
+                   _state = (_type_info select 3);
+                   _animal playMove _state;
+                };
+    	        _animal moveTo _pos_player;
+            };
+            if ((_dist <= 10) and (_dist > 2)) then {
+                // close, so just walk
+                if (! (_state isEqualTo (_type_info select 2))) then {
+                   _state = (_type_info select 2);
+                   _animal playMove _state;
+                };
+	        _animal moveTo _pos_player;
+            };
+            if (_dist <= 2) then {
+                if (! (_state isEqualTo (_type_info select 1))) then {
+                   _state = (_type_info select 1);
+                   _animal playMove _state;
+                };
+            };
+
+        };
     };
 };
+
+_animal addEventHandler ["Killed",  // sad ...
+    {
+        params ["_unit", "_killer", "_instigator", "_useEffects"];
+        private _player = _unit getVariable "master";
+        _player setVariable ["animals", (_player getVariable "animals") - [_animal]];
+    }
+];
+
+// add event handlers to move the animal "into" and "out of" vehicle
+[
+    _player,
+    [
+        "GetInMan",
+        {
+            params ["_unit", "_role", "_vehicle", "_turret"];
+            private _animals = _unit getVariable "animals";
+            if (! (isNil "_animals")) then {
+                private _pos = getPosATL _unit;
+                {
+                    if (alive _x) then {
+                        private _dist = _pos distance (getPosATL _x);
+                        if (_dist < 100) then {
+                            [ _x, true ] remoteExec ["hideObject", 0, true];    
+                            _x setVariable ["ride", true];
+                        };
+                    };
+                } forEach _animals;
+            };
+        }
+    ]
+] remoteExec ["addEventHandler", 0, true];
+[
+    _player,
+    [
+        "GetOutMan",
+        {
+            params ["_unit", "_role", "_vehicle", "_turret"];
+            private _animals = _unit getVariable "animals";
+            if (! (isNil "_animals")) then {
+                [("We're there. Hop out! <" + (str (_unit getVariable "animals")) + ">")] remoteExec ["systemChat", 0];
+                private _pos = getPosATL _unit;
+                {
+                    if (alive _x) then {
+                        _x setVehiclePosition [_pos, [], 3, "NONE"];
+                        [ _x, false ] remoteExec ["hideObject", 0, true];    
+                        _x setVariable ["ride", false];
+                    };
+                } forEach _animals;
+            };
+        }
+    ]
+] remoteExec ["addEventHandler", 0, true];
+_animal setOwner (owner _player);
+
 private _result = [_animal, _did_spawn];
 _result

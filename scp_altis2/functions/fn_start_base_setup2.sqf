@@ -235,4 +235,4 @@ _next_pos = (playableUnits select 0) getPos [_offset, start_dir]; _offset = _off
 _next_pos = (playableUnits select 0) getPos [_offset, start_dir]; _offset = _offset + 30;
 [_next_pos, playableUnits select 0, _hc_types_inf, "Squad 3", "teamGreen", "infantry"] call pcb_fnc_add_high_command_unit;
 */
-
+[(playableUnits select 0)] call pcb_fnc_animal_follower;

@@ -54,6 +54,7 @@ if (pcb_DEBUG) then {
 [] spawn {
     private _count = 0;
     private _sleep_time = 10;
+    sleep _sleep_time;
 
     spawned_encounters = createHashMap;
 

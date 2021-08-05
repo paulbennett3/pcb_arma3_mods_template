@@ -53,6 +53,7 @@ class CfgFunctions
             class monitor_ratings {};
             class near_military {};
             class objective_locate_object {};
+            class parse_airports {};
             class player_in_vehicle {};
             class players_in_area {};
             class populate_cities {};

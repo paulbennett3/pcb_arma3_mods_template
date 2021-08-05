@@ -44,6 +44,7 @@ switch (_action) do {
 
         // adjust start position if desired
         [] call pcb_fnc_random_start_pos;
+        waitUntil { ! isNil "random_start_ready" };
 
         // start spawning spare vehicles etc
         [] call pcb_fnc_background;

@@ -10,51 +10,46 @@ besides / in addition to the mission(s)
 
 if (! isServer) exitWith {};
 
+waitUntil { ! isNil "random_start_ready" };
+waitUntil { ! isNil "start_pos" };
+waitUntil { ! isNil "start_dir" };
+
 // ------------------------------------------------
 // create our "Active" area where sites will be
 // ------------------------------------------------
-if (true) then {
-    private _radius = mission_radius;  // mission radius
+private _radius = mission_radius;  // mission radius
 
-    // need an object for getRelDir and getRelPos ...
-    start_chemlight = createVehicle ["Chemlight_green", start_pos, [], 0, "NONE"];
-    publicVariable "start_chemlight";
+// need an object for getRelDir and getRelPos ...
+start_chemlight = createVehicle ["Chemlight_green", start_pos, [], 0, "NONE"];
+publicVariable "start_chemlight";
 
-    // create the active area "ellipse" -- we use this as an area later
-    private _dir = start_chemlight getRelDir epicenter;
-    private _dist = start_pos distance epicenter;
-    private _half_dist = _dist / 2;
-    private _midpoint = start_chemlight getRelPos [_half_dist, _dir];
-    private _a = _radius;
-    private _b = _radius + _dist;
+// create the active area "ellipse" -- we use this as an area later
+private _dir = start_chemlight getRelDir epicenter;
+private _dist = start_pos distance epicenter;
+private _half_dist = _dist / 2;
+private _midpoint = start_chemlight getRelPos [_half_dist, _dir];
+private _a = _radius;
+private _b = _radius + _dist;
 
-    density_scale = 1 + (_dist / _radius); 
-    publicVariable "density_scale";
+density_scale = 1 + (_dist / _radius); 
+publicVariable "density_scale";
 
-    private _marker = createMarker ["mACTIVE", _midpoint];
-    "mACTIVE" setMarkerShapeLocal "ELLIPSE";
-    "mACTIVE" setMarkerSizeLocal [_a, _b]; 
-    "mACTIVE" setMarkerDirLocal _dir;
-    "mACTIVE" setMarkerAlpha 0;
+private _marker = createMarker ["mACTIVE", _midpoint];
+"mACTIVE" setMarkerShapeLocal "ELLIPSE";
+"mACTIVE" setMarkerSizeLocal [_a, _b]; 
+"mACTIVE" setMarkerDirLocal _dir;
+"mACTIVE" setMarkerAlpha 0;
 
-    if (pcb_DEBUG) then {
-        "mACTIVE" setMarkerColorLocal "ColorRED";
-        "mACTIVE" setMarkerBrushLocal "BORDER";
-        "mACTIVE" setMarkerAlpha 0.9;
-    };
-
-    //active_area = ["mACTIVE"] call BIS_fnc_getArea;
-    active_area = "mACTIVE";
-    publicVariable "active_area";
-
-    // get a random position in area
-    //  _rpos = [["mACTIVE"], ["water"]] call BIS_fnc_randomPos;
-    // position inArea "mACTIVE";  // returns bool
-    // position inArea active_area;  // returns bool
+if (pcb_DEBUG) then {
+    "mACTIVE" setMarkerColorLocal "ColorRED";
+    "mACTIVE" setMarkerBrushLocal "BORDER";
+    "mACTIVE" setMarkerAlpha 0.9;
 };
 
-
-
+//active_area = ["mACTIVE"] call BIS_fnc_getArea;
+active_area = "mACTIVE";
+publicVariable "active_area";
+sleep .1;
 
 
 
@@ -62,10 +57,11 @@ if (true) then {
                     Background 
 
 ######################################################## */
+waitUntil { ! isNil "active_area" };
 [active_area] spawn {
     params ["_active_area"];
 
-    sleep 5;
+    sleep 10;
 
     // -----------------------------------------------
     // get a list of all "buildings" -- using worldSize, so pretty much everything on map 
