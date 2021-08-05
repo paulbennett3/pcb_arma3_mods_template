@@ -38,8 +38,7 @@ private _ok = false;
 
 diag_log ("GOTO" +  (str _state));
 if (pcb_DEBUG) then {
-   hint ("GOTO " + (str (_state get "target")));
-   ["Goto mission called"] remoteExec ["systemChat", 0, true];
+   ["Goto mission called"] call pcb_fnc_debug;
 };
 
 

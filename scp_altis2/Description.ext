@@ -30,11 +30,13 @@ class CfgFunctions
             file = "functions";
             class add_anomalies {};
             class add_base_actions {};
+            class debug {};
             class add_high_command_unit {};
             class add_interact_action_to_object {};
             class add_loot_boxes_to_building {};
             class advancedTowingInit {};
             class animal_follower {};
+            class animal_follower_loop {};
             class background {};
             class boom_guy {};
             class cargo_base {};
@@ -50,7 +52,9 @@ class CfgFunctions
             class is_valid_position {};
             class loot_crate {};
             class make_destroyable {};
+            class mark_active_area {};
             class monitor_ratings {};
+            class mutex {};
             class near_military {};
             class objective_locate_object {};
             class parse_airports {};

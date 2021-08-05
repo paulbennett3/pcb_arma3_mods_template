@@ -119,6 +119,11 @@ _state set ["code", _code];
 _state set ["duration", 15];
 
 _target setVariable ["_state", _state, true];  // gets overwritten in ll interact, but oh well
+[_target, true] remoteExec ["forceWalk", 0, true];
+[group _target, "BLUE"] remoteExec ["setCombatMode", 0, true];
+[group _target, "CARELESS"] remoteExec ["setBehaviour", 0, true];
+[_target, "MIDDLE"] remoteExec ["setUnitPos", 0, true];
+
 
 // add some anomalies
 [getPosATL _target, 1, 5] call pcb_fnc_add_anomalies;

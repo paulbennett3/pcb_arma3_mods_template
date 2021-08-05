@@ -5,15 +5,15 @@ Given the area of operation (ellipse), place random ground vehicles
 for "background color" and for spares for the players.
 -------------------------------------------------------------------- */
 
-params 
-[
-    "_active_area", 
-    "_buildings", 
-    ["_min_n_vehicles", 30], 
-    ["_max_n_vehicles", 80]
-];
+params [ "_active_area", ["_min_n_vehicles", 30], ["_max_n_vehicles", 80] ];
 
 if (! isServer) exitWith {};
+
+private _buildings = nearestTerrainObjects [
+    start_pos,
+    types_hash get "svbuildings",
+    worldSize
+];
 
 // only let this run once!!!!
 if (! isNil "spare_vehicles_spawner") exitWith {};
@@ -36,7 +36,7 @@ _n_vehicles = _n_vehicles * density_scale;
 private _placed = 0;
     
 while {_placed < _n_vehicles} do {
-    sleep 1;
+    sleep .1;
     _veh = [_active_area, _buildings] call pcb_fnc_spawn_random_vehicle;
 
     if (! (isNull _veh)) then {

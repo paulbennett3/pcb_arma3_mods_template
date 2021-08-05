@@ -23,17 +23,16 @@ private _types_info = [
     ["Snake_vipera_random_F", "Snake_Idle_Stop", "Snake_Move", "Snake_Move"]
 ];
 
-if (! isServer) exitWith { [objNull, false]};
 
 private _pos = _player getRelPos [(30 + random 50), (random 360)];
-if (((_pos select 0) == 0) and ((_pos select 1) == 0)) exitWith { [objNull, false] };
+if (! ([_pos] call pcb_fnc_is_valid_position)) exitWith { [objNull, false] };
 
 private _type_info = _types_info select _type_num;
-
 
 _animal = createAgent [_type_info select 0, _pos, [], 5, "NONE"];
 
 _did_spawn = true;
+["Spawned animal follower!"] call pcb_fnc_debug;
 
 // Disable animal behaviour
 _animal setVariable ["BIS_fnc_animalBehaviour_disable", true];
@@ -47,57 +46,16 @@ if (isNil "_animals") then {
 };
 (_player getVariable "animals") pushBackUnique _animal;
 
-// Following loop
-[_animal, _type_info, _player] spawn {
-    params ["_animal", "_type_info", "_player"];
-    private _state = (_type_info select 3);
-    // Force to sprint
-    _animal playMove _state;
+_animal setOwner (owner _player);
+sleep .1;
 
-    while { sleep 1; alive _animal } do {
-        if (! (_animal getVariable "ride")) then {
-            private _pos_player = getPosATL _player;
-            private _dist = _pos_player distance (getPosATL _animal);
-
-            // far, far away, so head off to the farm in the country
-            if (_dist > 2000) exitWith {
-                deleteVehicle _animal; true    // sad ...
-            };
-
-            // far away, so run
-            if (_dist > 10) then {
-                if (! (_state isEqualTo (_type_info select 3))) then {
-                   _state = (_type_info select 3);
-                   _animal playMove _state;
-                };
-    	        _animal moveTo _pos_player;
-            };
-            if ((_dist <= 10) and (_dist > 2)) then {
-                // close, so just walk
-                if (! (_state isEqualTo (_type_info select 2))) then {
-                   _state = (_type_info select 2);
-                   _animal playMove _state;
-                };
-	        _animal moveTo _pos_player;
-            };
-            if (_dist <= 2) then {
-                if (! (_state isEqualTo (_type_info select 1))) then {
-                   _state = (_type_info select 1);
-                   _animal playMove _state;
-                };
-            };
-
-        };
-    };
-};
-
-_animal addEventHandler ["Killed",  // sad ...
+[_animal, ["Killed",  // sad ...
     {
         params ["_unit", "_killer", "_instigator", "_useEffects"];
         private _player = _unit getVariable "master";
         _player setVariable ["animals", (_player getVariable "animals") - [_animal]];
     }
-];
+]] remoteExec ["addEventHandler", 0, true];
 
 // add event handlers to move the animal "into" and "out of" vehicle
 [
@@ -122,6 +80,7 @@ _animal addEventHandler ["Killed",  // sad ...
         }
     ]
 ] remoteExec ["addEventHandler", 0, true];
+
 [
     _player,
     [
@@ -130,7 +89,6 @@ _animal addEventHandler ["Killed",  // sad ...
             params ["_unit", "_role", "_vehicle", "_turret"];
             private _animals = _unit getVariable "animals";
             if (! (isNil "_animals")) then {
-                [("We're there. Hop out! <" + (str (_unit getVariable "animals")) + ">")] remoteExec ["systemChat", 0];
                 private _pos = getPosATL _unit;
                 {
                     if (alive _x) then {
@@ -143,7 +101,9 @@ _animal addEventHandler ["Killed",  // sad ...
         }
     ]
 ] remoteExec ["addEventHandler", 0, true];
-_animal setOwner (owner _player);
+
+// Following loop
+[_animal, _type_info, _player] remoteExec ["pcb_fnc_animal_follower_loop", 0, true];
 
 private _result = [_animal, _did_spawn];
 _result

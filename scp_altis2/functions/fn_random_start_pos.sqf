@@ -38,3 +38,5 @@ _marker setMarkerText "Insertion Point";
 sleep .1;
 random_start_ready = true;
 publicVariable "random_start_ready";
+
+[] call pcb_fnc_mark_active_area;

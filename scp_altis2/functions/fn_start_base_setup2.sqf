@@ -44,7 +44,7 @@ private _pid = "T" + str ([] call pcb_fnc_get_next_UID);
 private _crate_type = "B_Slingload_01_Cargo_F";
 _next_pos = (playableUnits select 0) getPos [_offset, start_dir]; _offset = _offset + 10;
 private _vpos = _next_pos;
-systemChat ("Putting crate at <" + (str _vpos) + ">");
+["Putting crate at <" + (str _vpos) + ">"] call pcb_fnc_debug;
 
 private _start_crate = _crate_type createVehicle _vpos;
 _start_crate setDir start_dir;
@@ -150,7 +150,7 @@ private _cmd = {
         _cmd,
         [], 1.5, false, false, "", "true", 5
     ]
-] remoteExec ["addAction", 0, true];   // Server only!
+] remoteExec ["addAction", 0, true];  
 
 
 [_desk] call pcb_fnc_add_base_actions;
@@ -235,4 +235,4 @@ _next_pos = (playableUnits select 0) getPos [_offset, start_dir]; _offset = _off
 _next_pos = (playableUnits select 0) getPos [_offset, start_dir]; _offset = _offset + 30;
 [_next_pos, playableUnits select 0, _hc_types_inf, "Squad 3", "teamGreen", "infantry"] call pcb_fnc_add_high_command_unit;
 */
-[(playableUnits select 0)] call pcb_fnc_animal_follower;
+

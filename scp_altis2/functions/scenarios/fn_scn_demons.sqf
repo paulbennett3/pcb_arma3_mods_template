@@ -31,10 +31,7 @@ Parameters:
 ******************************************************************* */
 params ["_action"];
 
-if (pcb_DEBUG) then {
-    diag_log ("Scenario Demons <" + (str _action) + ">");
-    hint ("Scenario Demons <" + (str _action) + ">");
-};
+[("Scenario Demons <" + (str _action) + ">")] call pcb_fnc_debug;
 
 switch (_action) do {
     case "create": {
@@ -46,15 +43,16 @@ switch (_action) do {
         [] call pcb_fnc_random_start_pos;
         waitUntil { ! isNil "random_start_ready" };
 
+        // create the "base camp" + spawning point
+        //[] call pcb_fnc_start_base_setup;
+        [] call pcb_fnc_start_base_setup2;
+
         // start spawning spare vehicles etc
         [] call pcb_fnc_background;
  
         // manipulate the starting weather et al
         [] call pcb_fnc_set_mission_environment;
 
-        // create the "base camp" + spawning point
-        //[] call pcb_fnc_start_base_setup;
-        [] call pcb_fnc_start_base_setup2;
 
         // Do we want a parent task (ie, missions as sub-tasks)?
         PARENT_TASK = "";  // set to objNull if we don't
@@ -77,9 +75,11 @@ switch (_action) do {
         // remember our state
         scenario_state = 1;
         publicVariable "scenario_state";
+        [("Scenario Demons completed <" + (str _action) + ">")] call pcb_fnc_debug;
      };
 
     case "mission_completed": {
+        [("Scenario Demons <" + (str _action) + ">")] call pcb_fnc_debug;
         if ((scenario_state == 1) && (total_missions < 1)) then {
             scenario_state = 2;
             publicVariable "scenario_state";

@@ -7,10 +7,9 @@ together.
 if (! isServer) exitWith {};
 
 [] spawn {
-    diag_log "Mission Generator spawned";
-    if (pcb_DEBUG) then {
-        hint "Mission Generator started (spawned)";
-    };
+    sleep .1;
+
+    ["Mission Generator spawned"] call pcb_fnc_debug;
 
     // start our mission counter and mission array
     mission_success = true; // assume true, set to false if failed ...
@@ -19,7 +18,6 @@ if (! isServer) exitWith {};
     publicVariable "mission_active";
 
     active_mission_info = createHashMap;  // index with "mission ID" -- for state needed for cleanup, or complex missions
-
     // fire off the director for tracking background stuff
     [] call pcb_fnc_director;
 
