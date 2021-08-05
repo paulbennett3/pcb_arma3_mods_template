@@ -30,7 +30,29 @@ types_hash set ["occult large items", [
     "Land_AncientStatue_01_F",
     "Land_AncientStatue_02_F",
     "Land_StoneTanoa_01_F",
-    "Land_RaiStone_01_F"
+    "Land_RaiStone_01_F",
+    "Land_Statue_03_F",
+    "Land_Monument_02_F",
+    "Land_OldSculpture_01_F",
+    "Land_Cross_01_small_F",
+    "Land_Grave_11_F",
+    "Land_Tombstone_04_F",
+    "Land_Tombstone_07_F",
+    "Land_Tombstone_08_F",
+    "Land_Tombstone_08_damaged_F",
+    "Land_Tombstone_08_damaged_F",
+    "Land_Tombstone_10_F",
+    "Land_Tombstone_11_damaged_F",
+    "Land_Tombstone_15_F",
+    "Land_Tombstone_16_F",
+    "Land_Tombstone_05_F",
+    "Land_Tombstone_14_F",
+    "Land_Caravan_01_green_F",
+    "Land_Calvary_03_F",
+    "Land_Chapel_02_white_damaged_F",
+    "Land_Substation_01_F",
+    "Land_Statue_01_F",
+    "Land_Monument_01_F"
 ]];
 
 
@@ -65,6 +87,58 @@ types_hash set ["small items", [
 ]];
 
 // --------------------------------
+//    bases
+//   tents etc for start base
+//    [ type string, rotation, offset in z]  
+//     note that rotation and offset are as
+//     compared to our starting
+//     "canvas cover, small"
+// --------------------------------
+types_hash set ["bases", [
+    ["Land_CanvasCover_02_F", 0, 1.5], 
+    ["CamoNet_OPFOR_F", 0, 1.5],
+    ["Land_BagBunker_Tower_F", 90, 1.3],
+    ["Land_MedicalTent_01_NATO_generic_outer_F", 90, 1.3],
+    ["Land_MedicalTent_01_NATO_generic_open_F", 90, 1.3],
+    ["Land_MedicalTent_01_CSAT_brownhex_generic_open_F", 90, 1.3],
+    ["Land_MedicalTent_01_aaf_generic_open_F", 90, 1.3],
+    ["Land_MedicalTent_01_white_generic_outer_F", 90, 1.3]
+]];
+
+// --------------------------------
+//    Boxes - ok for inside
+// --------------------------------
+types_hash set ["boxes", [
+    "Land_PlasticCase_01_large_F",
+    "Land_PlasticCase_01_large_black_F",
+    "Land_PlasticCase_01_large_CBRN_F",
+    "Land_PlasticCase_01_large_gray_F",
+    "Land_PlasticCase_01_large_olive_F",
+    "Land_PlasticCase_01_large_olive_CBRN_F",
+    "Land_vn_plasticcase_01_large_idap_f",
+    "Land_PlasticCase_01_medium_F",
+    "Land_PlasticCase_01_medium_black_F",
+    "Land_PlasticCase_01_medium_CBRN_F",
+    "Land_vn_plasticcase_01_medium_gray_f",
+    "Land_PlasticCase_01_medium_olive_F",
+    "Land_PlasticCase_01_medium_olive_CBRN_F",
+    "Land_PlasticCase_01_medium_idap_F",
+    "Land_PlasticCase_01_small_F",
+    "Land_PlasticCase_01_small_black_F",
+    "Land_PlasticCase_01_small_black_CBRN_F",
+    "Land_PlasticCase_01_small_CBRN_F",
+    "Land_PlasticCase_01_small_gray_F",
+    "Land_PlasticCase_01_small_olive_F",
+    "Land_PlasticCase_01_small_olive_CBRN_F",
+    "Land_PlasticCase_01_small_idap_F",
+    "Land_vn_plasticcase_01_small_idap_f",
+    "Land_PortableCabinet_01_closed_black_F",
+    "Land_PortableCabinet_01_closed_olive_F",
+    "Land_PortableCabinet_01_closed_sand_F"
+]];
+
+
+// --------------------------------
 // Civilians
 // --------------------------------
 types_hash set ["civilians", [
@@ -72,6 +146,9 @@ types_hash set ["civilians", [
     "Max_Tak_woman5", "Max_Tak_woman6", "Max_Taky_woman1", "Max_Taky_woman2",
     "Max_Taky_woman3", "Max_Taky_woman4", "Max_Taky_woman5", "Max_Tak2_woman1",
     "Max_Tak2_woman2", "Max_Tak2_woman3", "Max_Tak2_woman4", "Max_Tak2_woman5",
+    "Max_woman4", "Max_woman5", "Max_woman2", "Max_woman3", "Max_woman1",
+    "Max_woman4", "Max_woman5", "Max_woman2", "Max_woman3", "Max_woman1",
+    "Max_woman4", "Max_woman5", "Max_woman2", "Max_woman3", "Max_woman1",
     "Max_woman4", "Max_woman5", "Max_woman2", "Max_woman3", "Max_woman1",
     "vn_c_men_01", "vn_c_men_02", "vn_c_men_05", "vn_c_men_06",
     "vn_c_men_09", "vn_c_men_10", "vn_c_men_13", "vn_c_men_14",
@@ -176,6 +253,15 @@ types_hash set ["demons", [
 // --------------------------------
 // Spooks
 // --------------------------------
+types_hash set ["limited spooks", [
+    "DSA_Crazy",
+    "DSA_Crazy",
+    "DSA_Hatman",
+    "DSA_Shadowman",
+    "DSA_Wendigo",
+    "DSA_Wendigo"
+]];
+
 types_hash set ["spooks", [
     "DSA_411",
     "DSA_Abomination",
@@ -372,6 +458,9 @@ types_hash set ["city types", [
 //  Resupply crates (already loaded)
 // --------------------------------
 types_hash set ["resupply crates", [
+    "vn_o_ammobox_full_06",
+    "vn_b_ammobox_sog",
+    "vn_o_ammobox_full_07",
     "O_CargoNet_01_ammo_F",
     "C_IDAP_CargoNet_01_supplies_F",
     "I_E_CargoNet_01_ammo_F",
@@ -441,7 +530,11 @@ types_hash set ["blood", [
 
 types_hash set ["bones", [
     "Land_HumanSkeleton_F",
-    "Land_HumanSkull_F"
+    "Land_HumanSkull_F",
+    "Land_DeerSkeleton_full_01_F",
+    "Land_DeerSkeleton_damaged_01_F",
+    "Land_DeerSkeleton_pile_01_F",
+    "Land_DeerSkeleton_skull_01_F"
 ]];
 
 types_hash set ["detritus", [

@@ -40,10 +40,14 @@ _obj addItemCargoGlobal ["Rangefinder", 4];
 _obj addItemCargoGlobal ["vn_m72", 8];
 _obj addItemCargoGlobal ["vn_m79", 8];
 _obj addItemCargoGlobal ["vn_m72_mag", 8];
+_obj addItemCargoGlobal ["vn_m1897", 4];
+_obj addItemCargoGlobal ["vn_m1897_fl_mag", 4]; // magazineAmmo?!?
+_obj addItemCargoGlobal ["vn_m1897_buck_mag", 4]; // magazineAmmo?!?
 
 sleep .1;
 // mag
 _obj addMagazineAmmoCargo ["100Rnd_65x39_caseless_mag_Tracer", 60, 100];
+_obj addMagazineAmmoCargo ["30Rnd_65x39_caseless_mag", 60, 30];
 _obj addMagazineAmmoCargo ["30Rnd_9x21_Green_Mag", 20, 30];
 
 _obj addMagazineAmmoCargo ["1Rnd_HE_Grenade_shell", 40, 1];
@@ -65,8 +69,13 @@ _obj addItemCargoGlobal ["optic_SOS", 4];
 _obj addItemCargoGlobal ["optic_tws", 4];
 _obj addItemCargoGlobal ["optic_tws_mg", 4];
 _obj addItemCargoGlobal ["ToolKit", 2];
+_obj addItemCargoGlobal ["MineDetector", 2];
 
 // backpack
 _obj addBackpackCargoGlobal ["B_Kitbag_rgr", 2];
-_obj addBackpackCargoGlobal ["B_UAV_06_backpack_F", 2];
+_obj addBackpackCargoGlobal ["B_UAV_06_backpack_F", 1];
+_obj addBackpackCargoGlobal ["B_UGV_02_Demining_backpack_F", 1];
+_obj addBackpackCargoGlobal ["B_UGV_02_Science_backpack_F", 1];
+
+
 

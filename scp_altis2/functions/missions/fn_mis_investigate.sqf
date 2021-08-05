@@ -73,7 +73,7 @@ _state set ["taskdesc", [
         "markername"]];
 _state set ["taskpos", getPosATL _target];
 private _taskpid = "";
-if (! isNil "PARENT_TASK") then { _taskpid = PARENT_TASK; };
+if (! (PARENT_TASK isEqualTo "")) then { _taskpid = PARENT_TASK; };
 _state set ["taskpid", _taskpid];
 _state set ["action", "study"];
 _state set ["code", _code];

@@ -112,7 +112,7 @@ _state set ["taskdesc", [
         "markername"]];
 _state set ["taskpos", getPosATL _target];
 private _taskpid = "";
-if (! isNil "PARENT_TASK") then { _taskpid = PARENT_TASK; };
+if (! (PARENT_TASK isEqualTo "")) then { _taskpid = PARENT_TASK; };
 _state set ["taskpid", _taskpid];
 _state set ["action", "interview"];
 _state set ["code", _code];
@@ -124,13 +124,14 @@ _target setVariable ["_state", _state, true];  // gets overwritten in ll interac
 [getPosATL _target, 1, 5] call pcb_fnc_add_anomalies;
 //[getPosATL _target] call pcb_fnc_occult_decorate;
 [getPosATL _target, 10] call pcb_fnc_mission_encounter;
+[_building] call pcb_fnc_add_loot_boxes_to_building;
 
 private _result = [_state] call pcb_fnc_mis_ll_interact;
 
 if (_result select 0) then {
     _state = _result select 1;
     _tid = _state get "taskid";
-    if (! isNil "PARENT_TASK") then { _tid = _tid select 0; };
+    if (! (PARENT_TASK isEqualTo "")) then { _tid = _tid select 0; };
 
     // -------------------------------------
     //  In case the target is mobile,

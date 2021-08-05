@@ -26,10 +26,12 @@ _this addBackpack "B_Kitbag_rgr";
 
 comment "Add items to containers";
 _this addItemToUniform "FirstAidKit";
-_this addItemToUniform "DSA_Detector";
+//_this addItemToUniform "DSA_Detector";
+_this addItemToUniform "B_UavTerminal";
 for "_i" from 1 to 2 do {_this addItemToVest "DemoCharge_Remote_Mag";};
 _this addItemToVest "30Rnd_9x21_Green_Mag";
-for "_i" from 1 to 2 do {_this addItemToBackpack "100Rnd_65x39_caseless_mag_Tracer";};
+_this addItemToVest "30Rnd_9x21_Green_Mag";
+for "_i" from 1 to 5 do {_this addItemToBackpack "100Rnd_65x39_caseless_mag_Tracer";};
 _this addHeadgear "H_HelmetB_TI_arid_F";
 _this addGoggles "G_Balaclava_TI_G_blk_F";
 
@@ -38,6 +40,8 @@ _this linkItem "ItemMap";
 _this linkItem "ItemCompass";
 _this linkItem "ChemicalDetector_01_watch_F";
 _this linkItem "ItemRadio";
-_this linkItem "B_UavTerminal";
+// _this linkItem "B_UavTerminal";
 _this linkItem "NVGogglesB_blk_F";
+_this linkItem "DSA_Detector";
+
 

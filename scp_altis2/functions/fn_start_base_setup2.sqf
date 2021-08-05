@@ -67,19 +67,40 @@ if (_dir < 0) then { _dir = _dir + 360; };
 private _desk_pos = _start_crate getPos [5, _dir];
 
 private _desk = "Land_PortableDesk_01_black_F" createVehicle _desk_pos;
+[_desk, 1 + (ceil (random 5))] call pcb_fnc_loot_crate;
 _desk setDir _dir;
 _desk setPosASL getPosASL _desk;
 [_desk, "Land_DeskChair_01_black_F", [.8,1,-.25], 15] call _attachIt;
-[_desk, "Land_PortableCabinet_01_bookcase_black_F", [1.5, 1, -.05], 110] call _attachIt;
+[_desk, "Land_DeskChair_01_black_F", [-.5, .75, -.25], 15] call _attachIt;
+private _cabinet = [_desk, "Land_PortableCabinet_01_bookcase_black_F", [1.5, 1, -.05], 110] call _attachIt;
+[_cabinet, 1 + (ceil (random 5))] call pcb_fnc_loot_crate;
 [_desk, "Land_PortableCabinet_01_lid_black_F", [2.2, 1.3, -.35], 72] call _attachIt;
 [_desk, "Land_Laptop_device_F", [0, 0, .6], 25] call _attachIt;
 [_desk, "Land_File1_F", [1.05, 0, .45], 165] call _attachIt;
 [_desk, "Land_File2_F", [.95, .05, .45], 145] call _attachIt;
 [_desk, "Land_Tablet_01_F", [.65, -.15, .45], 27] call _attachIt;
 [_desk, "Land_PortableLight_double_F", [7, -.5, 0.6], 115] call _attachIt;
-[_desk, "Land_CanvasCover_01_F", [2, 2, 1.5], 0] call _attachIt;
-[_desk, "B_supplyCrate_F", [0, -5, 0.5], 135] call _attachIt;
-[_desk, "B_CargoNet_01_ammo_F", [0, 10, 0.4], 115] call _attachIt;
+private _tent_type_rot = selectRandom (types_hash get "bases");
+private _tent_type = _tent_type_rot select 0; private _tent_rot = _tent_type_rot select 1; _tent_offset_z = _tent_type_rot select 2;
+[_desk, _tent_type, [2, 2, _tent_offset_z], _tent_rot] call _attachIt;
+[_desk, "B_CargoNet_01_ammo_F", [5, 10, 0.4], 45 + (random 90)] call _attachIt;
+[_desk, "B_CargoNet_01_ammo_F", [0, 10, 0.4], 45 + (random 90)] call _attachIt;
+[_desk, "B_CargoNet_01_ammo_F", [-5, 10, 0.4], 45 + (random 90)] call _attachIt;
+_cabinet = [_desk, "Land_PortableCabinet_01_medical_F", [3.5, 2.55, 0], 35] call _attachIt;
+_cabinet addItemCargoGlobal ["FirstAidKit", 10]; _cabinet addItemCargoGlobal ["Medikit", 1];
+private _stuff = [ "dmpAntibiotics", "dmpAntidote", "RyanZombiesAntiVirusCure_Item", "RyanZombiesAntiVirusTemporary_Item", "dmpBandage", "dmpHeatpack", "dmpPainkillers", "dmpStims"];
+private _n_stuff = floor (random 5);
+for [{_i = 0 }, {_i < _n_stuff}, {_i = _i + 1}] do { _cabinet addItemCargoGlobal [(selectRandom _stuff), floor (random 4)]; };
+[_desk, "Land_Stretcher_01_sand_F", [2.5, 3.5, -.25], 90] call _attachIt;
+[_desk, "Land_DeskChair_01_black_F", [2.75, 2.2, -.25], 35] call _attachIt;
+[_desk, "Land_CampingTable_white_F",[-1.5, 3.5, 0], 0] call _attachIt;
+[_desk, "Land_PlasticCase_01_small_black_F",[4, -5, -.25], 90] call _attachIt;
+[_desk, "Land_PlasticCase_01_small_black_F",[3, -5, -.25], 95] call _attachIt;
+[_desk, "Land_PlasticCase_01_small_black_F",[3, -4.5, -.25], 87] call _attachIt;
+[_desk, "Land_PlasticCase_01_small_black_F",[4, -4.5, -.25], 85] call _attachIt;
+[_desk, "Land_PlasticCase_01_large_black_F",[0, -5, -0.5], 0] call _attachIt;
+[_desk, "Land_PlasticCase_01_medium_black_F",[-3, -5, -.2], 0] call _attachIt;
+[_desk, "Land_PlasticCase_01_medium_black_F",[-3, -3.5, -.2], 0] call _attachIt;
 base_desk = _desk;
 publicVariable "base_desk";
 
@@ -204,6 +225,7 @@ private _hc_types_inf = [
     "B_T_Soldier_UAV_F",
     "B_T_Soldier_LAT2_F"
 ];
+/*
 _next_pos = (playableUnits select 0) getPos [_offset, start_dir]; _offset = _offset + 30;
 [_next_pos, playableUnits select 0, _hc_types_inf, "Squad 1", "teamRed", "infantry"] call pcb_fnc_add_high_command_unit;
 
@@ -212,5 +234,5 @@ _next_pos = (playableUnits select 0) getPos [_offset, start_dir]; _offset = _off
 
 _next_pos = (playableUnits select 0) getPos [_offset, start_dir]; _offset = _offset + 30;
 [_next_pos, playableUnits select 0, _hc_types_inf, "Squad 3", "teamGreen", "infantry"] call pcb_fnc_add_high_command_unit;
-
+*/
 

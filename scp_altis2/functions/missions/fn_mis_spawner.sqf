@@ -64,7 +64,7 @@ private _desc = objNull;
 _desc = [ "Destroy the cursed source causing the dead to rise.", "Destroy source", ""];
 _destroyable = false;
 private _taskpid = "";
-if (! isNil "PARENT_TASK") then { _taskpid = PARENT_TASK; };
+if (! (PARENT_TASK isEqualTo "")) then { _taskpid = PARENT_TASK; };
 _state = createHashMapFromArray [
     ["target", _target],
     ["taskpos", _pos],

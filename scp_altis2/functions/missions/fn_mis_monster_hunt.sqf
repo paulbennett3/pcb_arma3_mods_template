@@ -42,6 +42,7 @@ if ((random 100) < 65) then {
     if (! isNil "_building") then {
         _pos = getPosATL _building;
     };
+    [_building] call pcb_fnc_add_loot_boxes_to_building;
 } else {
     _loc_type = "forest";
     // forest
@@ -83,7 +84,7 @@ _state set ["taskdesc", [
     "markername"
 ]];
 private _taskpid = "";
-if (! isNil "PARENT_TASK") then { _taskpid = PARENT_TASK; };
+if (! (PARENT_TASK isEqualTo "")) then { _taskpid = PARENT_TASK; };
 _state set ["taskpid", _taskpid];
 _state set ["taskpos", _pos];
 _state set ["taskradius", 1500];

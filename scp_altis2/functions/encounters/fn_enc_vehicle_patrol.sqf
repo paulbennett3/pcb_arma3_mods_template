@@ -51,6 +51,7 @@ if (true) then {
     // Note of result -> _res = [created vehicle, [crew]], group]
 
     _obj_list pushBack (_res select 0);
+    [_res select 0, ceil (random 10)] call pcb_fnc_loot_crate;
     [_res select 0] joinSilent _group;
     {
         _obj_list pushBack _x;

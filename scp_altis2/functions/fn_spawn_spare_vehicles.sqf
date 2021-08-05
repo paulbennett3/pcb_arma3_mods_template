@@ -40,6 +40,7 @@ while {_placed < _n_vehicles} do {
     _veh = [_active_area, _buildings] call pcb_fnc_spawn_random_vehicle;
 
     if (! (isNull _veh)) then {
+        [_veh, 1 + (ceil (random 5))] call pcb_fnc_loot_crate;
         spare_vehicle_list pushBack _veh;
         _placed = _placed + 1;
 

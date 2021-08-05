@@ -17,22 +17,20 @@ params ["_pos", "_leader", "_types", "_groupName", "_team", "_mode"];
 // create the group, and instantiate the soldiers
 // -----------------------------------------------
 private _group = createGroup west;
+private _obj_list = [];
 if (_mode isEqualTo "infantry") then {
     for [{_i = 0 }, {_i < (count _types)}, {_i = _i + 1}] do {
         private _type = _types select _i;
         private _veh = _group createUnit [_type, _pos, [], 5, 'NONE'];
         [_veh] joinSilent _group;
-
-        // make the first unit the group leader
-//        if (_i == 0) then {
-//            [_group, _veh] remoteExec ["selectLeader", _group];
-//            _veh setUnitRank "SERGEANT";
-//        };
+        _obj_list pushBack _veh;
     };
 } else {
     // figure out vehicles -- have to spawn in crew ...
 };
 
+(_obj_list select 0) setUnitRank "SERGEANT";
+[_group, (_obj_list select 0)] remoteExec ["selectLeader", owner _leader, true];
 
 // -----------------------------------------------
 // there is a limit to the number of groups, so we will mark this to delete
@@ -40,6 +38,13 @@ if (_mode isEqualTo "infantry") then {
 // -----------------------------------------------
 _group deleteGroupWhenEmpty true;
 
+
+// -----------------------------------------------
+// Make the group local to _leader
+// -----------------------------------------------
+_group setGroupOwner (owner _leader);
+
+/*
 // -----------------------------------------------
 // Check if the HC commander already has an HC command module assigned
 // -----------------------------------------------
@@ -51,18 +56,39 @@ private _has_hc = false;
 } forEach (synchronizedObjects _leader);
 
 // if they don't have a HC command module, add one
-/*
 if (! _has_hc) then {
     private _group_logic = createGroup sideLogic;
-    "HighCommand" createUnit [
-        start_pos,
+    [
+        "HighCommand", 
+        start_pos, 
         _group_logic,
         "this setVariable ['BIS_fnc_initModules_disableAutoActivation', false, true]; HC = this; publicVariable 'HC';"
-    ];
+    ] remoteExec ["createUnit", owner _leader, true];
     waitUntil { sleep 1; ! isNil "HC" };
+    _leader synchronizeObjectsAdd [HC];
+
+//    "HighCommand" createUnit [
+//        start_pos,
+//        _group_logic,
+//        "this setVariable ['BIS_fnc_initModules_disableAutoActivation', false, true]; HC = this; publicVariable 'HC';"
+//    ];
+//    waitUntil { sleep 1; ! isNil "HC" };
     //_leader synchronizeObjectsAdd [HC];
-    HC synchronizeObjectsAdd [_leader];
+//    HC synchronizeObjectsAdd [_leader];
 };
+
+// make an HC Subordinate module for the group
+private _group_logic = createGroup sideLogic;
+HCS = objNull;
+publicVariable "HCS";
+[
+    "HighCommandSubordinate", 
+    start_pos, 
+    _group_logic,
+    "this setVariable ['BIS_fnc_initModules_disableAutoActivation', false, true]; HCS = this; publicVariable 'HCS';"
+] remoteExec ["createUnit", owner _leader, true];
+waitUntil { sleep 1; ! isNull HCS };
+HCS synchronizeObjectsAdd [_group];
 */
 
 

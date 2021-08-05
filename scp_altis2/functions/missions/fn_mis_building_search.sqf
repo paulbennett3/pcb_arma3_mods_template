@@ -52,12 +52,15 @@ _state set ["taskdesc", [
 _state set ["taskpos", _pos];
 _state set ["taskradius", 5];
 private _taskpid = "";
-if (! isNil "PARENT_TASK") then { 
+if (! (PARENT_TASK isEqualTo "") ) then { 
     _taskpid = PARENT_TASK;
 };
 _state set ["taskpid", _taskpid];
 
 _target setVariable ["_state", _state, true];  // gets overwritten in ll interact, but oh well
+
+// put some loot boxes in the building
+[_target] call pcb_fnc_add_loot_boxes_to_building;
 
 // add some anomalies
 [getPosATL _target, 1, 5] call pcb_fnc_add_anomalies;

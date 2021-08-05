@@ -32,6 +32,7 @@ class CfgFunctions
             class add_base_actions {};
             class add_high_command_unit {};
             class add_interact_action_to_object {};
+            class add_loot_boxes_to_building {};
             class advancedTowingInit {};
             class animal_follower {};
             class background {};

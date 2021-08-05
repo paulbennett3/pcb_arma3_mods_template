@@ -15,13 +15,13 @@ if ((count (_player nearEntities 2000)) > 150) exitWith { false };
 // randomly select which encounter to spawn, then call its setup script
 private _options = [
     "animal_follower",
-    "compound",
-    "compound",
     "ambulance",
     "bandit_foot",
     "bandit_foot",
     "bandit_car",
-    "boom_guy",
+    "civ_foot",
+    "civ_foot",
+    "civ_foot",
     "civ_foot",
     "civ_foot",
     "civ_foot",
@@ -30,16 +30,21 @@ private _options = [
     "civ_vehicle",
     "civ_vehicle",
     "civ_vehicle",
+    "civ_vehicle",
+    "civ_vehicle",
+    "spooks",
+    "police_vehicle",
     "police_vehicle",
     "police_foot",
-    "zombies",
-    "zombies",
-    "zombies",
-    "spooks",
-    "demon",
+    "police_foot",
     "civ_air",
     "civ_air"
 ];
+//    "compound",
+//    "boom_guy",
+//    "zombies",
+//    "spooks",
+//    "demon",
 
 private _option = selectRandom _options;
 diag_log ("Spawning " + (str _option));
@@ -94,9 +99,9 @@ switch (_option) do {
         _did_spawn = [_option, _player, _g1, _g2] call pcb_fnc_enc_compound;
     };
     case "spooks": {
-            private _types = types_hash get "spooks";
+            private _types = types_hash get "limited spooks";
             private _type = [selectRandom _types];
-            _did_spawn = [_option, _player, _type, independent, 1, 3, false] call pcb_fnc_enc_infantry;
+            _did_spawn = [_option, _player, _type, independent, 2, 5, false] call pcb_fnc_enc_infantry;
         };
     case "demon": {
             private _types = types_hash get "demons";

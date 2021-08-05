@@ -46,7 +46,7 @@ _state set ["taskdesc", [
         "Retrieve laptop",
         "markername"]];
 private _taskpid = "";
-if (! isNil "PARENT_TASK") then { _taskpid = PARENT_TASK; };
+if (! (PARENT_TASK isEqualTo "")) then { _taskpid = PARENT_TASK; };
 _state set ["taskpid", _taskpid];
 
 private _result = [_state] call pcb_fnc_mis_ll_get_item;

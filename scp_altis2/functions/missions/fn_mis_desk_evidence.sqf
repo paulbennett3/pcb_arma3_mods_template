@@ -60,6 +60,7 @@ private _desk = "OfficeTable_01_old_F" createVehicle [0,0,0];
 
 private _cargo = "FlashDisk";
 _desk addItemCargoGlobal [_cargo, 1];
+[_desk, 2 + (ceil (random 5))] call pcb_fnc_loot_crate;
 
 _desk setPos _pos;
 _desk setDir 180; _desk setPosASL getPosASL _desk;
@@ -72,13 +73,15 @@ _state set ["taskdesc", [
         "Get evidence",
         "markername"]];
 private _taskpid = "";
-if (! isNil "PARENT_TASK") then { _taskpid = PARENT_TASK; };
+if (! (PARENT_TASK isEqualTo "")) then { _taskpid = PARENT_TASK; };
 _state set ["taskpid", _taskpid];
 
 // add some anomalies
 [getPosATL _desk, 1, 5] call pcb_fnc_add_anomalies;
 [_pos, _building] call pcb_fnc_occult_decorate;
 [_pos] call pcb_fnc_mission_encounter;
+
+[_building] call pcb_fnc_add_loot_boxes_to_building;
 
 private _result = [_state] call pcb_fnc_mis_ll_get_item;
 _result

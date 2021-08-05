@@ -41,19 +41,25 @@ private _code = {
         [_types, _n, _x, civilian] call _code;
 
     };   
-    // looters
-    if ((random 1) < 0.25) then {
-        private _types = types_hash get "looters";
-        private _n = 1 + (ceil (random 5));
-        [_types, _n, _x, independent] call _code;
-    };   
-    // zombies
-    if ((random 1) < 0.25) then {
-        private _types = types_hash get "zombies";
-        private _n = 1 + (ceil (random 5));
-        [_types, _n, _x, east] call _code;
-    };   
-        
+
+    // add "exclusion zone" to start area (since that is where players
+    //   will be when this runs ...)
+    if (! ([[_x, 1500]] call pcb_fnc_players_in_area)) then {
+        // looters
+        if ((random 1) < 0.15) then {
+            private _types = types_hash get "looters";
+            private _n = 1 + (ceil (random 5));
+            [_types, _n, _x, independent] call _code;
+        };   
+        // zombies -- disable for now
+        if ((random 1) < 0.10) then {
+            //private _types = types_hash get "zombies";
+            private _types = ["DSA_Crazy"];
+            private _n = 1 + (ceil (random 7));
+            [_types, _n, _x, east] call _code;
+        };   
+    };
+    
     if (pcb_DEBUG) then {
         private _mn = "MC" + (str _x);
         private _m = createMarker [_mn, _x];
