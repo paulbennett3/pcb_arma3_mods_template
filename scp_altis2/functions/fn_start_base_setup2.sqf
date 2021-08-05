@@ -80,11 +80,7 @@ private _cabinet = [_desk, "Land_PortableCabinet_01_bookcase_black_F", [1.5, 1, 
 [_desk, "Land_File2_F", [.95, .05, .45], 145] call _attachIt;
 [_desk, "Land_Tablet_01_F", [.65, -.15, .45], 27] call _attachIt;
 [_desk, "Land_PortableLight_double_F", [7, -.5, 0.6], 115] call _attachIt;
-private _tent_type_rot = selectRandom [
-    ["Land_CanvasCover_02_F", 0, 1.5], ["CamoNet_OPFOR_F", 0, 1.5],
-    ["Land_BagBunker_Tower_F", 90, 1.3], 
-    ["Land_MedicalTent_01_NATO_generic_outer_F", 90, 1.3]
-];
+private _tent_type_rot = selectRandom (types_hash get "bases");
 private _tent_type = _tent_type_rot select 0; private _tent_rot = _tent_type_rot select 1; _tent_offset_z = _tent_type_rot select 2;
 [_desk, _tent_type, [2, 2, _tent_offset_z], _tent_rot] call _attachIt;
 [_desk, "B_CargoNet_01_ammo_F", [5, 10, 0.4], 45 + (random 90)] call _attachIt;
@@ -229,6 +225,7 @@ private _hc_types_inf = [
     "B_T_Soldier_UAV_F",
     "B_T_Soldier_LAT2_F"
 ];
+/*
 _next_pos = (playableUnits select 0) getPos [_offset, start_dir]; _offset = _offset + 30;
 [_next_pos, playableUnits select 0, _hc_types_inf, "Squad 1", "teamRed", "infantry"] call pcb_fnc_add_high_command_unit;
 
@@ -237,5 +234,5 @@ _next_pos = (playableUnits select 0) getPos [_offset, start_dir]; _offset = _off
 
 _next_pos = (playableUnits select 0) getPos [_offset, start_dir]; _offset = _offset + 30;
 [_next_pos, playableUnits select 0, _hc_types_inf, "Squad 3", "teamGreen", "infantry"] call pcb_fnc_add_high_command_unit;
-
+*/
 

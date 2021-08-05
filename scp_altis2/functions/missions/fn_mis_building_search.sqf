@@ -52,7 +52,7 @@ _state set ["taskdesc", [
 _state set ["taskpos", _pos];
 _state set ["taskradius", 5];
 private _taskpid = "";
-if (! isNil "PARENT_TASK") then { 
+if (! (PARENT_TASK isEqualTo "") ) then { 
     _taskpid = PARENT_TASK;
 };
 _state set ["taskpid", _taskpid];

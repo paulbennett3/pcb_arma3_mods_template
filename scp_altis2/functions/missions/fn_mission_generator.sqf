@@ -66,7 +66,13 @@ if (! isServer) exitWith {};
             publicVariable "total_missions";
             
             // select one from our list
-            private _mission = selectRandom mission_list;
+            private _mission = "";
+            if (mission_select isEqualTo "random") then {
+                _mission = selectRandom mission_list;
+            } else {
+                // reading last mission in the queue first! (LIFO queue)
+                _mission = mission_list select (total_missions - 1);
+            };
             
             // make an ID for it
             private _UID = "MID" + (str ([] call pcb_fnc_get_next_UID));

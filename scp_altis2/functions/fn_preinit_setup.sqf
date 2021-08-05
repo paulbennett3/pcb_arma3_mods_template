@@ -65,9 +65,10 @@ if (_use_drongo_missions) then {
 ---------------------------------------------------------------- */
 diag_log "Placing DSA Detectable Spooks";
 
-_cmd = "DSA_DetectableSpooks = this; this setVariable ['BIS_fnc_initModules_disableAutoActivation', false, true]; DSA_DetectableSpooks setVariable ['DSA_Wendigo', 'FALSE', true]; DSA_DetectableSpooks setVariable ['DSA_Vampire', 'FALSE', true]; DSA_DetectableSpooks setVariable ['DSA_411', 'TRUE', true]; DSA_DetectableSpooks setVariable ['DSA_Shadowman', 'TRUE', true]; DSA_DetectableSpooks setVariable ['DSA_Hatman', 'TRUE', true]; DSA_DetectableSpooks setVariable ['DSA_Rake', 'FALSE' , true]; DSA_DetectableSpooks setVariable ['DSA_Mindflayer', 'TRUE', true]; DSA_DetectableSpooks setVariable ['DSA_Abomination', 'TRUE', true]; DSA_DetectableSpooks setVariable ['DSA_Snatcher', 'TRUE' , true]; DSA_DetectableSpooks setVariable ['DSA_Crazy', 'FALSE' , true];";
 
-"DSA_DetectableSpooks" createUnit [
+_cmd = "DSA_EnableDetectors = this; this setVariable ['BIS_fnc_initModules_disableAutoActivation', false, true]; DSA_EnableDetectors setVariable ['DSA_DetectorRange', 50, true]; DSA_EnableDetectors setVariable ['DSA_DetectorMode', 'BOTH', true]; DSA_EnableDetectors setVariable ['DSA_Wendigo','TRUE', true]; DSA_EnableDetectors setVariable ['DSA_Vampire','TRUE', true]; DSA_EnableDetectors setVariable ['DSA_411','TRUE', true]; DSA_EnableDetectors setVariable ['DSA_Shadowman','TRUE', true]; DSA_EnableDetectors setVariable ['DSA_Hatman','TRUE', true]; DSA_EnableDetectors setVariable ['DSA_Rake','TRUE', true]; DSA_EnableDetectors setVariable ['DSA_Mindflayer','TRUE', true]; DSA_EnableDetectors setVariable ['DSA_Abomination','TRUE', true]; DSA_EnableDetectors setVariable ['DSA_Snatcher','TRUE', true]; DSA_EnableDetectors setVariable ['DSA_Crazy','TRUE', true]; DSA_EnableDetectors setVariable ['DSA_ActiveIdol','TRUE', true]; DSA_EnableDetectors setVariable ['DSA_Trapdoor','TRUE', true]; DSA_EnableDetectors setVariable ['DSA_Leech','TRUE', true]; DSA_EnableDetectors setVariable ['DSA_Launchpad','TRUE', true]; DSA_EnableDetectors setVariable ['DSA_Zapper','TRUE', true]; DSA_EnableDetectors setVariable ['DSA_Idol','TRUE', true]; DSA_EnableDetectors setVariable ['DSA_Idol2','TRUE', true];";
+	
+"DSA_EnableDetectors" createUnit [
 	epicenter,
 	_moduleGroup,
 	_cmd

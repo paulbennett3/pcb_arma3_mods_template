@@ -73,7 +73,7 @@ _state set ["taskdesc", [
         "Get evidence",
         "markername"]];
 private _taskpid = "";
-if (! isNil "PARENT_TASK") then { _taskpid = PARENT_TASK; };
+if (! (PARENT_TASK isEqualTo "")) then { _taskpid = PARENT_TASK; };
 _state set ["taskpid", _taskpid];
 
 // add some anomalies
