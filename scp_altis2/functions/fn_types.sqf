@@ -177,6 +177,10 @@ types_hash set ["civ infected", [
 // Zombies
 // --------------------------------
 types_hash set ["zombies", [
+    "DSA_Crazy"
+]];
+
+types_hash set ["zombies_ryan", [
 "RyanZombieCrawler1", "RyanZombieCrawler2", "RyanZombieCrawler3",
 "RyanZombieCrawler4", "RyanZombieCrawler5", "RyanZombieCrawler6",
 "RyanZombieCrawler7", "RyanZombieCrawler8", "RyanZombieCrawler9",
