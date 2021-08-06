@@ -184,7 +184,6 @@ private _gt = selectRandom [
     "O_Truck_03_transport_F",
     "B_G_Van_02_transport_F",
     "B_APC_Tracked_01_rcws_F",
-    "B_T_APC_Tracked_01_CRV_F",
     "O_Truck_03_covered_F",
     "vn_b_wheeled_m54_01_sog",
     "vn_b_wheeled_m54_02"
