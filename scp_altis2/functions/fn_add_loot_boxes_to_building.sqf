@@ -14,7 +14,7 @@ private _positions = [_building] call BIS_fnc_buildingPositions;
     if (_count < _max_boxes) then {
         if ((random 100) < _chance) then {
             private _pos = _x;
-            if ((isNil "_pos") || (! ([_pos] call pcb_fnc_is_valid_position))) exitWith { [false, _state] };
+            if ((isNil "_pos") || (! ([_pos] call pcb_fnc_is_valid_position))) exitWith { };
 
             private _box_type = selectRandom (types_hash get "boxes");
             private _box = _box_type createVehicle _pos;
@@ -28,6 +28,7 @@ private _positions = [_building] call BIS_fnc_buildingPositions;
 
 if (_count < 1) then {
     private _pos = selectRandom _positions;
+    if ((isNil "_pos") || (! ([_pos] call pcb_fnc_is_valid_position))) exitWith { };
     private _box_type = selectRandom (types_hash get "boxes");
     private _box = _box_type createVehicle _pos;
     [_box, 1 + (ceil (random 6))] call pcb_fnc_loot_crate;
