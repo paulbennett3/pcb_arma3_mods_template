@@ -42,7 +42,6 @@ if (pcb_DEBUG) then {
 // find building
 // -------------------
 private _transmitters = nearestTerrainObjects [start_pos, ["Transmitter"], worldSize, false];
-systemChat (str _transmitters);
 private _building = selectRandom _transmitters;
  
 if ((isNil "_building") || (isNull _building)) exitWith { hint "failed to find building!"; [false, _state] };

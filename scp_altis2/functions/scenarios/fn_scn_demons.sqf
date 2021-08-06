@@ -31,10 +31,7 @@ Parameters:
 ******************************************************************* */
 params ["_action"];
 
-if (pcb_DEBUG) then {
-    diag_log ("Scenario Demons <" + (str _action) + ">");
-    hint ("Scenario Demons <" + (str _action) + ">");
-};
+[("Scenario Demons <" + (str _action) + ">")] call pcb_fnc_debug;
 
 switch (_action) do {
     case "create": {
@@ -44,6 +41,11 @@ switch (_action) do {
 
         // adjust start position if desired
         [] call pcb_fnc_random_start_pos;
+        waitUntil { ! isNil "random_start_ready" };
+
+        // create the "base camp" + spawning point
+        //[] call pcb_fnc_start_base_setup;
+        [] call pcb_fnc_start_base_setup2;
 
         // start spawning spare vehicles etc
         [] call pcb_fnc_background;
@@ -51,9 +53,6 @@ switch (_action) do {
         // manipulate the starting weather et al
         [] call pcb_fnc_set_mission_environment;
 
-        // create the "base camp" + spawning point
-        //[] call pcb_fnc_start_base_setup;
-        [] call pcb_fnc_start_base_setup2;
 
         // Do we want a parent task (ie, missions as sub-tasks)?
         PARENT_TASK = "";  // set to objNull if we don't
@@ -76,22 +75,23 @@ switch (_action) do {
         // remember our state
         scenario_state = 1;
         publicVariable "scenario_state";
+        [("Scenario Demons completed <" + (str _action) + ">")] call pcb_fnc_debug;
      };
 
     case "mission_completed": {
-        if ((scenario_state == 1) && (total_missions < 1)) then {
+        [("Scenario Demons <" + (str _action) + ">")] call pcb_fnc_debug;
+        if ((scenario_state == 1) && (total_missions == 0)) then {
             scenario_state = 2;
             publicVariable "scenario_state";
 
             // update our mission list (what we can choose from)
             // remember to do these in reverse order!!! 
             mission_list = []; 
-            // we "register" missions here, last one first, 
-            mission_list pushBackUnique "functions\missions\fn_mis_exfil.sqf";
-            mission_list pushBackUnique "functions\missions\fn_mis_spawner.sqf";
-            mission_list pushBackUnique "functions\missions\fn_mis_deliver_evidence.sqf";
-            mission_list pushBackUnique "functions\missions\fn_mis_get_laptop_from_base.sqf";
             mission_list pushBackUnique "functions\missions\fn_mis_monster_hunt.sqf";
+            mission_list pushBackUnique "functions\missions\fn_mis_get_laptop_from_base.sqf";
+            mission_list pushBackUnique "functions\missions\fn_mis_deliver_evidence.sqf";
+            mission_list pushBackUnique "functions\missions\fn_mis_spawner.sqf";
+            mission_list pushBackUnique "functions\missions\fn_mis_exfil.sqf";
             publicVariable "mission_list"; 
 
             total_missions = count mission_list;

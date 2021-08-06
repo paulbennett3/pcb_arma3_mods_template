@@ -144,27 +144,6 @@ private _cmd = {
 
 
 
-
-// ------------------------------------
-//            Set Respawn Here
-// ------------------------------------
-private _cmd = {
-    params ['_target', '_caller', '_actionId', '_arguments'];
-    "respawn_west" setMarkerPos getPosATL _caller;
-    { hint "Respawn point moved"; } remoteExec ["call", 0];
-    diag_log "Respawn point moved";
-    [ "Respawn point moved" ] remoteExec ["diag_log", 2];
-};
-
-[
-    _obj,
-    [
-        "Set Respawn Here",
-        _cmd,
-        [], 1.5, false, false, "", "true", 5
-    ]
-] remoteExec ["addAction", 0, true];   // Server only!
-
 // ------------------------------------
 //            Abandon Task
 // ------------------------------------
@@ -187,26 +166,6 @@ private _cmd = {
         [], 1.5, false, false, "", "true", 5
     ]
 ] remoteExec ["addAction", 0, true];   // Server only!
-
-// ------------------------------------
-//            Get Items 
-// ------------------------------------
-private _cmd = {
-    params ['_target', '_caller', '_actionId', '_arguments'];
-    private _list = (itemsWithMagazines _caller);
-    [ ("Items: <" + (str _list) + ">") ] remoteExec ["systemChat", 0];
-    { hint ("Items: <" + (str _list) + ">"); } remoteExec ["call", 0];
-};
-
-[
-    _obj,
-    [
-        "Items",
-        _cmd,
-        [], 1.5, false, false, "", "true", 5
-    ]
-] remoteExec ["addAction", 0, true];   // Server only!
-
 
 
 // ------------------------------------

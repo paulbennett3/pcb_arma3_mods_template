@@ -31,10 +31,6 @@ private _state = createHashMapFromArray [
 
 // -------------------------------------
 
-if (pcb_DEBUG) then {
-    hint "Building search running";
-//    ["Building search running"] remoteExec ["systemChat", 0, true];    
-};
 
 // pick a random cool building
 private _target = [epicenter, mission_radius, false, 5] call pcb_fnc_get_cool_building_location; 

@@ -7,10 +7,9 @@ together.
 if (! isServer) exitWith {};
 
 [] spawn {
-    diag_log "Mission Generator spawned";
-    if (pcb_DEBUG) then {
-        hint "Mission Generator started (spawned)";
-    };
+    sleep .1;
+
+    ["Mission Generator spawned"] call pcb_fnc_debug;
 
     // start our mission counter and mission array
     mission_success = true; // assume true, set to false if failed ...
@@ -19,7 +18,6 @@ if (! isServer) exitWith {};
     publicVariable "mission_active";
 
     active_mission_info = createHashMap;  // index with "mission ID" -- for state needed for cleanup, or complex missions
-
     // fire off the director for tracking background stuff
     [] call pcb_fnc_director;
 
@@ -70,14 +68,16 @@ if (! isServer) exitWith {};
             if (mission_select isEqualTo "random") then {
                 _mission = selectRandom mission_list;
             } else {
-                // reading last mission in the queue first! (LIFO queue)
-                _mission = mission_list select (total_missions - 1);
+                _mission = mission_list select 0;
+                mission_list deleteAt 0;
+                publicVariable "mission_list";
             };
             
             // make an ID for it
             private _UID = "MID" + (str ([] call pcb_fnc_get_next_UID));
             
             // execute the mission, and store any state for "later"
+            ["Executing mission <" + (str _mission) + ">"] call pcb_fnc_debug;
             private _result = [_UID] call compile preprocessFileLineNumbers _mission;
             private _started_ok = _result select 0;
             private _state = _result select 1;

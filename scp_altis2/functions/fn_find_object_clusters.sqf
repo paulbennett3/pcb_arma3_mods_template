@@ -4,10 +4,8 @@
 Given a list of classes (not types!), find clusters
 of those clases and return them.
 
-!!!!! not thread safe !!!!!! Use at own risk ...
-(uses globals for flags and return value -- running more than 
-one search at a time will cause havoc ...)
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!! Possibly "thread safe" -- uses publicVariable semaphore and delay at start ...
+Really should "spawn" this, since it is slow as fuck ...
 
 Params:
     _types (list of strings) : classes to search for
@@ -40,13 +38,26 @@ See the following pages for groups of class types (ie, military cargo bases, cem
  https://community.bistudio.com/wiki/Arma_3:_CfgPatches_CfgVehicles#A3_Structures_F_Mil_Cargo
 ******************************************************** */
 
-params ["_types", "_target", ["_search_radius", worldSize], ["_cluster_radius", 200], ["_min_cluster_size", 3]];
+params ["_types", "_target", ["_search_radius", worldSize], 
+        ["_cluster_radius", 200], ["_min_cluster_size", 3], ["_label", ""]];
 
+private _my_mutex_id = "find_object_clusters";
+
+if (isNil "find_object_clusters_mutex") then {
+    find_object_clusters_mutex = ["create", _my_mutex_id] call pcb_fnc_mutex;
+    publicVariable "find_object_clusters_mutex";
+};
+waitUntil { ! isNil "find_object_clusters_mutex"; };
+
+// now take the mutex -- will pend until taken
+["get", _my_mutex_id, find_object_clusters_mutex] call pcb_fnc_mutex;
+
+// we use this with our spawned thread to let us know it is done
 cluster_search_done = false;
 publicVariable "cluster_search_done";
 
-[_types, _target, _search_radius, _cluster_radius, _min_cluster_size] spawn {
-    params ["_types", "_target", "_search_radius", "_cluster_radius", "_min_cluster_size"];
+[_types, _target, _search_radius, _cluster_radius, _min_cluster_size, _label] spawn {
+    params ["_types", "_target", "_search_radius", "_cluster_radius", "_min_cluster_size", "_label"];
 
     cluster_search_results = createHashMap;
 
@@ -64,32 +75,38 @@ publicVariable "cluster_search_done";
 
         // does it have a valid position?
         if (((_pos select 0) > 0) || ((_pos select 1) > 0)) then {
-            // only process if we haven't seen it before
-            if (! ((str _x) in _exclude)) then {
-                // make a list of all the objects in the cluster-in-potentia
-                private _cluster_objs = [];
 
-                private _objects = nearestObjects [_pos, _types, _RADIUS];
+            // only process stuff in the active area ellipse
+            if (_pos inArea "mActive") then {
+                // only process if we haven't seen it before
+                if (! ((str _x) in _exclude)) then {
+                    // make a list of all the objects in the cluster-in-potentia
+                    private _cluster_objs = [];
 
-                private _bc_n = count _objects;
+                    private _objects = nearestObjects [_pos, _types, _RADIUS];
+
+                    private _bc_n = count _objects;
  
-                for [{_i = 0 }, {_i < _bc_n}, {_i = _i + 1}] do { 
-                    private _obj = _objects select _i;
-                    _pos = getPosATL _obj;
-                    if (((_pos select 0) > 0) || ((_pos select 1) > 0)) then {
-                        if (! ((str _obj) in _exclude)) then {
-                            _cluster_objs pushBackUnique _obj;
-                            _exclude set [(str _obj), [_obj, _cluster_count]]; // mark which cluster it is in
-                        } else {
-                            private _cnum = (_exclude get (str _obj)) select 1; 
-                            _merge_list pushBackUnique [_cluster_count, _cnum];
+                    for [{_i = 0 }, {_i < _bc_n}, {_i = _i + 1}] do { 
+                        private _obj = _objects select _i;
+                        _pos = getPosATL _obj;
+                        if (((_pos select 0) > 0) || ((_pos select 1) > 0)) then {
+                            if (! ((str _obj) in _exclude)) then {
+                                _cluster_objs pushBackUnique _obj;
+                                _exclude set [(str _obj), [_obj, _cluster_count]]; // mark which cluster it is in
+                            } else {
+                                private _cnum = (_exclude get (str _obj)) select 1; 
+                                _merge_list pushBackUnique [_cluster_count, _cnum];
+                            };
                         };
                     };
-                };
-                _clusters set [_cluster_count, _cluster_objs];  // key is cluster number, value is list of objs in cluster
-                _cluster_count = _cluster_count + 1;
 
-               sleep 0.1;
+                    // key is cluster number, value is list of objs in cluster
+                    _clusters set [_cluster_count, _cluster_objs];  
+                    _cluster_count = _cluster_count + 1;
+
+                   sleep 0.1;
+                };
             };
         };
     } forEach _found_objects;
@@ -145,6 +162,7 @@ publicVariable "cluster_search_done";
                 _temp set ["n_obj", count _obj_list]; 
                 _temp set ["a", _a]; 
                 _temp set ["b", _b]; 
+                _temp set ["label", _label]; 
                 cluster_search_results set [_x, _temp];
              };
         } forEach (keys _clusters);
@@ -155,6 +173,14 @@ publicVariable "cluster_search_done";
 
     cluster_search_done = true;
     publicVariable "cluster_search_done";
- };
+};
 
+waitUntil { sleep 1; cluster_search_done };
 
+// make a duplicate of the results so they aren't overwritten by next search
+private _result = +cluster_search_results;
+
+// release our mutex
+["release", _my_mutex_id, find_object_clusters_mutex] call pcb_fnc_mutex;
+
+_result

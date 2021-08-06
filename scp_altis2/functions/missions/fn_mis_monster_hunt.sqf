@@ -74,9 +74,7 @@ private _did = _enc_info select 3;
 _state set ["targetlist", _obj_list];
 _state set ["targettype", _type];
 
-if (pcb_DEBUG) then {
-    [("<" + (str (_state get "targettype")) + "><" + (str _n) + "><" + (str _did) + "><" + (str _pos) + "> " + _loc_type)] remoteExec ["systemChat", 0, true];
-};
+[("<" + (str (_state get "targettype")) + "><" + (str _n) + "><" + (str _did) + "><" + (str _pos) + "> " + _loc_type)] call pcb_fnc_debug; 
 
 _state set ["taskdesc", [
     "Purge the area of paranormal entities",

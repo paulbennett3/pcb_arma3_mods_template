@@ -177,6 +177,10 @@ types_hash set ["civ infected", [
 // Zombies
 // --------------------------------
 types_hash set ["zombies", [
+    "DSA_Crazy"
+]];
+
+types_hash set ["zombies_ryan", [
 "RyanZombieCrawler1", "RyanZombieCrawler2", "RyanZombieCrawler3",
 "RyanZombieCrawler4", "RyanZombieCrawler5", "RyanZombieCrawler6",
 "RyanZombieCrawler7", "RyanZombieCrawler8", "RyanZombieCrawler9",
@@ -279,11 +283,17 @@ types_hash set ["spooks", [
 // Looters
 // --------------------------------
 types_hash set ["looters", [
+    "I_L_Looter_Pistol_F", "I_L_Looter_SG_F", "I_L_Looter_Pistol_F", "I_L_Looter_SG_F", 
+    "I_L_Looter_Pistol_F", "I_L_Looter_SG_F", "I_L_Looter_Pistol_F", "I_L_Looter_SG_F", 
     "I_L_Looter_Pistol_F", "I_L_Looter_SG_F", "I_L_Looter_Rifle_F", "I_L_Looter_SMG_F",
-    "I_L_Criminal_SG_F", "I_L_Criminal_SMG_F", "I_L_Looter_Pistol_F", "I_L_Looter_SG_F",
-    "I_L_Looter_Rifle_F", "I_C_Soldier_Bandit_4_F", "I_C_Soldier_Bandit_3_F", "I_C_Soldier_Bandit_7_F",
+    "I_L_Criminal_SG_F", "I_L_Criminal_SMG_F", "I_L_Looter_SG_F", "I_L_Looter_Rifle_F"
+]];
+
+types_hash set ["insurgents", [
+    "I_C_Soldier_Bandit_4_F", "I_C_Soldier_Bandit_3_F", "I_C_Soldier_Bandit_7_F",
     "I_C_Soldier_Bandit_5_F", "I_C_Soldier_Bandit_6_F", "I_C_Soldier_Bandit_2_F", "I_C_Soldier_Bandit_8_F",
-    "I_C_Soldier_Bandit_1_F", "I_L_Looter_Pistol_F", "I_L_Looter_SG_F", "I_L_Looter_Rifle_F"
+    "I_C_Soldier_Bandit_1_F", "I_L_Looter_Pistol_F", "I_L_Looter_SG_F", "I_L_Looter_Rifle_F",
+    "I_E_Soldier_TL_F", "I_E_Soldier_AR_F", "I_E_Soldier_GL_F", "_E_RadioOperator_F"
 ]];
 
 // --------------------------------
@@ -588,10 +598,16 @@ types_hash set ["static cargo mil", [
 
 // Helicopters
 types_hash set ["heli civ", [
-    "C_Heli_Light_01_civil_F"
+    "B_Heli_Light_dynamicLoadout_01_F",
+    "C_Heli_Light_01_civil_F",
+    "C_Heli_Light_01_civil_F",
+    "C_IDAP_Heli_Transport_02_F"
 ]];
 
 types_hash set ["heli mil", [
+    "vn_i_air_ch34_02_02",
+    "vn_i_air_uh1c_07_01",
+    "vn_i_air_uh1d_01_01",
     "vn_b_air_uh1d_01_04",
     "vn_b_air_uh1d_01_06",
     "vn_b_air_uh1d_01_07",
@@ -602,7 +618,7 @@ types_hash set ["heli mil", [
     "O_Heli_Transport_04_covered_F",
     "O_Heli_Light_02_unarmed_F",
     "I_Heli_light_03_unarmed_F",
-    "B_Heli_Light_01_F",
+    "B_Heli_Light_dynamicLoadout_01_F",
     "O_T_VTOL_02_infantry_dynamicLoadout_F",
     "O_T_VTOL_02_vehicle_dynamicLoadout_F"
 ]];
@@ -611,5 +627,109 @@ types_hash set ["heli mil", [
 
 // Trucks 
 
+types_hash set ["car large civ", [
+    "C_Van_02_medevac_F",
+    "C_Van_02_transport_F",
+    "C_Truck_02_fuel_F",
+    "C_Truck_02_box_F",
+    "C_Truck_02_transport_F",
+    "C_Truck_02_covered_F",
+    "I_G_Offroad_01_repair_F",
+    "I_G_Van_02_vehicle_F",
+    "vn_b_wheeled_m151_02",
+    "vn_o_wheeled_z157_02_nva65",
+    "vn_o_wheeled_z157_01_nva65",
+    "vn_c_wheeled_m151_02",
+    "vn_c_wheeled_m151_01"
+]];
+
+types_hash set ["car large mil", [
+    "vn_b_wheeled_m54_01",
+    "vn_b_wheeled_m54_02",
+    "vn_b_wheeled_m54_01_airport",
+    "B_Truck_01_transport_F",
+    "B_Truck_01_covered_F",
+    "O_Truck_03_transport_F",
+    "O_Truck_03_transport_F",
+    "I_Truck_02_box_F",
+    "vn_i_wheeled_m54_repair",
+    "vn_i_wheeled_m54_repair",
+    "O_Truck_03_repair_F",
+    "O_Truck_03_medical_F",
+    "B_Truck_01_flatbed_F",
+    "B_Truck_01_flatbed_F",
+    "B_Truck_01_flatbed_F",
+    "B_Truck_01_medical_F",
+    "B_Truck_01_Repair_F",
+    "B_Truck_01_Repair_F",
+    "O_Truck_03_ammo_F",
+    "O_Truck_03_fuel_F",
+    "B_MBT_01_cannon_F",
+    "B_MBT_01_TUSK_F",
+    "O_MBT_04_command_F",
+    "O_MBT_04_cannon_F",
+    "O_MBT_04_command_F",
+    "I_MBT_03_cannon_F",
+    "I_LT_01_cannon_F",
+    "O_Truck_03_covered_F"
+]];
+types_hash set ["car medium civ", [
+    "C_Van_01_fuel_F",
+    "C_Offroad_01_F",
+    "C_Offroad_01_comms_F",
+    "C_Offroad_01_covered_F",
+    "C_Offroad_01_repair_F",
+    "C_Van_01_box_F",
+    "C_Tractor_01_F",
+    "C_Van_01_transport_F"
+]];
+
+types_hash set ["car medium mil", [
+    "B_MRAP_01_F",
+    "B_MRAP_01_gmg_F",
+    "B_MRAP_01_hmg_F",
+    "O_MRAP_02_F",
+    "O_MRAP_02_gmg_F",
+    "O_MRAP_02_hmg_F",
+    "I_MRAP_03_F",
+    "I_MRAP_03_gmg_F",
+    "I_MRAP_03_hmg_F"
+]];
+
+types_hash set ["car small civ", [
+    "vn_c_bicycle_01",
+    "C_Hatchback_01_F",
+    "C_Hatchback_01_sport_F",
+    "C_Offroad_02_unarmed_F",
+    "C_Quadbike_01_F"
+]];
+
+types_hash set ["car small mil", [
+    "vn_c_bicycle_01",
+    "vn_b_wheeled_m151_mg_04",
+    "vn_b_wheeled_m151_mg_04_mp",
+    "vn_b_wheeled_m151_mg_02",
+    "vn_b_wheeled_m151_mg_02_mp",
+    "vn_b_wheeled_m151_mg_03",
+    "vn_b_wheeled_m151_01",
+    "B_CTRG_LSV_01_light_F",
+    "B_LSV_01_AT_F",
+    "B_LSV_01_armed_F",
+    "B_LSV_01_unarmed_F",
+    "B_Quadbike_01_F",
+    "O_LSV_02_AT_F",
+    "O_LSV_02_unarmed_F",
+    "O_Quadbike_01_F",
+    "vn_o_wheeled_btr40_mg_02_nva65",
+    "vn_o_wheeled_btr40_mg_01_nva65",
+    "vn_o_wheeled_btr40_mg_03_nva65",
+    "vn_o_wheeled_btr40_02_nva65",
+    "vn_o_wheeled_btr40_01_nva65"
+]];
+
+
+
+
+// -----------------------------------------------------
 
 publicVariable "types_hash";

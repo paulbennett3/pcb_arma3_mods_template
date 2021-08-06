@@ -30,11 +30,13 @@ class CfgFunctions
             file = "functions";
             class add_anomalies {};
             class add_base_actions {};
+            class debug {};
             class add_high_command_unit {};
             class add_interact_action_to_object {};
             class add_loot_boxes_to_building {};
             class advancedTowingInit {};
             class animal_follower {};
+            class animal_follower_loop {};
             class background {};
             class boom_guy {};
             class cargo_base {};
@@ -50,12 +52,15 @@ class CfgFunctions
             class is_valid_position {};
             class loot_crate {};
             class make_destroyable {};
+            class mark_active_area {};
+            class mine_road {};
             class monitor_ratings {};
+            class mutex {};
             class near_military {};
             class objective_locate_object {};
+            class parse_airports {};
             class player_in_vehicle {};
             class players_in_area {};
-            class populate_cities {};
             class preinit_setup { preInit = 1; };
             class random_start_pos {};
             class show_cities {};
@@ -68,6 +73,7 @@ class CfgFunctions
             class set_rating {};
             class set_scp_loadout {};
             class set_scp_vehicle_loadout {};
+            class spawn_cluster_inhabitants {};
             class spawn_packable_base {};
             class spawn_random_vehicle {};
             class spawn_spare_helicopters {};

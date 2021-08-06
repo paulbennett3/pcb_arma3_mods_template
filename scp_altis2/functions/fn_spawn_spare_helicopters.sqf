@@ -5,6 +5,7 @@ Put helicopters on all the helipads on the map
 ****************************************************************** */
 // only let this run once!!!!
 if (! isNil "spare_heli_spawner") exitWith {};
+
 spare_heli_spawner = true; publicVariable "spare_heli_spawner";
 
 {
@@ -50,4 +51,3 @@ spare_heli_spawner = true; publicVariable "spare_heli_spawner";
 
     sleep .1;
 } forEach (world_center nearObjects ["Helipad_Base_F", worldSize]);
-// } forEach (nearestObjects [playableUnits select 0, ["HeliH"], worldSize]);
