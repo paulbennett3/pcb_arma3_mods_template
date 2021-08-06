@@ -68,14 +68,16 @@ if (! isServer) exitWith {};
             if (mission_select isEqualTo "random") then {
                 _mission = selectRandom mission_list;
             } else {
-                // reading last mission in the queue first! (LIFO queue)
-                _mission = mission_list select (total_missions - 1);
+                _mission = mission_list select 0;
+                mission_list deleteAt 0;
+                publicVariable "mission_list";
             };
             
             // make an ID for it
             private _UID = "MID" + (str ([] call pcb_fnc_get_next_UID));
             
             // execute the mission, and store any state for "later"
+            ["Executing mission <" + (str _mission) + ">"] call pcb_fnc_debug;
             private _result = [_UID] call compile preprocessFileLineNumbers _mission;
             private _started_ok = _result select 0;
             private _state = _result select 1;

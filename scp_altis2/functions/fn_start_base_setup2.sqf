@@ -189,22 +189,23 @@ private _gt = selectRandom [
     "vn_b_wheeled_m54_01_sog",
     "vn_b_wheeled_m54_02"
 ];
-_vehicle_list pushBack ["Ground Transport", _gt, 10];
+_vehicle_list pushBack ["Ground Transport", _gt, 15];
 
 // We need "fast" transport for 1 or 2
 private _ft = selectRandom [
     "B_LSV_01_unarmed_F",
     "B_Quadbike_01_F",
     "O_LSV_02_unarmed_F",
-    "B_Heli_Light_dynamicLoadout_01_F"
+    "B_Heli_Light_01_F"
 ];
-_vehicle_list pushBack ["Transport", _ft, 10];
+_vehicle_list pushBack ["Transport", _ft, 15];
 
 // Cool and useful
-_vehicle_list pushBack ["Drone", "B_T_UGV_01_rcws_olive_F", 10];
-_vehicle_list pushBack ["Flatbed", "B_T_Truck_01_flatbed_F", 10];
+_vehicle_list pushBack ["Flatbed", "B_T_Truck_01_flatbed_F", 15];
+_vehicle_list pushBack ["Drone", "B_T_UGV_01_rcws_olive_F", 15];
 
 // Large air transport
+_vehicle_list pushBack ["SPACER", "SPACER", 30];
 _vehicle_list pushBack ["VTOL", "B_T_VTOL_01_vehicle_F", 30];
 
 {
@@ -212,22 +213,24 @@ _vehicle_list pushBack ["VTOL", "B_T_VTOL_01_vehicle_F", 30];
     private _type = _x select 1;
     private _delta = _x select 2;
     _next_pos = (playableUnits select 0) getPos [_offset, start_dir]; _offset = _offset + _delta;
-    private _veh = _type createVehicle _next_pos;
-    if (unitIsUAV _veh) then {
-        createVehicleCrew _veh;
-    } else {
-        [_veh] call pcb_fnc_set_scp_vehicle_loadout;
+    if (! (_type isEqualTo "SPACER")) then {
+        private _veh = _type createVehicle _next_pos;
+        if (unitIsUAV _veh) then {
+            createVehicleCrew _veh;
+        } else {
+            [_veh] call pcb_fnc_set_scp_vehicle_loadout;
+        };
+
+        private _cid = "T" + str ([] call pcb_fnc_get_next_UID);
+        [[_cid, _pid], _label, _vpos, 15] call pcb_fnc_objective_locate_object;
+        _veh respawnVehicle [10, 3 + (ceil (random 3))];
+        _veh setDir start_dir;
+
+        // make the vehicle available for use by the players group
+        (group (playableUnits select 0)) addVehicle _veh;
+
+        sleep .1;
     };
-
-    private _cid = "T" + str ([] call pcb_fnc_get_next_UID);
-    [[_cid, _pid], _label, _vpos, 15] call pcb_fnc_objective_locate_object;
-    _veh respawnVehicle [10, 3 + (ceil (random 3))];
-    _veh setDir start_dir;
-
-    // make the vehicle available for use by the players group
-    (group (playableUnits select 0)) addVehicle _veh;
-
-    sleep .1;
 } forEach _vehicle_list;
 
 // ------------------------------------------------------------------
@@ -244,23 +247,19 @@ _sc = "B_Slingload_01_Repair_F" createVehicle (_start_crate getPos [30, _sc_dir]
 //    Base Guard Squad (not under player control) 
 // ------------------------------------------------------------------
 private _guard_types_inf = [
-    "B_T_Soldier_TL_F",
-    "B_T_Soldier_AR_F",
-    "B_T_Soldier_AAR_F",
-    "B_T_Medic_F",
-    "B_T_Engineer_F",
-    "B_T_soldier_M_F",
-    "B_T_Soldier_UAV_F",
-    "B_T_Soldier_LAT2_F"
+    "B_Soldier_GL_F",
+    "B_Soldier_F"
 ];
-_next_pos = (playableUnits select 0) getPos [_offset, start_dir]; _offset = _offset + 30;
+
+_offset = -20;
+_next_pos = (playableUnits select 0) getPos [_offset, start_dir]; _offset = _offset + 20;
 private _code = {
     params ["_types", "_n", "_pos", "_side"];
     private _group = createGroup _side;
-    for [{_i = 0 }, {_i < _n}, {_i = _i + 1}] do {
-        private _type = _types select _i;
-        private _veh = _group createUnit [_type, _pos, [], 200, 'NONE'];
-        _veh triggerDynamicSimulation false; // won't wake up enemy units:wq
+    for [{_ii = 0 }, {_ii < _n}, {_ii = _ii + 1}] do {
+        private _type = _types select _ii;
+        private _veh = _group createUnit [_type, _pos, [], 10, 'NONE'];
+        _veh triggerDynamicSimulation false; // won't wake up enemy units
         [_veh] joinSilent _group;
     };
 
@@ -269,9 +268,12 @@ private _code = {
     _group deleteGroupWhenEmpty true;
 
     _group enableDynamicSimulation true;
-    [_group, _pos, 20] call BIS_fnc_taskPatrol;
+    [_group, _pos, 50] call BIS_fnc_taskPatrol;
     sleep .1;
 };
-[_guard_types_inf, count _guard_types_inf, _next_pos, west] call _code;
+for [{_i = 0 }, {_i < 5}, {_i = _i + 1}] do {
+    [_guard_types_inf, count _guard_types_inf, _next_pos, west] call _code;
+    _next_pos = (playableUnits select 0) getPos [_offset, start_dir]; _offset = _offset + 20;
+};
 
 

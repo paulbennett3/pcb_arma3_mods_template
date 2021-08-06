@@ -87,12 +87,11 @@ switch (_action) do {
             // update our mission list (what we can choose from)
             // remember to do these in reverse order!!! 
             mission_list = []; 
-            // we "register" missions here, last one first, 
-            mission_list pushBackUnique "functions\missions\fn_mis_exfil.sqf";
-            mission_list pushBackUnique "functions\missions\fn_mis_spawner.sqf";
-            mission_list pushBackUnique "functions\missions\fn_mis_deliver_evidence.sqf";
-            mission_list pushBackUnique "functions\missions\fn_mis_get_laptop_from_base.sqf";
             mission_list pushBackUnique "functions\missions\fn_mis_monster_hunt.sqf";
+            mission_list pushBackUnique "functions\missions\fn_mis_get_laptop_from_base.sqf";
+            mission_list pushBackUnique "functions\missions\fn_mis_deliver_evidence.sqf";
+            mission_list pushBackUnique "functions\missions\fn_mis_spawner.sqf";
+            mission_list pushBackUnique "functions\missions\fn_mis_exfil.sqf";
             publicVariable "mission_list"; 
 
             total_missions = count mission_list;

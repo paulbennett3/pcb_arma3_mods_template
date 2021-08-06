@@ -202,109 +202,13 @@ spare vehicles and encounters.
         //
         // spawn this so if it dies, our monitor doesn't die too ...
         // ---------------------------------------------------------
-        [_cluster get "obj_list", 0.10, _label] spawn {
-            params ["_buildings", "_chance", "_label"];
-            private _civ = true;
-            if (_label isEqualTo "mil") then { _civ = false; }; 
-
-            private _n_buildings = count _buildings;
-            private _n = ceil (_n_buildings * _chance);
-            ["There are <" + (str _n_buildings) + "> buildings in this cluster, will spawn <" + (str _n) + ">"] call pcb_fnc_debug;
-            while { _n > 0 } do {
-                private _veh = [[], _buildings, true, _civ] call pcb_fnc_spawn_random_vehicle;
-
-                if (! (isNull _veh)) then {
-                    _n = _n - 1;
-                    [_veh, 1 + (ceil (random 5))] call pcb_fnc_loot_crate;
-
-                    if (pcb_DEBUG) then {
-                        // add a marker for reference
-                        private _mn = "M" + str ([] call pcb_fnc_get_next_UID);
-                        private _m = createMarker [_mn, getPosATL _veh];
-                        _mn setMarkerShapeLocal "ELLIPSE";
-                        _mn setMarkerColorLocal "ColorBLACK";
-                        _mn setMarkerSizeLocal [50, 50];
-                        _mn setMarkerAlpha 0.9;
-                    };
-                }; // if (! (isNull
-            };  // while
-        };  // spawn
+        [_cluster get "obj_list", 0.10, _label] call pcb_fnc_spawn_spare_vehicles;
 
         // ---------------------------------------------------------
         //                     spawn inhabitants
         //
         // ---------------------------------------------------------
-        [_cluster get "obj_list", _code, _label, _cluster] spawn {
-            params ["_buildings", "_spawn_code", "_label", "_cluster"];
-
-            // we'll scale encounter size by number of buildings
-            private _scale = ceil ((count _buildings) / 10);
-            // but cap it for sanity ...
-            if (_scale > 20) then { _scale = 20; };
-
-            // -----------------------------------------
-            // if it is military, do some cargo crates
-            // -----------------------------------------
-            if (_label isEqualTo "mil") then {
-                private _crates = types_hash get "resupply crates";
-                {
-                    private _building = _x; 
-                    private _positions = [_building] call BIS_fnc_buildingPositions;
-                    for [{_i = 0 }, {_i < (ceil (random ((count _positions)/2)))}, {_i = _i + 1}] do {
-                        private _pos = selectRandom _positions;
-                        if ([_pos] call pcb_fnc_is_valid_position) then {
-                            private _object_type = selectRandom _crates;
-                            _target = _object_type createVehicle [0, 0, 0];
-                            _target setPos _pos;
-                        };
-                    };
-                } forEach _buildings;
-            } else {
-                // spawn some civilians
-                if ((random 100) < 50) then {
-                    private _types = types_hash get "civilians";
-                    for [{_i = 0 }, {_i < (ceil (random (_scale / 2)))}, {_i = _i + 1}] do {
-                        private _n = 2 + (ceil (random 3));
-                        [_types, _n, getPosATL (selectRandom _buildings), civilian] call _spawn_code;
-                    };
-                };
-            };
-          
-            // -----------------------------------------
-            //  Looters
-            // -----------------------------------------
-            if ((random 100) < 25) then {
-                // so we have looters.  Is this a major or minor infestation?
-                if ((random 100) < 20) then {
-                    private _types = types_hash get "insurgents";
-                    private _n_squads = 2 + (ceil (random _scale));
-
-                    // major -- mark on map
-                    ["Warning! Significant insurgent activity in area. Caution advised"] remoteExec ["systemChat", 0];
-
-                    private _marker = createMarker ["ML" + (str ([] call pcb_fnc_get_next_UID)), _cluster get "center"];
-                    _marker setMarkerShapeLocal "ELLIPSE";
-                    _marker setMarkerSizeLocal [_cluster get "a", _cluster get "b"];
-                    _marker setMarkerAlphaLocal 0.5;
-                    _marker setMarkerColor "ColorRED";                    
-
-                    for [{_i = 0 }, {_i < _n_squads}, {_i = _i + 1}] do {
-                        private _n = 3 + (ceil (random 5));
-                        [_types, _n, getPosATL (selectRandom _buildings), east] call _spawn_code;
-                    };
-
-                    // if in city, spawn IEDs
-                    for [{_i = 0 }, {_i < (ceil (_scale / 2))}, {_i = _i + 1}] do {
-                        [getPosATL (selectRandom _buildings), 20, 2 + (ceil (random 5))] call pcb_fnc_mine_road;
-                    };
-
-                } else {
-                    private _types = types_hash get "looters";
-                    private _n = 1 + (ceil ((random _scale) / 2));
-                    [_types, _n, getPosATL (selectRandom _buildings), east] call _spawn_code;
-                }; // else
-            }; // if random looters at all
-        }; // while tick ...
-    };
+        [_cluster get "obj_list", _code, _label, _cluster] call pcb_fnc_spawn_cluster_inhabitants;
+    }; // while
 }; // spawn
 
