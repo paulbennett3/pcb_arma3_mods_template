@@ -38,7 +38,8 @@ See the following pages for groups of class types (ie, military cargo bases, cem
  https://community.bistudio.com/wiki/Arma_3:_CfgPatches_CfgVehicles#A3_Structures_F_Mil_Cargo
 ******************************************************** */
 
-params ["_types", "_target", ["_search_radius", worldSize], ["_cluster_radius", 200], ["_min_cluster_size", 3]];
+params ["_types", "_target", ["_search_radius", worldSize], 
+        ["_cluster_radius", 200], ["_min_cluster_size", 3], ["_label", ""]];
 
 private _my_mutex_id = "find_object_clusters";
 
@@ -55,8 +56,8 @@ waitUntil { ! isNil "find_object_clusters_mutex"; };
 cluster_search_done = false;
 publicVariable "cluster_search_done";
 
-[_types, _target, _search_radius, _cluster_radius, _min_cluster_size] spawn {
-    params ["_types", "_target", "_search_radius", "_cluster_radius", "_min_cluster_size"];
+[_types, _target, _search_radius, _cluster_radius, _min_cluster_size, _label] spawn {
+    params ["_types", "_target", "_search_radius", "_cluster_radius", "_min_cluster_size", "_label"];
 
     cluster_search_results = createHashMap;
 
@@ -161,6 +162,7 @@ publicVariable "cluster_search_done";
                 _temp set ["n_obj", count _obj_list]; 
                 _temp set ["a", _a]; 
                 _temp set ["b", _b]; 
+                _temp set ["label", _label]; 
                 cluster_search_results set [_x, _temp];
              };
         } forEach (keys _clusters);

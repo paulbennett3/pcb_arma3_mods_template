@@ -3,8 +3,10 @@
 
 --------------------------------------------------------------------- */
 
+//["start base being made, please be patient ..." + (str (isServer))] call pcb_fnc_debug;
+["start_pos <" + (str start_pos) + ">"] call pcb_fnc_debug;
 if (! isServer) exitWith {};
-
+["teleporting to start base area  ..."] call pcb_fnc_debug;
 
 // ------------------------------------------------------------------
 // move everybody to the start position
@@ -12,6 +14,8 @@ if (! isServer) exitWith {};
 {
    _x setVehiclePosition [start_pos, [], 5, "NONE"];
 } forEach units (group (playableUnits select 0));
+
+["You should be there  ..."] call pcb_fnc_debug;
 
 sleep .1;
 
@@ -172,18 +176,42 @@ _marker_respawn_veh setMarkerType "respawn_air";
 // spawn vehicles
 // ------------------------------------------------------------------
 private _vehicle_list = [];
-//_vehicle_list pushBack ["Ground Transport", "B_T_Truck_01_transport_F"];
-_vehicle_list pushBack ["Drone", "B_T_UGV_01_rcws_olive_F"];
-_vehicle_list pushBack ["Prowler", "B_T_LSV_01_armed_F"];
-_vehicle_list pushBack ["APC", "B_APC_Tracked_01_rcws_F"];
-_vehicle_list pushBack ["Heli", "B_Heli_Light_01_F"];
-_vehicle_list pushBack ["Heli", "B_Heli_Transport_03_unarmed_F"];
-_vehicle_list pushBack ["VTOL", "B_T_VTOL_01_infantry_F"];
+
+// We need a ground transport for 10+ troops always
+private _gt = selectRandom [
+    "B_Truck_01_covered_F",
+    "B_T_Truck_01_transport_F",
+    "O_Truck_03_transport_F",
+    "B_G_Van_02_transport_F",
+    "B_APC_Tracked_01_rcws_F",
+    "B_T_APC_Tracked_01_CRV_F",
+    "O_Truck_03_covered_F",
+    "vn_b_wheeled_m54_01_sog",
+    "vn_b_wheeled_m54_02"
+];
+_vehicle_list pushBack ["Ground Transport", _gt, 10];
+
+// We need "fast" transport for 1 or 2
+private _ft = selectRandom [
+    "B_LSV_01_unarmed_F",
+    "B_Quadbike_01_F",
+    "O_LSV_02_unarmed_F",
+    "B_Heli_Light_dynamicLoadout_01_F"
+];
+_vehicle_list pushBack ["Transport", _ft, 10];
+
+// Cool and useful
+_vehicle_list pushBack ["Drone", "B_T_UGV_01_rcws_olive_F", 10];
+_vehicle_list pushBack ["Flatbed", "B_T_Truck_01_flatbed_F", 10];
+
+// Large air transport
+_vehicle_list pushBack ["VTOL", "B_T_VTOL_01_vehicle_F", 30];
 
 {
     private _label = _x select 0;
     private _type = _x select 1;
-    _next_pos = (playableUnits select 0) getPos [_offset, start_dir]; _offset = _offset + 30;
+    private _delta = _x select 2;
+    _next_pos = (playableUnits select 0) getPos [_offset, start_dir]; _offset = _offset + _delta;
     private _veh = _type createVehicle _next_pos;
     if (unitIsUAV _veh) then {
         createVehicleCrew _veh;
@@ -191,7 +219,6 @@ _vehicle_list pushBack ["VTOL", "B_T_VTOL_01_infantry_F"];
         [_veh] call pcb_fnc_set_scp_vehicle_loadout;
     };
 
-    //_veh setVariable ["BIS_enableRandomization", false];
     private _cid = "T" + str ([] call pcb_fnc_get_next_UID);
     [[_cid, _pid], _label, _vpos, 15] call pcb_fnc_objective_locate_object;
     _veh respawnVehicle [10, 3 + (ceil (random 3))];
@@ -200,7 +227,7 @@ _vehicle_list pushBack ["VTOL", "B_T_VTOL_01_infantry_F"];
     // make the vehicle available for use by the players group
     (group (playableUnits select 0)) addVehicle _veh;
 
-    sleep 1;
+    sleep .1;
 } forEach _vehicle_list;
 
 // ------------------------------------------------------------------
@@ -212,10 +239,11 @@ private _sc = "B_Slingload_01_Ammo_F" createVehicle (_start_crate getPos [20, _s
 _sc = "B_Slingload_01_Fuel_F" createVehicle (_start_crate getPos [25, _sc_dir]); _sc setDir start_dir;
 _sc = "B_Slingload_01_Repair_F" createVehicle (_start_crate getPos [30, _sc_dir]); _sc setDir start_dir;
 
+
 // ------------------------------------------------------------------
-//    High Command Units
+//    Base Guard Squad (not under player control) 
 // ------------------------------------------------------------------
-private _hc_types_inf = [
+private _guard_types_inf = [
     "B_T_Soldier_TL_F",
     "B_T_Soldier_AR_F",
     "B_T_Soldier_AAR_F",
@@ -225,14 +253,25 @@ private _hc_types_inf = [
     "B_T_Soldier_UAV_F",
     "B_T_Soldier_LAT2_F"
 ];
-/*
 _next_pos = (playableUnits select 0) getPos [_offset, start_dir]; _offset = _offset + 30;
-[_next_pos, playableUnits select 0, _hc_types_inf, "Squad 1", "teamRed", "infantry"] call pcb_fnc_add_high_command_unit;
+private _code = {
+    params ["_types", "_n", "_pos", "_side"];
+    private _group = createGroup _side;
+    for [{_i = 0 }, {_i < _n}, {_i = _i + 1}] do {
+        private _type = _types select _i;
+        private _veh = _group createUnit [_type, _pos, [], 200, 'NONE'];
+        _veh triggerDynamicSimulation false; // won't wake up enemy units:wq
+        [_veh] joinSilent _group;
+    };
 
-_next_pos = (playableUnits select 0) getPos [_offset, start_dir]; _offset = _offset + 30;
-[_next_pos, playableUnits select 0, _hc_types_inf, "Squad 2", "teamBlue", "infantry"] call pcb_fnc_add_high_command_unit;
+    // there is a limit to the number of groups, so we will mark this to delete
+    //  when empty
+    _group deleteGroupWhenEmpty true;
 
-_next_pos = (playableUnits select 0) getPos [_offset, start_dir]; _offset = _offset + 30;
-[_next_pos, playableUnits select 0, _hc_types_inf, "Squad 3", "teamGreen", "infantry"] call pcb_fnc_add_high_command_unit;
-*/
+    _group enableDynamicSimulation true;
+    [_group, _pos, 20] call BIS_fnc_taskPatrol;
+    sleep .1;
+};
+[_guard_types_inf, count _guard_types_inf, _next_pos, west] call _code;
+
 

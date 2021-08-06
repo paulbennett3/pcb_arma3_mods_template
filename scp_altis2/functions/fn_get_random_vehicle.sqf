@@ -4,7 +4,7 @@
 given a type (car, heli) and other qualifiers, return random type string
 -------------------------------------------------------------------------- */
 
-params ["_class", "_size"];
+params ["_class", "_size", ["_civ", true]];
 private _result = objNull;
 
 // -----------------------------------------------------
@@ -39,48 +39,6 @@ private _small_helis = [
 ];
 // -----------------------------------------------------
 
-private _large_cars = [ 
-    "C_Van_02_medevac_F",
-    "C_Van_02_transport_F",
-    "C_Truck_02_fuel_F",
-    "C_Truck_02_box_F",
-    "C_Truck_02_transport_F",
-    "C_Truck_02_covered_F",
-    "vn_b_wheeled_m54_01",
-    "vn_b_wheeled_m54_02",
-    "vn_b_wheeled_m54_01_airport",
-    "B_Truck_01_transport_F",
-    "B_Truck_01_covered_F",
-    "O_Truck_03_transport_F",
-    "I_Truck_02_box_F",
-    "vn_i_wheeled_m54_repair",
-    "I_G_Offroad_01_repair_F",
-    "I_G_Van_02_vehicle_F",
-    "O_Truck_03_repair_F",
-    "O_Truck_03_medical_F",
-    "B_Truck_01_flatbed_F",
-    "B_Truck_01_medical_F",
-    "B_Truck_01_Repair_F"
-];
-private _med_cars = [ 
-    "C_Van_01_fuel_F",
-    "C_Offroad_01_F",
-    "C_Offroad_01_comms_F",
-    "C_Offroad_01_covered_F",
-    "C_Offroad_01_repair_F",
-    "C_Van_01_box_F",
-    "C_Tractor_01_F",
-    "C_Van_01_transport_F"
-];
-private _small_cars = [ 
-    "vn_c_bicycle_01",
-    "C_Hatchback_01_F",
-    "C_Hatchback_01_sport_F",
-    "C_Offroad_02_unarmed_F",
-    "C_Quadbike_01_F"
-];
-
-
 
 
 // -----------------------------------------------------
@@ -101,19 +59,40 @@ if (_class isEqualTo "heli") then {
     };
 };
 
+private _chance_mil = 10;
+
 if (_class isEqualTo "car") then {
     switch {_size} do {
         case "small": {
-            _result = selectRandom _small_cars;
+            if ( (! _civ) || ((random 100) < _chance_mil)) then {
+                _result = selectRandom (types_hash get "car small mil");
+            } else {
+                _result = selectRandom (types_hash get "car small civ");
+            };
         };
         case "medium": {
-            _result = selectRandom _med_cars;
+            if ( (! _civ) || ((random 100) < _chance_mil)) then {
+                _result = selectRandom (types_hash get "car medium mil");
+            } else {
+                _result = selectRandom (types_hash get "car medium civ");
+            };
         };
         case "large": {
-            _result = selectRandom _large_large;
+            if ( (! _civ) || ((random 100) < _chance_mil)) then {
+                _result = selectRandom (types_hash get "car large mil");
+            } else {
+                _result = selectRandom (types_hash get "car large civ");
+            };
         };
         default {
-            _result = selectRandom (_small_cars + _med_cars + _large_cars);
+            _result = selectRandom (
+               (types_hash get "car small mil") +
+               (types_hash get "car small civ") +
+               (types_hash get "car medium mil") +
+               (types_hash get "car medium civ") +
+               (types_hash get "car large mil") +
+               (types_hash get "car large civ") 
+            );
         };
     };
 };

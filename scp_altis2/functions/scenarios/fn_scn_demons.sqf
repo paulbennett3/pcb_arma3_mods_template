@@ -80,7 +80,7 @@ switch (_action) do {
 
     case "mission_completed": {
         [("Scenario Demons <" + (str _action) + ">")] call pcb_fnc_debug;
-        if ((scenario_state == 1) && (total_missions < 1)) then {
+        if ((scenario_state == 1) && (total_missions == 0)) then {
             scenario_state = 2;
             publicVariable "scenario_state";
 

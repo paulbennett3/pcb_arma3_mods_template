@@ -53,6 +53,7 @@ class CfgFunctions
             class loot_crate {};
             class make_destroyable {};
             class mark_active_area {};
+            class mine_road {};
             class monitor_ratings {};
             class mutex {};
             class near_military {};
@@ -60,7 +61,6 @@ class CfgFunctions
             class parse_airports {};
             class player_in_vehicle {};
             class players_in_area {};
-            class populate_cities {};
             class preinit_setup { preInit = 1; };
             class random_start_pos {};
             class show_cities {};
@@ -76,7 +76,6 @@ class CfgFunctions
             class spawn_packable_base {};
             class spawn_random_vehicle {};
             class spawn_spare_helicopters {};
-            class spawn_spare_vehicles {};
             class spawn_support_units {};
             class types {};
         };
