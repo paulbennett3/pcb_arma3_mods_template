@@ -61,6 +61,7 @@ class CfgFunctions
             class objective_locate_object {};
             class parse_airports {};
             class packable_base {};
+            class parachute_to_group {};
             class player_in_vehicle {};
             class players_in_area {};
             class preinit_setup { preInit = 1; };

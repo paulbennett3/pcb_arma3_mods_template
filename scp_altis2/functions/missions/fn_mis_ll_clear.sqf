@@ -46,10 +46,8 @@ params ["_state"];
 
 private _ok = false;
 
-diag_log str [_state];
-if (pcb_DEBUG) then {
-    hint ("CLEAR " + (str (_state get "targetlist")));
-};
+[str [_state]] call pcb_fnc_debug;
+[("CLEAR " + (str (_state get "targetlist")))] call pcb_fnc_debug;
 
 
 // create a trigger to monitor the area (and for us to stick our
@@ -79,9 +77,7 @@ if ((_state get "taskpid") isEqualTo "") then {
 
 private _pos = (_state get "taskpos");
 
-if (pcb_DEBUG) then {
-    hint ("creating task with " + (str (_state get "taskdesc")) + " at " + (str _pos));
-};
+[("creating task with " + (str (_state get "taskdesc")) + " at " + (str _pos))] call pcb_fnc_debug;
 [true, (_state get "taskid"), (_state get "taskdesc"), _pos, "ASSIGNED"] call BIS_fnc_taskCreate;
 
 
@@ -105,6 +101,7 @@ if (pcb_DEBUG) then {
             [_state] call pcb_fnc_end_mission;
         };
     };
+    ["Exiting spawned loop - Clear mission"] call pcb_fnc_debug;
 };
 
 

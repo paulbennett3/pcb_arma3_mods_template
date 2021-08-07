@@ -618,7 +618,6 @@ types_hash set ["heli mil", [
     "O_Heli_Transport_04_covered_F",
     "O_Heli_Light_02_unarmed_F",
     "I_Heli_light_03_unarmed_F",
-    "B_Heli_Light_dynamicLoadout_01_F",
     "O_T_VTOL_02_infantry_dynamicLoadout_F",
     "O_T_VTOL_02_vehicle_dynamicLoadout_F"
 ]];

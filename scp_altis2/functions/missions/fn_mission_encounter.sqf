@@ -43,10 +43,13 @@ if ((random 100) < _chance) then {
     //  when empty
     _group deleteGroupWhenEmpty true;
 
+/*    !!!! using Drongo's spooks -- this might not work, and might screw things up --
+        just leave them alone ...
     // toggle dynamic simulation on -- shouldn't really matter since we delete when far
     // away, but there is a chance to have lots of units ...
     _group enableDynamicSimulation true;
     [_group, _pos] call BIS_fnc_taskDefend;
+*/
 };
 
 [_obj_list, _type, _n, _did]

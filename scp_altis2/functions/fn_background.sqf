@@ -192,7 +192,9 @@ spare vehicles and encounters.
         private _label = _cid select 0;
         private _cluster_num = _cid select 1;
         private _cluster = objNull;
+        private _chance = .05;
         if (_label isEqualTo "mil") then {
+            _chance = .15;
             _cluster = _mil_result get _cluster_num;
         } else {
             _cluster = _civ_result get _cluster_num;
@@ -203,7 +205,7 @@ spare vehicles and encounters.
         //
         // spawn this so if it dies, our monitor doesn't die too ...
         // ---------------------------------------------------------
-        [_cluster get "obj_list", 0.10, _label] call pcb_fnc_spawn_spare_vehicles;
+        [_cluster get "obj_list", _chance, _label] call pcb_fnc_spawn_spare_vehicles;
 
         // ---------------------------------------------------------
         //                     spawn inhabitants

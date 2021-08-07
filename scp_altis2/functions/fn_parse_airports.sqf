@@ -33,6 +33,8 @@ if (count allAirports > 0) then {
 
         All_airfields pushbackunique [_ils_position, _ils_direction, _dir];
     };
+} else {
+   ["ERROR! No airports returned by <allAirports>?!?"] call pcb_fnc_debug;
 };
 publicVariable "ALL_airfields";
 

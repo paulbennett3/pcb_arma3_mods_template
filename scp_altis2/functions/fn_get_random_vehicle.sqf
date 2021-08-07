@@ -85,14 +85,19 @@ if (_class isEqualTo "car") then {
             };
         };
         default {
-            _result = selectRandom (
-               (types_hash get "car small mil") +
-               (types_hash get "car small civ") +
-               (types_hash get "car medium mil") +
-               (types_hash get "car medium civ") +
-               (types_hash get "car large mil") +
-               (types_hash get "car large civ") 
-            );
+            if ( (! _civ) || ((random 100) < _chance_mil)) then {
+                _result = selectRandom (
+                   (types_hash get "car small mil") +
+                   (types_hash get "car medium mil") +
+                   (types_hash get "car large mil") 
+                );
+            } else {
+                _result = selectRandom (
+                   (types_hash get "car small civ") +
+                   (types_hash get "car medium civ") +
+                   (types_hash get "car large civ") 
+                );
+            };
         };
     };
 };

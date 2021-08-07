@@ -105,9 +105,10 @@ publicVariable "cluster_search_done";
                     _clusters set [_cluster_count, _cluster_objs];  
                     _cluster_count = _cluster_count + 1;
 
-                   sleep 0.1;
                 };
             };
+
+            sleep 0.1;
         };
     } forEach _found_objects;
 

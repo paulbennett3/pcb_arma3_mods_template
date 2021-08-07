@@ -11,7 +11,7 @@ Makes the following public variables:
 -------------------------------------------------------------------------------------- */
 
 if (! isServer) exitWith {};
-diag_log "Setting random start position";
+["Setting random start position"] call pcb_fnc_debug;
 
 // Get location of all Airports, primary and secondary
 [] call pcb_fnc_parse_airports;
@@ -22,6 +22,7 @@ private _start_type = "Airfield";
 
 // pick an airfield to start at
 start_airfield = selectRandom All_airfields;
+["start_airfield <" + (str start_airfield) + ">"] call pcb_fnc_debug;
 start_pos = start_airfield select 0;
 start_dir = start_airfield select 2;
 

@@ -56,7 +56,7 @@ params ["_building", "_code", "_label", "_cluster"];
             private _n_squads = 2 + (ceil (random _scale));
 
             // major -- mark on map
-            [west, "HQ", "Warning! Significant insurgent activity in area. Caution advised."] remoteExec ["commandChat", 0];
+            [[west, "HQ"], "Warning! Significant insurgent activity in area. Caution advised."] remoteExec ["commandChat", 0];
 
             private _marker = createMarker ["ML" + (str ([] call pcb_fnc_get_next_UID)), _cluster get "center"];
             _marker setMarkerShapeLocal "ELLIPSE";
