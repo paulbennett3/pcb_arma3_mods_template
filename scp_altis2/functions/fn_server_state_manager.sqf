@@ -37,24 +37,15 @@ publicVariable "message_box";
            switch (_msg_type) do {
                case "pck": {
                    private _target = _msg select 1;
-                   private _packed_unpacked_rot = _msg select 2;
-                   private _act = _msg select 3;
-                   private _new_act = objNull;
-
-                   private _packed_obj = _packed_unpacked_rot select 0;
-                   private _unpacked_obj = _packed_unpacked_rot select 1;
-                   private _rot = _packed_unpacked_rot select 2;
-
-                   if (_act isEqualTo "Unpack") then {
-                       private _pos = getPosATL _packed_obj;
-                       _packed_obj setVehiclePosition [[0,0,0], [], 0, "NONE"];
-                       sleep .1;
-                       _unpacked_obj setVehiclePosition [_pos, [], 0, "NONE"];
-                   } else {
-                       private _pos = getPosATL _unpacked_obj;
-                       _unpacked_obj setVehiclePosition [[0,0,0], [], 0, "NONE"];
-                       sleep .1;
-                       _packed_obj setVehiclePosition [_pos, [], 0, "NONE"];
+                   [_target] call pcb_fnc_packable_base;
+               };
+               case "respawn_ai": {
+                   private _type = _msg select 1;
+                   [_type] spawn {
+                       params ["_type"];
+                       sleep 20;
+                       ["respawn ai called for unit"] call pcb_fnc_debug;
+                       [_type] remoteExec ["pcb_fnc_scp_new_unit", groupOwner player_group];
                    };
                };
 

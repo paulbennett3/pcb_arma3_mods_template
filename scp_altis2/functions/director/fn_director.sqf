@@ -51,6 +51,10 @@ if (pcb_DEBUG) then {
     "mEPI" setMarkerAlpha 0.9;
 };
 
+// for tracking groups for deletion as we get full
+group_stack = [];
+publicVariable "group_stack";
+
 [] spawn {
     private _count = 0;
     private _sleep_time = 10;
@@ -70,10 +74,12 @@ if (pcb_DEBUG) then {
         _count = _count + 1;
         
         private _n_active_enc = count spawned_encounters;
-        diag_log ("director tick " + (str _count) + " " + (str _n_active_enc));
-        if (pcb_DEBUG) then {
-            hint ("director tick " + (str _count) + " " + (str _n_active_enc));
-        };
+        [
+            "director tick " + 
+            (str _count) + " " + 
+            (str _n_active_enc) + " <" + 
+            (str (count group_stack)) + ">"
+        ] call pcb_fnc_debug;
 
         // keep a list of hashmap UIDs to delete when done iterating
         private _delete_keys = [];

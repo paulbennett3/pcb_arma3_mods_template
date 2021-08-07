@@ -163,6 +163,7 @@ spare vehicles and encounters.
         private _code = {
             params ["_types", "_n", "_pos", "_side"];
             private _group = createGroup _side;
+            group_stack pushBackUnique _group; publicVariable "group_stack";
             for [{_i = 0 }, {_i < _n}, {_i = _i + 1}] do {
                 private _type = selectRandom _types;
                 private _veh = _group createUnit [_type, _pos, [], 50, 'NONE'];

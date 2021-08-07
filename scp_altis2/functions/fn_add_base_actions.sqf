@@ -123,6 +123,23 @@ private _cmd = {
     ]
 ] remoteExec ["addAction", 0, true];   // Server only!
 
+// ------------------------------------
+//            Show Role
+// ------------------------------------
+private _cmd = {
+    params ['_target', '_caller', '_actionId', '_arguments'];
+    [ ((str _caller) + " has roles <" + (str (getAllUnitTraits _caller))) ] call pcb_fnc_debug;
+};
+
+[
+    _obj,
+    [
+        "Show Role",
+        _cmd,
+        [], 1.5, false, false, "", "true", 5
+    ]
+] remoteExec ["addAction", 0, true];   // Server only!
+
 
 // ------------------------------------
 //           Get Current Load (mass) 

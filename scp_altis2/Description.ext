@@ -43,6 +43,7 @@ class CfgFunctions
             class chemicalDetector {};
             class crate_loadout {};
             class destroy_building {};
+            class enable_ai_respawn {};
             class find_object_clusters {};
             class get_cool_building_location {};
             class get_city_positions {};
@@ -59,10 +60,12 @@ class CfgFunctions
             class near_military {};
             class objective_locate_object {};
             class parse_airports {};
+            class packable_base {};
             class player_in_vehicle {};
             class players_in_area {};
             class preinit_setup { preInit = 1; };
             class random_start_pos {};
+            class scp_new_unit {};
             class show_cities {};
             class start_base_setup {};
             class start_base_setup2 {};

@@ -42,6 +42,7 @@ if (true) then {
 
     // create a group
     private _group = createGroup _side;
+    group_stack pushBackUnique _group; publicVariable "group_stack";
     private _res = [
         _pos,
         random 360,

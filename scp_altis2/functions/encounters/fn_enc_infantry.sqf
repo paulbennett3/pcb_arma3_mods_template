@@ -69,6 +69,7 @@ if (true) then {
 
     // create a group
     private _group = createGroup _side;
+    group_stack pushBackUnique _group; publicVariable "group_stack";
     for [{_i = 0 }, {_i < _group_size}, {_i = _i + 1}] do {
         private _type = objNull;
         if (_exact) then {

@@ -8,11 +8,18 @@
 if (! isServer) exitWith {};
 ["teleporting to start base area  ..."] call pcb_fnc_debug;
 
+player_group = group (playableUnits select 0);
+publicVariable "player_group";
+
 // ------------------------------------------------------------------
 // move everybody to the start position
 // ------------------------------------------------------------------
+private _id = 1;
 {
    _x setVehiclePosition [start_pos, [], 5, "NONE"];
+   [_x, _id] call pcb_fnc_enable_ai_respawn;
+   [_x] call pcb_fnc_set_scp_loadout;
+   _id = _id + 1;
 } forEach units (group (playableUnits select 0));
 
 ["You should be there  ..."] call pcb_fnc_debug;
@@ -119,32 +126,8 @@ _start_crate setVariable ["packed", false];
 // ------------------------------------------------------------------
 private _cmd = {
     params ['_target', '_caller', '_actionId', '_arguments'];
-    private _crate = _target;
-    private _base = _crate getVariable "base";
-
-    // flip the state
-    private _state = not (_crate getVariable "packed");
-    _crate setVariable ["packed", _state];
-
-    { [ _x, _state ] remoteExec ["hideObject", 0, true]; } forEach (attachedObjects _base);
-    [ _base, _state ] remoteExec ["hideObject", 0, true];
-    _crate enableRopeAttach _state;
-
-    // if we are unpacking, pick a new location to move the base to
-    // Also if we are unpacking, move the respawn markers to the neighborhood
-    if (not _state) then {
-        private _dir = (getDir _crate) - 90;
-        if (_dir < 0) then { _dir = _dir + 360; };
-        private _base_pos = _crate getPos [5, _dir];
-        _base setPos _base_pos;
-        _base setDir _dir;
-        _base setPosATL getPosATL _base;
-
-        private _respawn_pos = _crate getPos [20, 180];
-        "respawn_west" setMarkerPos _respawn_pos;
-        "respawn_air" setMarkerPos _respawn_pos;
-    }
-
+    
+    [["pck", _target]] call pcb_fnc_send_mail; 
 };
 
 [
@@ -180,7 +163,7 @@ private _vehicle_list = [];
 // We need a ground transport for 10+ troops always
 private _gt = selectRandom [
     "B_Truck_01_covered_F",
-    "B_T_Truck_01_transport_F",
+//    "B_T_Truck_01_transport_F",
     "O_Truck_03_transport_F",
     "O_Truck_03_transport_F",
     "O_Truck_03_transport_F",
