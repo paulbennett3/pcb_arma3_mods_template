@@ -32,17 +32,23 @@ private _result = [_ok, _state];
 
 // We'll put it in either a city or forest
 private _pos = [0, 0, 0];
-private _loc_type = objNull;
-if ((random 100) < 65) then {
-    // city
-    _pos = selectRandom ([epicenter, mission_radius] call pcb_fnc_get_city_positions);
-    _loc_type = "city";
-    // then find a random building, and positions within ...
-    private _building = selectRandom (nearestObjects [_pos, ["House", "Building"], 100]);
-    if (! isNil "_building") then {
-        _pos = getPosATL _building;
+private _loc_type = "";
+private _building = objNull;
+
+if ((random 100) < 75) then {
+    private _loc_type = "building";
+    private _tries = 50;
+    while { _tries > 0 } do {
+        _tries = _tries - 1;
+        _building = [epicenter, mission_radius] call pcb_fnc_get_cool_building_location;
+        if (! isNil "_building") then {
+            _pos = getPosATL _building;
+            if (! isNil "_pos") then { 
+                [_building] call pcb_fnc_add_loot_boxes_to_building;
+                _tries = -10;
+            };
+        };
     };
-    [_building] call pcb_fnc_add_loot_boxes_to_building;
 } else {
     _loc_type = "forest";
     // forest
@@ -74,6 +80,7 @@ private _did = _enc_info select 3;
 _state set ["targetlist", _obj_list];
 _state set ["targettype", _type];
 
+[_loc_type] call pcb_fnc_debug; 
 [("<" + (str (_state get "targettype")) + "><" + (str _n) + "><" + (str _did) + "><" + (str _pos) + "> " + _loc_type)] call pcb_fnc_debug; 
 
 _state set ["taskdesc", [

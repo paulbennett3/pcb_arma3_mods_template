@@ -63,7 +63,8 @@ switch (_action) do {
 //        mission_list pushBackUnique "functions\missions\fn_mis_desk_evidence.sqf";
 //        mission_list pushBackUnique "functions\missions\fn_mis_investigate.sqf";
 //        mission_list pushBackUnique "functions\missions\fn_mis_building_search.sqf";
-        mission_list pushBackUnique "functions\missions\fn_mis_interview.sqf";
+//        mission_list pushBackUnique "functions\missions\fn_mis_interview.sqf";
+mission_list pushBackUnique "functions\missions\fn_mis_monster_hunt.sqf";
         publicVariable "mission_list"; 
         mission_select = "random";
         publicVariable "mission_select"; 

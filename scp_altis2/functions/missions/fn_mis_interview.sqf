@@ -39,14 +39,13 @@ if (pcb_DEBUG) then {
 //  in "defend"
 // pick one to "interview"
 
-
 // then find a random building, and positions within ...
 private _building = [epicenter, mission_radius] call pcb_fnc_get_cool_building_location;
 if ((isNil "_building") || (isNull _building)) exitWith { hint "failed to find building!"; [false, _state] };
 private _pos = getPosATL _building;
 if ((isNil "_pos") || (! ([_pos] call pcb_fnc_is_valid_position))) exitWith { [false, _state] };
-_pos = [_pos select 0, _pos select 1];
 
+private _positions = _building buildingPos -1;
 private _target = objNull;
 
 // -----------------------------------------------------------------
@@ -64,7 +63,12 @@ if (true) then {
         private _keep = [];
         for [{_i = 0 }, {_i < _n}, {_i = _i + 1}] do {
             _type = selectRandom _civs;
-            private _veh = _group createUnit [_type, _pos, [], 5, 'NONE'];
+            private _ppos = selectRandom _positions;
+            if (! ([_ppos] call pcb_fnc_is_valid_position)) then {
+                _ppos = _pos;
+            };
+            private _veh = _group createUnit [_type, _ppos, [], 50, 'NONE'];
+            _veh setPos _ppos;
             _veh triggerDynamicSimulation false; // won't wake up enemy units
             _keep pushBack _veh;
             sleep .1;

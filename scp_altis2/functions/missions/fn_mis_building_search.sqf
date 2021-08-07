@@ -33,7 +33,7 @@ private _state = createHashMapFromArray [
 
 
 // pick a random cool building
-private _target = [epicenter, mission_radius, false, 5] call pcb_fnc_get_cool_building_location; 
+private _target = [epicenter, mission_radius, 5] call pcb_fnc_get_cool_building_location; 
 // get a specific position in the building
 private _pos = selectRandom (_target buildingPos -1);
 //["Building search running <" + (str _target) + ">"] remoteExec ["systemChat", 0, true];    
