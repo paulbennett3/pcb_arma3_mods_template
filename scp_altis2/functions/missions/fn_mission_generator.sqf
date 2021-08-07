@@ -54,8 +54,6 @@ if (! isServer) exitWith {};
 
             // call our scenario to allow it to manipulate total_missions, mission_list
             ["mission_completed"] call _scenario; 
-        } else {
-            _first_mission = false;
         };
 
         // do we have any missions left to run?
@@ -68,7 +66,7 @@ if (! isServer) exitWith {};
             if (mission_select isEqualTo "random") then {
                 _mission = selectRandom mission_list;
             } else {
-                _mission = mission_list select 0;
+                _mission = mission_list deleteAt 0;
                 mission_list deleteAt 0;
                 publicVariable "mission_list";
             };
@@ -85,9 +83,11 @@ if (! isServer) exitWith {};
 
             if (! _started_ok) then {
                 // d'oh! Something went wrong, bump up the number so we try again ...
+["Oops -- mission creation failed"] call pcb_fnc_debug;
                 total_missions = total_missions + 1;
                 publicVariable "total_missions";
             } else {
+               _first_mission = false;
                mission_active = true;
                publicVariable "mission_active";
             };

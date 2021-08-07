@@ -125,23 +125,6 @@ private _cmd = {
 
 
 // ------------------------------------
-//         Parachute To Group 
-// ------------------------------------
-private _cmd = {
-    params ['_target', '_caller', '_actionId', '_arguments'];
-    [_caller] remoteExec ["pcb_fnc_parachute_to_group", owner _caller];
-};
-
-[
-    _obj,
-    [
-        "Parachute In",
-        _cmd,
-        [], 1.5, false, false, "", "true", 5
-    ]
-] remoteExec ["addAction", 0, true];   // Server only!
-
-// ------------------------------------
 //            Show Role
 // ------------------------------------
 private _cmd = {

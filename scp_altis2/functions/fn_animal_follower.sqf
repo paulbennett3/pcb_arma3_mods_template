@@ -57,53 +57,8 @@ sleep .1;
     }
 ]] remoteExec ["addEventHandler", 0, true];
 
-// add event handlers to move the animal "into" and "out of" vehicle
-[
-    _player,
-    [
-        "GetInMan",
-        {
-            params ["_unit", "_role", "_vehicle", "_turret"];
-            private _animals = _unit getVariable "animals";
-            if (! (isNil "_animals")) then {
-                private _pos = getPosATL _unit;
-                {
-                    if (alive _x) then {
-                        private _dist = _pos distance (getPosATL _x);
-                        if (_dist < 100) then {
-                            [ _x, true ] remoteExec ["hideObject", 0, true];    
-                            _x setVariable ["ride", true];
-                        };
-                    };
-                } forEach _animals;
-            };
-        }
-    ]
-] remoteExec ["addEventHandler", 0, true];
-
-[
-    _player,
-    [
-        "GetOutMan",
-        {
-            params ["_unit", "_role", "_vehicle", "_turret"];
-            private _animals = _unit getVariable "animals";
-            if (! (isNil "_animals")) then {
-                private _pos = getPosATL _unit;
-                {
-                    if (alive _x) then {
-                        _x setVehiclePosition [_pos, [], 3, "NONE"];
-                        [ _x, false ] remoteExec ["hideObject", 0, true];    
-                        _x setVariable ["ride", false];
-                    };
-                } forEach _animals;
-            };
-        }
-    ]
-] remoteExec ["addEventHandler", 0, true];
-
 // Following loop
-[_animal, _type_info, _player] remoteExec ["pcb_fnc_animal_follower_loop", 0, true];
+[_animal, _type_info, _player] remoteExec ["pcb_fnc_animal_follower_loop", owner _player];
 
 private _result = [_animal, _did_spawn];
 _result

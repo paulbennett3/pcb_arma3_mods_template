@@ -64,7 +64,6 @@ _state set ["trigger", _trg];
 _state set ["obj_list", [_trg]];
 _trg setVariable ["_state", _state, true];
 
-
 // ---------------
 // set up our task
 // ---------------
@@ -90,7 +89,7 @@ private _pos = (_state get "taskpos");
     while {sleep 1; ! _done} do {
         // check if any of our targets are in the area
         private _objs = (_state get "targetlist") inAreaArray (_state get "trigger");
-        if ((count _objs) < 1) then {
+        if ((count (_objs select { alive _x })) < 1) then {
             _done = true;
             _state set ["failed", true];
             {

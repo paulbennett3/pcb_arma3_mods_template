@@ -260,4 +260,4 @@ for [{_i = 0 }, {_i < 5}, {_i = _i + 1}] do {
     _next_pos = (playableUnits select 0) getPos [_offset, start_dir]; _offset = _offset + 20;
 };
 
-
+[playableUnits select 0, 0] call pcb_fnc_animal_follower;

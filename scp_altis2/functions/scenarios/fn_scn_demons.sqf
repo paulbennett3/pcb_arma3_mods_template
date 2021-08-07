@@ -69,7 +69,8 @@ switch (_action) do {
         publicVariable "mission_select"; 
 
         // total missions to run
-        total_missions = (ceil (random 3));
+        //total_missions = selectRandom [2, 3];
+        total_missions = 3;
         publicVariable "total_missions";
 
         // remember our state

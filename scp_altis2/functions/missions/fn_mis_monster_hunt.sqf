@@ -1,5 +1,5 @@
 /* *******************************************************************
-                      mis_monster_hung
+                      mis_monster_hunt
 
 Spawn a handful of monsters (spooks) for the players to hunt.
 
