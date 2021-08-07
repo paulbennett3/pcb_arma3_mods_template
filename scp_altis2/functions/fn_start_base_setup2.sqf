@@ -162,31 +162,28 @@ private _vehicle_list = [];
 
 // We need a ground transport for 10+ troops always
 private _gt = selectRandom [
-    "B_Truck_01_covered_F",
-//    "B_T_Truck_01_transport_F",
-    "O_Truck_03_transport_F",
-    "O_Truck_03_transport_F",
     "O_Truck_03_transport_F",
     "B_G_Van_02_transport_F",
-    "B_APC_Tracked_01_rcws_F",
     "O_Truck_03_covered_F",
-    "vn_b_wheeled_m54_01_sog",
-    "vn_b_wheeled_m54_02"
+    "O_T_APC_Wheeled_02_rcws_v2_ghex_F",
+    "O_APC_Wheeled_02_rcws_v2_F"
 ];
-_vehicle_list pushBack ["Ground Transport", _gt, 15];
+_vehicle_list pushBack ["Group Transport", _gt, 15];
 
 // We need "fast" transport for 1 or 2
 private _ft = selectRandom [
     "B_LSV_01_unarmed_F",
     "B_Quadbike_01_F",
     "O_LSV_02_unarmed_F",
-    "B_Heli_Light_01_F"
+    "B_Heli_Light_01_F",
+    "B_G_Van_01_transport_F",
+    "B_G_Offroad_01_F",
+    "vn_b_wheeled_m151_mg_04",
+    "O_MRAP_02_F",
+    "O_LSV_02_unarmed_F",
+    "O_T_APC_Wheeled_02_rcws_v2_ghex_F"
 ];
 _vehicle_list pushBack ["Transport", _ft, 15];
-
-// Cool and useful
-_vehicle_list pushBack ["Flatbed", "B_T_Truck_01_flatbed_F", 15];
-_vehicle_list pushBack ["Drone", "B_T_UGV_01_rcws_olive_F", 15];
 
 // Large air transport
 _vehicle_list pushBack ["SPACER", "SPACER", 30];
@@ -259,5 +256,3 @@ for [{_i = 0 }, {_i < 5}, {_i = _i + 1}] do {
     [_guard_types_inf, count _guard_types_inf, _next_pos, west] call _code;
     _next_pos = (playableUnits select 0) getPos [_offset, start_dir]; _offset = _offset + 20;
 };
-
-[playableUnits select 0, 0] call pcb_fnc_animal_follower;

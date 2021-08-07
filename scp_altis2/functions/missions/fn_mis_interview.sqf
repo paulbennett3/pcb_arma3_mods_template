@@ -43,9 +43,9 @@ if (pcb_DEBUG) then {
 // then find a random building, and positions within ...
 private _building = [epicenter, mission_radius] call pcb_fnc_get_cool_building_location;
 if ((isNil "_building") || (isNull _building)) exitWith { hint "failed to find building!"; [false, _state] };
-private _positions = [_building] call BIS_fnc_buildingPositions;
-private _pos = selectRandom _positions;
+private _pos = getPosATL _building;
 if ((isNil "_pos") || (! ([_pos] call pcb_fnc_is_valid_position))) exitWith { [false, _state] };
+_pos = [_pos select 0, _pos select 1];
 
 private _target = objNull;
 

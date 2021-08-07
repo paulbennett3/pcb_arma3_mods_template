@@ -39,6 +39,25 @@ if ((random 100) < _chance) then {
 
     _obj_list joinSilent _group;
 
+    if (pcb_DEBUG) then {
+       {
+           [_x] spawn {
+               params ["_unit"];
+               private _marker = createMarker ["ME" + (str _unit), getPosATL _unit];
+               _marker setMarkerShapeLocal "ELLIPSE";
+               _marker setMarkerSizeLocal [50, 50];
+               _marker setMarkerAlphaLocal 0.9;
+               _marker setMarkerColor "ColorGREEN";
+               while { sleep 5; alive _unit } do {
+                   _marker setMarkerPos (getPosATL _unit); 
+                   ["Monster <" + (str _unit) + "> alive"] call pcb_fnc_debug;
+               };
+               ["Monster <" + (str _unit) + "> died"] call pcb_fnc_debug;
+               deleteMarker _marker;
+           };
+       } forEach _obj_list;
+    };
+
     // there is a limit to the number of groups, so we will mark this to delete
     //  when empty
     _group deleteGroupWhenEmpty true;

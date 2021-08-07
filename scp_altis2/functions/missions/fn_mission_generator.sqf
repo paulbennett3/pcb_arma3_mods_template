@@ -67,7 +67,6 @@ if (! isServer) exitWith {};
                 _mission = selectRandom mission_list;
             } else {
                 _mission = mission_list deleteAt 0;
-                mission_list deleteAt 0;
                 publicVariable "mission_list";
             };
             

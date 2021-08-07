@@ -60,9 +60,9 @@ switch (_action) do {
 
         // this is the array of possible missions to choose from.  Might be modified as things progress
         mission_list = []; // we "register" missions here, last one first, 
-        mission_list pushBackUnique "functions\missions\fn_mis_desk_evidence.sqf";
-        mission_list pushBackUnique "functions\missions\fn_mis_investigate.sqf";
-        mission_list pushBackUnique "functions\missions\fn_mis_building_search.sqf";
+//        mission_list pushBackUnique "functions\missions\fn_mis_desk_evidence.sqf";
+//        mission_list pushBackUnique "functions\missions\fn_mis_investigate.sqf";
+//        mission_list pushBackUnique "functions\missions\fn_mis_building_search.sqf";
         mission_list pushBackUnique "functions\missions\fn_mis_interview.sqf";
         publicVariable "mission_list"; 
         mission_select = "random";

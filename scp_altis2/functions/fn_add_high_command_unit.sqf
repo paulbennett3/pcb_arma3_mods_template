@@ -4,15 +4,21 @@
 Given a player and a list of types, generate a group and
 add them to the player's high command bar
 
+!!!! add the "high command commander" module in the editor, or
+else add it here.  Either way, run this from initPlayerLocal.  Also,
+works with editor placed commander module.  Note that all spawed "west"
+units will be assigned to the commander if they don't have an HC 
+subordinate module attached.
+
 _pos (position) : where to spawn the group at
-_leader (unit) : the player to assign the group to
 _types (list of type strings) : the types to create for the group
 _groupName (string) : name of the group (anything)
 _team (string) : must be one of:
     "teamMain", "teamRed", "teamGreen", "teamBlue", "teamYellow"
 ******************************************************** */
-params ["_pos", "_leader", "_types", "_groupName", "_team", "_mode"];
+params ["_pos", "_types", "_groupName", "_team", "_mode"];
 
+["Adding high command unit with types <" + (str _types) + ">"] call pcb_fnc_debug;
 // -----------------------------------------------
 // create the group, and instantiate the soldiers
 // -----------------------------------------------
@@ -27,10 +33,11 @@ if (_mode isEqualTo "infantry") then {
     };
 } else {
     // figure out vehicles -- have to spawn in crew ...
+    ["Add High Command -- only infantry mode supported"] call pcb_fnc_debug;
 };
 
 (_obj_list select 0) setUnitRank "SERGEANT";
-[_group, (_obj_list select 0)] remoteExec ["selectLeader", owner _leader, true];
+_group selectLeader (_obj_list select 0);
 
 // -----------------------------------------------
 // there is a limit to the number of groups, so we will mark this to delete
@@ -38,66 +45,8 @@ if (_mode isEqualTo "infantry") then {
 // -----------------------------------------------
 _group deleteGroupWhenEmpty true;
 
-
-// -----------------------------------------------
-// Make the group local to _leader
-// -----------------------------------------------
-_group setGroupOwner (owner _leader);
-
-/*
-// -----------------------------------------------
-// Check if the HC commander already has an HC command module assigned
-// -----------------------------------------------
-private _has_hc = false;
-{
-    if (typeOf _x == "HighCommand") then {
-        _has_hc = true;
-    }
-} forEach (synchronizedObjects _leader);
-
-// if they don't have a HC command module, add one
-if (! _has_hc) then {
-    private _group_logic = createGroup sideLogic;
-    [
-        "HighCommand", 
-        start_pos, 
-        _group_logic,
-        "this setVariable ['BIS_fnc_initModules_disableAutoActivation', false, true]; HC = this; publicVariable 'HC';"
-    ] remoteExec ["createUnit", owner _leader, true];
-    waitUntil { sleep 1; ! isNil "HC" };
-    _leader synchronizeObjectsAdd [HC];
-
-//    "HighCommand" createUnit [
-//        start_pos,
-//        _group_logic,
-//        "this setVariable ['BIS_fnc_initModules_disableAutoActivation', false, true]; HC = this; publicVariable 'HC';"
-//    ];
-//    waitUntil { sleep 1; ! isNil "HC" };
-    //_leader synchronizeObjectsAdd [HC];
-//    HC synchronizeObjectsAdd [_leader];
-};
-
-// make an HC Subordinate module for the group
-private _group_logic = createGroup sideLogic;
-HCS = objNull;
-publicVariable "HCS";
-[
-    "HighCommandSubordinate", 
-    start_pos, 
-    _group_logic,
-    "this setVariable ['BIS_fnc_initModules_disableAutoActivation', false, true]; HCS = this; publicVariable 'HCS';"
-] remoteExec ["createUnit", owner _leader, true];
-waitUntil { sleep 1; ! isNull HCS };
-HCS synchronizeObjectsAdd [_group];
-*/
-
-
-// -----------------------------------------------
-// Unlikely that the player would already be
-//   the leader, but why not ...
-// -----------------------------------------------
-if (_leader != hcLeader _group) then {
+if (player != hcLeader _group) then {
     hcLeader _group hcRemoveGroup _group;
-    _leader hcSetGroup [_group, _groupName, _team];
+    player hcSetGroup [_group];
 };
 

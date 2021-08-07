@@ -73,7 +73,8 @@ spare vehicles and encounters.
         _trg setVariable ["cid", [_cluster get "label", _x]];
         _trg setTriggerArea [_a, _b, 0, true, -1];
         private _area = [_center] + (triggerArea _trg);
-        //if ( ! ([_area] call pcb_fnc_players_in_area)) then {
+
+
         if (true) then {
             _trg setTriggerActivation ["ANYPLAYER", "PRESENT", false];
             _trg setTriggerStatements [
@@ -97,6 +98,7 @@ spare vehicles and encounters.
             _marker setMarkerAlphaLocal 0.9;
             _marker setMarkerColor "ColorRED";
         };
+
     } forEach (keys _mil_result);
 
     ["done finding clusters of military buildings"] call pcb_fnc_debug;
