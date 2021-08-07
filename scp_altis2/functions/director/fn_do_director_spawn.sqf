@@ -101,7 +101,7 @@ switch (_option) do {
     case "spooks": {
             private _types = types_hash get "limited spooks";
             private _type = [selectRandom _types];
-            ["   spook type <" + (str _types) + ">"] call pcb_fnc_debug;
+            ["   spook type <" + (str _type) + ">"] call pcb_fnc_debug;
             _did_spawn = [_option, _player, _type, independent, 2, 5, false] call pcb_fnc_enc_infantry;
         };
     case "demon": {

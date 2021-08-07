@@ -75,14 +75,6 @@ if (true) then {
     
     _entry = [false, objNull, _obj_list, false, objNull, objNull, _label];
 
-    if (pcb_DEBUG) then {
-        private _m = createMarker [_UID, _obj_list select 0];
-        _m setMarkerShapeLocal "ELLIPSE";
-        _m setMarkerColorLocal "ColorRED";
-        _m setMarkerSizeLocal [50, 50];
-        _m setMarkerAlpha 0.9;
-    };
-
     // record our encounter in the list so we can delete it later
     spawned_encounters set [_UID, _entry];
     publicVariable "spawned_encounters";

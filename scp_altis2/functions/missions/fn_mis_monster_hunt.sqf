@@ -77,6 +77,24 @@ private _type = _enc_info select 1;
 private _n = _enc_info select 2;
 private _did = _enc_info select 3;
 
+{
+    [_x] spawn {
+        params ["_unit"];
+        private _marker = createMarker ["ME" + (str _unit), getPosATL _unit];
+        _marker setMarkerShapeLocal "ELLIPSE";
+        _marker setMarkerSizeLocal [100, 100];
+        _marker setMarkerAlphaLocal 0.5;
+        _marker setMarkerColor "ColorRED";
+        while { sleep 30; alive _unit } do {
+            private _mpos = (getPosATL _unit) getPos [random 50, random 360];
+            _marker setMarkerPos _mpos;
+            ["Monster <" + (str _unit) + "> alive"] call pcb_fnc_debug;
+        };
+        ["Monster <" + (str _unit) + "> died"] call pcb_fnc_debug;
+        deleteMarker _marker;
+    };
+} forEach _obj_list;
+
 _state set ["targetlist", _obj_list];
 _state set ["targettype", _type];
 

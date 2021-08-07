@@ -92,14 +92,6 @@ if (true) then {
     // away, but there is a chance to have lots of units ...
     _group enableDynamicSimulation true;
 
-    if (pcb_DEBUG) then {
-        private _m = createMarker [_UID, _obj_list select 0];
-        _m setMarkerShapeLocal "ELLIPSE";
-        _m setMarkerColorLocal "ColorRED";
-        _m setMarkerSizeLocal [50, 50];
-        _m setMarkerAlpha 0.9;
-    };
-
     if (_action == "patrol") then {
         // create a patrol
         private _waypoint_sep = 100 + (ceil (random 1000));
