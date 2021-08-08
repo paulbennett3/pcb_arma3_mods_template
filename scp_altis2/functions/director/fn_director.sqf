@@ -68,6 +68,11 @@ publicVariable "group_stack";
     _trg setTriggerArea [ENC_MIN_PLAYER_DIST_DELETE, ENC_MIN_PLAYER_DIST_DELETE, 0, false];
     _trg setTriggerActivation ["ANYPLAYER", "PRESENT", true];
     _trg setTriggerStatements ["this", "", ""];
+
+    // don't start the director loop until clustering is done
+    ["Director waiting for clustering to complete"] call pcb_fnc_debug;
+    waitUntil { sleep 30; (! isNil "background_clustering_done") && { background_clustering_done == true } };
+    ["Director starting"] call pcb_fnc_debug;
    
     while {true} do {
         sleep _sleep_time;

@@ -75,7 +75,7 @@ spare vehicles and encounters.
         private _b = (_cluster get "b") + _buffer;
         private _trg = createTrigger ["EmptyDetector", _center, false];    
         _trg setVariable ["cid", [_cluster get "label", _x]];
-        _trg setTriggerArea [_a, _b, 0, true, -1];
+        _trg setTriggerArea [_a, _b, 0, false, -1];
         private _area = [_center] + (triggerArea _trg);
 
 
@@ -96,7 +96,7 @@ spare vehicles and encounters.
             private _marker = createMarker ["MILCLUST" + (str _x), _center];
             _marker setMarkerType "b_motor_inf";
             _marker = createMarker ["MILCLUSTB" + (str _x), _center];
-            _marker setMarkerShapeLocal "RECTANGLE";
+            _marker setMarkerShapeLocal "ELLIPSE";
             _marker setMarkerSizeLocal [_a, _b];
             _marker setMarkerBrushLocal "BORDER";
             _marker setMarkerAlphaLocal 0.9;
@@ -128,7 +128,7 @@ spare vehicles and encounters.
         private _b = (_cluster get "b") + _buffer;
         private _trg = createTrigger ["EmptyDetector", _center, false];    
         _trg setVariable ["cid", [_cluster get "label", _x]];
-        _trg setTriggerArea [_a, _b, 0, true, -1];
+        _trg setTriggerArea [_a, _b, 0, false, -1];
         private _area = [_center] + (triggerArea _trg);
 
         if (true) then {
@@ -148,7 +148,7 @@ spare vehicles and encounters.
             private _marker = createMarker ["CIVCLUST" + (str _x), _center];
             _marker setMarkerType "hd_end";
             _marker = createMarker ["CIVCLUSTB" + (str _x), _center];
-            _marker setMarkerShapeLocal "RECTANGLE";
+            _marker setMarkerShapeLocal "ELLIPSE";
             _marker setMarkerSizeLocal [_a, _b];
             _marker setMarkerBrushLocal "BORDER";
             _marker setMarkerAlphaLocal 0.9;

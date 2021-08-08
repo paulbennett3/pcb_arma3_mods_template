@@ -35,6 +35,7 @@ for "_i" from 1 to 5 do {_this addItemToBackpack "100Rnd_65x39_caseless_mag_Trac
 _this addHeadgear "H_HelmetB_TI_arid_F";
 _this addGoggles "G_Balaclava_TI_G_blk_F";
 _this addItemToBackpack "SmokeShellRed";
+_this addItemToBackpack "SmokeShellRed";
 _this addItemToBackpack "Chemlight_red";
 
 

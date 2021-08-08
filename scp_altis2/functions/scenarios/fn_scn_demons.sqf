@@ -131,12 +131,12 @@ switch (_action) do {
             publicVariable "scenario_state";
 
             // update our mission list (what we can choose from)
-            // remember to do these in reverse order!!! 
             mission_list = []; 
-            mission_list pushBackUnique "functions\missions\fn_mis_desk_evidence.sqf";
-            mission_list pushBackUnique "functions\missions\fn_mis_investigate.sqf";
-            mission_list pushBackUnique "functions\missions\fn_mis_building_search.sqf";
-            mission_list pushBackUnique "functions\missions\fn_mis_interview.sqf";
+            mission_list pushBackUnique "functions\missions\fn_mis_monster_hunt.sqf";
+//            mission_list pushBackUnique "functions\missions\fn_mis_desk_evidence.sqf";
+//            mission_list pushBackUnique "functions\missions\fn_mis_investigate.sqf";
+//            mission_list pushBackUnique "functions\missions\fn_mis_building_search.sqf";
+//            mission_list pushBackUnique "functions\missions\fn_mis_interview.sqf";
             publicVariable "mission_list"; 
 
             total_missions = 3;

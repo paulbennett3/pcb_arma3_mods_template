@@ -278,7 +278,7 @@ types_hash set ["stronger spooks", [
     "DSA_Vampire"
 ]];
 
-types_hash set ["spooks", [
+types_hash set ["all spooks", [
     "DSA_ActiveIdols",
     "DSA_Crazy",
     "DSA_Hatman",
@@ -290,6 +290,11 @@ types_hash set ["spooks", [
     "DSA_411",
     "DSA_Mindflayer",
     "DSA_Vampire"
+]];
+//types_hash set ["spooks", types_hash get ["weaker spooks"]]; 
+types_hash set ["spooks", [
+    "DSA_ActiveIdol",
+    "DSA_ActiveIdol2"
 ]];
 
 // --------------------------------

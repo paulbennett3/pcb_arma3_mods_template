@@ -35,7 +35,7 @@ private _pos = [0, 0, 0];
 private _loc_type = "";
 private _building = objNull;
 
-if ((random 100) < 75) then {
+if ((random 100) < 35) then {
     private _loc_type = "building";
     private _tries = 50;
     while { _tries > 0 } do {

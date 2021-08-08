@@ -74,4 +74,18 @@ _cmd = "DSA_EnableDetectors = this; this setVariable ['BIS_fnc_initModules_disab
 	_cmd
 ];
 
+/* ----------------------------------------------------------------
+              Configure and Place Active Idol module
+---------------------------------------------------------------- */
+diag_log "Placing DSA ActiveIdols";
+
+_cmd = "DSA_ActiveIdols = this; this setVariable ['BIS_fnc_initModules_disableAutoActivation', false, true]; DSA_ActiveIdols setVariable ['DSA_Visibility', 2, true]; DSA_ActiveIdols setVariable ['DSA_Audibility', 0.1, true]; DSA_ActiveIdols setVariable ['DSA_DelayIdle', 5, true]; DSA_ActiveIdols setVariable ['DSA_DelayHunt', 2, true]; DSA_ActiveIdols setVariable ['DSA_LurkChance', 0, true]; DSA_ActiveIdols setVariable ['DSA_LurkDuration', '300,900', true]; DSA_ActiveIdols setVariable ['DSA_IdleSoundChance', 5, true]; DSA_ActiveIdols setVariable ['DSA_HuntSoundChance', 50, true]; DSA_ActiveIdols setVariable ['DSA_AttackSoundChance', 90, true]; DSA_ActiveIdols setVariable ['DSA_AnimSpeed', 1.3, true]; DSA_ActiveIdols setVariable ['DSA_SaveChance', 50, true]; DSA_ActiveIdols setVariable ['DSA_DamageModifier', 100, true]; DSA_ActiveIdols setVariable ['DSA_AttackRange', 7, true]; DSA_ActiveIdols setVariable ['DSA_Damage', '30,100', true]; DSA_ActiveIdols setVariable ['DSA_AttackEffects', '''STUN'',''KO'',''THROW''', true]; DSA_ActiveIdols setVariable ['DSA_DamageVehicle', '30,70', true]; DSA_ActiveIdols setVariable ['DSA_ArmourThreshold', 1000, true]; DSA_ActiveIdols setVariable ['DSA_SpookKillers', '''DSA_B_12Gauge_slug'',''DSA_B_12Gauge_HEAP''', true]; DSA_ActiveIdols setVariable ['DSA_DetectionRange', 2000, true]; DSA_ActiveIdols setVariable ['DSA_ScentRange', 3, true]; DSA_ActiveIdols setVariable ['DSA_PatrolRange', 200, true]; DSA_ActiveIdols setVariable ['DSA_FleeChance', 20, true]; DSA_ActiveIdols setVariable ['DSA_FleeThreshold', 10, true];";
+	
+"DSA_ActiveIdols" createUnit [
+	epicenter,
+	_moduleGroup,
+	_cmd
+];
+
+
 

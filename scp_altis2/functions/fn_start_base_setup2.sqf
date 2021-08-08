@@ -173,7 +173,7 @@ private _gt = selectRandom [
 ];
 _vehicle_list pushBack ["Group Transport", _gt, 15];
 
-private _ft = selectRandom [
+private _ft_types = [
     "B_LSV_01_unarmed_F",
     "B_Quadbike_01_F",
     "O_LSV_02_unarmed_F",
@@ -185,8 +185,8 @@ private _ft = selectRandom [
     "O_LSV_02_unarmed_F",
     "O_T_APC_Wheeled_02_rcws_v2_ghex_F"
 ];
-_vehicle_list pushBack ["Transport", _ft, 15];
-_vehicle_list pushBack ["Transport", _ft, 15];
+_vehicle_list pushBack ["Transport", selectRandom _ft_types, 15];
+_vehicle_list pushBack ["Transport", selectRandom _ft_types, 15];
 
 // Large air transport
 _vehicle_list pushBack ["SPACER", "SPACER", 30];

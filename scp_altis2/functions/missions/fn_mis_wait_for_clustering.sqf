@@ -40,8 +40,8 @@ private _code = {
 _state set ["delay code", _code];
 _state set ["taskpos", start_pos];
 _state set ["taskdesc", [
-    "HQ gathering intel on military complexes and urban areas.  Try some target practice, make notes on your loadout etc.  Kill Time -- if you can!",
-    "Wait patiently",
+    "HQ gathering intel on military complexes and urban areas.  Try some target practice, make notes on your loadout etc.  Kill Time -- if you can! (mission will complete when processing ready)",
+    "Kill: Time",
     "markername"
 ]];
 private _taskpid = "";
