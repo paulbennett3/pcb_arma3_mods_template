@@ -35,22 +35,20 @@ Mindflayer
     Thralls
          DSA_Thrall module (no parameters) -- synch ai to this
     Crazy
+    "DSA_Hatman",
 
 Vampire
     Abomination
     Rake
+    "DSA_Shadowman",
 
 Cultist / "Demon Lord"
     Demon
     "DSA_411",
-    Active Idol / ActiveIdol2
-
-??
-    "DSA_Hatman",
-    "DSA_Shadowman",
     "DSA_Snatcher",
 
 Always Around
+    Active Idol / ActiveIdol2
     Wendigo
 
 -----------
@@ -102,7 +100,30 @@ switch (_action) do {
         // manipulate the starting weather et al
         [] call pcb_fnc_set_mission_environment;
 
+        // Pick our boss and minion types
+        private _boss_info = selectRandom [
+            ['DSA_Mindflayer', ['DSA_Crazy', 'DSA_Hatman']],
+            ['DSA_Vampire', ['DSA_Abomination', 'DSA_Rake', 'DSA_Shadowman']],
+            ['RyanZombieboss28', ['DSA_Snatcher', 'DSA_411']]
+        ];
+        private _ambient = [
+            'DSA_Wendigo', 
+            'DSA_Wendigo', 
+            'DSA_Wendigo', 
+            'DSA_Wendigo', 
+            'DSA_ActiveIdol', 
+            'DSA_ActiveIdol2'
+        ];
 
+        private _spook_boss = _boss_info select 0;
+        private _spook_minions = _boss_info select 1;
+        ["------------------------------------"] call pcb_fnc_debug;
+        ["Boss <" + (str _spook_boss) + ">  Minions <" + (str _spook_minions) + ">"] call pcb_fnc_debug;
+        ["------------------------------------"] call pcb_fnc_debug;
+        types_hash set ["weaker spooks", _spook_minions];
+        types_hash set ["boss spook", _spook_boss];
+        types_hash set ["spooks", _ambient];
+          
         // Do we want a parent task (ie, missions as sub-tasks)?
         PARENT_TASK = "";  // set to objNull if we don't
         publicVariable "PARENT_TASK";
@@ -132,14 +153,13 @@ switch (_action) do {
 
             // update our mission list (what we can choose from)
             mission_list = []; 
-            mission_list pushBackUnique "functions\missions\fn_mis_monster_hunt.sqf";
-//            mission_list pushBackUnique "functions\missions\fn_mis_desk_evidence.sqf";
-//            mission_list pushBackUnique "functions\missions\fn_mis_investigate.sqf";
-//            mission_list pushBackUnique "functions\missions\fn_mis_building_search.sqf";
-//            mission_list pushBackUnique "functions\missions\fn_mis_interview.sqf";
+            mission_list pushBackUnique "functions\missions\fn_mis_desk_evidence.sqf";
+            mission_list pushBackUnique "functions\missions\fn_mis_investigate.sqf";
+            mission_list pushBackUnique "functions\missions\fn_mis_building_search.sqf";
+            mission_list pushBackUnique "functions\missions\fn_mis_interview.sqf";
             publicVariable "mission_list"; 
 
-            total_missions = 3;
+            total_missions = 2;
             publicVariable "total_missions";
 
             mission_select = "random";
@@ -153,9 +173,10 @@ switch (_action) do {
             // remember to do these in reverse order!!! 
             mission_list = []; 
             mission_list pushBackUnique "functions\missions\fn_mis_monster_hunt.sqf";
-            mission_list pushBackUnique "functions\missions\fn_mis_get_laptop_from_base.sqf";
-            mission_list pushBackUnique "functions\missions\fn_mis_deliver_evidence.sqf";
-            mission_list pushBackUnique "functions\missions\fn_mis_spawner.sqf";
+//            mission_list pushBackUnique "functions\missions\fn_mis_get_laptop_from_base.sqf";
+//            mission_list pushBackUnique "functions\missions\fn_mis_deliver_evidence.sqf";
+//            mission_list pushBackUnique "functions\missions\fn_mis_spawner.sqf";
+            mission_list pushBackUnique "functions\missions\fn_mis_boss.sqf";
             mission_list pushBackUnique "functions\missions\fn_mis_exfil.sqf";
             publicVariable "mission_list"; 
 

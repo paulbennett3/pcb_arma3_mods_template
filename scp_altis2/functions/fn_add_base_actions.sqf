@@ -103,6 +103,24 @@ private _cmd = {
 ] remoteExec ["addAction", 0, true];   // Server only!
 
 // ------------------------------------
+//            Virtual Arsenal
+// ------------------------------------
+private _cmd = {
+    params ['_target', '_caller', '_actionId', '_arguments'];
+    ["Open", true] call BIS_fnc_arsenal;
+};
+
+[
+    _obj,
+    [
+        "Arsenal",
+        _cmd,
+        [], 1.5, false, false, "", "true", 5
+    ]
+] remoteExec ["addAction", 0, true];   // Server only!
+
+
+// ------------------------------------
 //            Set Role: Single Player
 // ------------------------------------
 private _cmd = {

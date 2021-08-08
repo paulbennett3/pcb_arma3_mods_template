@@ -175,9 +175,7 @@ _vehicle_list pushBack ["Group Transport", _gt, 15];
 
 private _ft_types = [
     "B_LSV_01_unarmed_F",
-    "B_Quadbike_01_F",
     "O_LSV_02_unarmed_F",
-    "B_Heli_Light_01_F",
     "B_G_Van_01_transport_F",
     "B_G_Offroad_01_F",
     "vn_b_wheeled_m151_mg_04",

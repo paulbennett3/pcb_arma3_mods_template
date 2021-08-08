@@ -291,11 +291,7 @@ types_hash set ["all spooks", [
     "DSA_Mindflayer",
     "DSA_Vampire"
 ]];
-//types_hash set ["spooks", types_hash get ["weaker spooks"]]; 
-types_hash set ["spooks", [
-    "DSA_ActiveIdol",
-    "DSA_ActiveIdol2"
-]];
+types_hash set ["spooks", types_hash get ["weaker spooks"]]; 
 
 // --------------------------------
 // Looters

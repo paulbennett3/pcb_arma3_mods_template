@@ -11,7 +11,7 @@ private _did = false;
 // chance of encounter
 if ((random 100) < _chance) then {
     _did = true;
-    private _spooks = types_hash get "spooks";
+    private _spooks = types_hash get "weaker spooks";
     _type = selectRandom _spooks;
 
     private _group = createGroup east;

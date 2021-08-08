@@ -121,6 +121,7 @@ class CfgFunctions
             // --------------------------------------------------------------
             // true missions -- just need UID (and start_pos, epicenter, ...)
             // --------------------------------------------------------------
+            class mis_boss {};
             class mis_building_search {};
             class mis_desk_evidence {};
             class mis_deliver_evidence {};
