@@ -99,7 +99,7 @@ switch (_option) do {
         _did_spawn = [_option, _player, _g1, _g2] call pcb_fnc_enc_compound;
     };
     case "spooks": {
-            private _types = types_hash get "limited spooks";
+            private _types = types_hash get "weaker spooks";
             private _type = [selectRandom _types];
             ["   spook type <" + (str _type) + ">"] call pcb_fnc_debug;
             _did_spawn = [_option, _player, _type, independent, 2, 5, false] call pcb_fnc_enc_infantry;

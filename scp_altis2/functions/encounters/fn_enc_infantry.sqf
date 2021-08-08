@@ -69,7 +69,6 @@ if (true) then {
 
     // create a group
     private _group = createGroup _side;
-    group_stack pushBackUnique _group; publicVariable "group_stack";
     for [{_i = 0 }, {_i < _group_size}, {_i = _i + 1}] do {
         private _type = objNull;
         if (_exact) then {
@@ -83,14 +82,7 @@ if (true) then {
         _obj_list pushBack _veh;
         sleep .1;
     };
-
-    // there is a limit to the number of groups, so we will mark this to delete
-    //  when empty
-    _group deleteGroupWhenEmpty true;
-
-    // toggle dynamic simulation on -- shouldn't really matter since we delete when far
-    // away, but there is a chance to have lots of units ...
-    _group enableDynamicSimulation true;
+    [_group] call pcb_fnc_log_group;
 
     if (_action == "patrol") then {
         // create a patrol

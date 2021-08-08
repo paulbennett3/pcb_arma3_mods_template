@@ -43,5 +43,5 @@ if (count allAirports > 0) then {
 } else {
    ["ERROR! No airports returned by <allAirports>?!?"] call pcb_fnc_debug;
 };
-publicVariable "ALL_airfields";
+//publicVariable "ALL_airfields";
 

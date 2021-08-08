@@ -91,6 +91,7 @@ class CfgFunctions
             file = "functions\director";
             class do_director_spawn {};
             class director {};
+            class log_group {};
         }; 
         class encounters
         {
@@ -110,6 +111,7 @@ class CfgFunctions
             //              "low level" building blocks
             // --------------------------------------------------------------
             class mis_ll_clear {};
+            class mis_ll_delay {};
             class mis_ll_destroy {};
             class mis_ll_get_item {};
             class mis_ll_goto {};

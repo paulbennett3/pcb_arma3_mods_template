@@ -112,6 +112,9 @@ for [{_i = 0 }, {_i < _n_stuff}, {_i = _i + 1}] do { _cabinet addItemCargoGlobal
 [_desk, "Land_PlasticCase_01_large_black_F",[0, -5, -0.5], 0] call _attachIt;
 [_desk, "Land_PlasticCase_01_medium_black_F",[-3, -5, -.2], 0] call _attachIt;
 [_desk, "Land_PlasticCase_01_medium_black_F",[-3, -3.5, -.2], 0] call _attachIt;
+[_desk, "TargetP_Alien1_F",[-5, -20, 0.4], 270] call _attachIt;
+[_desk, "TargetP_Zom_F",[-5, -25, 0.4], 270] call _attachIt;
+[_desk, "TargetP_Inf9_F",[-5, -30, 0.4], 270] call _attachIt;
 base_desk = _desk;
 publicVariable "base_desk";
 
@@ -170,7 +173,6 @@ private _gt = selectRandom [
 ];
 _vehicle_list pushBack ["Group Transport", _gt, 15];
 
-// We need "fast" transport for 1 or 2
 private _ft = selectRandom [
     "B_LSV_01_unarmed_F",
     "B_Quadbike_01_F",
@@ -183,6 +185,7 @@ private _ft = selectRandom [
     "O_LSV_02_unarmed_F",
     "O_T_APC_Wheeled_02_rcws_v2_ghex_F"
 ];
+_vehicle_list pushBack ["Transport", _ft, 15];
 _vehicle_list pushBack ["Transport", _ft, 15];
 
 // Large air transport

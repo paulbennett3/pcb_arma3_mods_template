@@ -8,7 +8,7 @@ a parachute on.
 Parameters:
     _unit (object) : the unit to be parachuted
 ******************************************************************* */
-params ["_unit", ["_pos", [0,0, 200]]];
+params ["_unit", ["_pos", [0,0, 350]]];
 
 [_unit, _pos] spawn {
     params ["_unit", "_pos"];

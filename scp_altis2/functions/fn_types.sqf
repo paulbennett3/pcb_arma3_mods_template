@@ -257,26 +257,39 @@ types_hash set ["demons", [
 // --------------------------------
 // Spooks
 // --------------------------------
-types_hash set ["limited spooks", [
+types_hash set ["weaker spooks", [
+    "DSA_ActiveIdol",
+    "DSA_ActiveIdol2",
     "DSA_Crazy",
     "DSA_Crazy",
     "DSA_Hatman",
-    "DSA_Shadowman",
-    "DSA_Wendigo",
-    "DSA_Wendigo"
-]];
-
-types_hash set ["spooks", [
-    "DSA_411",
-    "DSA_Abomination",
-    "DSA_Crazy",
-    "DSA_Hatman",
-    "DSA_Mindflayer",
     "DSA_Rake",
     "DSA_Shadowman",
     "DSA_Snatcher",
-    "DSA_Vampire",
+    "DSA_Wendigo",
+    "DSA_Wendigo",
+    "DSA_Wendigo",
     "DSA_Wendigo"
+]];
+types_hash set ["stronger spooks", [
+    "DSA_Abomination",
+    "DSA_411",
+    "DSA_Mindflayer",
+    "DSA_Vampire"
+]];
+
+types_hash set ["spooks", [
+    "DSA_ActiveIdols",
+    "DSA_Crazy",
+    "DSA_Hatman",
+    "DSA_Rake",
+    "DSA_Shadowman",
+    "DSA_Snatcher",
+    "DSA_Wendigo",
+    "DSA_Abomination",
+    "DSA_411",
+    "DSA_Mindflayer",
+    "DSA_Vampire"
 ]];
 
 // --------------------------------
@@ -731,4 +744,4 @@ types_hash set ["car small mil", [
 
 // -----------------------------------------------------
 
-publicVariable "types_hash";
+//publicVariable "types_hash";

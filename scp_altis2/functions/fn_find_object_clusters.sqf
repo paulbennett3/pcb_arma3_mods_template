@@ -54,7 +54,7 @@ waitUntil { ! isNil "find_object_clusters_mutex"; };
 
 // we use this with our spawned thread to let us know it is done
 cluster_search_done = false;
-publicVariable "cluster_search_done";
+//publicVariable "cluster_search_done";
 
 [_types, _target, _search_radius, _cluster_radius, _min_cluster_size, _label] spawn {
     params ["_types", "_target", "_search_radius", "_cluster_radius", "_min_cluster_size", "_label"];
@@ -69,8 +69,13 @@ publicVariable "cluster_search_done";
     private _merge_list = []; // for tracking clusters that overlap, so we should merge them
 
     private _found_objects = nearestObjects [_target, _types, _search_radius];
-
+    private _progress_count = 0; 
+    private _tick = 100;
     {
+        _progress_count = _progress_count + 1;
+        if ((_progress_count % _tick) < 1) then {
+            ["Find Clusters: " + (str _progress_count) + " of " + (str (count _found_objects)) + " processed"] call pcb_fnc_debug;
+        };
         private _pos = getPosATL _x;
 
         // does it have a valid position?
@@ -169,7 +174,7 @@ publicVariable "cluster_search_done";
         } forEach (keys _clusters);
     };
 
-    publicVariable "cluster_search_results";
+//    publicVariable "cluster_search_results";
     sleep 0.1;
 
     cluster_search_done = true;

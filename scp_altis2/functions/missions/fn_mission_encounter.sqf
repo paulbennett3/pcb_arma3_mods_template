@@ -39,10 +39,7 @@ if ((random 100) < _chance) then {
 
     _obj_list joinSilent _group;
 
-    // there is a limit to the number of groups, so we will mark this to delete
-    //  when empty
-    _group deleteGroupWhenEmpty true;
-
+    [_group] call pcb_fnc_log_group;
 };
 
 [_obj_list, _type, _n, _did]

@@ -42,7 +42,6 @@ if (true) then {
 
     // create a group
     private _group = createGroup _side;
-    group_stack pushBackUnique _group; publicVariable "group_stack";
     private _res = [
         _pos,
         random 360,
@@ -60,15 +59,9 @@ if (true) then {
     } forEach (_res select 1);
     [(_res select 1)] joinSilent _group;
 
+    [_group] call pcb_fnc_log_group;
+
     sleep .1;
-
-    // there is a limit to the number of groups, so we will mark this to delete
-    //  when empty
-    _group deleteGroupWhenEmpty true;
-
-    // toggle dynamic simulation on -- shouldn't really matter since we delete when far
-    // away, but there is a chance to have lots of units ...
-    _group enableDynamicSimulation true;
 
     // create a patrol
     [_group, _pos, 1000] call BIS_fnc_taskPatrol; 

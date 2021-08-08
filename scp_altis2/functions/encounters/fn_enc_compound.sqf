@@ -67,7 +67,6 @@ private _obj_list = [];
 // ----------------
 private _group1_size = _g1_min + (ceil (random (_g1_max - _g1_min)));
 private _group1 = createGroup _g1_side;
-group_stack pushBackUnique _group1; publicVariable "group_stack";
 for [{_i = 0 }, {_i < _group1_size}, {_i = _i + 1}] do {
     private _type = selectRandom _g1_types;
     private _veh = _group1 createUnit [_type, _pos, [], 5, 'NONE'];
@@ -76,8 +75,7 @@ for [{_i = 0 }, {_i < _group1_size}, {_i = _i + 1}] do {
     _obj_list pushBack _veh;
     sleep .1;
 };
-_group1 deleteGroupWhenEmpty true;
-_group1 enableDynamicSimulation true;
+[_group1] call pcb_fnc_log_group;
 
 // ----------------
 // build group 2
@@ -85,7 +83,6 @@ _group1 enableDynamicSimulation true;
 private _pos2 = (_obj_list select 0) getRelPos [random 200, random 360];
 private _group2_size = _g2_min + (ceil (random (_g2_max - _g2_min)));
 private _group2 = createGroup _g2_side;
-group_stack pushBackUnique _group2; publicVariable "group_stack";
 for [{_i = 0 }, {_i < _group2_size}, {_i = _i + 1}] do {
     private _type = selectRandom _g2_types;
     private _veh = _group2 createUnit [_type, _pos2, [], 5, 'NONE'];
@@ -94,8 +91,7 @@ for [{_i = 0 }, {_i < _group2_size}, {_i = _i + 1}] do {
     _obj_list pushBack _veh;
     sleep .1;
 };
-_group2 deleteGroupWhenEmpty true;
-_group2 enableDynamicSimulation true;
+[_group2] call pcb_fnc_log_group;
 
 // -----------------------------------
 // set up the hot group on group action

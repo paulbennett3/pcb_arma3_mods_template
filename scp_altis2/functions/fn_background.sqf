@@ -32,6 +32,10 @@ spare vehicles and encounters.
     private _buffer = 500;
     sleep 10;
 
+    // flag to let other modules know we are done grinding ...
+    background_clustering_done = false;
+    publicVariable "background_clustering_done";
+
     // -----------------------------------------------
     // generate "spare" helicopters
     // -----------------------------------------------
@@ -154,6 +158,11 @@ spare vehicles and encounters.
 
     ["done finding clusters of civ buildings"] call pcb_fnc_debug;
 
+    // let other modules know we are ready to roll!
+    background_clustering_done = true;
+    publicVariable "background_clustering_done";
+
+
     // -----------------------------------------------
     // Now that we have the location information,
     // we'll start monitoring the player positions
@@ -165,24 +174,19 @@ spare vehicles and encounters.
         private _code = {
             params ["_types", "_n", "_pos", "_side"];
             private _group = createGroup _side;
-            group_stack pushBackUnique _group; publicVariable "group_stack";
             for [{_i = 0 }, {_i < _n}, {_i = _i + 1}] do {
                 private _type = selectRandom _types;
                 private _veh = _group createUnit [_type, _pos, [], 50, 'NONE'];
                 _veh triggerDynamicSimulation false; // won't wake up enemy units:wq
                 [_veh] joinSilent _group;
             };
+            [_group] call pcb_fnc_log_group;
 
-            // there is a limit to the number of groups, so we will mark this to delete
-            //  when empty
-            _group deleteGroupWhenEmpty true;
-
-            _group enableDynamicSimulation true;
             [_group, _pos] call BIS_fnc_taskDefend;
             sleep .1;
         };
 
-        waitUntil { (count bck_trg_fired) > 0 };
+        waitUntil { sleep 1; (count bck_trg_fired) > 0 };
        
         // we know one of our triggers fired, and we have its label and
         // cluster id.
