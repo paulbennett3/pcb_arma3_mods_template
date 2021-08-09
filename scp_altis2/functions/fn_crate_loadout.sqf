@@ -10,22 +10,10 @@ _loadout_name - string specifying loadout type(s)
 params ["_obj", "_loadout_name"];
 
 if (! isServer) exitWith { diag_log "fn_crate_loadout called on non-server"; };
-sleep .1;
 clearItemCargoGlobal _obj;
-sleep .1;
 clearWeaponCargoGlobal _obj;
-sleep .1;
 clearMagazineCargoGlobal _obj;
-sleep .1;
 clearBackpackCargoGlobal _obj;
-sleep .1;
-diag_log "Cleared loadout crate";
-diag_log (str (magazineCargo _obj));
-diag_log (str (magazinesAmmoCargo _obj));
-diag_log (str (weaponCargo _obj));
-diag_log (str (weaponsItemsCargo _obj));
-diag_log (str (itemCargo _obj));
-sleep 1;
 
 // weapon
 _obj addItemCargoGlobal ["arifle_MXM_F", 8];

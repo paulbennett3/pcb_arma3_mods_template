@@ -201,6 +201,10 @@ _vehicle_list pushBack ["VTOL", "B_T_VTOL_01_vehicle_F", 30];
             createVehicleCrew _veh;
         } else {
             [_veh] call pcb_fnc_set_scp_vehicle_loadout;
+            _veh addEventHandler ["Respawn", {
+                params ["_unit", "_corpse"];
+                [_unit] call pcb_fnc_set_scp_vehicle_loadout;
+            }];
         };
 
         private _cid = "T" + str ([] call pcb_fnc_get_next_UID);
@@ -210,6 +214,7 @@ _vehicle_list pushBack ["VTOL", "B_T_VTOL_01_vehicle_F", 30];
 
         // make the vehicle available for use by the players group
         (group (playableUnits select 0)) addVehicle _veh;
+
 
         sleep .1;
     };

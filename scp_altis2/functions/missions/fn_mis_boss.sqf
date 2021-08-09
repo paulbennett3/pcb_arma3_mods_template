@@ -1,7 +1,7 @@
 /* *******************************************************************
-                      mis_monster_hunt
+                      mis_boss
 
-Spawn a handful of monsters (spooks) for the players to hunt.
+Spawn a boss monster spook, possibly with minions
 
 Uses the "clear" mission type.
 
@@ -35,7 +35,7 @@ private _pos = [0, 0, 0];
 private _loc_type = "";
 private _building = objNull;
 
-if ((random 100) < 35) then {
+if ((random 100) < 75) then {
     private _loc_type = "building";
     private _tries = 50;
     while { _tries > 0 } do {
@@ -69,7 +69,7 @@ if ((random 100) < 35) then {
 // test if we have utterly failed ... 
 if (! ([_pos] call pcb_fnc_is_valid_position)) exitWith { [false, _state] };
 
-// generate our monsters
+// generate our minion monsters
 // [_obj_list, _type, _n, _did]
 private _enc_info = [_pos, 101] call pcb_fnc_mission_encounter;
 private _obj_list = _enc_info select 0;
@@ -77,15 +77,28 @@ private _type = _enc_info select 1;
 private _n = _enc_info select 2;
 private _did = _enc_info select 3;
 
+// generate boss
+private _group = group (_obj_list select 0);
+private _type = types_hash get "boss spook";
+private _veh = _group createUnit [_type, [_pos select 0, _pos select 1], [], 30, 'NONE'];
+private _tries = 50;
+while { (_tries > 0) && (! alive _veh) } do {
+    _tries = _tries - 1;
+    _veh = _group createUnit [_type, [_pos select 0, _pos select 1], [], 30, 'NONE'];
+};
+["Spawned boss " + (str _type) + " with " + (str _tries) + " left"] call pcb_fnc_debug;
+_veh triggerDynamicSimulation false;
+_obj_list pushBack _veh;
+
 {
     [_x] spawn {
         params ["_unit"];
         private _marker = createMarker ["ME" + (str _unit), getPosATL _unit];
         _marker setMarkerShapeLocal "ELLIPSE";
-        _marker setMarkerSizeLocal [75, 75];
+        _marker setMarkerSizeLocal [100, 100];
         _marker setMarkerAlphaLocal 0.5;
         _marker setMarkerColor "ColorRED";
-        while { sleep 15; alive _unit } do {
+        while { sleep 30; alive _unit } do {
             private _mpos = (getPosATL _unit) getPos [random 50, random 360];
             _marker setMarkerPos _mpos;
             ["Monster <" + (str _unit) + "> alive"] call pcb_fnc_debug;
@@ -95,15 +108,16 @@ private _did = _enc_info select 3;
     };
 } forEach _obj_list;
 
+
 _state set ["targetlist", _obj_list];
 _state set ["targettype", _type];
 
 [_loc_type] call pcb_fnc_debug; 
-[("<" + (str (_state get "targettype")) + "><" + (str _n) + "><" + (str _did) + "><" + (str _pos) + "> " + _loc_type)] call pcb_fnc_debug; 
+[str _obj_list] call pcb_fnc_debug;
 
 _state set ["taskdesc", [
-    "Purge the area of paranormal entities",
-    "Purge area",
+    "Eliminate the occult leader and its minions",
+    "Eliminate leader and minions",
     "markername"
 ]];
 private _taskpid = "";
@@ -118,7 +132,7 @@ _result = [_state] call pcb_fnc_mis_ll_clear;
 /* ----------------------------------------------------------------
                  Configure and Place Anomalies 
 ---------------------------------------------------------------- */
-[_pos, 3, 7] call pcb_fnc_add_anomalies;
+[_pos, 7, 10] call pcb_fnc_add_anomalies;
 
 // -------------------------------------
 _ok = true;

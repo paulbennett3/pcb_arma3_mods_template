@@ -174,7 +174,7 @@ spare vehicles and encounters.
         private _code = {
             params ["_types", "_n", "_pos", "_side"];
             private _group = createGroup _side;
-            for [{_i = 0 }, {_i < _n}, {_i = _i + 1}] do {
+            for [{_ij = 0 }, {_ij < _n}, {_ij = _ij + 1}] do {
                 private _type = selectRandom _types;
                 private _veh = _group createUnit [_type, _pos, [], 50, 'NONE'];
                 _veh triggerDynamicSimulation false; // won't wake up enemy units:wq
