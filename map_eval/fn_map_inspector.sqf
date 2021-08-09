@@ -57,6 +57,7 @@
         ["No buildings found" + (str _sizes)] remoteExec ["systemChat", 0];
     };
 
-    private _map = density_map get "MIL";
+    //private _map = density_map get "MIL";
+    private _map = density_map get "CIV";
     [_map, _size, ""] call compile preprocessFileLineNumbers "fn_plot_density.sqf";
 };

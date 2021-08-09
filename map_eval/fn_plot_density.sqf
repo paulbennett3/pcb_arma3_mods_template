@@ -10,15 +10,17 @@ Params:
 params ["_density_map", "_size", "_symbol"];
 
 private _values = values _density_map;
-private _max = selectMax _values;
-private _min = selectMin _values;
-private _range = _max - _min;
-private _quarter = _range / 4;
-private _bq = _min + _quarter;
-private _mq = _min + (2*_quarter);
-private _uq = _min + (3*_quarter);
+_values sort true;
+private _n = count _values;
+private _med_index = ceil (_n / 2);
+private _qindex = ceil (_n / 4);
+private _min = _values select 0;
+private _max = _values select (_n - 1);
+private _bq = _values select _qindex;
+private _mq = _values select _med_index;
+private _uq = _values select (_med_index + _qindex - 1);
 
-[(str _values) + " " + (str [_min, _bq, _mq, _uq, _max])] remoteExec ["systemChat", 0];
+private _quartiles = [_min, _bq, _mq, _uq, _max];
 
 {
     private _xx = _x select 0;
@@ -57,3 +59,5 @@ private _uq = _min + (3*_quarter);
         _marker setMarkerColor _markerColor;
     };
 } forEach keys _density_map;
+
+_quartiles
