@@ -100,6 +100,14 @@ class CfgFunctions
             class enc_infantry {};
             class enc_vehicle_patrol {};
         }
+        class map
+        {
+            file = "functions\map";
+            class building_classifier {};
+            class find_building_density {};
+            class map_inspector {};
+            class plot_density {};
+        }
         class missions 
         {
             file = "functions\missions";
