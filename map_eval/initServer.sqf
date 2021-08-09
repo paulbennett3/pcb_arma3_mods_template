@@ -4,6 +4,6 @@
 
 if (! isServer) exitWith {};
 
-[] call compile preprocessFileLineNumbers "fn_show_cities.sqf";
+[] call compile preprocessFileLineNumbers "fn_map_inspector.sqf";
 
 
