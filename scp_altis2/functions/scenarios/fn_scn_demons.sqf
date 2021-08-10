@@ -173,6 +173,23 @@ switch (_action) do {
             // remember to do these in reverse order!!! 
             mission_list = []; 
             mission_list pushBackUnique "functions\missions\fn_mis_monster_hunt.sqf";
+            mission_list pushBackUnique "functions\missions\fn_mis_spawner.sqf";
+            publicVariable "mission_list"; 
+
+            total_missions = count mission_list;
+            publicVariable "total_missions";
+
+            mission_select = "random";
+            publicVariable "mission_select"; 
+        }; 
+        if ((scenario_state == 3) && (total_missions == 0)) then {
+            scenario_state = 4;
+            publicVariable "scenario_state";
+
+            // update our mission list (what we can choose from)
+            // remember to do these in reverse order!!! 
+            mission_list = []; 
+            mission_list pushBackUnique "functions\missions\fn_mis_monster_hunt.sqf";
 //            mission_list pushBackUnique "functions\missions\fn_mis_get_laptop_from_base.sqf";
 //            mission_list pushBackUnique "functions\missions\fn_mis_deliver_evidence.sqf";
 //            mission_list pushBackUnique "functions\missions\fn_mis_spawner.sqf";
@@ -186,6 +203,8 @@ switch (_action) do {
             mission_select = "sequential";
             publicVariable "mission_select"; 
         }; 
+
+
     };
 };
 

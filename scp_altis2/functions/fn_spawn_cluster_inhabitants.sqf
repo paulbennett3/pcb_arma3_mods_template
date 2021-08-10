@@ -14,7 +14,8 @@ params ["_building", "_code", "_label", "_cluster"];
     params ["_buildings", "_spawn_code", "_label", "_cluster"];
 
     // we'll scale encounter size by number of buildings
-    private _scale = ceil (ln (count _buildings));
+    // want log base 2, so use change of bases formula with natural log
+    private _scale = ceil ((ln (count _buildings)) / (ln 2));
     ["Setting scale to " + (str _scale)] call pcb_fnc_debug;
 
     // -----------------------------------------
@@ -39,8 +40,8 @@ params ["_building", "_code", "_label", "_cluster"];
         // spawn some civilians
         if ((random 100) < 50) then {
             private _types = types_hash get "civilians";
-            for [{_i = 0 }, {_i < (ceil (random (_scale / 2)))}, {_i = _i + 1}] do {
-                private _n = 2 + (ceil (random 3));
+            for [{_i = 0 }, {_i < (ceil (random _scale)}, {_i = _i + 1}] do {
+                private _n = 1 + (floor (random 4));
                 [_types, _n, getPosATL (selectRandom _buildings), civilian] call _spawn_code;
 ["Spawning civilian squad in city of size " + (str _n)] call pcb_fnc_debug;
             };
@@ -75,14 +76,14 @@ params ["_building", "_code", "_label", "_cluster"];
             };
 
             // if in city, spawn IEDs
-            for [{_i = 0 }, {_i < (ceil (_scale / 2))}, {_i = _i + 1}] do {
+            for [{_i = 0 }, {_i < (ceil (_scale))}, {_i = _i + 1}] do {
                 [getPosATL (selectRandom _buildings), 20, 2 + (ceil (random 5))] call pcb_fnc_mine_road;
 ["Spawning mines"] call pcb_fnc_debug;
             };
 
         } else {
             private _types = types_hash get "looters";
-            private _n = 1 + (ceil ((random _scale) / 2));
+            private _n = 1 + (ceil (random _scale));
             [_types, _n, getPosATL (selectRandom _buildings), east] call _spawn_code;
 ["Spawning city looters of size " + (str _n)] call pcb_fnc_debug;
         }; // else
