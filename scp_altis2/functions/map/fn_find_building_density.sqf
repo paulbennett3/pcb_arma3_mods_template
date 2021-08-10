@@ -44,9 +44,11 @@ if (! isNil "_buildings") then {
                 private _yy = floor ((_pos select 1) / _size); 
                 private _map = _density_map get _my_class;
                 private _key = [_xx, _yy];
-                private _val = _map getOrDefault [_key, 0];
-                //_map set [_key, _val + _n_pos];
-                _map set [_key, _val + 1];
+                private _val = _map getOrDefault [_key, [0, []]];
+                private _v = (_val select 0) + 1;
+                private _obj_list = _val select 1;
+                _obj_list pushBackUnique _x;
+                _map set [_key, [_v, _obj_list]];
             };
         };
     } forEach _buildings;

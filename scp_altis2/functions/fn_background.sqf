@@ -44,6 +44,8 @@ spare vehicles and encounters.
         [] call pcb_fnc_spawn_spare_helicopters;
     };
 
+
+    // get density of clustered buildings by "class" (MIL, CIV, IND, UNK)
     [] call pcb_fnc_map_inspector;
 
     // -----------------------------------------------

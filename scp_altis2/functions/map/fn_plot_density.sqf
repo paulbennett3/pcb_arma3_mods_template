@@ -13,7 +13,7 @@ params ["_density_map", "_size", "_threshold", "_color"];
 {
     private _xx = _x select 0;
     private _yy = _x select 1;
-    private _val = _density_map get _x;
+    private _val = (_density_map get _x) select 0;
 
     if (_val >= _threshold) then {
         private _x0 = (_xx * _size); 
