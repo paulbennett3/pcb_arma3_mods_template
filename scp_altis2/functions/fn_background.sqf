@@ -46,121 +46,12 @@ spare vehicles and encounters.
 
 
     // get density of clustered buildings by "class" (MIL, CIV, IND, UNK)
+    map_inspector_done = false;
     [] call pcb_fnc_map_inspector;
+    waitUntil { sleep 1; map_inspector_done };
 
-    // -----------------------------------------------
-    //   Find clusters of cities and military buildings
-    // -----------------------------------------------
-    // https://community.bistudio.com/wiki/Arma_3:_CfgPatches_CfgVehicles#A3_Structures_F_Mil_Cargo
-
-    // -------------------------
-    // find all "military bases"
-    // -------------------------
-    ["finding clusters of military buildings"] call pcb_fnc_debug;
-
-    private _types = types_hash get "military buildings"; 
-    private _mil_result = [
-        _types, 
-        world_center, 
-        worldSize, 
-        200, 
-        3,
-        "mil"
-    ] call pcb_fnc_find_object_clusters;
-
-    private _trigger_list = [];
     bck_trg_fired = [];
     publicVariable "bck_trg_fired";
-
-    {
-        private _cluster = _mil_result get _x;
-        private _center = _cluster get "center";
-        private _a = (_cluster get "a") + _buffer;
-        private _b = (_cluster get "b") + _buffer;
-        private _trg = createTrigger ["EmptyDetector", _center, false];    
-        _trg setVariable ["cid", [_cluster get "label", _x]];
-        _trg setTriggerArea [_a, _b, 0, false, -1];
-        private _area = [_center] + (triggerArea _trg);
-
-
-        if (true) then {
-            _trg setTriggerActivation ["ANYPLAYER", "PRESENT", false];
-            _trg setTriggerStatements [
-                "this",
-                "bck_trg_fired pushBackUnique (thisTrigger getVariable 'cid'); publicVariable 'bck_trg_fired';",
-                ""
-            ];
-            _trg setTriggerInterval 2;
-            _trigger_list pushBack _trg;
-        } else {
-            deleteVehicle _trg;
-        };
-        
-        if (pcb_DEBUG) then {
-            private _marker = createMarker ["MILCLUST" + (str _x), _center];
-            _marker setMarkerType "b_motor_inf";
-            _marker = createMarker ["MILCLUSTB" + (str _x), _center];
-            _marker setMarkerShapeLocal "ELLIPSE";
-            _marker setMarkerSizeLocal [_a, _b];
-            _marker setMarkerBrushLocal "BORDER";
-            _marker setMarkerAlphaLocal 0.9;
-            _marker setMarkerColor "ColorRED";
-        };
-
-    } forEach (keys _mil_result);
-
-    ["done finding clusters of military buildings"] call pcb_fnc_debug;
-
-    // -------------------------
-    // Find all "towns"
-    // -------------------------
-    ["finding clusters of civ buildings"] call pcb_fnc_debug;
-    _types = types_hash get "city buildings";
-    _civ_result = [
-        _types, 
-        world_center, 
-        worldSize, 
-        200, 
-        12,
-        "city" 
-    ] call pcb_fnc_find_object_clusters;
-
-    {
-        private _cluster = _civ_result get _x;
-        private _center = _cluster get "center";
-        private _a = (_cluster get "a") + _buffer;
-        private _b = (_cluster get "b") + _buffer;
-        private _trg = createTrigger ["EmptyDetector", _center, false];    
-        _trg setVariable ["cid", [_cluster get "label", _x]];
-        _trg setTriggerArea [_a, _b, 0, false, -1];
-        private _area = [_center] + (triggerArea _trg);
-
-        if (true) then {
-            _trg setTriggerActivation ["ANYPLAYER", "PRESENT", false];
-            _trg setTriggerStatements [
-                "this",
-                "bck_trg_fired pushBackUnique (thisTrigger getVariable 'cid'); publicVariable 'bck_trg_fired';",
-                ""
-            ];
-            _trg setTriggerInterval 2;
-            _trigger_list pushBack _trg;
-        } else {
-            deleteVehicle _trg;
-        };
-        
-        if (pcb_DEBUG) then {
-            private _marker = createMarker ["CIVCLUST" + (str _x), _center];
-            _marker setMarkerType "hd_end";
-            _marker = createMarker ["CIVCLUSTB" + (str _x), _center];
-            _marker setMarkerShapeLocal "ELLIPSE";
-            _marker setMarkerSizeLocal [_a, _b];
-            _marker setMarkerBrushLocal "BORDER";
-            _marker setMarkerAlphaLocal 0.9;
-            _marker setMarkerColor "ColorRED";
-        };
-    } forEach _civ_result;
-
-    ["done finding clusters of civ buildings"] call pcb_fnc_debug;
 
     // let other modules know we are ready to roll!
     background_clustering_done = true;
@@ -203,11 +94,11 @@ spare vehicles and encounters.
         private _cluster_num = _cid select 1;
         private _cluster = objNull;
         private _chance = .05;
-        if (_label isEqualTo "mil") then {
+        if (_label isEqualTo "MIL") then {
             _chance = .15;
-            _cluster = _mil_result get _cluster_num;
+            _cluster = mil_clusters get _cluster_num;
         } else {
-            _cluster = _civ_result get _cluster_num;
+            _cluster = civ_clusters get _cluster_num;
         };
 
         // ---------------------------------------------------------

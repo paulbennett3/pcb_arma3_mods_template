@@ -50,4 +50,4 @@ spare_heli_spawner = true; publicVariable "spare_heli_spawner";
     };
 
     sleep .1;
-} forEach (world_center nearObjects ["Helipad_Base_F", worldSize]);
+} forEach (world_center nearObjects ["HeliH", worldSize]);

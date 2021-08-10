@@ -14,9 +14,7 @@ params ["_building", "_code", "_label", "_cluster"];
     params ["_buildings", "_spawn_code", "_label", "_cluster"];
 
     // we'll scale encounter size by number of buildings
-    private _scale = ceil ((count _buildings) / 10);
-    // but cap it for sanity ...
-    if (_scale > 4) then { _scale = 4; };
+    private _scale = ceil (ln (count _buildings));
     ["Setting scale to " + (str _scale)] call pcb_fnc_debug;
 
     // -----------------------------------------

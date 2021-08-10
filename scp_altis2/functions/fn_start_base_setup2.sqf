@@ -180,7 +180,6 @@ private _ft_types = [
     "O_LSV_02_unarmed_F",
     "B_G_Van_01_transport_F",
     "B_G_Offroad_01_F",
-    "vn_b_wheeled_m151_mg_04",
     "O_MRAP_02_F",
     "O_LSV_02_unarmed_F",
     "O_T_APC_Wheeled_02_rcws_v2_ghex_F"
