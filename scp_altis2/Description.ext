@@ -109,6 +109,7 @@ class CfgFunctions
             class find_building_density {};
             class map_inspector {};
             class merge_clusters {};
+            class plot_clusters_and_create_triggers {};
             class plot_density {};
         }
         class missions 

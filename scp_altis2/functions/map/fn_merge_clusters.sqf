@@ -9,6 +9,8 @@ Parameters:
             is (_xx * _size, _yy * _size), and the opposite corner is
                (_xx * _size + _size, _yy * _size + _size)
           values are [ cluster value, [ building objects ]]
+   _label (string) : the label to attach to the clusters ("MIL", "CIV", "IND", "UNK")
+   _threshold (number) : only consider clusters with this density level or higher
 
 Returns:
    clusters (hashmap)
@@ -20,10 +22,11 @@ Returns:
            obj_list (list of buildings in the cluster)
            label ("MIL", "CIV", "IND", "UNK") 
 ******************************************************************** */
-params ["_map", "_class"];
+params ["_map", "_class", "_threshold"];
 
 // get a list of all our cells ([x, y])
-private _cells = keys _map;
+//    filtered by if the density is at or above the threshold
+private _cells = (keys _map) select { ((_map get _x) select 0) >= _threshold };
 
 // list of "visited" cells
 private _visited = createHashMap;
@@ -94,38 +97,48 @@ for [{_cluster_count = 0 }, {_cluster_count < (count _clusters)}, {_cluster_coun
         _obj_list = _obj_list + ((_map get _x) select 1);
     } forEach _key_list;
 
+    // make sure we only have unique items in the list!
+    _obj_list = _obj_list arrayIntersect _obj_list;
+
     // find the center and bounds
     private _xacc = 0;  
     private _yacc = 0;  
     private _xs = [];
     private _ys = [];
 
+    private _n = 0;
+
     {
         private _pos = getPosATL _x;
-        private _xval = (_pos select 0);
-        private _yval = (_pos select 1);
-        _xacc = _xacc + _xval; _xs pushBack _xval;
-        _yacc = _yacc + _yval; _ys pushBack _yval;
-      
+        if ([_pos] call pcb_fnc_is_valid_position) then {
+            _n = _n + 1;
+            private _xval = (_pos select 0);
+            private _yval = (_pos select 1);
+            _xacc = _xacc + _xval; _xs pushBackUnique _xval;
+            _yacc = _yacc + _yval; _ys pushBackUnique _yval;
+        }; 
     } forEach _obj_list;
 
-    private _center = [_xacc / (count _obj_list), _yacc / (count _obj_list)];
-    private _minx = selectMin _xs;
-    private _maxx = selectMax _xs;
-    private _miny = selectMin _ys;
-    private _maxy = selectMax _ys;
-    private _a = (_maxx - _minx) / 2;
-    private _b = (_maxy - _miny) / 2;
+    private _center = [_xacc / _n, _yacc / _n];
+    // only use clusters in our active area
+    if (_center inArea "mActive") then {
+        private _minx = selectMin _xs;
+        private _maxx = selectMax _xs;
+        private _miny = selectMin _ys;
+        private _maxy = selectMax _ys;
+        private _a = (_maxx - _minx) / 2;
+        private _b = (_maxy - _miny) / 2;
 
-    private _cluster = createHashMapFromArray [
-        ["center", _center],
-        ["a", _a],
-        ["b", _b],
-        ["obj_list", _obj_list],
-        ["label", _class]
-    ];
+        private _cluster = createHashMapFromArray [
+            ["center", _center],
+            ["a", _a],
+            ["b", _b],
+            ["obj_list", _obj_list],
+            ["label", _class]
+        ];
    
-    _cluster_map set [_cid, _cluster]; 
+        _cluster_map set [_cid, _cluster]; 
+    };
 };
 
 _cluster_map
