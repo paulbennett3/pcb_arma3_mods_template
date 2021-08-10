@@ -21,8 +21,5 @@
         _values sort true;
         private _uq = _values select (floor (3* (count _values) / 4));
         [_map, _size, _uq, "colorGREEN"] call pcb_fnc_plot_density;
-
-
-
     };
 };

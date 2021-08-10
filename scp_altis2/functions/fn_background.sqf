@@ -44,6 +44,8 @@ spare vehicles and encounters.
         [] call pcb_fnc_spawn_spare_helicopters;
     };
 
+    [] call pcb_fnc_map_inspector;
+
     // -----------------------------------------------
     //   Find clusters of cities and military buildings
     // -----------------------------------------------

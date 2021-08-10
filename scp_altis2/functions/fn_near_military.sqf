@@ -15,10 +15,14 @@ Returns:
 ************************************************************************* */
 params ["_pos", ["_radius", 200], ["_min_military_buildings", 2]];
 
-private _mil_buildings = types_hash get "military buildings";
+private _buildings = nearestObjects [_pos, ["House", "Building"], _radius];
+private _count = 0;
+{
+    if (([_x] call pcb_fnc_building_classifier) isEqualTo "MIL") then {
+        _count = _count + 1;
+    };
+} forEach _buildings;
 
-private _buildings = nearestObjects [_pos, _mil_buildings, _radius];
-
-private _result = (count _buildings) >= _min_military_buildings;
+private _result = _count >= _min_military_buildings;
 
 _result

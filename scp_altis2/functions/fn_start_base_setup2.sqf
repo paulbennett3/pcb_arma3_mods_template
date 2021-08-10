@@ -115,6 +115,8 @@ for [{_i = 0 }, {_i < _n_stuff}, {_i = _i + 1}] do { _cabinet addItemCargoGlobal
 [_desk, "TargetP_Alien1_F",[-5, -20, 0.4], 270] call _attachIt;
 [_desk, "TargetP_Zom_F",[-5, -25, 0.4], 270] call _attachIt;
 [_desk, "TargetP_Inf9_F",[-5, -30, 0.4], 270] call _attachIt;
+[_desk, "Zombie_PopUp_Moving_90deg_Acc1_F",[-5, -35, 0.4], 270] call _attachIt;
+[_desk, "Land_Target_Dueling_01_F",[-5, -40, 0.4], 270] call _attachIt;
 base_desk = _desk;
 publicVariable "base_desk";
 
@@ -262,3 +264,5 @@ for [{_i = 0 }, {_i < 5}, {_i = _i + 1}] do {
     [_guard_types_inf, count _guard_types_inf, _next_pos, west] call _code;
     _next_pos = (playableUnits select 0) getPos [_offset, start_dir]; _offset = _offset + 20;
 };
+
+[] call pcb_fnc_convenience;
