@@ -42,7 +42,9 @@ private _trigger_list = [];
         _marker setMarkerSizeLocal [_a, _b];
         _marker setMarkerBrushLocal "BORDER";
         _marker setMarkerAlphaLocal 0.9;
-        _marker setMarkerColor "ColorBLACK";
+        if (_class isEqualTo "MIL") then { _marker setMarkerColor "ColorBLACK"; };
+        if (_class isEqualTo "CIV") then { _marker setMarkerColor "ColorBLUE"; };
+        if (_class isEqualTo "IND") then { _marker setMarkerColor "ColorGREEN"; };
     };
 } forEach (keys _map);
 
