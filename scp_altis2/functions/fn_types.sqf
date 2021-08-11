@@ -157,7 +157,24 @@ types_hash set ["civilians", [
     "vn_c_men_24", "vn_c_men_03", "vn_c_men_04", "C_IDAP_Man_AidWorker_01_F",
     "C_IDAP_Man_AidWorker_08_F", "C_IDAP_Man_AidWorker_05_F", "C_IDAP_Man_AidWorker_04_F",
     "C_IDAP_Man_AidWorker_03_F", "C_man_p_beggar_F_afro", "C_Man_casual_2_F_afro",
-    "C_man_polo_1_F_afro", "C_man_shorts_2_F_afro", "C_Man_casual_8_F_asia", "C_man_polo_4_F_asia"
+    "C_man_polo_1_F_afro", "C_man_shorts_2_F_afro", "C_Man_casual_8_F_asia", "C_man_polo_4_F_asia",
+    "C_man_p_beggar_F", "C_man_1", "C_Man_casual_1_F", "C_Man_casual_2_F", "C_Man_casual_3_F",
+    "C_Man_casual_4_v2_F", "C_Man_casual_5_v2_F", "C_Man_casual_6_v2_F", "C_Man_casual_7_F",
+    "C_Man_casual_8_F", "C_Man_casual_9_F", "C_Man_formal_1_F", "C_Man_formal_2_F", "C_Man_formal_3_F",
+    "C_Man_formal_4_F", "C_Man_smart_casual_1_F", "C_Man_smart_casual_2_F", "C_man_sport_1_F",
+    "C_man_sport_2_F", "C_man_sport_3_F", "C_Man_casual_4_F", "C_Man_casual_5_F", "C_Man_casual_6_F",
+    "C_man_polo_1_F", "C_man_polo_2_F", "C_man_polo_3_F", "C_man_polo_4_F", "C_man_polo_5_F",
+    "C_man_polo_6_F", "C_man_shorts_1_F", "C_man_1_2_F", "C_man_1_3_F", "C_Man_Fisherman_01_F",
+    "C_man_p_fugitive_F", "C_man_p_shorts_1_F", "C_man_hunter_1_F", "C_Man_Messenger_01_F", "C_man_shorts_2_F",
+    "C_man_p_beggar_F_afro", "C_Man_casual_2_F_afro", "C_Man_casual_3_F_afro", "C_Man_casual_4_v2_F_afro",
+    "C_Man_casual_5_v2_F_afro", "C_Man_casual_6_v2_F_afro", "C_Man_casual_7_F_afro", "C_Man_casual_8_F_afro",
+    "C_Man_casual_9_F_afro", "C_Man_smart_casual_1_F_afro", "C_Man_smart_casual_2_F_afro", "C_man_sport_1_F_afro",
+    "C_man_sport_2_F_afro", "C_man_sport_3_F_afro", "C_Man_casual_4_F_afro", "C_Man_casual_5_F_afro",
+    "C_Man_casual_6_F_afro", "C_man_polo_1_F_afro", "C_man_polo_2_F_afro", "C_man_polo_3_F_afro",
+    "C_man_polo_4_F_afro", "C_man_polo_5_F_afro", "C_man_polo_6_F_afro", "C_man_shorts_1_F_afro",
+    "C_man_p_fugitive_F_afro", "C_man_p_shorts_1_F_afro", "C_man_shorts_2_F_afro", "C_Man_1_enoch_F",
+    "C_Man_2_enoch_F", "C_Man_3_enoch_F", "C_Man_4_enoch_F", "C_Man_5_enoch_F",
+    "C_Man_6_enoch_F", "C_Farmer_01_enoch_F"
 ]];
 
 types_hash set ["civ infected", [
@@ -300,14 +317,26 @@ types_hash set ["looters", [
     "I_L_Looter_Pistol_F", "I_L_Looter_SG_F", "I_L_Looter_Pistol_F", "I_L_Looter_SG_F", 
     "I_L_Looter_Pistol_F", "I_L_Looter_SG_F", "I_L_Looter_Pistol_F", "I_L_Looter_SG_F", 
     "I_L_Looter_Pistol_F", "I_L_Looter_SG_F", "I_L_Looter_Rifle_F", "I_L_Looter_SMG_F",
-    "I_L_Criminal_SG_F", "I_L_Criminal_SMG_F", "I_L_Looter_SG_F", "I_L_Looter_Rifle_F"
+    "I_L_Criminal_SG_F", "I_L_Criminal_SMG_F", "I_L_Looter_SG_F", "I_L_Looter_Rifle_F",
+    "vn_o_men_vc_local_02", "vn_o_men_vc_local_20", "vn_o_men_vc_local_06",
+    "vn_o_men_vc_local_04", "vn_o_men_vc_local_18", "vn_o_men_vc_local_03",
+    "vn_o_men_vc_local_17", "vn_o_men_vc_local_05", "vn_o_men_vc_local_19",
+    "vn_o_men_vc_local_09", "vn_o_men_vc_local_23", "vn_o_men_vc_local_30",
+    "vn_o_men_vc_local_07", "vn_o_men_vc_local_08", "vn_o_men_vc_local_22",
+    "vn_o_men_vc_local_29", "vn_o_men_vc_local_01", "vn_o_men_vc_local_15"
 ]];
 
 types_hash set ["insurgents", [
     "I_C_Soldier_Bandit_4_F", "I_C_Soldier_Bandit_3_F", "I_C_Soldier_Bandit_7_F",
     "I_C_Soldier_Bandit_5_F", "I_C_Soldier_Bandit_6_F", "I_C_Soldier_Bandit_2_F", "I_C_Soldier_Bandit_8_F",
     "I_C_Soldier_Bandit_1_F", "I_L_Looter_Pistol_F", "I_L_Looter_SG_F", "I_L_Looter_Rifle_F",
-    "I_E_Soldier_TL_F", "I_E_Soldier_AR_F", "I_E_Soldier_GL_F", "_E_RadioOperator_F"
+    "I_E_Soldier_TL_F", "I_E_Soldier_AR_F", "I_E_Soldier_GL_F", "_E_RadioOperator_F",
+    "vn_o_men_vc_local_02", "vn_o_men_vc_local_20", "vn_o_men_vc_local_06",
+    "vn_o_men_vc_local_04", "vn_o_men_vc_local_18", "vn_o_men_vc_local_03",
+    "vn_o_men_vc_local_17", "vn_o_men_vc_local_05", "vn_o_men_vc_local_19",
+    "vn_o_men_vc_local_09", "vn_o_men_vc_local_23", "vn_o_men_vc_local_30",
+    "vn_o_men_vc_local_07", "vn_o_men_vc_local_08", "vn_o_men_vc_local_22",
+    "vn_o_men_vc_local_29", "vn_o_men_vc_local_01", "vn_o_men_vc_local_15"
 ]];
 
 // --------------------------------
@@ -318,7 +347,9 @@ types_hash set ["civ vehicles", [
     "C_Offroad_01_covered_F", "C_Offroad_01_repair_F", "C_Quadbike_01_F", "C_SUV_01_F",
     "C_Tractor_01_F", "C_Van_01_transport_F", "C_Van_01_box_F", "C_Van_02_vehicle_F",
     "C_Van_02_service_F", "C_Van_02_transport_F", "C_Truck_02_fuel_F", "C_Truck_02_box_F",
-    "C_Truck_02_transport_F", "C_Truck_02_covered_F"
+    "C_Truck_02_transport_F", "C_Truck_02_covered_F", "C_Van_02_medevac_F", "vn_c_bicycle_01",
+    "vn_b_wheeled_m151_02", "vn_o_wheeled_z157_02_nva65", "vn_o_wheeled_z157_01_nva65",
+    "vn_c_wheeled_m151_02", "vn_c_wheeled_m151_01", "C_Van_01_fuel_F", "C_Offroad_01_F"
 ]];
 
 

@@ -15,13 +15,12 @@ publicVariable "player_group";
 // move everybody to the start position
 // ------------------------------------------------------------------
 private _id = 0;
-private _unitslist = units (group (playableUnits select 0));
+private _unitslist = units player_group;
 for [{_id = 0}, {_id < (count (_unitslist))}, {_id = _id + 1}] do {
     private _x = _unitslist select _id;
     _x setVehiclePosition [start_pos, [], 5, "NONE"];
     [_x, _id] call pcb_fnc_enable_ai_respawn;
     [_x] call pcb_fnc_set_scp_loadout;
-    _id = _id + 1;
     sleep .1;
 }; // forEach units (group (playableUnits select 0));
 

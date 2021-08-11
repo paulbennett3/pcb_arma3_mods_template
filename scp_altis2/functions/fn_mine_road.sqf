@@ -10,15 +10,16 @@ private _type = selectRandom [
     "APERSMine", "APERSBoundingMine", "APERSTripMine", "ATMine"
 ];
 
-for [{_i = 0 }, {_i < _n_mines}, {_i = _i + 1}] do {
+private _mdx = 0;
+for [{_mdx = 0 }, {_mdx < _n_mines}, {_mdx = _mdx + 1}] do {
     private _rpos = [
-        [_pos, _radius],
+        [[_pos, _radius]],
         ["water"],
         { isOnRoad _this }
     ] call BIS_fnc_randomPos; 
 
     if ([_rpos] call pcb_fnc_is_valid_position) then {
         _rpos = [_rpos select 0, _rpos select 1];
-        createMine [_type, _rpos, [], "NONE"];
+        createMine [_type, _rpos, [], 0];
     };
 };

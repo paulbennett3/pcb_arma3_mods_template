@@ -11,7 +11,26 @@ Returns
 ***************************************************************************** */
 params ["_group"];
 
-group_stack pushBackUnique _group; 
+// ----------------------------------
+// mutex stuff
+// ----------------------------------
+private _my_mutex_id = "log_group_id";
+
+if (isNil "group_mutex") then {
+    group_mutex = ["create", _my_mutex_id] call pcb_fnc_mutex;
+    publicVariable "group_mutex";
+};
+waitUntil { ! isNil "group_mutex"; };
+
+// now take the mutex -- will pend until taken
+["get", _my_mutex_id, group_mutex] call pcb_fnc_mutex;
+// ----------------------------------
+// ----------------------------------
+
+
+
+
+group_stack pushBackUnique [_group, serverTime]; 
 
 // some mitigation efforts
 _group deleteGroupWhenEmpty true;
@@ -20,9 +39,11 @@ _group deleteGroupWhenEmpty true;
 // away, but there is a chance to have lots of units ...
 _group enableDynamicSimulation true;
 
-/* doesn't work -- groups aren't objects ...
-_group addEventHandler ["Deleted", {
-    params ["_entity"];
-    ["GROUP DELETE <" + (str _entity) + ">"] call pcb_fnc_debug;
-}];
-*/
+
+
+
+// ------------------------
+// release our mutex
+// ------------------------
+["release", _my_mutex_id, group_mutex] call pcb_fnc_mutex;
+

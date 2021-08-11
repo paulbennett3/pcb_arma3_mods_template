@@ -17,12 +17,13 @@ when they change -- for learning purposes ...
         { 
             private _rating = rating _x; 
             if (_rating != (_pu_ratings get (str _x))) then {
+                 private _name = name _x;
                  if (_rating < -2000) then {
-                     [(str _x) + " is now an ENEMY! Rating: " + (str _rating)] call pcb_fnc_debug; 
-                     [(str _x) + " is now an ENEMY! Rating: " + (str _rating)] remoteExec ["systemChat", 0, true]; 
+                     [_name + " is now an ENEMY! Rating: " + (str _rating)] call pcb_fnc_debug; 
+                     [_name + " is now an ENEMY! Rating: " + (str _rating)] remoteExec ["systemChat", 0, true]; 
                  } else {
-                     [(str _x) + " has changed their rating to " + (str _rating)] call pcb_fnc_debug; 
-                     [(str _x) + " has changed their rating to " + (str _rating)] remoteExec ["systemChat", 0, true]; 
+                     [_name + " has changed their rating to " + (str _rating)] call pcb_fnc_debug; 
+                     [_name + " has changed their rating to " + (str _rating)] remoteExec ["systemChat", 0, true]; 
                  };
                  _pu_ratings set [str _x, rating _x];
             };

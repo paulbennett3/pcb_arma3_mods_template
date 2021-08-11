@@ -58,6 +58,7 @@ publicVariable "group_stack";
 [] spawn {
     private _count = 0;
     private _sleep_time = 10;
+    private _trigger_group_gc = 250; // max groups is ~288
     sleep _sleep_time;
 
     spawned_encounters = createHashMap;
@@ -85,6 +86,14 @@ publicVariable "group_stack";
             (str _n_active_enc) + " <" + 
             (str (count group_stack)) + ">"
         ] call pcb_fnc_debug;
+
+        if ((count group_stack) > _trigger_group_gc) then {
+            [] spawn {
+                ["Starting group garbage collection"] call pcb_fnc_debug;
+                [] call pcb_fnc_group_garbage_collect;
+                ["Done with group garbage collection"] call pcb_fnc_debug;
+            };
+        };
 
         // keep a list of hashmap UIDs to delete when done iterating
         private _delete_keys = [];
@@ -144,7 +153,6 @@ publicVariable "group_stack";
                         _last_encounter_tick = _count;
                     };
                     if (isNil "_did_spawn") then {
-// hint "failed to assign _did_spawn";
                     };
  
                 };

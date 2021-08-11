@@ -12,7 +12,7 @@ removeGoggles _this;
 
 comment "Add weapons";
 _this addWeapon "arifle_MXC_F";
-_this addPrimaryWeaponItem "acc_flashlight";
+//_this addPrimaryWeaponItem "acc_pointer_IR";
 _this addPrimaryWeaponItem "optic_Hamr";
 _this addPrimaryWeaponItem "100Rnd_65x39_caseless_mag";
 _this addWeapon "hgun_Rook40_F";
@@ -31,14 +31,15 @@ _this addItemToUniform "B_UavTerminal";
 for "_i" from 1 to 2 do {_this addItemToVest "DemoCharge_Remote_Mag";};
 _this addItemToVest "30Rnd_9x21_Green_Mag";
 _this addItemToVest "30Rnd_9x21_Green_Mag";
-for "_i" from 1 to 5 do {_this addItemToBackpack "100Rnd_65x39_caseless_mag_Tracer";};
-_this addHeadgear "H_HelmetB_TI_arid_F";
-_this addGoggles "G_Balaclava_TI_G_blk_F";
 _this addItemToBackpack "SmokeShellRed";
 _this addItemToBackpack "SmokeShellRed";
 _this addItemToBackpack "Chemlight_red";
-_this addItemToBackpack "acc_pointer_IR";
+_this addItemToBackpack "acc_flashlight";
+for "_i" from 1 to 3 do {_this addItemToVest "100Rnd_65x39_caseless_mag_Tracer";};
+for "_i" from 1 to 3 do {_this addItemToBackpack "100Rnd_65x39_caseless_mag_Tracer";};
 
+_this addHeadgear "H_HelmetB_TI_arid_F";
+_this addGoggles "G_Balaclava_TI_G_blk_F";
 
 
 comment "Add items";
