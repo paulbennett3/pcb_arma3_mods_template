@@ -37,6 +37,7 @@ _this addGoggles "G_Balaclava_TI_G_blk_F";
 _this addItemToBackpack "SmokeShellRed";
 _this addItemToBackpack "SmokeShellRed";
 _this addItemToBackpack "Chemlight_red";
+_this addItemToBackpack "acc_pointer_IR";
 
 
 

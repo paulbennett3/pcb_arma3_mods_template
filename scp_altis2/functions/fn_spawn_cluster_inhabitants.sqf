@@ -40,7 +40,7 @@ params ["_building", "_code", "_label", "_cluster"];
         // spawn some civilians
         if ((random 100) < 50) then {
             private _types = types_hash get "civilians";
-            for [{_i = 0 }, {_i < (ceil (random _scale)}, {_i = _i + 1}] do {
+            for [{_i = 0 }, {_i < (ceil (random _scale))}, {_i = _i + 1}] do {
                 private _n = 1 + (floor (random 4));
                 [_types, _n, getPosATL (selectRandom _buildings), civilian] call _spawn_code;
 ["Spawning civilian squad in city of size " + (str _n)] call pcb_fnc_debug;

@@ -52,7 +52,7 @@ class CfgFunctions
             class get_empty_pos {};
             class get_next_UID {};
             class get_random_vehicle {};
-            class group_garbage_collection {};
+//            class group_garbage_collection {};
             class is_valid_position {};
             class loadout_save_restore {};
             class loot_crate {};
@@ -65,6 +65,7 @@ class CfgFunctions
             class objective_locate_object {};
             class parse_airports {};
             class packable_base {};
+            class packable_boat {};
             class parachute_to_group {};
             class player_in_vehicle {};
             class players_in_area {};

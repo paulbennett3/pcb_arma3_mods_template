@@ -58,6 +58,7 @@ _obj addItemCargoGlobal ["optic_tws", 4];
 _obj addItemCargoGlobal ["optic_tws_mg", 4];
 _obj addItemCargoGlobal ["ToolKit", 2];
 _obj addItemCargoGlobal ["MineDetector", 2];
+_obj addItemCargoGlobal ["acc_flashlight", 2];
 
 // backpack
 _obj addBackpackCargoGlobal ["B_Kitbag_rgr", 2];

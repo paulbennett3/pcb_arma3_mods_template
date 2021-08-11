@@ -94,12 +94,12 @@ switch (_action) do {
         //[] call pcb_fnc_start_base_setup;
         [] call pcb_fnc_start_base_setup2;
 
-        // start spawning spare vehicles etc
-        [] call pcb_fnc_background;
- 
         // manipulate the starting weather et al
         [] call pcb_fnc_set_mission_environment;
 
+        // start spawning spare vehicles etc
+        [] call pcb_fnc_background;
+ 
         // Pick our boss and minion types
         private _boss_info = selectRandom [
             ['DSA_Mindflayer', ['DSA_Crazy', 'DSA_Hatman']],

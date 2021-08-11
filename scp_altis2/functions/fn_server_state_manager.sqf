@@ -31,6 +31,7 @@ publicVariable "message_box";
        if (true) then {
            private _msg = message_box deleteAt 0;
            publicVariable "message_box";
+["Server State Manager processing <" + (str _msg) + ">"] call pcb_fnc_debug;
 
            private _msg_type = _msg select 0;
 
@@ -38,6 +39,10 @@ publicVariable "message_box";
                case "pck": {
                    private _target = _msg select 1;
                    [_target] call pcb_fnc_packable_base;
+               };
+               case "pck_boat": {
+                   private _target = _msg select 1;
+                   [_target] call pcb_fnc_packable_boat;
                };
                case "respawn_ai": {
                    private _type = _msg select 1;

@@ -17,6 +17,8 @@ clearMagazineCargo _obj;
 _obj addItemCargoGlobal ["arifle_MXC_F", 2];
 _obj addItemCargoGlobal ["hgun_Rook40_F", 2];
 _obj addItemCargoGlobal ["Laserdesignator", 1];
+_obj addItemCargoGlobal ["acc_pointer_IR", 2];
+_obj addItemCargoGlobal ["acc_flashlight", 2];
 // mag
 _obj addMagazineAmmoCargo ["100Rnd_65x39_caseless_mag_Tracer", 10, 100];
 _obj addMagazineAmmoCargo ["30Rnd_65x39_caseless_mag_Tracer", 10, 30];

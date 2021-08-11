@@ -14,15 +14,15 @@ mworld_center = createMarker ["MWORLD_CENTER", world_center];
 "MWORLD_CENTER" setMarkerType "Empty";
 publicVariable "mworld_center";
 
-//pcb_DEBUG = true;
-pcb_DEBUG = false;
+pcb_DEBUG = true;
+//pcb_DEBUG = false;
 publicVariable "pcb_DEBUG";
 
 [] call pcb_fnc_types; // initialize our type lists
 
+[] call pcb_fnc_advancedTowingInit;
 [] call pcb_fnc_server_state_manager;
 [] call pcb_fnc_mission_generator;
-[] call pcb_fnc_advancedTowingInit;
 [] call pcb_fnc_monitor_ratings;
 
 ["initServer done and ready to kill Wendigos!"] call pcb_fnc_debug;

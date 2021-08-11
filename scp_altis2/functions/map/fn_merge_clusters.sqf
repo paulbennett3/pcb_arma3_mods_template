@@ -42,14 +42,15 @@ private _neighbors = [
 private _clusters = [];
 
 // until we'v processed them all ...
-while { (count _cells) > 0 } do {
+while { sleep .1; (count _cells) > 0 } do {
+
     // remove the first cell in our list, and start a new cluster
     private _cell = _cells deleteAt 0;
     if (! (_cell in _visited)) then {
         private _stack = [ _cell ];
         private _cluster = [];
  
-        while { (count _stack) > 0 } do {
+        while { sleep .1; (count _stack) > 0 } do {
             // pop the first entry
             private _current = (_stack deleteAt 0);
             if (! (_current in _visited)) then {
@@ -63,7 +64,9 @@ while { (count _cells) > 0 } do {
                 _visited set [_current, true];
     
                 // find all neighbors
-                {
+                private _ndx = 0;
+                for [{_ndx = 0}, {_ndx < (count _neighbors)}, {_ndx = _ndx + 1}] do {
+                    private _x = _neighbors select _ndx;
                     private _key = [_cx + (_x select 0), _cy + (_x select 1)];
                     private _index = _cells find _key;
                     if (_index > -1) then {
@@ -75,7 +78,7 @@ while { (count _cells) > 0 } do {
                             _stack pushBackUnique _temp;
                         };
                     };   
-                 } forEach _neighbors;
+                 }; // forEach _neighbors;
             }; // check the current inner cell for if we've seen it already
         };  // inner while as we process this cluster
 
@@ -93,9 +96,12 @@ for [{_cluster_count = 0 }, {_cluster_count < (count _clusters)}, {_cluster_coun
 
     // accumulate all the buildings across the cluster
     private _obj_list = [];
-    {
+    private _odx = 0;
+    for [{_odx = 0}, {_odx < (count _key_list)}, {_odx = _odx + 1}] do {
+        if ((_odx % 100) < 1) then { sleep .1; };
+        private _x = _key_list select _odx; 
         _obj_list = _obj_list + ((_map get _x) select 1);
-    } forEach _key_list;
+    }; // forEach _key_list;
 
     // make sure we only have unique items in the list!
     _obj_list = _obj_list arrayIntersect _obj_list;
@@ -108,7 +114,10 @@ for [{_cluster_count = 0 }, {_cluster_count < (count _clusters)}, {_cluster_coun
 
     private _n = 0;
 
-    {
+    private _jdx = 0;
+    for [{_jdx = 0}, {_jdx < (count _obj_list) }, {_jdx = _jdx + 1}] do {
+        if ((_jdx % 100) < 1) then { sleep .1; };
+        private _x = _obj_list select _jdx;
         private _pos = getPosATL _x;
         if ([_pos] call pcb_fnc_is_valid_position) then {
             _n = _n + 1;
@@ -117,7 +126,7 @@ for [{_cluster_count = 0 }, {_cluster_count < (count _clusters)}, {_cluster_coun
             _xacc = _xacc + _xval; _xs pushBackUnique _xval;
             _yacc = _yacc + _yval; _ys pushBackUnique _yval;
         }; 
-    } forEach _obj_list;
+    }; // forEach _obj_list;
 
     private _center = [_xacc / _n, _yacc / _n];
     // only use clusters in our active area

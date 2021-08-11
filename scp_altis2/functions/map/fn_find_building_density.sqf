@@ -19,14 +19,23 @@ _density_map set ["UNK", createHashMap];
 
 private _center = [worldSize / 2, worldSize / 2];
 
-private _buildings = (_center nearObjects ["House", worldSize]) +
-                     (_center nearObjects ["Building", worldSize]);
+//private _buildings = (_center nearObjects ["House", worldSize]) +
+//                     (_center nearObjects ["Building", worldSize]);
+
+private _buildings = (_center nearObjects ["House", worldSize]);
+sleep .1;
+_buildings = _buildings + (_center nearObjects ["Building", worldSize]);
+sleep .1;
 
 // make sure we only have unique entries
 _buildings = _buildings arrayIntersect _buildings;
+sleep .1;
 
 if (! isNil "_buildings") then {
-    {
+    private _bidx = 0;
+    for [{_bidx = 0}, { _bidx < (count _buildings) }, { _bidx = _bidx + 1 }] do {
+        if ((_bidx % 100) < 1) then { sleep .1; };
+        private _x = _buildings select _bidx;
         private _pos = getPosATL _x;
         if (((_pos select 0) > 0) || ((_pos select 1) > 0)) then {
             private _n_pos = count (_x buildingPos -1);    
@@ -51,6 +60,6 @@ if (! isNil "_buildings") then {
                 _map set [_key, [_v, _obj_list]];
             };
         };
-    } forEach _buildings;
+    }; // forEach _buildings;
 };
 _density_map

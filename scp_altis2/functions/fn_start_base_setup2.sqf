@@ -14,13 +14,16 @@ publicVariable "player_group";
 // ------------------------------------------------------------------
 // move everybody to the start position
 // ------------------------------------------------------------------
-private _id = 1;
-{
-   _x setVehiclePosition [start_pos, [], 5, "NONE"];
-   [_x, _id] call pcb_fnc_enable_ai_respawn;
-   [_x] call pcb_fnc_set_scp_loadout;
-   _id = _id + 1;
-} forEach units (group (playableUnits select 0));
+private _id = 0;
+private _unitslist = units (group (playableUnits select 0));
+for [{_id = 0}, {_id < (count (_unitslist))}, {_id = _id + 1}] do {
+    private _x = _unitslist select _id;
+    _x setVehiclePosition [start_pos, [], 5, "NONE"];
+    [_x, _id] call pcb_fnc_enable_ai_respawn;
+    [_x] call pcb_fnc_set_scp_loadout;
+    _id = _id + 1;
+    sleep .1;
+}; // forEach units (group (playableUnits select 0));
 
 ["You should be there  ..."] call pcb_fnc_debug;
 
@@ -112,6 +115,9 @@ for [{_i = 0 }, {_i < _n_stuff}, {_i = _i + 1}] do { _cabinet addItemCargoGlobal
 [_desk, "Land_PlasticCase_01_large_black_F",[0, -5, -0.5], 0] call _attachIt;
 [_desk, "Land_PlasticCase_01_medium_black_F",[-3, -5, -.2], 0] call _attachIt;
 [_desk, "Land_PlasticCase_01_medium_black_F",[-3, -3.5, -.2], 0] call _attachIt;
+//private _boat_box = [_desk, "Box_B_UAV_06_F",[-5, -3.5, -.2], 0] call _attachIt;
+private _boat_box1 = [_desk, "Land_MetalCase_01_large_F",[-5, -3.0, -.2], 0] call _attachIt;
+private _boat_box2 = [_desk, "Land_MetalCase_01_large_F",[-5, -4.5, -.2], 0] call _attachIt;
 [_desk, "TargetP_Alien1_F",[-5, -20, 0.4], 270] call _attachIt;
 [_desk, "TargetP_Zom_F",[-5, -25, 0.4], 270] call _attachIt;
 [_desk, "TargetP_Inf9_F",[-5, -30, 0.4], 270] call _attachIt;
@@ -119,7 +125,6 @@ for [{_i = 0 }, {_i < _n_stuff}, {_i = _i + 1}] do { _cabinet addItemCargoGlobal
 [_desk, "Land_Target_Dueling_01_F",[-5, -40, 0.4], 270] call _attachIt;
 base_desk = _desk;
 publicVariable "base_desk";
-
 
 _start_crate setVariable ["type", _crate_type];
 _start_crate setVariable ["base", _desk];
@@ -146,6 +151,38 @@ private _cmd = {
 
 
 [_desk] call pcb_fnc_add_base_actions;
+
+
+// ------------------------------------------------------------------
+//                     Boat Box
+// ------------------------------------------------------------------
+_boat_box1 setVariable ["packed", true];
+_boat_box2 setVariable ["packed", true];
+
+private _bcmd = {
+    params ['_target', '_caller', '_actionId', '_arguments'];
+    
+    [["pck_boat", _target]] call pcb_fnc_send_mail; 
+};
+
+[
+    _boat_box1,
+    [
+        "Pack/Unpack Boat",
+        _bcmd,
+        [], 1.5, true, false, "", "true", 5
+    ]
+] remoteExec ["addAction", 0, true];  
+[
+    _boat_box2,
+    [
+        "Pack/Unpack Boat",
+        _bcmd,
+        [], 1.5, true, false, "", "true", 5
+    ]
+] remoteExec ["addAction", 0, true];  
+
+
 
 // ------------------------------------------------------------------
 // place initial spawn marker
@@ -188,18 +225,25 @@ _vehicle_list pushBack ["Transport", selectRandom _ft_types, 15];
 _vehicle_list pushBack ["Transport", selectRandom _ft_types, 15];
 
 // Large air transport
-_vehicle_list pushBack ["SPACER", "SPACER", 30];
+//_vehicle_list pushBack ["SUPPORT", "B_Heli_Transport_03_F", 20];
+_vehicle_list pushBack ["SPACER", "SPACER", 10];
 _vehicle_list pushBack ["VTOL", "B_T_VTOL_01_vehicle_F", 30];
 
-{
+private _vdx = 0;
+for [{_vdx = 0}, {_vdx < (count _vehicle_list)}, { _vdx = _vdx + 1 }] do {
+    private _x = _vehicle_list select _vdx;
     private _label = _x select 0;
     private _type = _x select 1;
     private _delta = _x select 2;
     _next_pos = (playableUnits select 0) getPos [_offset, start_dir]; _offset = _offset + _delta;
     if (! (_type isEqualTo "SPACER")) then {
         private _veh = _type createVehicle _next_pos;
-        if (unitIsUAV _veh) then {
+        if ((unitIsUAV _veh) || (_label isEqualTo "SUPPORT")) then {
             createVehicleCrew _veh;
+
+            if (_type isEqualTo "SUPPORT") then {
+                [playableUnits select 0, _veh] call BIS_fnc_transportService;
+            };
         } else {
             [_veh] call pcb_fnc_set_scp_vehicle_loadout;
             _veh addEventHandler ["Respawn", {
@@ -216,10 +260,9 @@ _vehicle_list pushBack ["VTOL", "B_T_VTOL_01_vehicle_F", 30];
         // make the vehicle available for use by the players group
         (group (playableUnits select 0)) addVehicle _veh;
 
-
         sleep .1;
     };
-} forEach _vehicle_list;
+}; // forEach _vehicle_list;
 
 // ------------------------------------------------------------------
 //    Spawn "support crates" relative to _start_crate
@@ -262,6 +305,7 @@ private _code = {
 for [{_i = 0 }, {_i < 5}, {_i = _i + 1}] do {
     [_guard_types_inf, count _guard_types_inf, _next_pos, west] call _code;
     _next_pos = (playableUnits select 0) getPos [_offset, start_dir]; _offset = _offset + 20;
+    sleep .1;
 };
 
 [] call pcb_fnc_convenience;

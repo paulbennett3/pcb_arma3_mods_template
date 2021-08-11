@@ -20,11 +20,23 @@ start_pos = [0, 0, 0];
 start_dir = 0;
 private _start_type = "Airfield";
 
-// pick an airfield to start at
-start_airfield = selectRandom All_airfields;
-["start_airfield <" + (str start_airfield) + ">"] call pcb_fnc_debug;
-start_pos = start_airfield select 0;
-start_dir = start_airfield select 2;
+private _tries = 5;
+private _done = false;
+while { (! _done) && (_tries > -1) } do {
+
+    // pick an airfield to start at
+    start_airfield = selectRandom All_airfields;
+    ["start_airfield <" + (str start_airfield) + ">"] call pcb_fnc_debug;
+    start_pos = start_airfield select 0;
+    start_dir = start_airfield select 2;
+
+    if ( ([start_pos] call pcb_fnc_is_valid_position) ) then { _done = true; };
+    _tries = _tries - 1;
+};
+if (! ([start_pos] call pcb_fnc_is_valid_position)) then {
+    start_pos = [worldSize / 2, worldSize / 2];
+    start_dir = random 360;
+};
 
 sleep .1;
 

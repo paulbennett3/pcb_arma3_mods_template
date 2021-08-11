@@ -8,7 +8,12 @@ if (! isNil "spare_heli_spawner") exitWith {};
 
 spare_heli_spawner = true; publicVariable "spare_heli_spawner";
 
-{
+private _helipads = (world_center nearObjects ["HeliH", worldSize]);
+private _hdx = 0;
+for [{_hdx = 0}, {_hdx < (count _helipads)}, {_hdx = _hdx + 1}] do {
+    if ((_hdx % 100) < 1) then { sleep .1; };
+
+    private _x = _helipads select _hdx;
     private _pos = getPosATL _x;
     private _near_military = [_pos] call pcb_fnc_near_military;
 
@@ -50,4 +55,4 @@ spare_heli_spawner = true; publicVariable "spare_heli_spawner";
     };
 
     sleep .1;
-} forEach (world_center nearObjects ["HeliH", worldSize]);
+}; // forEach (world_center nearObjects ["HeliH", worldSize]);
