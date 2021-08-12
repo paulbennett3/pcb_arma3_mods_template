@@ -10,7 +10,7 @@ if ((count playableUnits) > 0) then {
 };
 
 // limit the number of units in the area
-if ((count (_player nearEntities 2000)) > 150) exitWith { false };
+//if ((count (_player nearEntities 2000)) > 250) exitWith { false };
 
 // randomly select which encounter to spawn, then call its setup script
 private _options_with_weights = [
@@ -19,7 +19,7 @@ private _options_with_weights = [
     ["police_vehicle", 2],
     ["bandit_foot", 1],
     ["bandit_car", 3],
-    ["spooks", 2],
+    ["spooks", 1],
     ["civ_air", 1],
     ["civ_vehicle", 10],
     ["civ_foot", 10]

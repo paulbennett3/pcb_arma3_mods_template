@@ -42,7 +42,7 @@ private _neighbors = [
 private _clusters = [];
 
 // until we'v processed them all ...
-while { sleep .1; (count _cells) > 0 } do {
+while { (count _cells) > 0 } do {
 
     // remove the first cell in our list, and start a new cluster
     private _cell = _cells deleteAt 0;
@@ -50,7 +50,7 @@ while { sleep .1; (count _cells) > 0 } do {
         private _stack = [ _cell ];
         private _cluster = [];
  
-        while { sleep .1; (count _stack) > 0 } do {
+        while { (count _stack) > 0 } do {
             // pop the first entry
             private _current = (_stack deleteAt 0);
             if (! (_current in _visited)) then {

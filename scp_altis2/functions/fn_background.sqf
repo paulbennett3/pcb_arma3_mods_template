@@ -57,6 +57,21 @@ spare vehicles and encounters.
     background_clustering_done = true;
     publicVariable "background_clustering_done";
 
+    // pick a few clusters to be insurgent / zombie / ... areas
+    private _n_special_clusters = 5;
+    private _special_clusters = createHashMap;
+    private _scdx = 0;
+    for [{_scdx = 0}, {_scdx < _n_special_clusters}, {_scdx = _scdx + 1}] do {
+        private _map_type = selectRandom [
+            [mil_clusters, "MIL"],
+            [civ_clusters, "CIV"],
+            [ind_clusters, "IND"]
+        ];
+        private _map = _map_type select 0;
+        private _label = _map_type select 1;
+
+        [_special_clusters, _map, _label] call pcb_fnc_make_special_cluster;
+    };
 
     // -----------------------------------------------
     // Now that we have the location information,
@@ -66,24 +81,6 @@ spare vehicles and encounters.
     ["Starting 'background' loop"] call pcb_fnc_debug;
     private _done = false;
     while {! _done} do {
-        private _code = {
-            params ["_types", "_n", "_pos", "_side", ["_do_task", true]];
-            private _group = createGroup _side;
-            for [{_ij = 0 }, {_ij < _n}, {_ij = _ij + 1}] do {
-                private _type = selectRandom _types;
-                private _veh = _group createUnit [_type, _pos, [], 50, 'NONE'];
-                _veh triggerDynamicSimulation false; // won't wake up enemy units:wq
-                [_veh] joinSilent _group;
-            };
-            [_group] call pcb_fnc_log_group;
-
-            if (_do_task) then {
-                [_group, _pos] call BIS_fnc_taskDefend;
-            };
-            sleep .1;
-            _group
-        };
-
         waitUntil { sleep 1; (count bck_trg_fired) > 0 };
        
         // we know one of our triggers fired, and we have its label and
@@ -94,35 +91,39 @@ spare vehicles and encounters.
 
         ["Background trigger <" + (str _cid) + "> fired"] call pcb_fnc_debug;
         private _label = _cid select 0;
-        private _cluster_num = _cid select 1;
-        private _cluster = objNull;
-        private _chance = .05;
-        if (_label isEqualTo "MIL") then {
-            _chance = .15;
-            _cluster = mil_clusters get _cluster_num;
+        if (_cid in _special_clusters) then {
+            ["Special Cluster fired"] call pcb_fnc_debug;
         } else {
-            if (_label isEqualTo "IND") then {
-                _cluster = ind_clusters get _cluster_num;
+            private _cluster_num = _cid select 1;
+            private _cluster = objNull;
+            private _chance = .05;
+            if (_label isEqualTo "MIL") then {
+                _chance = .15;
+                _cluster = mil_clusters get _cluster_num;
             } else {
-                _cluster = civ_clusters get _cluster_num;
+                if (_label isEqualTo "IND") then {
+                    _cluster = ind_clusters get _cluster_num;
+                } else {
+                    _cluster = civ_clusters get _cluster_num;
+                };
             };
-        };
 
-        if ((_label isEqualTo "MIL") || (_label isEqualTo "CIV")) then {
-            // ---------------------------------------------------------
-            //                    spawn spare vehicles
-            //
-            // spawn this so if it dies, our monitor doesn't die too ...
-            // ---------------------------------------------------------
-            [_cluster get "obj_list", _chance, _label] call pcb_fnc_spawn_spare_vehicles;
+            if ((_label isEqualTo "MIL") || (_label isEqualTo "CIV")) then {
+                // ---------------------------------------------------------
+                //                    spawn spare vehicles
+                //
+                // spawn this so if it dies, our monitor doesn't die too ...
+                // ---------------------------------------------------------
+                [_cluster get "obj_list", _chance, _label] call pcb_fnc_spawn_spare_vehicles;
 
-            // ---------------------------------------------------------
-            //                     spawn inhabitants
-            //
-            // ---------------------------------------------------------
-            [_cluster get "obj_list", _code, _label, _cluster] call pcb_fnc_spawn_cluster_inhabitants;
-        } else { // IND
-            [_cluster get "obj_list", _code, _label, _cluster] call pcb_fnc_spawn_cluster_inhabitants_ind;
+                // ---------------------------------------------------------
+                //                     spawn inhabitants
+                //
+                // ---------------------------------------------------------
+                [_cluster get "obj_list", _label, _cluster] call pcb_fnc_spawn_cluster_inhabitants;
+            } else { // IND
+                [_cluster get "obj_list", _label, _cluster] call pcb_fnc_spawn_cluster_inhabitants_ind;
+            };
         };
     }; // while
 }; // spawn

@@ -46,11 +46,12 @@ publicVariable "message_box";
                };
                case "respawn_ai": {
                    private _type = _msg select 1;
-                   [_type] spawn {
-                       params ["_type"];
-                       sleep 20;
-                       ["respawn ai called for unit"] call pcb_fnc_debug;
-                       [_type] remoteExec ["pcb_fnc_scp_new_unit", groupOwner player_group];
+                   private _id = _msg select 2;
+                   [_type, _id] spawn {
+                       params ["_type", "_id"];
+                       sleep 30;
+                       ["respawn ai called for unit <" + (str _id) + ">"] call pcb_fnc_debug;
+                       [_type, _id] remoteExec ["pcb_fnc_scp_new_unit", groupOwner player_group];
                    };
                };
 

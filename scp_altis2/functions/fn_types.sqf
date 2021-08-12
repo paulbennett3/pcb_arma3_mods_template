@@ -96,6 +96,8 @@ types_hash set ["small items", [
 // --------------------------------
 types_hash set ["bases", [
     ["Land_CanvasCover_02_F", 0, 1.5], 
+    ["Land_IRMaskingCover_02_F", 0, 1.5], 
+    ["Land_Cargo_Patrol_V4_F", 0, 4.5],
     ["CamoNet_OPFOR_F", 0, 1.5],
     ["Land_BagBunker_Tower_F", 90, 1.3],
     ["Land_MedicalTent_01_NATO_generic_outer_F", 90, 1.3],

@@ -31,13 +31,13 @@ ENC_MIN_PLAYER_DIST_CREATE = 500;
 ENC_MIN_PLAYER_DIST_DELETE = 1500;
 ENC_MAX_ACTIVE_ENC = 20;
 
-publicVariable "TICKS_BETWEEN_ENCOUNTERS";
-publicVariable "P_ENCOUNTER";
-publicVariable "ENC_DIST";
-publicVariable "ENC_RADIUS";
-publicVariable "ENC_MIN_PLAYER_DIST_CREATE";
-publicVariable "ENC_MIN_PLAYER_DIST_DELETE";
-publicVariable "ENC_MAX_ACTIVE_ENC";
+//publicVariable "TICKS_BETWEEN_ENCOUNTERS";
+//publicVariable "P_ENCOUNTER";
+//publicVariable "ENC_DIST";
+//publicVariable "ENC_RADIUS";
+//publicVariable "ENC_MIN_PLAYER_DIST_CREATE";
+//publicVariable "ENC_MIN_PLAYER_DIST_DELETE";
+//publicVariable "ENC_MAX_ACTIVE_ENC";
 // *****************************************************
 
 // epicenter is set in fn_preinit_setup.sqf 
@@ -111,7 +111,7 @@ publicVariable "group_stack";
                     if (pcb_DEBUG) then {
                         hint ("Deleting encounter - no players in area " + (str _y) + " <" + (str _area) + ">" + (str (getPosATL ((_y select 2) select 0))));
                     };
-                    diag_log ("Deleting encounter " + (str _y));
+                    [("Deleting encounter " + (str _y))] call pcb_fnc_debug;
 
                     // so not static and no players within 2k -- delete!
                     //  Note!  can't use nested forEach!!!
@@ -148,13 +148,11 @@ publicVariable "group_stack";
         if ((_count - _last_encounter_tick) > TICKS_BETWEEN_ENCOUNTERS) then {
             if ((random 1) < P_ENCOUNTER) then {
                 if (_n_active_enc < ENC_MAX_ACTIVE_ENC) then {
+["Director attempting spawn <" + (str _last_encounter_tick) + ">"] call pcb_fnc_debug;
                     private _did_spawn = [] call pcb_fnc_do_director_spawn;    
                     if ((! isNil "_did_spawn") && { _did_spawn }) then {
                         _last_encounter_tick = _count;
                     };
-                    if (isNil "_did_spawn") then {
-                    };
- 
                 };
             };
         };

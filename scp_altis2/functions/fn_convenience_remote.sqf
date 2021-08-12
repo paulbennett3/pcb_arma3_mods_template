@@ -53,3 +53,19 @@ if (((getPosATL player) distance2D (markerPos "respawn_west")) < 50) then {
         player setVariable ["lrestore", -1];
     };
 };
+
+// -------------------------------------------
+//    Leader check
+//
+//  If your role says you are the leader, then
+//   make sure you are the leader (for respawn, mostly)
+// -------------------------------------------
+if ((roleDescription player) isEqualTo "SCP Operative (Leader)") then {
+    if (! isNil "player_group") then {
+        if ((leader player_group) != player) then {
+            player_group selectLeader player;
+            [player_group, player] remoteExec ["selectLeader", 0, true];
+            player setUnitRank "SERGEANT";
+        };
+    };
+};

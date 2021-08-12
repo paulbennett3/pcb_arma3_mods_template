@@ -72,6 +72,7 @@ class CfgFunctions
             class random_start_pos {};
             class scp_new_unit {};
             class show_cities {};
+            class sog_tunnels {};
             class start_base_setup {};
             class start_base_setup2 {};
             class send_mail {};
@@ -87,6 +88,7 @@ class CfgFunctions
             class spawn_random_vehicle {};
             class spawn_spare_helicopters {};
             class spawn_spare_vehicles {};
+            class spawn_squad {};
             class spawn_support_units {};
             class types {};
         };
@@ -110,6 +112,7 @@ class CfgFunctions
             file = "functions\map";
             class building_classifier {};
             class find_building_density {};
+            class make_special_cluster {};
             class map_inspector {};
             class merge_clusters {};
             class plot_clusters_and_create_triggers {};
