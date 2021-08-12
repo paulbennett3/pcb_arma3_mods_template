@@ -82,6 +82,7 @@ class CfgFunctions
             class set_scp_loadout {};
             class set_scp_vehicle_loadout {};
             class spawn_cluster_inhabitants {};
+            class spawn_cluster_inhabitants_ind {};
             class spawn_packable_base {};
             class spawn_random_vehicle {};
             class spawn_spare_helicopters {};

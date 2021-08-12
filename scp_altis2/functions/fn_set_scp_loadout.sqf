@@ -12,7 +12,7 @@ removeGoggles _this;
 
 comment "Add weapons";
 _this addWeapon "arifle_MXC_F";
-//_this addPrimaryWeaponItem "acc_pointer_IR";
+_this addPrimaryWeaponItem "acc_pointer_IR";
 _this addPrimaryWeaponItem "optic_Hamr";
 _this addPrimaryWeaponItem "100Rnd_65x39_caseless_mag";
 _this addWeapon "hgun_Rook40_F";

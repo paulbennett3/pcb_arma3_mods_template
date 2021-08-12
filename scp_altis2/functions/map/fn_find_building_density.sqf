@@ -19,9 +19,6 @@ _density_map set ["UNK", createHashMap];
 
 private _center = [worldSize / 2, worldSize / 2];
 
-//private _buildings = (_center nearObjects ["House", worldSize]) +
-//                     (_center nearObjects ["Building", worldSize]);
-
 private _buildings = (_center nearObjects ["House", worldSize]);
 sleep .1;
 _buildings = _buildings + (_center nearObjects ["Building", worldSize]);

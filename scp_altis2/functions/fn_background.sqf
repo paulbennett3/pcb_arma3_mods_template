@@ -67,7 +67,7 @@ spare vehicles and encounters.
     private _done = false;
     while {! _done} do {
         private _code = {
-            params ["_types", "_n", "_pos", "_side"];
+            params ["_types", "_n", "_pos", "_side", ["_do_task", true]];
             private _group = createGroup _side;
             for [{_ij = 0 }, {_ij < _n}, {_ij = _ij + 1}] do {
                 private _type = selectRandom _types;
@@ -77,8 +77,11 @@ spare vehicles and encounters.
             };
             [_group] call pcb_fnc_log_group;
 
-            [_group, _pos] call BIS_fnc_taskDefend;
+            if (_do_task) then {
+                [_group, _pos] call BIS_fnc_taskDefend;
+            };
             sleep .1;
+            _group
         };
 
         waitUntil { sleep 1; (count bck_trg_fired) > 0 };
@@ -98,21 +101,29 @@ spare vehicles and encounters.
             _chance = .15;
             _cluster = mil_clusters get _cluster_num;
         } else {
-            _cluster = civ_clusters get _cluster_num;
+            if (_label isEqualTo "IND") then {
+                _cluster = ind_clusters get _cluster_num;
+            } else {
+                _cluster = civ_clusters get _cluster_num;
+            };
         };
 
-        // ---------------------------------------------------------
-        //                    spawn spare vehicles
-        //
-        // spawn this so if it dies, our monitor doesn't die too ...
-        // ---------------------------------------------------------
-        [_cluster get "obj_list", _chance, _label] call pcb_fnc_spawn_spare_vehicles;
+        if ((_label isEqualTo "MIL") || (_label isEqualTo "CIV")) then {
+            // ---------------------------------------------------------
+            //                    spawn spare vehicles
+            //
+            // spawn this so if it dies, our monitor doesn't die too ...
+            // ---------------------------------------------------------
+            [_cluster get "obj_list", _chance, _label] call pcb_fnc_spawn_spare_vehicles;
 
-        // ---------------------------------------------------------
-        //                     spawn inhabitants
-        //
-        // ---------------------------------------------------------
-        [_cluster get "obj_list", _code, _label, _cluster] call pcb_fnc_spawn_cluster_inhabitants;
+            // ---------------------------------------------------------
+            //                     spawn inhabitants
+            //
+            // ---------------------------------------------------------
+            [_cluster get "obj_list", _code, _label, _cluster] call pcb_fnc_spawn_cluster_inhabitants;
+        } else { // IND
+            [_cluster get "obj_list", _code, _label, _cluster] call pcb_fnc_spawn_cluster_inhabitants_ind;
+        };
     }; // while
 }; // spawn
 

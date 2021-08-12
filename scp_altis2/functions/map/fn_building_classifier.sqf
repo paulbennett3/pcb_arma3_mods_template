@@ -9,7 +9,11 @@ Returns:
 *********************************************************************** */
 params ["_building"];
 
-private _classes = ["MILITARY", "CIVILIAN", "INDUSTRIAL", "MIL", "CIV", "IND", "USARMY", "HOUSEHOLDS", "RUINS"];
+private _classes = [
+    "MILITARY", "MIL", "USARMY", 
+    "INDUSTRIAL", "IND", "CULTURAL", "CEMETERIES", "DOMINANTS",
+    "CIVILIAN", "CIV", "HOUSEHOLDS", "RUINS"
+];
 private _type = typeOf _building;
 private _config = configOf _building;
 private _model = [_config >> "model"] call BIS_fnc_getCfgData;
@@ -24,6 +28,9 @@ if ((count _class) == 0) then {
 if (_class isEqualTo "USA") then { _class = "MIL"; };
 if (_class isEqualTo "HOU") then { _class = "CIV"; };
 if (_class isEqualTo "RUI") then { _class = "CIV"; };
+if (_class isEqualTo "CUL") then { _class = "IND"; };
+if (_class isEqualTo "CEM") then { _class = "IND"; };
+if (_class isEqualTo "DOM") then { _class = "IND"; };
 
 
 _class

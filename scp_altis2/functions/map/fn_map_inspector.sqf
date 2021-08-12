@@ -25,16 +25,13 @@
         if (pcb_DEBUG) then { [_map, _size, _uq, "colorRED"] call pcb_fnc_plot_density; };
         [mil_clusters, "MIL"] call pcb_fnc_plot_clusters_and_create_triggers;
 
-        // skipping industrial sites for now ...
-        if (false) then {
-            _map = _density_map get "IND";
-            _values = (values _map) apply { _x select 0 };
-            _values sort true;
-            private _uq = _values select (floor (3* (count _values) / 4));
-            ind_clusters = [_map, "IND", _uq] call pcb_fnc_merge_clusters;
-            if (pcb_DEBUG) then { [_map, _size, _uq, "colorGREEN"] call pcb_fnc_plot_density; };
-            [ind_clusters, "IND"] call pcb_fnc_plot_clusters_and_create_triggers;
-        };
+        _map = _density_map get "IND";
+        _values = (values _map) apply { _x select 0 };
+        _values sort true;
+        private _uq = _values select (floor (3* (count _values) / 4));
+        ind_clusters = [_map, "IND", _uq] call pcb_fnc_merge_clusters;
+        if (pcb_DEBUG) then { [_map, _size, _uq, "colorGREEN"] call pcb_fnc_plot_density; };
+        [ind_clusters, "IND"] call pcb_fnc_plot_clusters_and_create_triggers;
 [" ... done merging"] call pcb_fnc_debug;
     };
 

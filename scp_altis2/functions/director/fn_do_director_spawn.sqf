@@ -17,9 +17,9 @@ private _options_with_weights = [
     ["animal_follower", 1],
     ["police_foot", 2],
     ["police_vehicle", 2],
-    ["bandit_foot", 2],
+    ["bandit_foot", 1],
     ["bandit_car", 3],
-    ["spooks", 3],
+    ["spooks", 2],
     ["civ_air", 1],
     ["civ_vehicle", 10],
     ["civ_foot", 10]
@@ -58,15 +58,15 @@ switch (_option) do {
             private _types = types_hash get "spooks";
             private _type = [selectRandom _types];
             ["   spook type <" + (str _type) + ">"] call pcb_fnc_debug;
-            _did_spawn = [_option, _player, _type, independent, 2, 5, false] call pcb_fnc_enc_infantry;
+            _did_spawn = [_option, _player, _type, east, 2, 5, false] call pcb_fnc_enc_infantry;
         };
     case "demon": {
             private _types = types_hash get "demons";
-            _did_spawn = [_option, _player, _types, independent, 1, 2, false] call pcb_fnc_enc_infantry;
+            _did_spawn = [_option, _player, _types, east, 1, 2, false] call pcb_fnc_enc_infantry;
         };
     case "zombies": {
             private _types = types_hash get "zombies"; 
-            _did_spawn = [_option, _player, _types, independent, 2, 7, false] call pcb_fnc_enc_infantry;
+            _did_spawn = [_option, _player, _types, east, 2, 7, false] call pcb_fnc_enc_infantry;
         };
     case "civ_vehicle": {
             private _type = selectRandom (types_hash get "civ vehicles");
@@ -79,11 +79,11 @@ switch (_option) do {
         };
     case "bandit_foot": {
             private _types = types_hash get "looters";
-            _did_spawn = [_option, _player, _types, independent] call pcb_fnc_enc_infantry;
+            _did_spawn = [_option, _player, _types, east] call pcb_fnc_enc_infantry;
         };
     case "bandit_car": {
             private _type = selectRandom (types_hash get "civ vehicles");
-            _did_spawn = [_option, _player, _type, independent] call pcb_fnc_enc_vehicle_patrol;
+            _did_spawn = [_option, _player, _type, east] call pcb_fnc_enc_vehicle_patrol;
         };
     case "police_foot": {
             private _types = types_hash get "police"; 
