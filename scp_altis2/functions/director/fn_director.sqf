@@ -90,7 +90,7 @@ publicVariable "group_stack";
         if ((count group_stack) > _trigger_group_gc) then {
             [] spawn {
                 ["Starting group garbage collection"] call pcb_fnc_debug;
-                [] call pcb_fnc_group_garbage_collect;
+                [_trigger_group_gc] call pcb_fnc_group_garbage_collect;
                 ["Done with group garbage collection"] call pcb_fnc_debug;
             };
         };

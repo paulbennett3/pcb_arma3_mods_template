@@ -14,8 +14,12 @@ Keep criteria
    Closer than X to players
    No farther than mission_radius (is that the constant?) from epicenter
 
+Parameters:
+    _trigger_threshold (number) : number of groups at which garbage collect triggered
+
 Input and output is via the global variable "group_stack"
 ----------------------------------------------------------- */
+params ["_trigger_threshold"];
 
 private _min_range_to_pc = 5000;
 
