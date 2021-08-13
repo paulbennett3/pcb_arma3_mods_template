@@ -49,10 +49,27 @@ private _ok = false;
 [str [_state]] call pcb_fnc_debug;
 [("CLEAR " + (str (_state get "targetlist")))] call pcb_fnc_debug;
 
+// get the average location of our targets -- if it isn't close to the given
+//   task position, use the true position (where the targets are ...)
+private _xacc = 0;
+private _yacc = 0;
+private _tidx = 0;
+private _targets = _state get "targetlist";
+for [{_tidx = 0 }, {_tidx < (count _targets)}, {_tidx = _tidx + 1}] do {
+    private _temp = _targets select _tidx;
+    private _tpos = getPosATL _temp;
+    _xacc = _xacc + (_tpos select 0);
+    _yacc = _yacc + (_tpos select 1);
+};
+private _center = [_xacc / (count _targets), _yacc / (count _targets)];
+private _target_pos = _state get "taskpos";
+if ((_center distance2D _target_pos) > 500) then {
+    _target_pos = _center;
+};
 
 // create a trigger to monitor the area (and for us to stick our
 // variable info in
-private _trg = createTrigger ["EmptyDetector", _state get "taskpos", true];
+private _trg = createTrigger ["EmptyDetector", _target_pos, true];
 _trg setTriggerArea  [
     _state get "taskradius", 
     _state get "taskradius",

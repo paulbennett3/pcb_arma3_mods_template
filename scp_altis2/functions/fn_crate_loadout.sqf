@@ -44,6 +44,9 @@ _obj addMagazineAmmoCargo ["ClaymoreDirectionalMine_Remote_Mag", 4, 1];
 _obj addMagazineAmmoCargo ["DemoCharge_Remote_Mag", 8, 1];
 _obj addMagazineAmmoCargo ["Titan_AP", 8, 1];
 _obj addMagazineAmmoCargo ["UGL_FlareGreen_F", 8, 1];
+_obj addMagazineAmmoCargo ["Chemlight_green", 8, 1];
+_obj addMagazineAmmoCargo ["Chemlight_blue", 8, 1];
+_obj addMagazineAmmoCargo ["Chemlight_red", 8, 1];
 // item
 _obj addItemCargoGlobal ["FirstAidKit", 20];
 _obj addItemCargoGlobal ["Medikit", 2];

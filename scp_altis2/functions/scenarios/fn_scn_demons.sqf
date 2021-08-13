@@ -107,6 +107,8 @@ switch (_action) do {
             ['RyanZombieboss28', ['DSA_Snatcher', 'DSA_411']]
         ];
         private _ambient = [
+            'DSA_Crazy', 
+            'DSA_Crazy', 
             'DSA_Wendigo', 
             'DSA_Wendigo', 
             'DSA_Wendigo', 
@@ -159,7 +161,7 @@ switch (_action) do {
             mission_list pushBackUnique "functions\missions\fn_mis_interview.sqf";
             publicVariable "mission_list"; 
 
-            total_missions = 2;
+            total_missions = selectRandom [2, 3];
             publicVariable "total_missions";
 
             mission_select = "random";
@@ -176,7 +178,7 @@ switch (_action) do {
             mission_list pushBackUnique "functions\missions\fn_mis_spawner.sqf";
             publicVariable "mission_list"; 
 
-            total_missions = count mission_list;
+            total_missions = 1;
             publicVariable "total_missions";
 
             mission_select = "random";
@@ -189,11 +191,15 @@ switch (_action) do {
             // update our mission list (what we can choose from)
             // remember to do these in reverse order!!! 
             mission_list = []; 
-            mission_list pushBackUnique "functions\missions\fn_mis_monster_hunt.sqf";
 //            mission_list pushBackUnique "functions\missions\fn_mis_get_laptop_from_base.sqf";
 //            mission_list pushBackUnique "functions\missions\fn_mis_deliver_evidence.sqf";
 //            mission_list pushBackUnique "functions\missions\fn_mis_spawner.sqf";
-            mission_list pushBackUnique "functions\missions\fn_mis_boss.sqf";
+            if (worldName isEqualTo "Cam_Lao_Nam") then {
+                mission_list pushBackUnique "functions\missions\fn_mis_tunnels.sqf";
+            } else {
+                mission_list pushBackUnique "functions\missions\fn_mis_boss.sqf";
+            };
+           
             mission_list pushBackUnique "functions\missions\fn_mis_exfil.sqf";
             publicVariable "mission_list"; 
 

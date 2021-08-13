@@ -41,7 +41,7 @@ if ((random 100) < 40) then {
     private _airfield = selectRandom All_airfields;
     _pos = _airfield select 0;
 } else {
-    private _helipad = selectRandom ((playableUnits select 0) nearObjects ["Helipad_Base_F", worldSize]);
+    private _helipad = selectRandom ((playableUnits select 0) nearObjects ["HeliH", worldSize]);
     _pos = getPosATL _helipad;
 };
 

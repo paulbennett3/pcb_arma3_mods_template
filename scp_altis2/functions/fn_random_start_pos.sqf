@@ -20,7 +20,7 @@ start_pos = [0, 0, 0];
 start_dir = 0;
 private _start_type = "Airfield";
 
-private _tries = 5;
+private _tries = 10;
 private _done = false;
 while { (! _done) && (_tries > -1) } do {
 

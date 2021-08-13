@@ -31,9 +31,10 @@ if (true) then {
 
     private _marker = createMarker ["MLI" + (str ([] call pcb_fnc_get_next_UID)), _cluster get "center"];
     _marker setMarkerShapeLocal "ELLIPSE";
-    _marker setMarkerSizeLocal [_cluster get "a", _cluster get "b"];
+    _marker setMarkerSizeLocal [(_cluster get "a") + 100, (_cluster get "b") + 100];
     _marker setMarkerAlphaLocal 0.5;
-    _marker setMarkerColor "ColorRED";
+    _marker setMarkerBrushLocal "SolidBorder";
+    _marker setMarkerColor "ColorYELLOW";
 
     private _iidx = 0;
     for [{_iidx = 0 }, {_iidx < _n_squads}, {_iidx = _iidx + 1}] do {

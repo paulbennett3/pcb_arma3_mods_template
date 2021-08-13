@@ -50,7 +50,7 @@ params ["_building", "_label", "_cluster"];
     // -----------------------------------------
     //  Looters
     // -----------------------------------------
-    if ((random 100) < 15) then {
+    if ((random 100) < 10) then {
         private _types = types_hash get "looters";
         private _n = 1 + (ceil (random _scale));
         [_types, _n, getPosATL (selectRandom _buildings), east] call pcb_fnc_spawn_squad;

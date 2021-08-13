@@ -149,6 +149,8 @@ class CfgFunctions
             class mis_interview {};
             class mis_monster_hunt {};
             class mis_spawner {};
+            class spawn_cultists {};
+            class mis_tunnels {};
         }; 
         class scenarios
         {

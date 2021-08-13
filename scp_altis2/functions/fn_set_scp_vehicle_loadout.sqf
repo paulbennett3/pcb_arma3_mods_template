@@ -32,7 +32,8 @@ _obj addItemCargoGlobal ["DSA_Detector", 1];
 _obj addItemCargoGlobal ["B_UavTerminal", 1];
 _obj addItemCargoGlobal ["MineDetector", 1];
 _obj addItemCargoGlobal ["SmokeShellRed", 4];
-_obj addItemCargoGlobal ["Chemlight_red", 4];
+_obj addItemCargoGlobal ["Chemlight_red", 8];
+_obj addItemCargoGlobal ["Chemlight_blue", 8];
 
 // backpack
 _obj addBackpackCargoGlobal ["B_UAV_06_backpack_F", 1];
