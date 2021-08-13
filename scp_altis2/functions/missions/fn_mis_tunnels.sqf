@@ -36,21 +36,7 @@ private _pos = [0, 0, 0];
 private _loc_type = "";
 private _building = objNull;
 
-if ((random 100) < 75) then {
-    private _loc_type = "building";
-    private _tries = 50;
-    while { _tries > 0 } do {
-        _tries = _tries - 1;
-        _building = [epicenter, mission_radius] call pcb_fnc_get_cool_building_location;
-        if (! isNil "_building") then {
-            _pos = getPosATL _building;
-            if (! isNil "_pos") then { 
-                [_building] call pcb_fnc_add_loot_boxes_to_building;
-                _tries = -10;
-            };
-        };
-    };
-} else {
+if (true) then {
     _loc_type = "forest";
     // forest
     private _tries = 100;

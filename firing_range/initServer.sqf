@@ -3,33 +3,7 @@
 ----------------------------------------------------------- */
 
 if (! isServer) exitWith {};
-
-group_list = [];
-
-[] spawn {
-   private _code = {
-       private _group = createGroup west;
-       group_list pushBackUnique _group;
-       private _pos = getPosATL (playableUnits select 0);
-       private _veh1 = _group createUnit ["B_Soldier_A_F", _pos, [], 5, "NONE"];
-       private _veh2 = _group createUnit ["B_Soldier_A_F", _pos, [], 5, "NONE"];
-       private _veh3 = _group createUnit ["B_Soldier_A_F", _pos, [], 5, "NONE"];
-   };
-
-   ["Spawning groups"] remoteExec ["systemChat", 0];
-   [] call _code;
-   [] call _code;
-   [] call _code;
-   sleep 10;
-   ["before " + (str group_list)] remoteExec ["systemChat", 0];
-   group_list = [group_list, 5000] call compile preprocessFileLineNumbers "fn_group_garbage_collect.sqf";
-   ["after " + (str group_list)] remoteExec ["systemChat", 0];
-   (units (group_list select 1)) apply { deleteVehicle _x };
-   sleep 10;
-   group_list = [group_list, 5000] call compile preprocessFileLineNumbers "fn_group_garbage_collect.sqf";
-   ["after after" + (str group_list)] remoteExec ["systemChat", 0];
-   sleep 10;
-   group_list = [group_list, 0] call compile preprocessFileLineNumbers "fn_group_garbage_collect.sqf";
-   ["after after 2" + (str group_list)] remoteExec ["systemChat", 0];
-   ["<" + (units objNull) + ">"] remoteExec ["systemChat", 0];
-};
+private _types = [ "I_L_Looter_Pistol_F", "I_L_Looter_SG_F", "I_L_Looter_Rifle_F", "I_L_Looter_SMG_F", "I_L_Criminal_SG_F", "I_L_Criminal_SMG_F" ];
+private _group = [_types, 5, getPosATL (playableUnits select 0), east, false] call compile preprocessFileLineNumbers "fn_spawn_squad.sqf";
+[_group] call compile preprocessFileLineNumbers "fn_spawn_cultists.sqf";
+[getPosATL (playableUnits select 0)] call compile preprocessFileLineNumbers "fn_goblins.sqf";

@@ -308,4 +308,4 @@ for [{_i = 0 }, {_i < 5}, {_i = _i + 1}] do {
 };
 
 [] call pcb_fnc_convenience;
-
+[start_pos, west, 10] call pcb_fnc_goblins;
