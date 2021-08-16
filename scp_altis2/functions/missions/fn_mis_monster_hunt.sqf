@@ -71,7 +71,7 @@ if (! ([_pos] call pcb_fnc_is_valid_position)) exitWith { [false, _state] };
 
 // generate our monsters
 // [_obj_list, _type, _n, _did]
-private _enc_info = [_pos, 101] call pcb_fnc_mission_encounter;
+private _enc_info = [_pos, 101, 12] call pcb_fnc_mission_encounter;
 private _obj_list = _enc_info select 0;
 private _type = _enc_info select 1;
 private _n = _enc_info select 2;
@@ -111,6 +111,7 @@ if (! (PARENT_TASK isEqualTo "")) then { _taskpid = PARENT_TASK; };
 _state set ["taskpid", _taskpid];
 _state set ["taskpos", _pos];
 _state set ["taskradius", 1500];
+_state set ["threshold", 1];
 sleep 1;
 _result = [_state] call pcb_fnc_mis_ll_clear;
 

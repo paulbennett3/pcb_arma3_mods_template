@@ -35,4 +35,29 @@ params ["_buildings", "_chance", "_label"];
             };
         }; // if (! (isNull
     };  // while
+    
+    // reset for boats
+    private _n = ceil (_n_buildings * _chance);
+    private _btries = 2 * _n; // will fail most of the time, but try a few extra times ...
+    ["Trying to spawn " + (str _n) + " boats ..."] call pcb_fnc_debug;
+    while { (_n > 0) && (_btries > 0) } do {
+        _btries = _btries - 1;
+        private _veh = [[], _buildings, true, _civ] call pcb_fnc_spawn_random_boat;
+
+        if (! (isNull _veh)) then {
+            _n = _n - 1;
+            [_veh, 1 + (ceil (random 5))] call pcb_fnc_loot_crate;
+
+            if (pcb_DEBUG) then {
+                // add a marker for reference
+                private _mn = "M" + str ([] call pcb_fnc_get_next_UID);
+                private _m = createMarker [_mn, getPosATL _veh];
+                _mn setMarkerShapeLocal "ELLIPSE";
+                _mn setMarkerColorLocal "ColorORANGE";
+                _mn setMarkerSizeLocal [50, 50];
+                _mn setMarkerAlpha 0.9;
+            };
+        }; // if (! (isNull
+    };  // while
+    [" ... " + (str _n) + " boats didn't spawn"] call pcb_fnc_debug;
 };  // spawn

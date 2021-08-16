@@ -56,19 +56,25 @@ if (true) then {
 // test if we have utterly failed ... 
 if (! ([_pos] call pcb_fnc_is_valid_position)) exitWith { [false, _state] };
 
-private _tunnel_stuff = [_pos, _types, 5 + (ceil (random 5))] call pcb_fnc_sog_tunnels;
+//private _n_garrison = 5 + (ceil (random 25));
+_types = [_types select 0, _types select 1];
+private _n_garrison = 5;
+private _tunnel_stuff = [_pos, _types, _n_garrison] call pcb_fnc_sog_tunnels;
 private _grp = _tunnel_stuff select 0;
 private _tpos = _tunnel_stuff select 1;
-[_grp] call pcb_fnc_spawn_cultists;
+[_grp, true] call pcb_fnc_spawn_cultists;
+
+["Asked for " + (str _n_garrison) + " got " + (str (count (units _grp)))] call pcb_fnc_debug;
 
 _state set ["obj_list", units _grp];
 
-_state set ["targetlist", (_state get "obj_list")];
+_state set ["targetlist", units _grp];
 _state set ["targettype", str _types];
+_state set ["threshold", ceil ((count (units _grp)) / 2)];
 
 _state set ["taskdesc", [
-    "Hunt down and thin out the Cult of the Wendigo",
-    "Eliminate cult",
+    "Hunt down and thin out the fanatical Cult of the Wendigo",
+    "Thin out Wendigo Cult fanatics",
     "markername"
 ]];
 private _taskpid = "";
@@ -79,6 +85,17 @@ _state set ["taskradius", 1500];
 sleep 1;
 _result = [_state] call pcb_fnc_mis_ll_clear;
 
+
+// add a guard near the entrance
+private _ctypes = [ "O_Soldier_SL_F", "O_soldier_M_F", "O_Sharpshooter_F", "O_medic_F" ];
+private _n = selectRandom [3,4,4,4,6];
+private _group = [_ctypes, _n, _pos, east, false] call pcb_fnc_spawn_squad;
+[_group] call pcb_fnc_spawn_cultists;
+private _wpg = _group addWaypoint [_pos, 10];
+_wpg setWaypointType "GUARD";
+_wpg setWaypointCombatMode "RED";
+_wpg setWaypointBehaviour "AWARE";
+createGuardedPoint [east, _pos, -1, objNull];
 
 /* ----------------------------------------------------------------
                  Configure and Place Anomalies 

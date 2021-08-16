@@ -46,7 +46,6 @@ params ["_state"];
 
 private _ok = false;
 
-[str [_state]] call pcb_fnc_debug;
 [("CLEAR " + (str (_state get "targetlist")))] call pcb_fnc_debug;
 
 // get the average location of our targets -- if it isn't close to the given
@@ -65,6 +64,13 @@ private _center = [_xacc / (count _targets), _yacc / (count _targets)];
 private _target_pos = _state get "taskpos";
 if ((_center distance2D _target_pos) > 500) then {
     _target_pos = _center;
+    if (pcb_DEBUG) then {
+        private _marker = createMarker ["clear_area", _target_pos];
+        _marker setMarkerShape "ELLIPSE";
+        _marker setMarkerSize [_state get "taskradius", _state get "taskradius"];
+        _marker setMarkerColor "colorGREEN";
+        _marker setMarkerBrush "SolidBorder";
+    };
 };
 
 // create a trigger to monitor the area (and for us to stick our
@@ -78,7 +84,7 @@ _trg setTriggerArea  [
 _trg setTriggerType "NONE";
 _state set ["trigger", _trg];
 
-_state set ["obj_list", [_trg]];
+(_state get "obj_list") pushBack _trg;
 _trg setVariable ["_state", _state, true];
 
 // ---------------
@@ -96,17 +102,27 @@ private _pos = (_state get "taskpos");
 [("creating task with " + (str (_state get "taskdesc")) + " at " + (str _pos))] call pcb_fnc_debug;
 [true, (_state get "taskid"), (_state get "taskdesc"), _pos, "ASSIGNED"] call BIS_fnc_taskCreate;
 
+private _threshold = _state get "threshold";
+if (isNil "_threshold") then { _state set ["threshold", 1]; };
 
 // -----------------------------------------
 // spawn a piece of code to monitor our area
 // -----------------------------------------
 [_state] spawn {
     params ["_state"];
+    private _threshold = _state get "threshold";
     private _done = false;
-    while {sleep 1; ! _done} do {
+    while {sleep 30; ! _done} do {
         // check if any of our targets are in the area
         private _objs = (_state get "targetlist") inAreaArray (_state get "trigger");
-        if ((count (_objs select { alive _x })) < 1) then {
+        private _cc = 0; 
+        { 
+            if (alive _x) then { 
+                _cc = _cc + 1; 
+            }; 
+        } forEach (_state get "targetlist");
+        private _n_alive = count (_objs select { alive _x });
+        if (_n_alive < _threshold) then {
             _done = true;
             _state set ["failed", true];
             {
@@ -115,6 +131,8 @@ private _pos = (_state get "taskpos");
                 };
             } forEach (_state get "targetlist");
             [_state] call pcb_fnc_end_mission;
+        } else {
+            ["Clear : " + (str _n_alive) + " alive for threshold " + (str _threshold)] call pcb_fnc_debug;
         };
     };
     ["Exiting spawned loop - Clear mission"] call pcb_fnc_debug;

@@ -2,6 +2,17 @@
                              destroyable obelisk
 
 Decorate it with invisible UAVs, add event handlers to them
+
+
+
+ In a repeatable trigger, covering the area you want:
+
+condition:
+
+{_x inArea thisTrigger} count allMissionObjects "#explosion" > 0 
+
+allMissionObjects very expensive -- maybe only enable this trigger
+when players are within say 300 meters?
 --------------------------------------------------------------------- */
 params ["_obj"];
 

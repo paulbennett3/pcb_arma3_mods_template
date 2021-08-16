@@ -42,7 +42,13 @@ if ((random 100) < 40) then {
     _pos = _airfield select 0;
 } else {
     private _helipad = selectRandom ((playableUnits select 0) nearObjects ["HeliH", worldSize]);
-    _pos = getPosATL _helipad;
+    if (! isNil "_helipad") then {
+        _pos = getPosATL _helipad;
+    } else {
+        ["No helipads on this map?!? Using airport for Exfil"] call pcb_fnc_debug;
+        private _airfield = selectRandom All_airfields;
+        _pos = _airfield select 0;
+    };
 };
 
 if ((isNil "_pos") || (! ([_pos] call pcb_fnc_is_valid_position))) exitWith { [false, _state] };

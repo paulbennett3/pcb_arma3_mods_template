@@ -64,6 +64,7 @@ types_hash set ["occult large items", [
 //   or near "research" lab ...
 // --------------------------------
 types_hash set ["tech large items", [
+    "sg_mini_gate_Ramp",
     "Land_PowerGenerator_F",
     "Land_Device_assembled_F",
     "Land_Device_disassembled_F"
@@ -99,7 +100,7 @@ types_hash set ["bases", [
     ["Land_IRMaskingCover_02_F", 0, 1.5], 
     ["Land_Cargo_Patrol_V4_F", 0, 4.5],
     ["CamoNet_OPFOR_F", 0, 1.5],
-    ["Land_BagBunker_Tower_F", 90, 1.3],
+//    ["Land_BagBunker_Tower_F", 90, 1.3],
     ["Land_MedicalTent_01_NATO_generic_outer_F", 90, 1.3],
     ["Land_MedicalTent_01_NATO_generic_open_F", 90, 1.3],
     ["Land_MedicalTent_01_CSAT_brownhex_generic_open_F", 90, 1.3],
@@ -669,6 +670,15 @@ types_hash set ["heli mil", [
     "O_T_VTOL_02_vehicle_dynamicLoadout_F"
 ]];
 
+types_hash set ["hangars", [
+    "Land_Airport_01_hangar_F",
+    "Land_Hangar_F",
+    "Land_TentHangar_V1_F",
+    "Land_vn_airport_02_hangar_left_f",
+    "Land_vn_airport_02_hangar_right_f",
+    "Land_vn_airport_01_hangar_f"
+]];
+
 
 
 // Trucks 
@@ -774,6 +784,74 @@ types_hash set ["car small mil", [
 ]];
 
 
+types_hash set ["boat civ", [
+    "B_G_Boat_Transport_01_F",
+    "B_Lifeboat",
+    "vn_o_boat_01_03",
+    "vn_o_boat_01_04",
+    "vn_o_boat_02_03",
+    "vn_o_boat_01_00",
+    "vn_o_boat_01_mg_03",
+    "vn_o_boat_01_mg_01",
+    "vn_o_boat_01_02",
+    "vn_o_boat_02_mg_04",
+    "vn_o_boat_02_mg_02",
+    "vn_o_boat_02_mg_03",
+    "vn_o_boat_02_mg_00",
+    "vn_o_boat_02_00",
+    "vn_o_boat_08_02",
+    "vn_o_boat_08_01",
+    "vn_o_boat_07_02",
+    "vn_o_boat_07_01",
+    "C_Boat_Civil_01_F",
+    "C_Boat_Civil_01_police_F",
+    "C_Boat_Civil_01_rescue_F",
+    "C_Rubberboat",
+    "C_Boat_Transport_02_F",
+    "C_Scooter_Transport_01_F"    
+]];
+
+types_hash set ["boat mil", [
+    "vn_b_boat_06_02",
+    "vn_b_boat_06_01",
+    "vn_b_boat_05_02",
+    "vn_b_boat_05_01",
+    "B_Boat_Armed_01_minigun_F",
+    "vn_o_boat_03_02",
+    "vn_o_boat_03_01",
+    "vn_o_boat_04_02",
+    "vn_o_boat_04_01",
+    "B_Boat_Transport_01_F"
+]];
+
+// -----------------------------------------------------
+// "background" encounters
+types_hash set ["background_options_with_weights", [
+    ["animal_follower", 1],
+    ["police_foot", 1],
+    ["police_vehicle", 1],
+    ["bandit_foot", 1],
+    ["bandit_car", 2],
+    ["goblins", 1],
+    ["cultists", 1],
+    ["spooks", 2],
+    ["civ_air", 1],
+    ["civ_vehicle", 10],
+    ["civ_foot", 10]
+]];
+
+types_hash set ["aliens_options_with_weights", [
+    ["drone", 1],
+    ["vehicle", 1],
+    ["police_foot", 1],
+    ["police_vehicle", 1],
+    ["bandit_foot", 1],
+    ["bandit_car", 2],
+    ["spooks", 2],
+    ["civ_air", 1],
+    ["civ_vehicle", 10],
+    ["civ_foot", 10]
+]];
 
 
 // -----------------------------------------------------

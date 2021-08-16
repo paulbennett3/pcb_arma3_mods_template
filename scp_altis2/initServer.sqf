@@ -25,4 +25,18 @@ publicVariable "pcb_DEBUG";
 [] call pcb_fnc_mission_generator;
 [] call pcb_fnc_monitor_ratings;
 
+// ------------------------------------------
+// epicenter is set in fn_preinit_setup.sqf
+// ------------------------------------------
+_marker = createMarker ["mEPI", epicenter];
+"mEPI" setMarkerSize [5000, 5000];
+
+if (pcb_DEBUG) then {
+    "mEPI" setMarkerShapeLocal "ELLIPSE";
+    "mEPI" setMarkerColorLocal "ColorRED";
+    "mEPI" setMarkerBrushLocal "BORDER";
+    "mEPI" setMarkerAlpha 0.9;
+};
+// ------------------------------------------
+
 ["initServer done and ready to kill Wendigos!"] call pcb_fnc_debug;

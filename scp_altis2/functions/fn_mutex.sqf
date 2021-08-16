@@ -29,9 +29,7 @@ switch (_action) do {
 
     case "get": {
         if ((_mutex select 1) != _id) then {
-["Waiting on mutex"] call pcb_fnc_debug;
            waitUntil { [_mutex select 0, _mutex set [0, false]] select 0} ;
-["Got mutex"] call pcb_fnc_debug;
            _mutex set [1, _id];
        }; 
        _mutex set [2,(_mutex select 2) +1];

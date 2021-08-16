@@ -9,6 +9,7 @@ if (! isNil "spare_heli_spawner") exitWith {};
 spare_heli_spawner = true; publicVariable "spare_heli_spawner";
 
 private _helipads = (world_center nearObjects ["HeliH", worldSize]);
+["Found " + (str (count _helipads)) + " helipads"] call pcb_fnc_debug;
 private _hdx = 0;
 for [{_hdx = 0}, {_hdx < (count _helipads)}, {_hdx = _hdx + 1}] do {
     if ((_hdx % 100) < 1) then { sleep .1; };

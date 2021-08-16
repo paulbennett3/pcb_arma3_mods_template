@@ -1,11 +1,11 @@
 /* *********************************************************
                     mission encounter
 ********************************************************* */
-params ["_pos", ["_chance", 50]];
+params ["_pos", ["_chance", 50], ["_max_n", 3]];
 
 private _obj_list = [];
 private _type = objNull;
-private _n = 1 + (floor (random 3));
+private _n = 1 + (floor (random _max_n));
 private _did = false;
 
 // chance of encounter
@@ -21,7 +21,7 @@ if ((random 100) < _chance) then {
         private _keep = [];
         for [{_i = 0 }, {_i < _n}, {_i = _i + 1}] do {
             private _veh = _group createUnit [_type, _pos, [], 5, 'NONE'];
-            _veh triggerDynamicSimulation false; // won't wake up enemy units
+            _veh triggerDynamicSimulation true; // *will* wake up enemy units
             _keep pushBack _veh;
             sleep .1;
         };
@@ -40,6 +40,8 @@ if ((random 100) < _chance) then {
     _obj_list joinSilent _group;
 
     [_group] call pcb_fnc_log_group;
+    _group enableDynamicSimulation false;
 };
+
 
 [_obj_list, _type, _n, _did]

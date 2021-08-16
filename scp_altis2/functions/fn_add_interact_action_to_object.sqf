@@ -41,8 +41,8 @@ switch (_action) do {
         };
 };
 
-private _start_cond = "(_this distance _target < 3)";
-private _cont_cond = "_caller distance _target < 3";
+private _start_cond = "(_this distance _target < 5)";
+private _cont_cond = "_caller distance _target < 5";
 
 if (_trait != "") then {
     _start_cond = "(" + _start_cond + ' && (_this getUnitTrait "' + _trait + '"))';

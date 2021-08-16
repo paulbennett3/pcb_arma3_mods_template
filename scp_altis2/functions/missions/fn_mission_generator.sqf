@@ -19,13 +19,14 @@ if (! isServer) exitWith {};
 
     active_mission_info = createHashMap;  // index with "mission ID" -- for state needed for cleanup, or complex missions
     // fire off the director for tracking background stuff
-    [] call pcb_fnc_director;
+    //[] call pcb_fnc_director;  called by scenario now !!!!
 
     // call our scenario to populate mission_list, total_missions, generate start base, etc
     private _scenarios = [];
     //_scenarios pushBackUnique "functions\scenarios\fn_scn_drongo.sqf";
     //_scenarios pushBackUnique "functions\scenarios\fn_scn_zombies.sqf";
-    _scenarios pushBackUnique "functions\scenarios\fn_scn_demons.sqf";
+    //_scenarios pushBackUnique "functions\scenarios\fn_scn_demons.sqf";
+    _scenarios pushBackUnique "functions\scenarios\fn_scn_aliens.sqf";
 
     private _scenario = compile preprocessFileLineNumbers (selectRandom _scenarios);
 

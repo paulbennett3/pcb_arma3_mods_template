@@ -14,7 +14,6 @@ params ["_special_clusters", "_map", "_label"];
 // select a cluster at random from our map
 private _cluster_id = selectRandom (keys _map);
 private _cluster = _map get _cluster_id;
-["  " + (str _cluster_id) + "  " + (str _cluster)] call pcb_fnc_debug;
 private _buildings = _cluster get "obj_list";
 
 _special_clusters set [[_label, _cluster_id], true];
@@ -27,7 +26,6 @@ if (true) then {
 
     // major -- mark on map
     [[west, "HQ"], "Warning! Significant insurgent activity in area. Caution advised."] remoteExec ["commandChat", 0];
-    ["Warning! Significant insurgent activity in area. Caution advised."] remoteExec ["systemChat", 0];
 
     private _marker = createMarker ["MLI" + (str ([] call pcb_fnc_get_next_UID)), _cluster get "center"];
     _marker setMarkerShapeLocal "ELLIPSE";
@@ -47,13 +45,13 @@ if (true) then {
         };
 
         [_types, _n, getPosATL _building, east] call pcb_fnc_spawn_squad;
-["Spawning Insurgent squad " + (str (_iidx + 1)) + " of " + (str (_n_squads)) + " size " + (str _n)] call pcb_fnc_debug;
+        ["Spawning Insurgent squad " + (str (_iidx + 1)) + " of " + (str (_n_squads)) + " size " + (str _n)] call pcb_fnc_debug;
     };
 
     // if in city, spawn IEDs
     for [{_iidx = 0 }, {_iidx < _scale}, {_iidx = _iidx + 1}] do {
         [getPosATL (selectRandom _buildings), 30, 2 + (ceil (random 5))] call pcb_fnc_mine_road;
-["Spawning mines"] call pcb_fnc_debug;
+        //["Spawning mines"] call pcb_fnc_debug;
     };
 };
 

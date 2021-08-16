@@ -57,7 +57,7 @@ while {_tries > 0} do {
 
     if (((_rpos select 0) != 0) or ((_rpos select 1) != 0)) then {
         private _type = ["car", "any", _civ] call pcb_fnc_get_random_vehicle;
-        _veh = createVehicle [_type, _rpos, [], 0, "NONE"];
+        _veh = createVehicle [_type, _rpos, [], 5, "NONE"];
         // _veh setVariable ["BIS_enableRandomization", false];
         _veh setDir (random 360);
 
@@ -69,14 +69,6 @@ while {_tries > 0} do {
             _veh = objNull;
         } else {
             _tries = -10;
-            if (pcb_DEBUG) then {
-                private _mn = "M" + str ([] call pcb_fnc_get_next_UID);
-                private _m = createMarker [_mn, _rpos];
-                _mn setMarkerShapeLocal "ELLIPSE";
-                _mn setMarkerColorLocal "ColorBLACK";
-                _mn setMarkerSizeLocal [50, 50];
-                _mn setMarkerAlpha 0.9;
-            };
         };
 
     };

@@ -50,7 +50,7 @@ private _set_behaviour = {
     _wp setWaypointBehaviour "COMBAT"; 
     _wp setWaypointSpeed "NORMAL";
 */
-    [_group, _pos, 300] call BIS_fnc_taskPatrol;
+    [_group, _pos, 500] call BIS_fnc_taskPatrol;
 };
 
 
@@ -84,4 +84,4 @@ for [{_ngdx = 0}, {_ngdx < _n}, {_ngdx = _ngdx + 1}] do {
 
 [_g, _pos] call _set_behaviour;
 [_g] call pcb_fnc_log_group;
-
+_g

@@ -40,17 +40,6 @@ ENC_MAX_ACTIVE_ENC = 20;
 //publicVariable "ENC_MAX_ACTIVE_ENC";
 // *****************************************************
 
-// epicenter is set in fn_preinit_setup.sqf 
-_marker = createMarker ["mEPI", epicenter];
-"mEPI" setMarkerSize [5000, 5000];
-
-if (pcb_DEBUG) then {
-    "mEPI" setMarkerShapeLocal "ELLIPSE";
-    "mEPI" setMarkerColorLocal "ColorRED";
-    "mEPI" setMarkerBrushLocal "BORDER";
-    "mEPI" setMarkerAlpha 0.9;
-};
-
 // for tracking groups for deletion as we get full
 group_stack = [];
 publicVariable "group_stack";

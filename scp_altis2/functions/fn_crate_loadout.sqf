@@ -51,6 +51,8 @@ _obj addMagazineAmmoCargo ["Chemlight_red", 8, 1];
 _obj addItemCargoGlobal ["FirstAidKit", 20];
 _obj addItemCargoGlobal ["Medikit", 2];
 _obj addItemCargoGlobal ["muzzle_snds_H", 1];
+_obj addItemCargoGlobal ["optic_ACO_grn", 4];
+_obj addItemCargoGlobal ["optic_Aco", 4];
 _obj addItemCargoGlobal ["optic_DMS", 4];
 _obj addItemCargoGlobal ["optic_Hamr", 4];
 _obj addItemCargoGlobal ["optic_LRPS", 4];
@@ -69,5 +71,9 @@ _obj addBackpackCargoGlobal ["B_UAV_06_backpack_F", 1];
 _obj addBackpackCargoGlobal ["B_UGV_02_Demining_backpack_F", 1];
 _obj addBackpackCargoGlobal ["B_UGV_02_Science_backpack_F", 1];
 
+_obj addItemCargoGlobal ["H_Shemag_olive", 2];
+_obj addItemCargoGlobal ["H_Watchcap_blk", 2];
+_obj addItemCargoGlobal ["vn_g_spectacles_01", 2];
+_obj addItemCargoGlobal ["G_Shades_Blue", 2];
 
 

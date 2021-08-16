@@ -225,7 +225,8 @@ _vehicle_list pushBack ["Transport", selectRandom _ft_types, 15];
 
 // Large air transport
 //_vehicle_list pushBack ["SUPPORT", "B_Heli_Transport_03_F", 20];
-_vehicle_list pushBack ["SPACER", "SPACER", 10];
+_vehicle_list pushBack ["Cargo Heli", "O_Heli_Transport_04_F", 20];
+_vehicle_list pushBack ["SPACER", "SPACER", 30];
 _vehicle_list pushBack ["VTOL", "B_T_VTOL_01_vehicle_F", 30];
 
 private _vdx = 0;
@@ -308,4 +309,3 @@ for [{_i = 0 }, {_i < 5}, {_i = _i + 1}] do {
 };
 
 [] call pcb_fnc_convenience;
-[start_pos, west, 10] call pcb_fnc_goblins;

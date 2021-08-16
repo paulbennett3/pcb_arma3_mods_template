@@ -8,7 +8,7 @@ Parameters:
 Returns:
    Nothing
 ****************************************************************** */
-params ["_group"];
+params ["_group", ["_pistols", false]];
 
 private _units = units _group;
 private _cdx = 0;
@@ -29,15 +29,16 @@ for [{_cdx = 0}, {_cdx < (count _units)}, {_cdx = _cdx + 1}] do {
     // set the textures to black
     private _texture = "#(rgb,8,8,3)color(0,0,0,1)"; 
     private _tdx = 0;
-    for [{_tdx = 0}, {_tdx < 15}, {_tdx = _tdx + 1}] do {
-        _unit setObjectTextureGlobal [_tdx, _texture]; // set it on player
+    for [{_tdx = 0}, {_tdx < 16}, {_tdx = _tdx + 1}] do {
+        _unit setObjectMaterialGlobal [_tdx, "\a3\data_f\default.rvmat"];
+        _unit setObjectTextureGlobal [_tdx, _texture]; 
     };
     uniformContainer _unit setVariable ["texture", _texture, true]; // store it on uniform    
     _unit setUnitPos "MIDDLE";
     _unit playMoveNow"AmovPercMstpSnonWnonDnon_AmovPknlMstpSnonWnonDnon";
     _unit addGoggles "NWTS_goggle_deer";
 
-    if ((random 100) < 75) then {
+    if ((! _pistols) && ((random 100) < 75)) then {
         _unit addWeapon "SGA_bow_entspannt";
         _unit addPrimaryWeaponItem "sga_bow_mag";
         for "_i" from 1 to 10 do {_unit addItemToUniform "sga_bow_mag";};

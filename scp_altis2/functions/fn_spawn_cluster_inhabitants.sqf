@@ -13,8 +13,8 @@ params ["_building", "_label", "_cluster"];
     params ["_buildings", "_label", "_cluster"];
 
     // we'll scale encounter size by number of buildings
-    // want log base 2, so use change of bases formula with natural log
-    private _scale = ceil ((ln (count _buildings)) / (ln 2));
+    // want log base 3, so use change of bases formula with natural log
+    private _scale = ceil ((ln (count _buildings)) / (ln 3));
     ["Setting scale to " + (str _scale)] call pcb_fnc_debug;
 
     // -----------------------------------------

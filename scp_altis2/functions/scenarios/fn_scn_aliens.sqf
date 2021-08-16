@@ -1,7 +1,7 @@
 /* *******************************************************************
-                           scn_demons
+                           scn_aliens
 
-Scenario -- Demons!
+Scenario -- Aliens!  Uses the Stargate mod foes (Goa'uld, Ori, Wraith).  Based on Demons scenario.
 
 A scenario is a linked set of missions for the players to complete.
 It sets the tone, start point, missions, etc.  It is called from
@@ -30,55 +30,12 @@ Parameters:
                          mission_list if appropriate
 
 
-
-Mindflayer
-    Thralls
-         DSA_Thrall module (no parameters) -- synch ai to this
-    Crazy
-    "DSA_Hatman",
-
-Vampire
-    Abomination
-    Rake
-    "DSA_Shadowman",
-
-Cultist / "Demon Lord"
-    Demon
-    "DSA_411",
-    "DSA_Snatcher",
-
-Always Around
-    Active Idol / ActiveIdol2
-    Wendigo
-
------------
-SPOOK INFO
-Wendigo: This creature resembles a humanoid deer. It is fast and tough. When close to an enemy, it will attack by leaping at them.
-Shadowman: These beings are completely black. They can teleport and attack with psychic blasts.
-Hatman: A shadowman with a hat.
-Vampires: Fast and tough, they leap into and out of combat. Can attack with melee and leaps.
-Mindflayer: Slow but deadly psychic creatures. Their powers allow them to attack from a distance. Then can mind-control targets and turn them into thralls.
-411: Near-invisible ambush predator. Turn your back on it when close and it can pounce and kill in a single hit. Your best defence is your eyes.
-Rake: These creatures are completely white. They move hunched over and attack with melee.
-Abomination: Shrouded in a cloud of black, these creatures launch powerful stab attacks from long range.
-Snatcher: These semi-visible creatures can change their texture to match their environment. They can teleport their target hundreds of meters away to isolate them.
-Crazy: A basic zombie type creature
-Cursed Idol: An active version of the Cursed Idol object. They require heavy weapons to kill and perform powerful melee attacks.
-
-
-ANOMALIES
-These are static points of danger with aural or visual cues. There update period and range of effect can be set in the Core module.
-
-Launchpad:	Throws victim a random distance.
-Leech:		Drains stamina, may also knock victim down and drain health.
-Trapdoor:	Teleports victim up to 1000m away.
-Zapper:		Calls down lightning on the victim.
-
-
 ******************************************************************* */
 params ["_action"];
 
-[("Scenario Demons <" + (str _action) + ">")] call pcb_fnc_debug;
+private _scn_name = "Aliens";
+[("Scenario " + _scn_name + " <" + (str _action) + ">")] call pcb_fnc_debug;
+
 
 switch (_action) do {
     case "create": {
@@ -97,33 +54,40 @@ switch (_action) do {
         // manipulate the starting weather et al
         [] call pcb_fnc_set_mission_environment;
 
-        // start spawning spare vehicles etc
-        [] call pcb_fnc_background;
- 
+
+        // over-ride defaults in fn_types / types_hash
+        types_hash set ["background_options_with_weights", types_hash get "aliens_options_with_weights"];
+
         // Pick our boss and minion types
+        //   [boss type, [minion type(s)],[vehicle types], [drone types]]
+        // no boss ("") = use lots of minions!
         private _boss_info = selectRandom [
-            ['DSA_Mindflayer', ['DSA_Crazy', 'DSA_Hatman']],
-            ['DSA_Vampire', ['DSA_Abomination', 'DSA_Rake', 'DSA_Shadowman']],
-            ['RyanZombieboss28', ['DSA_Snatcher', 'DSA_411']]
+            ["sga_prior1", ["sga_ori_soldier1"], [ "sga_needlethreader_normal" ], ["SG_gouald_drone"]],
+            ["", ["WL_SG_Replicator"], [], ["SG_gouald_drone"]],
+            ["sga_jaffa_black_leader", ["sga_jaffa_serpent_guard_closed"], ["SG_DeathGlider_heli"], ["SG_gouald_drone"]],
+            ["Wraith_Leader", ["Wraith_Drone"], ["sg_wraith_dart_normal"], ["SG_gouald_drone"]]
         ];
         private _ambient = [
-            'DSA_Crazy', 
-            'DSA_Crazy', 
-            'DSA_Wendigo', 
-            'DSA_Wendigo', 
-            'DSA_Wendigo', 
             'DSA_Wendigo', 
             'DSA_ActiveIdol', 
             'DSA_ActiveIdol2'
         ];
 
+
         private _spook_boss = _boss_info select 0;
         private _spook_minions = _boss_info select 1;
+        private _spook_vehicles = _boss_info select 2;
+        private _spook_drones = _boss_info select 3;
+
         ["------------------------------------"] call pcb_fnc_debug;
         ["Boss <" + (str _spook_boss) + ">  Minions <" + (str _spook_minions) + ">"] call pcb_fnc_debug;
         ["------------------------------------"] call pcb_fnc_debug;
         types_hash set ["weaker spooks", _spook_minions];
         types_hash set ["boss spook", _spook_boss];
+        types_hash set ["drone spooks", _spook_drones];
+        types_hash set ["vehicle spooks", _spook_vehicles];
+
+        _ambient = _ambient + _spook_minions;
         types_hash set ["spooks", _ambient];
           
         // Do we want a parent task (ie, missions as sub-tasks)?
@@ -144,27 +108,28 @@ switch (_action) do {
         // fire off the director for tracking background stuff
         [] call pcb_fnc_director;
 
+        // start spawning spare vehicles etc
+        sleep 1;
+        [] call pcb_fnc_background;
+ 
         // remember our state
         scenario_state = 1;
         publicVariable "scenario_state";
-        [("Scenario Demons completed <" + (str _action) + ">")] call pcb_fnc_debug;
+        [("Scenario " + _scn_name + " completed <" + (str _action) + ">")] call pcb_fnc_debug;
      };
 
     case "mission_completed": {
-        [("Scenario Demons <" + (str _action) + ">")] call pcb_fnc_debug;
+        [("Scenario " + _scn_name + " <" + (str _action) + ">")] call pcb_fnc_debug;
         if ((scenario_state == 1) && (total_missions == 0)) then {
             scenario_state = 2;
             publicVariable "scenario_state";
 
             // update our mission list (what we can choose from)
             mission_list = []; 
-            mission_list pushBackUnique "functions\missions\fn_mis_desk_evidence.sqf";
-            mission_list pushBackUnique "functions\missions\fn_mis_investigate.sqf";
-            mission_list pushBackUnique "functions\missions\fn_mis_building_search.sqf";
             mission_list pushBackUnique "functions\missions\fn_mis_interview.sqf";
             publicVariable "mission_list"; 
 
-            total_missions = selectRandom [2, 3];
+            total_missions = selectRandom [2, 2];
             publicVariable "total_missions";
 
             mission_select = "random";
@@ -178,7 +143,7 @@ switch (_action) do {
             // remember to do these in reverse order!!! 
             mission_list = []; 
             mission_list pushBackUnique "functions\missions\fn_mis_monster_hunt.sqf";
-            mission_list pushBackUnique "functions\missions\fn_mis_spawner.sqf";
+            mission_list pushBackUnique "functions\missions\fn_mis_monster_hunt.sqf";
             publicVariable "mission_list"; 
 
             total_missions = 1;
@@ -194,15 +159,7 @@ switch (_action) do {
             // update our mission list (what we can choose from)
             // remember to do these in reverse order!!! 
             mission_list = []; 
-//            mission_list pushBackUnique "functions\missions\fn_mis_get_laptop_from_base.sqf";
-//            mission_list pushBackUnique "functions\missions\fn_mis_deliver_evidence.sqf";
-//            mission_list pushBackUnique "functions\missions\fn_mis_spawner.sqf";
-//            if (worldName isEqualTo "Cam_Lao_Nam") then {
-//                mission_list pushBackUnique "functions\missions\fn_mis_tunnels.sqf";
-//            } else {
-                mission_list pushBackUnique "functions\missions\fn_mis_boss.sqf";
-//            };
-           
+            mission_list pushBackUnique "functions\missions\fn_mis_alien_spawner.sqf";
             mission_list pushBackUnique "functions\missions\fn_mis_exfil.sqf";
             publicVariable "mission_list"; 
 
@@ -212,8 +169,6 @@ switch (_action) do {
             mission_select = "sequential";
             publicVariable "mission_select"; 
         }; 
-
-
     };
 };
 

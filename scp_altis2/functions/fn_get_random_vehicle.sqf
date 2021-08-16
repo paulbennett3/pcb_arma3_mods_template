@@ -50,5 +50,14 @@ if (_class isEqualTo "car") then {
     };
 };
 
+if (_class isEqualTo "boat") then {
+    if ( (! _civ) || ((random 100) < _chance_mil)) then {
+        _result = selectRandom (types_hash get "boat mil");
+    } else {
+        _result = selectRandom (types_hash get "boat civ");
+    };
+};
+
+
 
 _result;

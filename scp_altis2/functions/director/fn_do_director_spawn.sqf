@@ -13,17 +13,7 @@ if ((count playableUnits) > 0) then {
 //if ((count (_player nearEntities 2000)) > 250) exitWith { false };
 
 // randomly select which encounter to spawn, then call its setup script
-private _options_with_weights = [
-    ["animal_follower", 1],
-    ["police_foot", 2],
-    ["police_vehicle", 2],
-    ["bandit_foot", 1],
-    ["bandit_car", 3],
-    ["spooks", 1],
-    ["civ_air", 1],
-    ["civ_vehicle", 10],
-    ["civ_foot", 10]
-];
+private _options_with_weights = types_hash get "background_options_with_weights"; 
 
 private _options = [];
 private _odx = 0;
@@ -49,11 +39,80 @@ switch (_option) do {
             private _animal = _result select 0;
             private _obj_list = [ _animal];
             private _UID = "S" + str ([] call pcb_fnc_get_next_UID);
-            _entry = [false, objNull, _obj_list, false, objNull, objNull, _option];
+            private _entry = [false, objNull, _obj_list, false, objNull, objNull, _option];
             spawned_encounters set [_UID, _entry];
             publicVariable "spawned_encounters"; 
         };
     };
+    case "cultists": {
+            private _ctypes = [ "O_Soldier_F" ];
+            private _result = [_player] call pcb_fnc_get_random_position;
+            private _pos = _result select 1;
+            private _n = selectRandom [5,5,5,6,6,6,7,8,9,10,12];
+            private _group = [_ctypes, _n, _pos, east, false] call pcb_fnc_spawn_squad;
+            [_group] call pcb_fnc_spawn_cultists;
+            private _UID = "S" + str ([] call pcb_fnc_get_next_UID);
+            private _entry = [false, objNull, units _group, false, objNull, objNull, _option];
+            spawned_encounters set [_UID, _entry];
+            publicVariable "spawned_encounters"; 
+            [_group, _pos, 300] call BIS_fnc_taskPatrol;
+            _did_spawn = true;
+        };
+    case "goblins": {
+            private _n = selectRandom [1,1,1,2,2,3];
+            private _result = [_player] call pcb_fnc_get_random_position;
+            private _pos = _result select 1;
+            private _group = [_pos, civilian, _n] call pcb_fnc_goblins;
+            private _UID = "S" + str ([] call pcb_fnc_get_next_UID);
+            private _entry = [false, objNull, units _group, false, objNull, objNull, _option];
+            spawned_encounters set [_UID, _entry];
+            publicVariable "spawned_encounters"; 
+
+            _did_spawn = true;
+        };
+    case "drone": {
+            private _types = types_hash get "drone spooks";
+            if ((! (isNil "_types")) && ((count _types) > 0)) then {
+                private _type = selectRandom _types;
+                ["   drone type <" + (str _type) + ">"] call pcb_fnc_debug;
+                private _dpos = _player getPos [300 + (random 200), selectRandom [270, 315, 0, 45, 90]]; 
+                private _stuff = [_dpos, 0, _type, east] call BIS_fnc_spawnVehicle;
+                private _group = _stuff select 2;
+                [_group] call pcb_fnc_log_group;
+
+                private _UID = "S" + str ([] call pcb_fnc_get_next_UID);
+                private _entry = [false, objNull, _stuff select 1, false, objNull, objNull, _option];
+                spawned_encounters set [_UID, _entry];
+                private _mode = selectRandom ["SAD", "Patrol", "Patrol"];
+                [_group, _player, _mode] call pcb_fnc_set_behaviour;
+
+                _did_spawn = true;
+            } else {
+                _did_spawn = false;
+            };
+        };
+    case "vehicle": {
+            private _types = types_hash get "vehicle spooks";
+            if ((! (isNil "_types")) && ((count _types) > 0)) then {
+                private _type = selectRandom _types;
+                ["   vehicle type <" + (str _type) + ">"] call pcb_fnc_debug;
+                private _dpos = _player getPos [300 + (random 200), selectRandom [270, 315, 0, 45, 90]]; 
+                private _stuff = [_dpos, 0, _type, east] call BIS_fnc_spawnVehicle;
+                private _group = _stuff select 2;
+                [_group] call pcb_fnc_log_group;
+
+                private _UID = "S" + str ([] call pcb_fnc_get_next_UID);
+                private _entry = [false, objNull, _stuff select 1, false, objNull, objNull, _option];
+                spawned_encounters set [_UID, _entry];
+
+                private _mode = selectRandom ["SAD", "Patrol", "Patrol"];
+                [_group, _player, _mode] call pcb_fnc_set_behaviour;
+
+                _did_spawn = true;
+            } else {
+                _did_spawn = false;
+            };
+        };
     case "spooks": {
             private _types = types_hash get "spooks";
             private _type = [selectRandom _types];

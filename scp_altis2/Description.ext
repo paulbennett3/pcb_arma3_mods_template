@@ -9,7 +9,7 @@ class Header
     maxPlayers = 4;
 };
 
-briefingName = "SCP - Wendigogos";
+briefingName = "SCP - Wendigos Need Love 2";
 
 respawn = 3;
 respawnButton = 1;
@@ -51,9 +51,11 @@ class CfgFunctions
             class get_city_positions {};
             class get_empty_pos {};
             class get_next_UID {};
+            class get_random_position {};
             class get_random_vehicle {};
             class goblins {};
             class is_valid_position {};
+            class loadout_clone {};
             class loadout_save_restore {};
             class loot_crate {};
             class make_destroyable {};
@@ -67,6 +69,7 @@ class CfgFunctions
             class packable_base {};
             class packable_boat {};
             class parachute_to_group {};
+            class paradrop_stuff {};
             class player_in_vehicle {};
             class players_in_area {};
             class preinit_setup { preInit = 1; };
@@ -78,6 +81,7 @@ class CfgFunctions
             class start_base_setup2 {};
             class send_mail {};
             class server_state_manager {};
+            class set_behaviour {};
             class setPosAGLS {};
             class set_mission_environment {};
             class set_rating {};
@@ -86,6 +90,7 @@ class CfgFunctions
             class spawn_cluster_inhabitants {};
             class spawn_cluster_inhabitants_ind {};
             class spawn_packable_base {};
+            class spawn_random_boat {};
             class spawn_random_vehicle {};
             class spawn_spare_helicopters {};
             class spawn_spare_vehicles {};
@@ -149,6 +154,7 @@ class CfgFunctions
             class mis_investigate {};
             class mis_interview {};
             class mis_monster_hunt {};
+            class mis_alien_spawner {};
             class mis_spawner {};
             class spawn_cultists {};
             class mis_tunnels {};
@@ -193,6 +199,26 @@ class CfgCommunicationMenu
         text = "Restore loadout";
         submenu = "";
         expression = "[_this select 0, false] call pcb_fnc_loadout_save_restore;";
+        icon = "\a3\Ui_f\data\GUI\Cfg\CommunicationMenu\supplydrop_ca.paa";
+        cursor = "\a3\Ui_f\data\IGUI\Cfg\Cursors\iconCursorSupport_ca.paa";
+        enable = "1";
+        removeAfterExpressionCall = 0;
+    };
+    class myCloneLoadout
+    {
+        text = "Clone loadout to squad";
+        submenu = "";
+        expression = "[_this select 0, false] call pcb_fnc_loadout_clone;";
+        icon = "\a3\Ui_f\data\GUI\Cfg\CommunicationMenu\supplydrop_ca.paa";
+        cursor = "\a3\Ui_f\data\IGUI\Cfg\Cursors\iconCursorSupport_ca.paa";
+        enable = "1";
+        removeAfterExpressionCall = 0;
+    };
+    class myParaResupply
+    {
+        text = "Para-drop resupply at position";
+        submenu = "";
+        expression = "[_this select 0, _this select 1] call pcb_fnc_paradrop_stuff;";
         icon = "\a3\Ui_f\data\GUI\Cfg\CommunicationMenu\supplydrop_ca.paa";
         cursor = "\a3\Ui_f\data\IGUI\Cfg\Cursors\iconCursorSupport_ca.paa";
         enable = "1";
