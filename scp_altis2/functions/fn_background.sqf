@@ -10,11 +10,13 @@ besides / in addition to the mission(s)
 
 if (! isServer) exitWith {};
 
+["fn_background called, waiting for variables"] call pcb_fnc_debug;
 waitUntil { ! isNil "random_start_ready" };
 waitUntil { ! isNil "start_pos" };
 waitUntil { ! isNil "start_dir" };
 waitUntil { ! isNil "active_area" };
 waitUntil { ! isNil "group_stack" };
+["fn_background started"] call pcb_fnc_debug;
 
 
 /* ########################################################

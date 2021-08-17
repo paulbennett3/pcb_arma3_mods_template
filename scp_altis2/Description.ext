@@ -51,6 +51,7 @@ class CfgFunctions
             class get_city_positions {};
             class get_empty_pos {};
             class get_next_UID {};
+            class get_player_direction {};
             class get_random_position {};
             class get_random_vehicle {};
             class goblins {};

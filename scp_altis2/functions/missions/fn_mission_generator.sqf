@@ -25,8 +25,8 @@ if (! isServer) exitWith {};
     private _scenarios = [];
     //_scenarios pushBackUnique "functions\scenarios\fn_scn_drongo.sqf";
     //_scenarios pushBackUnique "functions\scenarios\fn_scn_zombies.sqf";
-    //_scenarios pushBackUnique "functions\scenarios\fn_scn_demons.sqf";
-    _scenarios pushBackUnique "functions\scenarios\fn_scn_aliens.sqf";
+    _scenarios pushBackUnique "functions\scenarios\fn_scn_demons.sqf";
+    //_scenarios pushBackUnique "functions\scenarios\fn_scn_aliens.sqf";
 
     private _scenario = compile preprocessFileLineNumbers (selectRandom _scenarios);
 

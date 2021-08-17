@@ -142,7 +142,8 @@ switch (_option) do {
         };
     case "bandit_car": {
             private _type = selectRandom (types_hash get "civ vehicles");
-            _did_spawn = [_option, _player, _type, east] call pcb_fnc_enc_vehicle_patrol;
+            private _types = types_hash get "looters";
+            _did_spawn = [_option, _player, _type, east, [_types, 2 + (ceil (random 3))]] call pcb_fnc_enc_vehicle_patrol;
         };
     case "police_foot": {
             private _types = types_hash get "police"; 

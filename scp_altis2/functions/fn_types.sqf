@@ -670,6 +670,34 @@ types_hash set ["heli mil", [
     "O_T_VTOL_02_vehicle_dynamicLoadout_F"
 ]];
 
+// Planes 
+types_hash set ["plane civ", [
+    "C_Plane_Civil_01_F",
+    "C_Plane_Civil_01_racing_F"
+]];
+
+types_hash set ["plane mil", [
+    "vn_b_air_f4b_navy_at", "vn_b_air_f4c_hcas", "vn_b_air_f4b_navy_bmb",
+    "vn_b_air_f4b_navy_mbmb", "vn_b_air_f4b_usmc_cas", "vn_b_air_f4b_usmc_ehcas",
+    "vn_b_air_f4b_usmc_hcas", "vn_b_air_f4b_usmc_lrbmb", "vn_b_air_f4b_navy_cap",
+    "vn_b_air_f4b_navy_cbu", "vn_b_air_f4b_navy_lbmb", "vn_b_air_f4c_mbmb",
+    "vn_b_air_f4b_usmc_bmb", "vn_b_air_f4b_usmc_cap", "vn_b_air_f4b_usmc_cbu",
+    "vn_b_air_f4b_usmc_mbmb", "vn_b_air_f4b_navy_cas", "vn_b_air_f4c_lrbmb",
+    "vn_b_air_f4c_mr", "vn_b_air_f4b_usmc_mr", "vn_b_air_f4b_usmc_ucas",
+    "vn_b_air_f4b_navy_ehcas", "vn_b_air_f4b_navy_gbu", "vn_b_air_f4c_sead",
+    "vn_b_air_f4b_navy_hbmb", "vn_b_air_f4b_navy_hcas", "vn_b_air_f4b_navy_lrbmb",
+    "vn_b_air_f4b_usmc_hbmb", "vn_b_air_f4b_usmc_lbmb", "vn_b_air_f4b_navy_mr",
+    "vn_b_air_f4b_navy_sead", "vn_b_air_f4b_navy_ucas", "vn_b_air_f4c_at",
+    "vn_b_air_f4c_bmb", "vn_b_air_f4c_cap", "vn_b_air_f4c_hbmb", "vn_b_air_f4c_cas",
+    "vn_b_air_f4c_cbu", "vn_b_air_f4c_chico", "vn_b_air_f4c_ehcas", "vn_b_air_f4c_gbu",
+    "vn_b_air_f4c_lbmb", "vn_b_air_f4b_usmc_sead", "vn_b_air_f4c_ucas",
+    "vn_b_air_f4b_usmc_at", "vn_b_air_f4b_usmc_gbu", "B_Plane_CAS_01_dynamicLoadout_F",
+    "B_Plane_Fighter_01_F", "B_Plane_Fighter_01_Stealth_F", "B_T_VTOL_01_armed_F",
+    "B_T_VTOL_01_infantry_F", "B_T_VTOL_01_vehicle_F", "O_Plane_CAS_02_dynamicLoadout_F",
+    "O_Plane_Fighter_02_F", "O_Plane_Fighter_02_Stealth_F", "O_T_VTOL_02_infantry_dynamicLoadout_F",
+    "O_T_VTOL_02_vehicle_dynamicLoadout_F", "I_Plane_Fighter_03_dynamicLoadout_F", "I_Plane_Fighter_04_F"
+]];
+
 types_hash set ["hangars", [
     "Land_Airport_01_hangar_F",
     "Land_Hangar_F",

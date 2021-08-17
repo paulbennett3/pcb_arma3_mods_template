@@ -14,9 +14,8 @@ private _vobj = _player;
 
 // did our caller not specify a position? If they didn't, pick one
 if (! ([_pos] call pcb_fnc_is_valid_position)) then {
-    private _vtemp = [_player] call pcb_fnc_player_in_vehicle;
-    if (_vtemp select 0) then { _vobj = (_vtemp select 1) select 0; };
-    private _whitelist = [ [_vobj getRelPos [ENC_DIST, 0], ENC_RADIUS] ];
+    private _dir = [_player] call pcb_fnc_get_player_direction;
+    private _whitelist = [ [_player getPos [ENC_DIST, _dir], ENC_RADIUS] ];
     private _blacklist = [ "water" ];
     _pos = [0, 0];
     private _tries = 10;
@@ -31,12 +30,17 @@ if (! ([_pos] call pcb_fnc_is_valid_position)) then {
         };
     };
 
-    if (! ([_pos] call pcb_fnc_is_valid_position)) exitWith { diag_log "fn_enc_infantry - not valid position"; false };
+    if (! ([_pos] call pcb_fnc_is_valid_position)) exitWith { 
+        ["fn_enc_infantry - not valid position"] call pcb_fnc_debug; 
+        false 
+    };
 
     // are there any players in the area?
-    if ([ [_pos, ENC_MIN_PLAYER_DIST_CREATE] ] call pcb_fnc_players_in_area) exitWith { diag_log "fn_enc_infantry - players in range"; false };
+    if ([ [_pos, ENC_MIN_PLAYER_DIST_CREATE] ] call pcb_fnc_players_in_area) exitWith { 
+        ["fn_enc_infantry - players in range"] call pcb_fnc_debug; 
+        false 
+    };
 };
-//hint ("Spawning " + _label + " at " + (str _pos) + ">");
 
 private _action = objNull;
 private _entry = objNull;
@@ -45,11 +49,7 @@ private _building = objNull;
 if ((random 1) > 0.15) then {
     _action = "patrol";
 } else {
-    _action = "garrison";
-    // use the previously found _pos to find the nearest building
-    _building = nearestBuilding _pos;
-
-    _pos = getPosATL _building;
+    _action = "defend";
 };
 
 
@@ -68,30 +68,8 @@ if (true) then {
     };
 
     // create a group
-    private _group = createGroup _side;
-    for [{_i = 0 }, {_i < _group_size}, {_i = _i + 1}] do {
-        private _type = objNull;
-        if (_exact) then {
-            _type = _types select _i;
-        } else {
-            _type = selectRandom _types;
-        };
-        private _veh = _group createUnit [_type, _pos, [], 5, 'NONE'];
-        [_veh] joinSilent _group;
-        _veh triggerDynamicSimulation false; // won't wake up enemy units
-        _obj_list pushBack _veh;
-        sleep .1;
-    };
-    [_group] call pcb_fnc_log_group;
-
-    if (_action == "patrol") then {
-        // create a patrol
-        private _waypoint_sep = 100 + (ceil (random 1000));
-        [_group, _pos, _waypoint_sep] call BIS_fnc_taskPatrol; 
-    } else {
-        // create a garrison waypoint
-        [_group, getPosATL _building] call BIS_fnc_taskDefend;
-    };
+    private _group = [_types, _group_size, _pos, _side, false] call pcb_fnc_spawn_squad;
+    [_group, _pos, _action] call pcb_fnc_set_behaviour;
 
     _entry = [false, objNull, _obj_list, false, objNull, objNull, _label];
 

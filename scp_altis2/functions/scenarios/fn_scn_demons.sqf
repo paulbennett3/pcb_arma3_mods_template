@@ -97,9 +97,7 @@ switch (_action) do {
         // manipulate the starting weather et al
         [] call pcb_fnc_set_mission_environment;
 
-        // start spawning spare vehicles etc
-        [] call pcb_fnc_background;
- 
+
         // Pick our boss and minion types
         private _boss_info = selectRandom [
             ['DSA_Mindflayer', ['DSA_Crazy', 'DSA_Hatman']],
@@ -144,6 +142,9 @@ switch (_action) do {
         // fire off the director for tracking background stuff
         [] call pcb_fnc_director;
 
+        // start spawning spare vehicles etc
+        [] call pcb_fnc_background;
+ 
         // remember our state
         scenario_state = 1;
         publicVariable "scenario_state";
