@@ -126,7 +126,9 @@ _target setVariable ["_state", _state, true];  // gets overwritten in ll interac
 [_target, true] remoteExec ["forceWalk", 0, true];
 [group _target, "BLUE"] remoteExec ["setCombatMode", 0, true];
 [group _target, "CARELESS"] remoteExec ["setBehaviour", 0, true];
+[group _target, "LIMITED"] remoteExec ["setSpeedMode", 0, true];
 [_target, "MIDDLE"] remoteExec ["setUnitPos", 0, true];
+[_target, "SitDown", _target] remoteExec ["action", 0, true];
 
 
 // add some anomalies

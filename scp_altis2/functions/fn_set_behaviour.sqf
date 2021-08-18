@@ -8,9 +8,13 @@ switch (_mode) do {
     case "SAD": {
         //[_group, getPosATL (selectRandom playableUnits)] call BIS_fnc_taskAttack;
         [_group, _pos, 100] call BIS_fnc_taskPatrol;
+        private _wp = _group addWaypoint [_pos, 10];
+        _wp setWaypointType "CYCLE";
     };
     case "PATROL": {
         [_group, _pos, 500] call BIS_fnc_taskPatrol;
+        private _wp = _group addWaypoint [_pos, 10];
+        _wp setWaypointType "CYCLE";
     };
     case "DEFEND": {
         [_group, _pos] call BIS_fnc_taskDefend;

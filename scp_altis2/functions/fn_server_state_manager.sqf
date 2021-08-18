@@ -45,13 +45,19 @@ publicVariable "message_box";
                    [_target] call pcb_fnc_packable_boat;
                };
                case "respawn_ai": {
-                   private _type = _msg select 1;
-                   private _id = _msg select 2;
-                   [_type, _id] spawn {
-                       params ["_type", "_id"];
+                   private _id = _msg select 1;
+                   private _unit = scp_support_unit_tracker get _id;
+
+                   if ((! isNull _unit) && { alive _unit }) exitWith {}; 
+                   if ((! isNull _unit) && { _unit in playableUnits}) exitWith {};
+                   
+                   [_id, _unit] spawn {
+                       params ["_id", "_unit"];
                        sleep 30;
+                       if (! (isNull _unit)) then { deleteVehicle _unit; };
+                       sleep 30; 
                        ["respawn ai called for unit <" + (str _id) + ">"] call pcb_fnc_debug;
-                       [_type, _id] remoteExec ["pcb_fnc_scp_new_unit", groupOwner player_group];
+                       [_id] remoteExec ["pcb_fnc_scp_new_unit", groupOwner player_group];
                    };
                };
 

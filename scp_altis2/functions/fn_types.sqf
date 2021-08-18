@@ -100,7 +100,6 @@ types_hash set ["bases", [
     ["Land_IRMaskingCover_02_F", 0, 1.5], 
     ["Land_Cargo_Patrol_V4_F", 0, 4.5],
     ["CamoNet_OPFOR_F", 0, 1.5],
-//    ["Land_BagBunker_Tower_F", 90, 1.3],
     ["Land_MedicalTent_01_NATO_generic_outer_F", 90, 1.3],
     ["Land_MedicalTent_01_NATO_generic_open_F", 90, 1.3],
     ["Land_MedicalTent_01_CSAT_brownhex_generic_open_F", 90, 1.3],
@@ -261,7 +260,15 @@ types_hash set ["zombies_ryan", [
 "RyanZombieSpider20", "RyanZombieSpider21", "RyanZombieSpider22", "RyanZombieSpider23",
 "RyanZombieSpider24", "RyanZombieSpider25", "RyanZombieSpider26", "RyanZombieSpider27",
 "RyanZombieSpider28", "RyanZombieSpider29", "RyanZombieSpider30", "RyanZombieSpider31",
-"RyanZombieSpider32"
+"RyanZombieSpider32", "RyanZombieCrawler1", "RyanZombieCrawler2", "RyanZombieCrawler3",
+"RyanZombieCrawler4", "RyanZombieCrawler5", "RyanZombieCrawler6", "RyanZombieCrawler7",
+"RyanZombieCrawler8", "RyanZombieCrawler9", "RyanZombieCrawler10", "RyanZombieCrawler11",
+"RyanZombieCrawler12", "RyanZombieCrawler13", "RyanZombieCrawler14", "RyanZombieCrawler15",
+"RyanZombieCrawler16", "RyanZombieCrawler17", "RyanZombieCrawler18", "RyanZombieCrawler19",
+"RyanZombieCrawler20", "RyanZombieCrawler21", "RyanZombieCrawler22", "RyanZombieCrawler23",
+"RyanZombieCrawler24", "RyanZombieCrawler25", "RyanZombieCrawler26", "RyanZombieCrawler27",
+"RyanZombieCrawler28", "RyanZombieCrawler29", "RyanZombieCrawler30", "RyanZombieCrawler31",
+"RyanZombieCrawler32"
 ]];
 
 
@@ -269,9 +276,14 @@ types_hash set ["zombies_ryan", [
 // Demons
 // --------------------------------
 types_hash set ["demons", [
-    "RyanZombieboss1", "RyanZombieboss10", "RyanZombieboss11", "RyanZombieboss12",
-    "RyanZombieboss13", "RyanZombieboss15", "RyanZombieboss30", "RyanZombieboss16",
-    "RyanZombieboss28"
+    "RyanZombieboss1", "RyanZombieboss2", "RyanZombieboss3", "RyanZombieboss4",
+    "RyanZombieboss5", "RyanZombieboss6", "RyanZombieboss7", "RyanZombieboss8",
+    "RyanZombieboss9", "RyanZombieboss10", "RyanZombieboss11", "RyanZombieboss12",
+    "RyanZombieboss13", "RyanZombieboss14", "RyanZombieboss15", "RyanZombieboss16",
+    "RyanZombieboss17", "RyanZombieboss18", "RyanZombieboss19", "RyanZombieboss20",
+    "RyanZombieboss21", "RyanZombieboss22", "RyanZombieboss23", "RyanZombieboss24",
+    "RyanZombieboss25", "RyanZombieboss26", "RyanZombieboss27", "RyanZombieboss28",
+    "RyanZombieboss29", "RyanZombieboss30", "RyanZombieboss31", "RyanZombieboss32"
 ]];
 
 // --------------------------------
@@ -389,113 +401,6 @@ types_hash set ["ambulance", [
     "C_Van_02_medevac_F"
 ]];
 
-// --------------------------------
-// City Buildings
-// --------------------------------
-types_hash set ["city buildings", [
-    "Land_Offices_01_V1_F",
-    "Land_Church_01_V1_F",
-    "Land_Hospital_main_F",
-    "Land_Hospital_side1_F",
-    "Land_Hospital_side2_F",
-    "Land_WIP_F",
-    "Land_d_House_Big_01_V1_F",
-    "Land_i_House_Big_01_V1_F",
-    "Land_i_House_Big_01_V2_F",
-    "Land_i_House_Big_01_V3_F",
-    "Land_u_House_Big_01_V1_F",
-    "Land_d_House_Big_02_V1_F",
-    "Land_i_House_Big_02_V1_F",
-    "Land_i_House_Big_02_V2_F",
-    "Land_i_House_Big_02_V3_F",
-    "Land_u_House_Big_02_V1_F",
-    "Land_d_Shop_01_V1_F",
-    "Land_i_Shop_01_V1_F",
-    "Land_i_Shop_01_V2_F",
-    "Land_i_Shop_01_V3_F",
-    "Land_u_Shop_01_V1_F",
-    "Land_d_Shop_02_V1_F",
-    "Land_i_Shop_02_V1_F",
-    "Land_i_Shop_02_V2_F",
-    "Land_i_Shop_02_V3_F",
-    "Land_u_Shop_02_V1_F",
-    "Land_d_House_Small_01_V1_F",
-    "Land_i_House_Small_01_V1_F",
-    "Land_i_House_Small_01_V2_F",
-    "Land_i_House_Small_01_V3_F",
-    "Land_u_House_Small_01_V1_F",
-    "Land_d_House_Small_02_V1_F",
-    "Land_i_House_Small_02_V1_F",
-    "Land_i_House_Small_02_V2_F",
-    "Land_i_House_Small_02_V3_F",
-    "Land_u_House_Small_02_V1_F",
-    "Land_i_House_Small_03_V1_F",
-    "Land_d_Stone_HouseBig_V1_F",
-    "Land_i_Stone_HouseBig_V1_F",
-    "Land_i_Stone_HouseBig_V2_F",
-    "Land_i_Stone_HouseBig_V3_F",
-    "Land_d_Stone_Shed_V1_F",
-    "Land_i_Stone_Shed_V1_F",
-    "Land_i_Stone_Shed_V2_F",
-    "Land_i_Stone_Shed_V3_F",
-    "Land_d_Stone_HouseSmall_V1_F",
-    "Land_i_Stone_HouseSmall_V1_F",
-    "Land_i_Stone_HouseSmall_V2_F",
-    "Land_i_Stone_HouseSmall_V3_F",
-    "Land_Unfinished_Building_01_F",
-    "Land_Unfinished_Building_02_F",
-    "Land_CarService_F"
-]];
-
-// --------------------------------
-// Military Base Buildings
-// --------------------------------
-types_hash set ["military buildings", [
-        "Land_Cargo_House_V1_F",
-        "Land_Cargo_House_V2_F",
-        "Land_Cargo_House_V3_F",
-        "Land_Cargo_HQ_V1_F",
-        "Land_Cargo_HQ_V2_F",
-        "Land_Cargo_HQ_V3_F",
-        "Land_Cargo_Patrol_V1_F",
-        "Land_Cargo_Patrol_V2_F",
-        "Land_Cargo_Patrol_V3_F",
-        "Land_Cargo_Tower_V1_F",
-        "Land_Cargo_Tower_V1_No1_F",
-        "Land_Cargo_Tower_V1_No2_F",
-        "Land_Cargo_Tower_V1_No3_F",
-        "Land_Cargo_Tower_V1_No4_F",
-        "Land_Cargo_Tower_V1_No5_F",
-        "Land_Cargo_Tower_V1_No6_F",
-        "Land_Cargo_Tower_V1_No7_F",
-        "Land_Cargo_Tower_V2_F",
-        "Land_Cargo_Tower_V3_F",
-        "Land_Medevac_house_V1_F",
-        "Land_Medevac_HQ_V1_F",
-        "Land_i_Barracks_V1_F",
-        "Land_i_Barracks_V2_F",
-        "Land_u_Barracks_V2_F",
-        "Land_Radar_F",
-        "Land_Radar_Small_F",
-        "Land_Dome_Big_F",
-        "Land_Dome_Small_F",
-        "Land_Research_house_V1_F",
-        "Land_Research_HQ_F",
-        "Land_MilOffices_V1_F"
-]];
-
-// --------------------------------
-// Cool Buildings (overlaps with Military buildings)
-// --------------------------------
-types_hash set ["cool buildings", [
-    "Cargo_Tower_base_F", "Land_Offices_01_V1_F", "Land_Hospital_Main_F",
-    "Land_LightHouse_F", "Land_Castle_01_tower_F", "Land_d_Windmill01_F", "Land_i_Barracks_V1_F",
-    "Land_i_Barracks_V2_F", "Land_u_Barracks_V2_F", "Land_Cargo_Tower_V1_F", "Land_Cargo_Tower_V1_No1_F",
-    "Land_Cargo_Tower_V1_No2_F", "Land_Cargo_Tower_V1_No3_F", "Land_Cargo_Tower_V1_No4_F",
-    "Land_Cargo_Tower_V1_No5_F", "Land_Cargo_Tower_V1_No6_F", "Land_Cargo_Tower_V1_No7_F",
-    "Land_Cargo_Tower_V2_F", "Land_Cargo_Tower_V3_F", "Land_Medevac_house_V1_F", "Land_Medevac_HQ_V1_F",
-    "Land_Dome_Big_F", "Land_Dome_Small_F", "Land_Research_HQ_F"
-]];
 
 // --------------------------------
 //            city types
@@ -868,6 +773,18 @@ types_hash set ["background_options_with_weights", [
     ["civ_foot", 10]
 ]];
 
+types_hash set ["zombies_options_with_weights", [
+    ["police_foot", 1],
+    ["police_vehicle", 1],
+    ["bandit_foot", 2],
+    ["bandit_car", 2],
+    ["zombies", 3],
+    ["civ_air", 1],
+    ["civ_vehicle", 10],
+    ["civ_foot", 10]
+]];
+
+
 types_hash set ["aliens_options_with_weights", [
     ["drone", 1],
     ["vehicle", 1],
@@ -882,6 +799,119 @@ types_hash set ["aliens_options_with_weights", [
 ]];
 
 
-// -----------------------------------------------------
+// -----------------------------------------------------------------------------
+// For loadouts and types for SCP Operators (base loadout) and support specialists
+// -----------------------------------------------------------------------------
+scp_specialists = createHashMap;
 
-//publicVariable "types_hash";
+// --- SCP Base Loadout ---
+scp_specialists set ["base loadout", { 
+    params ["_this"];
+
+    _this setVariable ["role", "base"];
+
+    removeAllWeapons _this;
+    removeAllItems _this;
+    removeAllAssignedItems _this;
+    removeUniform _this;
+    removeVest _this;
+    removeBackpack _this;
+    removeHeadgear _this;
+    removeGoggles _this;
+
+    _this addWeapon "arifle_MXC_F";
+    _this addPrimaryWeaponItem "acc_pointer_IR";
+    _this addPrimaryWeaponItem "optic_Hamr";
+    _this addPrimaryWeaponItem "100Rnd_65x39_caseless_mag";
+    _this addWeapon "hgun_Rook40_F";
+    _this addHandgunItem "30Rnd_9x21_Green_Mag";
+    _this forceAddUniform "U_B_CTRG_Soldier_Arid_F";
+    _this addVest "V_PlateCarrier2_rgr_noflag_F";
+    _this addBackpack "B_Kitbag_rgr";
+    _this addItemToUniform "FirstAidKit";
+    _this addItemToUniform "B_UavTerminal";
+    for "_i" from 1 to 2 do {_this addItemToVest "DemoCharge_Remote_Mag";};
+    _this addItemToVest "30Rnd_9x21_Green_Mag";
+    _this addItemToVest "30Rnd_9x21_Green_Mag";
+    _this addItemToVest "SmokeShellGreen";
+    _this addItemToVest "SmokeShellRed";
+    _this addItemToVest "Chemlight_red";
+    _this addItemToVest "acc_flashlight";
+    for "_i" from 1 to 3 do {_this addItemToVest "100Rnd_65x39_caseless_mag_Tracer";};
+
+    _this addHeadgear "H_HelmetB_TI_arid_F";
+    _this addGoggles "G_Balaclava_TI_G_blk_F";
+
+    _this linkItem "ItemMap";
+    _this linkItem "ItemCompass";
+    _this linkItem "ChemicalDetector_01_watch_F";
+    _this linkItem "ItemRadio";
+    _this linkItem "NVGogglesB_blk_F";
+    _this linkItem "DSA_Detector";
+}];
+
+scp_specialists set ["Engineer", [
+    "B_engineer_F", {
+    params ["_this"];
+    _this setVariable ["role", "Engineer"];
+    _this addItemToBackpack "ToolKit";
+    _this addItemToBackpack "MineDetector";
+    _this addItemToBackpack "SatchelCharge_Remote_Mag";
+    for "_i" from 1 to 2 do {_this addItemToBackpack "DemoCharge_Remote_Mag";};
+}]];
+
+scp_specialists set ["UAV", [
+    "B_soldier_UAV_F", {
+    params ["_this"];
+    _this setVariable ["role", "UAV"];
+    removeBackpack _this;
+    _this addBackpack "B_UAV_01_backpack_F";
+}]];
+
+
+scp_specialists set ["UGV", [
+    "B_soldier_UGV_02_Demining_F", {
+    params ["_this"];
+    _this setVariable ["role", "UGV"];
+    removeBackpack _this;
+    _this addBackpack "B_UGV_02_Demining_backpack_F";
+}]];
+
+scp_specialists set ["Medic", [
+    "B_medic_F", {
+    params ["_this"];
+    _this setVariable ["role", "Medic"];
+    _this addItemToBackpack "Medikit";
+    for "_i" from 1 to 10 do {_this addItemToBackpack "FirstAidKit";};
+}]];
+
+scp_specialists set ["AT", [
+    "B_soldier_AT_F", {
+    params ["_this"];
+    _this setVariable ["role", "AT"];
+    _this addWeapon "launch_B_Titan_short_F";
+    _this addSecondaryWeaponItem "Titan_AT";
+    for "_i" from 1 to 2 do {_this addItemToBackpack "Titan_AT";};
+}]];
+
+scp_specialists set ["LAT", [
+    "B_soldier_LAT2_F", {
+    params ["_this"];
+    _this setVariable ["role", "LAT"];
+    _this addWeapon "launch_MRAWS_sand_F";
+    _this addSecondaryWeaponItem "MRAWS_HEAT_F";
+
+    for "_i" from 1 to 2 do {_this addItemToBackpack "MRAWS_HEAT_F";};
+    _this addItemToBackpack "MRAWS_HE_F";
+}]];
+
+publicVariable "scp_specialists";
+
+scp_support_units = [
+    "Engineer",
+    "Engineer",
+    "UAV", 
+    "UGV", 
+    "Medic", 
+    "LAT"
+];

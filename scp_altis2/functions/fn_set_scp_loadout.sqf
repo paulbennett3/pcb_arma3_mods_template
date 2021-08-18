@@ -1,5 +1,12 @@
 params ["_this"];
 
+// now all set in fn_types.sqf
+waitUntil { ! isNil "scp_specialists" };
+
+[_this] call (scp_specialists get "base loadout");
+
+
+/*
 comment "Remove existing items";
 removeAllWeapons _this;
 removeAllItems _this;
@@ -50,5 +57,5 @@ _this linkItem "ItemRadio";
 // _this linkItem "B_UavTerminal";
 _this linkItem "NVGogglesB_blk_F";
 _this linkItem "DSA_Detector";
-
+*/
 

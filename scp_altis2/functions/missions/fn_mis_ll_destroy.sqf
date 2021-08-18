@@ -21,7 +21,6 @@ State Object:
                    Assumed to already exist and be positioned!!!
    "taskdesc"   [(string),(string),(string)]  task description, task name, task marker
    "taskpid"    (string)  parent id of task ("" for no parent)
-   "is_destroyable"  (bool)    if true, kill it. If false, use UAVs to allow it to be blown up
 
 
 Example:
@@ -32,8 +31,7 @@ Example:
             "Destroy the stone statue at the Old Mill in Derbyshire",
             "Destroy Idol",
             "markername"]],
-        ["taskpid", ""]],
-        ["is_destroyable", false]
+        ["taskpid", ""]]
     ];
     _result = [_state] call pcb_fnc_mis_destroy;
     _ok = _result select 0; _state = _result select 1;
@@ -51,11 +49,11 @@ if (pcb_DEBUG) then {
 
 
 // -------------------------------------------------
-// If our target isn't a person, make it destroyable
+//  If there is enough of a boom by are target,
+//    we make them destroyable (even if they were
+//  "killable" before ...)
 // -------------------------------------------------
-if (!(_state get "is_destroyable")) then {
-    [(_state get "target")] call pcb_fnc_make_destroyable;
-};
+[(_state get "target")] call pcb_fnc_make_destroyable;
 
 // ---------------
 // set up our task
@@ -76,78 +74,13 @@ private _pos = (_state get "taskpos");
 // -------------------------------------
 // Set up a way to tell task is complete
 // -------------------------------------
-// isKindOf
-//   Man -- kill it
-//   AllVehicle -- kill it
-//       MPKilled event handler
-//   Building -- [target] call pcb_fnc_destroy_building 
-//       hidden?
-//   not destroyable -- Deleted event handler
-if (((_state get "target") isKindOf "Man") or
-    ((_state get "target") isKindOf "AllVehicle")) then {
-    [
-        (_state get "target"), 
-        [
-            "MPKilled",
-            {
-                params ["_unit", "_killer", "_instigator", "_useEffect"];
-                private _state = _unit getVariable "_state";
-                _state set ["failed", false];
-                [_state] call pcb_fnc_end_mission;
-            }
-        ]    
-    ] remoteExec ["addMPEventHandler", 0, true];
-    [
-        (_state get "target"), 
-        [
-            "Explosion",
-            {
-                params ["_vehicle", "_damage"];
-                private _state = _vehicle getVariable "_state";
+[_state, _state get "target"] spawn {
+    params ["_state", "_target"];
+    waitUntil { sleep 5; ! (alive _target) };
 
-                _state set ["failed", false];
-                [_state] call pcb_fnc_end_mission;
-            }
-        ]    
-    ] remoteExec ["addEventHandler", 0, true];
+    _state set ["failed", false];
+    [_state] call pcb_fnc_end_mission;
 };
-
-
-if ( ! (_state get "is_destroyable")) then { 
-    [
-        (_state get "target"), 
-        [
-            "Deleted",
-            {
-                params ["_entity"];
-                private _state = _entity getVariable "_state";
-
-                _state set ["failed", false];
-                [_state] call pcb_fnc_end_mission;
-            }
-        ]    
-    ] remoteExec ["addEventHandler", 0, true];
-
-    [
-        (_state get "target"), 
-        [
-            "Explosion",
-            {
-                params ["_vehicle", "_damage"];
-                private _state = _vehicle getVariable "_state";
-
-                _state set ["failed", false];
-                [_state] call pcb_fnc_end_mission;
-            }
-        ]    
-    ] remoteExec ["addEventHandler", 0, true];
-};
-
-
-// -------------------------------------------------------------------
-// stick our state in the target so we can get it from event handlers
-// -------------------------------------------------------------------
-(_state get "target") setVariable ["_state", _state, true];
 
 
 // -----------------------------------------

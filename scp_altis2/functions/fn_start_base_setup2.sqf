@@ -28,6 +28,13 @@ for [{_id = 0}, {_id < (count (_unitslist))}, {_id = _id + 1}] do {
 
 sleep .1;
 
+// ------------------------------------------------------------------
+// Spawn the support squad
+// ------------------------------------------------------------------
+[getPosATL (playableUnits select 0), player_group] call pcb_fnc_spawn_support_units;
+
+
+
 // figure out position along the line of the runway
 private _offset = 15; 
 private _next_pos = (playableUnits select 0) getPos [_offset, start_dir]; _offset = _offset + 10;

@@ -87,7 +87,7 @@ for [{_hdx = 0}, {_hdx < (count _hangars)}, {_hdx = _hdx + 1}] do {
         };
     };
 
-    _veh = createVehicle [_type, _pos, [], 2, "NONE"];
+    _veh = createVehicle [_type, _pos, [], 1, "NONE"];
     _veh setDir (random 360);
     sleep .1;
 

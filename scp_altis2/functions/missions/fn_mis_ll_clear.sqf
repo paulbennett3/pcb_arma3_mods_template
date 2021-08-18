@@ -116,9 +116,13 @@ if (isNil "_threshold") then { _state set ["threshold", 1]; };
         // check if any of our targets are in the area
         private _objs = (_state get "targetlist") inAreaArray (_state get "trigger");
         private _cc = 0; 
+        private _xs = 0;
+        private _ys = 0;
         { 
             if (alive _x) then { 
                 _cc = _cc + 1; 
+                _xs = _xs + ((getPosATL _x) select 0);
+                _ys = _ys + ((getPosATL _x) select 1);
             }; 
         } forEach (_state get "targetlist");
         private _n_alive = count (_objs select { alive _x });
@@ -133,6 +137,8 @@ if (isNil "_threshold") then { _state set ["threshold", 1]; };
             [_state] call pcb_fnc_end_mission;
         } else {
             ["Clear : " + (str _n_alive) + " alive for threshold " + (str _threshold)] call pcb_fnc_debug;
+            private _new_pos = [_xs / _n_alive, _ys / _n_alive];
+            [_state get "taskid", _new_pos] call BIS_fnc_taskSetDestination; 
         };
     };
     ["Exiting spawned loop - Clear mission"] call pcb_fnc_debug;

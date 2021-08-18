@@ -1,10 +1,15 @@
 params ["_newUnit", "_oldUnit", "_respawn", "_respawnDelay"];
 
-[_newUnit] call pcb_fnc_set_scp_loadout;
+private _loadout_profile = profileNamespace getVariable "unit_loadout";
+if (! (isNil "_loadout_profile")) then {
+    _newUnit setUnitLoadout _loadout_profile;
+} else {
+    [_newUnit] call pcb_fnc_set_scp_loadout;
+};
 
 // Transfer any roles from _oldUnit to _newUnit
 if (! isNull _oldUnit) then {
-    if (_oldUnit getUnitTrait "Medic") then { _newUnit setUnitTrait ["medic", true]; };
+    if (_oldUnit getUnitTrait "medic") then { _newUnit setUnitTrait ["medic", true]; };
     if (_oldUnit getUnitTrait "engineer") then { _newUnit setUnitTrait ["engineer", true]; };
     if (_oldUnit getUnitTrait "explosiveSpecialist") then { _newUnit setUnitTrait ["explosiveSpecialist", true]; };
 

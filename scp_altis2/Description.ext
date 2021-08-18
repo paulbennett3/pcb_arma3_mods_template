@@ -76,7 +76,6 @@ class CfgFunctions
             class preinit_setup { preInit = 1; };
             class random_start_pos {};
             class scp_new_unit {};
-            class show_cities {};
             class sog_tunnels {};
             class start_base_setup {};
             class start_base_setup2 {};
@@ -154,19 +153,13 @@ class CfgFunctions
             class mis_get_laptop_from_base {};
             class mis_investigate {};
             class mis_interview {};
+            class mis_alien_hunt {};
             class mis_monster_hunt {};
+            class mis_zombie_hunt {};
             class mis_alien_spawner {};
             class mis_spawner {};
             class spawn_cultists {};
             class mis_tunnels {};
-        }; 
-        class scenarios
-        {
-            file = "functions\scenarios";
-            class scn_drongo {};
-            class scn_zombies {};
-            class oo {};
-            class oo_new {};
         }; 
     };
 };

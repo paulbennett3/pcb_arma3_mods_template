@@ -93,14 +93,14 @@ private _types = types_hash get "zombies";
     params ["_target", "_types", "_pos", "_UID"];
 
     sleep 10;
-    private _n_spawn = 5 + (ceil (random 10));
-    private _delay = 30;
+    private _n_spawn = 10 + (ceil (random 10));
+    private _delay = 10;
     private _obj_list = [];
     private _group = createGroup east;
     _group enableDynamicSimulation true;
     _group deleteGroupWhenEmpty false;  // can go empty, but will respawn ...
     while { (alive _target) && (! isNull _target) } do {
-        sleep _delay;
+        sleep _delay + (random 40);
 
         private _keep_list = [];
         private _del_list = [];

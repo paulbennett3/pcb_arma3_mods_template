@@ -23,9 +23,8 @@ if (! isServer) exitWith {};
 
     // call our scenario to populate mission_list, total_missions, generate start base, etc
     private _scenarios = [];
-    //_scenarios pushBackUnique "functions\scenarios\fn_scn_drongo.sqf";
-    //_scenarios pushBackUnique "functions\scenarios\fn_scn_zombies.sqf";
-    _scenarios pushBackUnique "functions\scenarios\fn_scn_demons.sqf";
+    _scenarios pushBackUnique "functions\scenarios\fn_scn_zombies.sqf";
+    //_scenarios pushBackUnique "functions\scenarios\fn_scn_occult.sqf";
     //_scenarios pushBackUnique "functions\scenarios\fn_scn_aliens.sqf";
 
     private _scenario = compile preprocessFileLineNumbers (selectRandom _scenarios);

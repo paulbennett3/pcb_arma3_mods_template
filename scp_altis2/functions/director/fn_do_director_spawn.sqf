@@ -125,7 +125,7 @@ switch (_option) do {
         };
     case "zombies": {
             private _types = types_hash get "zombies"; 
-            _did_spawn = [_option, _player, _types, east, 2, 7, false] call pcb_fnc_enc_infantry;
+            _did_spawn = [_option, _player, _types, east, 3, 10, false] call pcb_fnc_enc_infantry;
         };
     case "civ_vehicle": {
             private _type = selectRandom (types_hash get "civ vehicles");
