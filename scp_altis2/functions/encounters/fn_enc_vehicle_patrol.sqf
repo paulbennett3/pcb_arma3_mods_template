@@ -70,7 +70,11 @@ if (true) then {
     } else {
         private _types = _types_n select 0;
         private _n = _types_n select 1;
-        _group = [_types, _n, _pos, _side, false] call pcb_fnc_spawn_squad;
+        private _ctypes = [];
+        for [{}, {_n > -1}, {_n = _n - 1}] do {
+            _ctypes pushBack (selectRandom _types);
+        };
+        _group = [_ctypes, _pos, _side, false] call pcb_fnc_spawn_squad;
         _group selectLeader ((units _group) select 0);
         _obj_list = _obj_list + (units _group);
         _veh = createVehicle [_type, _pos, [], 5, "NONE"];

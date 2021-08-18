@@ -67,8 +67,12 @@ if (true) then {
         _group_size = _min_n + (ceil (random (_max_n - _min_n)));
     };
 
+    private _ctypes = [];
+    for [{}, {_group_size > -1}, {_group_size = _group_size - 1}] do {
+        _ctypes pushBack (selectRandom _types);
+    };
     // create a group
-    private _group = [_types, _group_size, _pos, _side, false] call pcb_fnc_spawn_squad;
+    private _group = [_ctypes, _pos, _side, false] call pcb_fnc_spawn_squad;
     [_group, _pos, _action] call pcb_fnc_set_behaviour;
 
     _entry = [false, objNull, _obj_list, false, objNull, objNull, _label];

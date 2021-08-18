@@ -41,7 +41,11 @@ params ["_building", "_label", "_cluster"];
         for [{_i = 0 }, {_i < _scale}, {_i = _i + 1}] do {
             if ((random 100) < 50) then {
                 private _n = 1 + (floor (random 4));
-                [_types, _n, getPosATL (selectRandom _buildings), civilian] call pcb_fnc_spawn_squad;
+                private _ctypes = [];
+                for [{}, {_n > -1}, {_n = _n - 1}] do {
+                    _ctypes pushBack (selectRandom _ctypes);
+                }; 
+                [_ctypes, getPosATL (selectRandom _buildings), civilian] call pcb_fnc_spawn_squad;
 ["Spawning civilian squad in city of size " + (str _n)] call pcb_fnc_debug;
             };
         };
@@ -53,7 +57,11 @@ params ["_building", "_label", "_cluster"];
     if ((random 100) < 10) then {
         private _types = types_hash get "looters";
         private _n = 1 + (ceil (random _scale));
-        [_types, _n, getPosATL (selectRandom _buildings), east] call pcb_fnc_spawn_squad;
+        private _ctypes = [];
+        for [{}, {_n > -1}, {_n = _n - 1}] do {
+            _ctypes pushBack (selectRandom _ctypes);
+        }; 
+        [_ctypes, getPosATL (selectRandom _buildings), east] call pcb_fnc_spawn_squad;
         ["Spawning city looters of size " + (str _n)] call pcb_fnc_debug;
     } else {
         ["Not spawning looters for this city"] call pcb_fnc_debug;

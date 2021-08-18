@@ -45,11 +45,12 @@ switch (_option) do {
         };
     };
     case "cultists": {
-            private _ctypes = [ "O_Soldier_F" ];
             private _result = [_player] call pcb_fnc_get_random_position;
             private _pos = _result select 1;
             private _n = selectRandom [5,5,5,6,6,6,7,8,9,10,12];
-            private _group = [_ctypes, _n, _pos, east, false] call pcb_fnc_spawn_squad;
+            private _ctypes = [];
+            for [{}, {_n > -1}, { _n = _n - 1}] do { _ctypes pushBack "O_Soldier_F"; };
+            private _group = [_ctypes, _pos, east, false] call pcb_fnc_spawn_squad;
             [_group] call pcb_fnc_spawn_cultists;
             private _UID = "S" + str ([] call pcb_fnc_get_next_UID);
             private _entry = [false, objNull, units _group, false, objNull, objNull, _option];

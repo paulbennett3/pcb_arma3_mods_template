@@ -71,6 +71,7 @@ for [{_hdx = 0}, {_hdx < (count _hangars)}, {_hdx = _hdx + 1}] do {
 
     private _x = _hangars select _hdx;
     private _pos = getPosATL _x;
+    private _dir = getDir _x;
     private _near_military = [_pos] call pcb_fnc_near_military;
 
     _pos = [_pos select 0, _pos select 1];
@@ -88,7 +89,7 @@ for [{_hdx = 0}, {_hdx < (count _hangars)}, {_hdx = _hdx + 1}] do {
     };
 
     _veh = createVehicle [_type, _pos, [], 1, "NONE"];
-    _veh setDir (random 360);
+    _veh setDir _dir;
     sleep .1;
 
     if (pcb_DEBUG) then {

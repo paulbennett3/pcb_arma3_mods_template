@@ -4,7 +4,6 @@
 Setup (and spawn if needed) the "background" -- what is going on
 besides / in addition to the mission(s)
 
-
 !!! Uses start_pos, "mACTIVE"
 -------------------------------------------------------------------- */
 

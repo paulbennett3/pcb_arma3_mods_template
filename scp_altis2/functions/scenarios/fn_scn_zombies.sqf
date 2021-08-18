@@ -51,6 +51,45 @@ switch (_action) do {
         types_hash set ["spooks", types_hash get "zombies_ryan"];
         types_hash set ["background_options_with_weights", types_hash get "zombies_options_with_weights"];
 
+        private _decorate = {
+            params ["_pos", ["_building", objNull]];
+            private _pos2d = [_pos select 0, _pos select 1];
+            private _blood = (types_hash get "blood");
+            private _n = 5 + (ceil (random 10));
+            private _io = 0;
+            for [{_io = 0 }, {_io < _n}, {_io = _io + 1}] do {
+                private _type = selectRandom _blood;
+                private _veh = createVehicle [_type, _pos2d, [], 5, 'CAN_COLLIDE'];
+                _veh setDir (random 360);
+                _veh setPos getPos _veh;
+            };
+        };
+        _sobj set ["Decorate", _decorate];
+
+        private _mission_enc = {
+            params ["_pos", ["_chance", 50], ["_max_n", 20]];
+
+            private _obj_list = [];
+            private _type = objNull;
+            private _n = 1 + (floor (random _max_n));
+            private _did = false;
+
+            // chance of encounter
+            if ((random 100) < _chance) then {
+                _did = true;
+                private _types = types_hash get "zombies";
+                private _ctypes = [];
+                private _i = 0;
+                for [{}, {_i < _n}, {_i = _i + 1}] do {
+                    _ctypes pushBack (selectRandom _types);
+                };
+                [_ctypes, _pos, east, false] call pcb_fnc_spawn_squad;
+            };
+
+            [_obj_list, _type, _n, _did]
+        };
+        _sobj set ["Mission Encounter", _mission_enc];
+
         // subset civilians
         private _civ_temp = (types_hash get "civilians") select { (random 100) < 10 };
         _civ_temp = _civ_temp + (types_hash get "civ infected");

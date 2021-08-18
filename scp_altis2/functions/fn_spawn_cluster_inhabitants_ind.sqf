@@ -19,36 +19,22 @@ params ["_building", "_label", "_cluster"];
 
     private _bdx = 0;
     for [{_bdx = 0}, {_bdx < _scale}, {_bdx = _bdx + 1}] do {
-        private _building = selectRandom _buildings;
-
-        // add some decorations
-        [getPosATL _building, _building] call pcb_fnc_occult_decorate;
-
         // spooks
+        private _building = selectRandom _buildings;
         if ((random 100) < 20) then {
-            // part of the time, make them cultists
-            if ((random 100) < 50) then {
-                private _ctypes = [ "O_Soldier_SL_F", "O_soldier_M_F", "O_Sharpshooter_F", "O_medic_F" ];
-                private _n = 5 + (ceil (random 20));
-                private _group = [_ctypes, _n, getPosATL _building, east, false] call pcb_fnc_spawn_squad;
-                [_group] call pcb_fnc_spawn_cultists;                 
-                [_group, getPosATL _building] call BIS_fnc_taskDefend;
-["Spawning cultists squad in Ind/Cult of size " + (str _n)] call pcb_fnc_debug;
-            } else {
-                private _types = [selectRandom (types_hash get "spooks")];
-                for [{_i = 0 }, {_i < _scale}, {_i = _i + 1}] do {
-                    private _n = 1 + (floor (random 4));
-                    private _pos = (getPosATL _building) getPos [random 30, random 360];
-                    [_types, _n, _pos, east, false] call pcb_fnc_spawn_squad;
-["Spawning spooks <" + (str _types) + "> squad in Ind/Cult of size " + (str _n)] call pcb_fnc_debug;
-                };
-            };
+
+            // add some decorations
+            [getPosATL _building, _building] call (scenario_object get "Decorate"); 
+
+            private _n = 1 + (floor (random _scale));
+            private _pos = (getPosATL _building) getPos [random 30, random 360];
+            [_pos, 101, 1 + _scale] call (scenario_object get "Mission Encounter");
         };
 
         // anomalies
         if ((random 100) < 20) then {
             private _pos = (getPosATL _building) getPos [random 30, random 360];
-            [_pos, _scale, 3 * _scale] call pcb_fnc_add_anomalies;
+            [_pos, _scale, 3 * _scale] call (scenario_object get "Add Anomalies");
             ["Spawning anomalies ..."] call pcb_fnc_debug;
         };
 

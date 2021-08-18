@@ -44,8 +44,12 @@ if (true) then {
             _marker setMarkerType "KIA";
         };
 
-        [_types, _n, getPosATL _building, east] call pcb_fnc_spawn_squad;
-        ["Spawning Insurgent squad " + (str (_iidx + 1)) + " of " + (str (_n_squads)) + " size " + (str _n)] call pcb_fnc_debug;
+        private _ctypes = [];
+        for [{}, {_n > -1}, {_n = _n - 1}] do {
+            _ctypes pushBack (selectRandom _types);
+        };
+        [_ctypes, getPosATL _building, east] call pcb_fnc_spawn_squad;
+        ["Spawning Insurgent squad " + (str (_iidx + 1)) + " of " + (str (_n_squads)) + " size " + (str (count _ctypes))] call pcb_fnc_debug;
     };
 
     // if in city, spawn IEDs

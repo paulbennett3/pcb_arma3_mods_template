@@ -88,14 +88,19 @@ private _pos = [_pos select 0, _pos select 1];
 private _boss = types_hash get "boss spook";
 private _n_troops = selectRandom [3,3,3,4,5];
 private _types = types_hash get "weaker spooks";
-private _group = [_types, _n_troops, _pos, east, false] call pcb_fnc_spawn_squad;
+private _ctypes = [];
+private _nt = 0;
+for [{_nt = 0}, {_nt < _n_troups}, {_nt = _nt + 1}] do {
+    _ctypes pushBack (selectRandom _types);
+};
+private _group = [_ctypes, _pos, east, false] call pcb_fnc_spawn_squad;
 
 if ((isNil "_boss") || (_boss isEqualTo "")) then {
     ["No boss for this scenario"] call pcb_fnc_debug;
-    private _bossgroup = [_types, _n_troops, _pos, east, false] call pcb_fnc_spawn_squad;
+    private _bossgroup = [_ctypes, _pos, east, false] call pcb_fnc_spawn_squad;
 } else {
     // spawn the boss 
-    private _bossgroup = [[types_hash get "boss spook"], 1, _pos, east, false] call pcb_fnc_spawn_squad;
+    private _bossgroup = [[types_hash get "boss spook"], _pos, east, false] call pcb_fnc_spawn_squad;
     _bossgroup selectLeader ((units _bossgroup) select 0);
     
     (units _group) joinSilent _bossgroup;

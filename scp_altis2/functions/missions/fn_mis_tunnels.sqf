@@ -87,9 +87,12 @@ _result = [_state] call pcb_fnc_mis_ll_clear;
 
 
 // add a guard near the entrance
-private _ctypes = [ "O_Soldier_SL_F", "O_soldier_M_F", "O_Sharpshooter_F", "O_medic_F" ];
+private _ctypes = []; 
 private _n = selectRandom [3,4,4,4,6];
-private _group = [_ctypes, _n, _pos, east, false] call pcb_fnc_spawn_squad;
+for [{}, {_n > -1}, {_n = _n - 1}] do {
+    _ctypes pushBack "O_Soldier_SL_F";
+};
+private _group = [_ctypes, _pos, east, false] call pcb_fnc_spawn_squad;
 [_group] call pcb_fnc_spawn_cultists;
 private _wpg = _group addWaypoint [_pos, 10];
 _wpg setWaypointType "GUARD";
