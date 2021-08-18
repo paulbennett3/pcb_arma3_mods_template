@@ -19,7 +19,7 @@ Returns:
 
 ******************************************************************* */
 
-params ["_UID"];
+params ["_sobj", "_UID"];
 
 private _ok = false;
 
@@ -36,7 +36,6 @@ private _state = createHashMapFromArray [
 private _target = [epicenter, mission_radius, 5] call pcb_fnc_get_cool_building_location; 
 // get a specific position in the building
 private _pos = selectRandom (_target buildingPos -1);
-//["Building search running <" + (str _target) + ">"] remoteExec ["systemChat", 0, true];    
 
 // test if we have utterly failed ...
 if ((! ([_pos] call pcb_fnc_is_valid_position)) or (isNull _target)) exitWith { [false, _state] };
@@ -58,10 +57,10 @@ _target setVariable ["_state", _state, true];  // gets overwritten in ll interac
 // put some loot boxes in the building
 [_target] call pcb_fnc_add_loot_boxes_to_building;
 
-// add some anomalies
-[getPosATL _target, 1, 5] call pcb_fnc_add_anomalies;
-[_pos] call pcb_fnc_occult_decorate;
-[getPosATL _target] call pcb_fnc_mission_encounter;
+// add some anomalies, decorate, add (possible) foes
+[getPosATL _target, 1, 5] call (_sobj get "Add Anomalies");
+[_pos] call (_sobj get "Decorate");
+[getPosATL _target] call (_sobj get "Mission Encounter");
 
 private _result = [_state] call pcb_fnc_mis_ll_goto;
 _result

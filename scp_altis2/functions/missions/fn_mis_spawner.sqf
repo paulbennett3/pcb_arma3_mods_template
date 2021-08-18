@@ -24,7 +24,7 @@ Returns:
 !!! Make this actually spawn stuff, and ideally "garrison" the
  location ...
 ******************************************************************* */
-params ["_UID"];
+params ["_sobj", "_UID"];
 
 private _ok = false;
 private _state = createHashMapFromArray [
@@ -143,9 +143,9 @@ private _types = types_hash get "zombies";
 /* ----------------------------------------------------------------
                  Configure and Place Anomalies 
 ---------------------------------------------------------------- */
-[_pos, 3, 7] call pcb_fnc_add_anomalies;
-[_pos] call pcb_fnc_occult_decorate;
-[_pos] call pcb_fnc_mission_encounter;
+[_pos, 3, 7] call (_sobj get "Add Anomalies");
+[_pos] call (_sobj get "Decorate");
+[_pos] call (_sobj get "Mission Encounter");
 
 // -------------------------------------
 _ok = true;

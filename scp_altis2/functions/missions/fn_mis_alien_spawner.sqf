@@ -24,7 +24,7 @@ Returns:
 !!! Make this actually spawn stuff, and ideally "garrison" the
  location ...
 ******************************************************************* */
-params ["_UID"];
+params ["_sobj", "_UID"];
 
 private _ok = false;
 private _state = createHashMapFromArray [
@@ -215,10 +215,6 @@ private _types = types_hash get "weaker spooks";
     } forEach _obj_list;
 };
 
-/* ----------------------------------------------------------------
-                 Configure and Place Anomalies 
----------------------------------------------------------------- */
-//[_pos] call pcb_fnc_mission_encounter;
 
 // -------------------------------------
 _ok = true;

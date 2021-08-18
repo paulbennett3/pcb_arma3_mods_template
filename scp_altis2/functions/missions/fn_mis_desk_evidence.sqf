@@ -19,7 +19,7 @@ Returns:
 
 ******************************************************************* */
 
-params ["_UID"];
+params ["_sobj", "_UID"];
 
 private _ok = false;
 
@@ -77,9 +77,9 @@ if (! (PARENT_TASK isEqualTo "")) then { _taskpid = PARENT_TASK; };
 _state set ["taskpid", _taskpid];
 
 // add some anomalies
-[getPosATL _desk, 1, 5] call pcb_fnc_add_anomalies;
-[_pos, _building] call pcb_fnc_occult_decorate;
-[_pos] call pcb_fnc_mission_encounter;
+[getPosATL _desk, 1, 5] call (_sobj get "Add Anomalies");
+[_pos, _building] call (_sobj get "Decorate");
+[_pos] call (_sobj get "Mission Encounter");
 
 [_building] call pcb_fnc_add_loot_boxes_to_building;
 

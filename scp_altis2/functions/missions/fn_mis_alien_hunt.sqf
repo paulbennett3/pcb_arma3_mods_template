@@ -6,6 +6,7 @@ Spawn a (large) handful of alients for the players to hunt.
 Uses the "clear" mission type.
 
 Parameters:
+   _sobj (hashMap) : our scenario object
    _UID (string) : the UID assigned by the mission generator
 
 Returns:
@@ -20,7 +21,7 @@ Returns:
                     ???
 
 ******************************************************************* */
-params ["_UID"];
+params ["_sobj", "_UID"];
 
 private _ok = false;
 private _state = createHashMapFromArray [
@@ -71,7 +72,8 @@ if (! ([_pos] call pcb_fnc_is_valid_position)) exitWith { [false, _state] };
 
 // generate our monsters
 // [_obj_list, _type, _n, _did]
-private _enc_info = [_pos, 101, 15] call pcb_fnc_mission_encounter;
+//private _enc_info = [_pos, 101, 15] call pcb_fnc_mission_encounter;
+private _enc_info = [_pos, 101, 15] call (_sobj get "Mission Encounter");
 private _obj_list = _enc_info select 0;
 private _type = _enc_info select 1;
 private _n = _enc_info select 2;
@@ -117,9 +119,10 @@ _result = [_state] call pcb_fnc_mis_ll_clear;
 
 
 /* ----------------------------------------------------------------
-                 Configure and Place Anomalies 
+                 Configure and Place Anomalies, Decorate
 ---------------------------------------------------------------- */
-[_pos, 3, 7] call pcb_fnc_add_anomalies;
+[_pos, 3, 7] call (_sobj get "Add Anomalies");
+[_pos] call (_sobj get "Decorate");
 
 // -------------------------------------
 _ok = true;

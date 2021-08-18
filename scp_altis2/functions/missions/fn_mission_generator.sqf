@@ -17,20 +17,27 @@ if (! isServer) exitWith {};
     mission_active = false; // set to true when mission created.  Mission sets it to false when completed.
     publicVariable "mission_active";
 
-    active_mission_info = createHashMap;  // index with "mission ID" -- for state needed for cleanup, or complex missions
-    // fire off the director for tracking background stuff
-    //[] call pcb_fnc_director;  called by scenario now !!!!
+    // --------------------------------------------------------
+    // use the default scenario to initialize our methods etc
+    // --------------------------------------------------------
+    private _defaults = compile preprocessFileLineNumbers "functions\scenarios\fn_scn_defaults.sqf";
+    private _sobj = [] call _defaults;
 
-    // call our scenario to populate mission_list, total_missions, generate start base, etc
-    private _scenarios = [];
-    _scenarios pushBackUnique "functions\scenarios\fn_scn_zombies.sqf";
-    //_scenarios pushBackUnique "functions\scenarios\fn_scn_occult.sqf";
-    //_scenarios pushBackUnique "functions\scenarios\fn_scn_aliens.sqf";
+     // Make a list of possible scenarios to run
+    _sobj set ["Scenarios", []];
+    (_sobj get "Scenarios") pushBackUnique "functions\scenarios\fn_scn_zombies.sqf";
+//    (_sobj get "Scenarios") pushBackUnique "functions\scenarios\fn_scn_occult.sqf";
+//    (_sobj get "Scenarios") pushBackUnique "functions\scenarios\fn_scn_aliens.sqf";
 
-    private _scenario = compile preprocessFileLineNumbers (selectRandom _scenarios);
+    // pick a scenario to run at random from our list, and compile it
+    _sobj set ["Scenario Name", selectRandom (_sobj get "Scenarios")];
+    _sobj set ["Scenario", compile preprocessFileLineNumbers (_sobj get "Scenario Name")];
 
-    ["create"] call _scenario; 
-    waitUntil { sleep 1; !isNil "total_missions" };        
+    // Let the scenario do its stuff to prepare (override methods and types_hash stuff)
+    [_sobj, "create"] call (_sobj get "Scenario");
+
+    // do the actual initialization method calls
+    [_sobj] call (_sobj get "_init");
 
     // start our mission loop
     private _missions_done = false;
@@ -53,21 +60,19 @@ if (! isServer) exitWith {};
             //  know which state to clean up ...
 
             // call our scenario to allow it to manipulate total_missions, mission_list
-            ["mission_completed"] call _scenario; 
+            [_sobj, "mission_completed"] call (_sobj get "Scenario"); 
         };
 
         // do we have any missions left to run?
-        if (total_missions > 0) then {
-            total_missions = total_missions - 1;
-            publicVariable "total_missions";
+        if ((_sobj get "Total Missions") > 0) then {
+            _sobj set ["Total Missions", (_sobj get "Total Missions") - 1];
             
             // select one from our list
             private _mission = "";
-            if (mission_select isEqualTo "random") then {
-                _mission = selectRandom mission_list;
+            if ((_sobj get "Mission Select") isEqualTo "random") then {
+                _mission = selectRandom (_sobj get "Mission List");
             } else {
-                _mission = mission_list deleteAt 0;
-                publicVariable "mission_list";
+                _mission = (_sobj get "Mission List") deleteAt 0;
             };
             
             // make an ID for it
@@ -75,16 +80,14 @@ if (! isServer) exitWith {};
             
             // execute the mission, and store any state for "later"
             ["Executing mission <" + (str _mission) + ">"] call pcb_fnc_debug;
-            private _result = [_UID] call compile preprocessFileLineNumbers _mission;
+            private _result = [_sobj, _UID] call compile preprocessFileLineNumbers _mission;
             private _started_ok = _result select 0;
             private _state = _result select 1;
-            active_mission_info set [_UID, _state];
 
             if (! _started_ok) then {
                 // d'oh! Something went wrong, bump up the number so we try again ...
 ["Oops -- mission creation failed"] call pcb_fnc_debug;
-                total_missions = total_missions + 1;
-                publicVariable "total_missions";
+                _sobj set ["Total Missions", (_sobj get "Total Missions") + 1];
             } else {
                _first_mission = false;
                mission_active = true;

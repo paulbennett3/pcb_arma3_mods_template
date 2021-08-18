@@ -21,7 +21,7 @@ Returns:
                     ???
 
 ******************************************************************* */
-params ["_UID"];
+params ["_sobj", "_UID"];
 
 private _ok = false;
 private _state = createHashMapFromArray [

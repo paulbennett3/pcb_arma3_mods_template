@@ -19,7 +19,7 @@ Returns:
 
 ******************************************************************* */
 
-params ["_UID"];
+params ["_sobj", "_UID"];
 
 private _ok = false;
 
@@ -132,9 +132,9 @@ _target setVariable ["_state", _state, true];  // gets overwritten in ll interac
 
 
 // add some anomalies
-[getPosATL _target, 1, 5] call pcb_fnc_add_anomalies;
-//[getPosATL _target] call pcb_fnc_occult_decorate;
-[getPosATL _target, 10] call pcb_fnc_mission_encounter;
+[getPosATL _target, 1, 5] call (_sobj get "Add Anomalies");
+//[getPosATL _target] call (_sobj get "Decorate");
+[getPosATL _target, 10] call (_sobj get "Mission Encounter");
 [_building] call pcb_fnc_add_loot_boxes_to_building;
 
 private _result = [_state] call pcb_fnc_mis_ll_interact;

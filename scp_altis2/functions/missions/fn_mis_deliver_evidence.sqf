@@ -22,7 +22,7 @@ Returns:
 
 ******************************************************************* */
 
-params ["_UID"];
+params ["_sobj", "_UID"];
 
 private _ok = false;
 
@@ -65,10 +65,10 @@ _state set ["taskpid", ""];
 _state set ["callback", [false, objNull, objNull]];
 private _result = [_state] call pcb_fnc_mis_ll_put_item;
 
-// add some anomalies
-[getPosATL _building, 1, 5] call pcb_fnc_add_anomalies;
-//[getPosATL _target] call pcb_fnc_occult_decorate;
-[getPosATL _building, 30] call pcb_fnc_mission_encounter;
+// add some anomalies, decorate, add (possible) foes
+[getPosATL _building, 1, 5] call (_sobj get "Add Anomalies");
+//[getPosATL _target] call (_sobj get "Decorate");
+[getPosATL _building, 30] call (_sobj get "Mission Encounter");
 
 
 _result
