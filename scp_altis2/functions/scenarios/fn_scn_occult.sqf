@@ -1,7 +1,7 @@
 /* *******************************************************************
-                           scn_demons
+                           scn_occult
 
-Scenario -- Demons!
+Scenario -- occult
 
 A scenario is a linked set of missions for the players to complete.
 It sets the tone, start point, missions, etc.  It is called from
@@ -76,27 +76,17 @@ Zapper:		Calls down lightning on the victim.
 
 
 ******************************************************************* */
-params ["_action"];
+params ["_sobj", "_action"];
 
-[("Scenario Demons <" + (str _action) + ">")] call pcb_fnc_debug;
+_sobj set ["Name", "Occult"];
 
 switch (_action) do {
     case "create": {
+        ["create"] call (_sobj get "_log");
+
         if (! isNil "scenarioCreated") exitWith {};
         scenario_created = true;
         publicVariable "scenario_created";
-
-        // adjust start position if desired
-        [] call pcb_fnc_random_start_pos;
-        waitUntil { ! isNil "random_start_ready" };
-
-        // create the "base camp" + spawning point
-        //[] call pcb_fnc_start_base_setup;
-        [] call pcb_fnc_start_base_setup2;
-
-        // manipulate the starting weather et al
-        [] call pcb_fnc_set_mission_environment;
-
 
         // Pick our boss and minion types
         private _boss_info = selectRandom [
@@ -129,91 +119,62 @@ switch (_action) do {
         publicVariable "PARENT_TASK";
 
         // this is the array of possible missions to choose from.  Might be modified as things progress
-        mission_list = []; // we "register" missions here, last one first, 
-        mission_list pushBackUnique "functions\missions\fn_mis_wait_for_clustering.sqf";
-        publicVariable "mission_list"; 
-        mission_select = "sequential";
-        publicVariable "mission_select"; 
+        (_sobj get "Mission List") pushBackUnique "functions\missions\fn_mis_wait_for_clustering.sqf";
+        _sobj set ["Mission Select", "sequential"];
 
         // total missions to run
-        total_missions = 1;
-        publicVariable "total_missions";
+        _sobj set ["Total Missions", 1];
 
-        // fire off the director for tracking background stuff
-        [] call pcb_fnc_director;
-
-        // start spawning spare vehicles etc
-        [] call pcb_fnc_background;
- 
         // remember our state
-        scenario_state = 1;
-        publicVariable "scenario_state";
-        [("Scenario Demons completed <" + (str _action) + ">")] call pcb_fnc_debug;
+        ["initialization complete"] call (_sobj get "_log");
      };
 
     case "mission_completed": {
-        [("Scenario Demons <" + (str _action) + ">")] call pcb_fnc_debug;
-        if ((scenario_state == 1) && (total_missions == 0)) then {
-            scenario_state = 2;
-            publicVariable "scenario_state";
+        ["Mission complete"] call (_sobj get "_log");
+        if (((_sobj get "Scenario State") == 1) && ((_sobj get "Total Missions") == 0)) then {
+            _sobj set ["Scenario State", 2];
 
             // update our mission list (what we can choose from)
-            mission_list = []; 
-            mission_list pushBackUnique "functions\missions\fn_mis_desk_evidence.sqf";
-            mission_list pushBackUnique "functions\missions\fn_mis_investigate.sqf";
-            mission_list pushBackUnique "functions\missions\fn_mis_building_search.sqf";
-            mission_list pushBackUnique "functions\missions\fn_mis_interview.sqf";
-            publicVariable "mission_list"; 
+            _sobj set ["Mission List", []];
+            (_sobj get "Mission List") pushBackUnique "functions\missions\fn_mis_desk_evidence.sqf";
+            (_sobj get "Mission List") pushBackUnique "functions\missions\fn_mis_investigate.sqf";
+            (_sobj get "Mission List") pushBackUnique "functions\missions\fn_mis_building_search.sqf";
+            (_sobj get "Mission List") pushBackUnique "functions\missions\fn_mis_interview.sqf";
 
-            total_missions = selectRandom [2, 3];
-            publicVariable "total_missions";
-
-            mission_select = "random";
-            publicVariable "mission_select"; 
+            _sobj set ["Total Missions", selectRandom [2, 3]];
+            _sobj set ["Mission Select", "random"];
         }; 
-        if ((scenario_state == 2) && (total_missions == 0)) then {
-            scenario_state = 3;
-            publicVariable "scenario_state";
+        if (((_sobj get "Scenario State") == 2) && ((_sobj get "Total Missions") == 0)) then {
+            _sobj set ["Scenario State", 3];
 
             // update our mission list (what we can choose from)
-            // remember to do these in reverse order!!! 
-            mission_list = []; 
-            mission_list pushBackUnique "functions\missions\fn_mis_monster_hunt.sqf";
-            mission_list pushBackUnique "functions\missions\fn_mis_spawner.sqf";
-            publicVariable "mission_list"; 
+            _sobj set ["Mission List", []];
+            (_sobj get "Mission List") pushBackUnique "functions\missions\fn_mis_monster_hunt.sqf";
+            (_sobj get "Mission List") pushBackUnique "functions\missions\fn_mis_spawner.sqf";
 
-            total_missions = 1;
-            publicVariable "total_missions";
-
-            mission_select = "random";
-            publicVariable "mission_select"; 
+            _sobj set ["Total Missions", 1];
+            _sobj set ["Mission Select", "random"];
         }; 
-        if ((scenario_state == 3) && (total_missions == 0)) then {
-            scenario_state = 4;
-            publicVariable "scenario_state";
+        if (((_sobj get "Scenario State") == 3) && ((_sobj get "Total Missions") == 0)) then {
+            _sobj set ["Scenario State", 4];
 
             // update our mission list (what we can choose from)
-            // remember to do these in reverse order!!! 
-            mission_list = []; 
-//            mission_list pushBackUnique "functions\missions\fn_mis_get_laptop_from_base.sqf";
-//            mission_list pushBackUnique "functions\missions\fn_mis_deliver_evidence.sqf";
-//            mission_list pushBackUnique "functions\missions\fn_mis_spawner.sqf";
+            _sobj set ["Mission List", []];
+//            (_sobj get "Mission List") pushBackUnique "functions\missions\fn_mis_get_laptop_from_base.sqf";
+//            (_sobj get "Mission List") pushBackUnique "functions\missions\fn_mis_deliver_evidence.sqf";
+//            (_sobj get "Mission List") pushBackUnique "functions\missions\fn_mis_spawner.sqf";
 //            if (worldName isEqualTo "Cam_Lao_Nam") then {
-//                mission_list pushBackUnique "functions\missions\fn_mis_tunnels.sqf";
+//                (_sobj get "Mission List") pushBackUnique "functions\missions\fn_mis_tunnels.sqf";
 //            } else {
-                mission_list pushBackUnique "functions\missions\fn_mis_boss.sqf";
+                (_sobj get "Mission List") pushBackUnique "functions\missions\fn_mis_boss.sqf";
 //            };
            
-            mission_list pushBackUnique "functions\missions\fn_mis_exfil.sqf";
-            publicVariable "mission_list"; 
+            (_sobj get "Mission List") pushBackUnique "functions\missions\fn_mis_exfil.sqf";
 
-            total_missions = count mission_list;
-            publicVariable "total_missions";
+            _sobj set ["Total Missions", count (_sobj get "Mission List")];
 
-            mission_select = "sequential";
-            publicVariable "mission_select"; 
+            _sobj set ["Mission Select", "sequential"];
         }; 
-
 
     };
 };

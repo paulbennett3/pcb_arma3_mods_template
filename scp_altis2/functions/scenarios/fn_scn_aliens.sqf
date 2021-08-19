@@ -31,29 +31,47 @@ Parameters:
 
 
 ******************************************************************* */
-params ["_action"];
+params ["_sobj", "_action"];
 
-private _scn_name = "Aliens";
-[("Scenario " + _scn_name + " <" + (str _action) + ">")] call pcb_fnc_debug;
-
+_sobj set ["Name", "Aliens!"];
 
 switch (_action) do {
     case "create": {
+        ["create"] call (_sobj get "_log");
+
         if (! isNil "scenarioCreated") exitWith {};
         scenario_created = true;
         publicVariable "scenario_created";
 
-        // adjust start position if desired
-        [] call pcb_fnc_random_start_pos;
-        waitUntil { ! isNil "random_start_ready" };
 
-        // create the "base camp" + spawning point
-        //[] call pcb_fnc_start_base_setup;
-        [] call pcb_fnc_start_base_setup2;
+        private _decorate = {
+            params ["_pos", ["_building", objNull]];
+        };
+        _sobj set ["Decorate", _decorate];
 
-        // manipulate the starting weather et al
-        [] call pcb_fnc_set_mission_environment;
+        private _mission_enc = {
+            params ["_pos", ["_chance", 50], ["_max_n", 20]];
 
+            private _obj_list = [];
+            private _type = objNull;
+            private _n = 1 + (floor (random _max_n));
+            private _did = false;
+
+            // chance of encounter
+            if ((random 100) < _chance) then {
+                _did = true;
+                private _types = types_hash get "weaker spooks"; // these are minion types
+                private _ctypes = [];
+                private _i = 0;
+                for [{}, {_i < _n}, {_i = _i + 1}] do {
+                    _ctypes pushBack (selectRandom _types);
+                };
+                [_ctypes, _pos, east, false] call pcb_fnc_spawn_squad;
+            };
+
+            [_obj_list, _type, _n, _did]
+        };
+        _sobj set ["Mission Encounter", _mission_enc];
 
         // over-ride defaults in fn_types / types_hash
         types_hash set ["background_options_with_weights", types_hash get "aliens_options_with_weights"];
@@ -95,78 +113,44 @@ switch (_action) do {
         publicVariable "PARENT_TASK";
 
         // this is the array of possible missions to choose from.  Might be modified as things progress
-        mission_list = []; // we "register" missions here, last one first, 
-        mission_list pushBackUnique "functions\missions\fn_mis_wait_for_clustering.sqf";
-        publicVariable "mission_list"; 
-        mission_select = "sequential";
-        publicVariable "mission_select"; 
+        (_sobj get "Mission List") pushBackUnique "functions\missions\fn_mis_wait_for_clustering.sqf";
+        _sobj set ["Mission Select", "sequential"];
 
         // total missions to run
-        total_missions = 1;
-        publicVariable "total_missions";
+        _sobj set ["Total Missions, 1];
 
-        // fire off the director for tracking background stuff
-        [] call pcb_fnc_director;
-
-        // start spawning spare vehicles etc
-        sleep 1;
-        [] call pcb_fnc_background;
- 
-        // remember our state
-        scenario_state = 1;
-        publicVariable "scenario_state";
-        [("Scenario " + _scn_name + " completed <" + (str _action) + ">")] call pcb_fnc_debug;
+        ["initialization complete"] call (_sobj get "_log");
      };
 
     case "mission_completed": {
-        [("Scenario " + _scn_name + " <" + (str _action) + ">")] call pcb_fnc_debug;
-        if ((scenario_state == 1) && (total_missions == 0)) then {
-            scenario_state = 2;
-            publicVariable "scenario_state";
+        ["Mission Complete"] call (_sobj get "_log");
+        if (((_sobj get "Scenario State") == 1) && ((_sobj get "Total Missions") == 0)) then {
+            _sobj set ["Scenario State", 2];
 
             // update our mission list (what we can choose from)
-            mission_list = []; 
-            mission_list pushBackUnique "functions\missions\fn_mis_interview.sqf";
-            publicVariable "mission_list"; 
-
-            total_missions = selectRandom [2, 2];
-            publicVariable "total_missions";
-
-            mission_select = "random";
-            publicVariable "mission_select"; 
+            _sobj set ["Mission List",  []]; 
+            (_sobj get "Mission List") pushBackUnique "functions\missions\fn_mis_interview.sqf";
+            _sobj set ["Total Missions", 2];
+            _sobj set ["Mission Select", "random"];
         }; 
-        if ((scenario_state == 2) && (total_missions == 0)) then {
-            scenario_state = 3;
-            publicVariable "scenario_state";
+        if (((_sobj get "Scenario State") == 2) && ((_sobj get "Total Missions") == 0)) then {
+            _sobj set ["Scenario State", 3];
 
             // update our mission list (what we can choose from)
-            // remember to do these in reverse order!!! 
-            mission_list = []; 
-            mission_list pushBackUnique "functions\missions\fn_mis_alien_hunt.sqf";
-            publicVariable "mission_list"; 
-
-            total_missions = 1;
-            publicVariable "total_missions";
-
-            mission_select = "random";
-            publicVariable "mission_select"; 
+            _sobj set ["Mission List",  []]; 
+            (_sobj get "Mission List") pushBackUnique "functions\missions\fn_mis_alien_hunt.sqf";
+            _sobj set ["Total Missions", 1];
+            _sobj set ["Mission Select", "random"];
         }; 
-        if ((scenario_state == 3) && (total_missions == 0)) then {
-            scenario_state = 4;
-            publicVariable "scenario_state";
+        if (((_sobj get "Scenario State") == 3) && ((_sobj get "Total Missions") == 0)) then {
+            _sobj set ["Scenario State", 4];
 
             // update our mission list (what we can choose from)
-            // remember to do these in reverse order!!! 
-            mission_list = []; 
-            mission_list pushBackUnique "functions\missions\fn_mis_alien_spawner.sqf";
-            mission_list pushBackUnique "functions\missions\fn_mis_exfil.sqf";
-            publicVariable "mission_list"; 
-
-            total_missions = count mission_list;
-            publicVariable "total_missions";
-
-            mission_select = "sequential";
-            publicVariable "mission_select"; 
+            _sobj set ["Mission List",  []]; 
+            (_sobj get "Mission List") pushBackUnique "functions\missions\fn_mis_alien_spawner.sqf";
+            (_sobj get "Mission List") pushBackUnique "functions\missions\fn_mis_exfil.sqf";
+            _sobj set ["Total Missions", 2];
+            _sobj set ["Mission Select", "sequential"];
         }; 
     };
 };
