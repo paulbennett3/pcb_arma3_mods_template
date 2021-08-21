@@ -43,7 +43,8 @@ switch (_action) do {
         scenario_created = true;
         publicVariable "scenario_created";
 
-
+       
+//        _sobj set ["Start Base", pcb_fnc_start_base_setup3];  
         private _decorate = {
             params ["_pos", ["_building", objNull]];
         };
@@ -56,6 +57,7 @@ switch (_action) do {
             private _type = objNull;
             private _n = 1 + (floor (random _max_n));
             private _did = false;
+            private _group = grpNull;
 
             // chance of encounter
             if ((random 100) < _chance) then {
@@ -66,9 +68,9 @@ switch (_action) do {
                 for [{}, {_i < _n}, {_i = _i + 1}] do {
                     _ctypes pushBack (selectRandom _types);
                 };
-                [_ctypes, _pos, east, false] call pcb_fnc_spawn_squad;
+                _group = [_ctypes, _pos, east, false] call pcb_fnc_spawn_squad;
+                _obj_list = _obj_list + (units _group);
             };
-
             [_obj_list, _type, _n, _did]
         };
         _sobj set ["Mission Encounter", _mission_enc];
@@ -117,7 +119,7 @@ switch (_action) do {
         _sobj set ["Mission Select", "sequential"];
 
         // total missions to run
-        _sobj set ["Total Missions, 1];
+        _sobj set ["Total Missions", 1];
 
         ["initialization complete"] call (_sobj get "_log");
      };

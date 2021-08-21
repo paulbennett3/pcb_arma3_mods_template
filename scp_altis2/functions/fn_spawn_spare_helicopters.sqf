@@ -92,6 +92,17 @@ for [{_hdx = 0}, {_hdx < (count _hangars)}, {_hdx = _hdx + 1}] do {
     _veh setDir _dir;
     sleep .1;
 
+    if ((random 100) < 34) then {
+        private _svpos = _pos getPos [15, 90];
+        private _vtype = selectRandom [ 
+            "C_Van_01_fuel_F",
+            "C_Offroad_01_repair_F",
+            "C_Quadbike_01_F"     
+        ];
+        private _sveh = _vtype createVehicle _svpos;
+        _sveh setDir _dir;
+    };
+
     if (pcb_DEBUG) then {
         private _mn = "M" + str ([] call pcb_fnc_get_next_UID);
         private _m = createMarker [_mn, _pos];

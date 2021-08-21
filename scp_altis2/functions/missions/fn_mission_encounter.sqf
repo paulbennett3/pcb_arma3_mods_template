@@ -7,6 +7,7 @@ private _obj_list = [];
 private _type = objNull;
 private _n = 1 + (floor (random _max_n));
 private _did = false;
+private _group = grpNull;
 
 // chance of encounter
 if ((random 100) < _chance) then {
@@ -18,7 +19,8 @@ if ((random 100) < _chance) then {
     for [{}, {_i < _n}, {_i = _i + 1}] do {
         _ctypes pushBack _type;
     };
-    [_ctypes, _pos, east, false] call pcb_fnc_spawn_squad;
+    _group = [_ctypes, _pos, east, false] call pcb_fnc_spawn_squad;
+    _obj_list = _obj_list + (units _group);
 };
 
 

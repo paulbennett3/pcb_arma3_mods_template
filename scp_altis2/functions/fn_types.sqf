@@ -96,6 +96,8 @@ types_hash set ["small items", [
 //     "canvas cover, small"
 // --------------------------------
 types_hash set ["bases", [
+    ["Land_vn_tent_02_02", 0, 1.5],
+    ["Land_vn_tent_02_01", 0, 1.5],
     ["Land_CanvasCover_02_F", 0, 1.5], 
     ["Land_IRMaskingCover_02_F", 0, 1.5], 
     ["Land_Cargo_Patrol_V4_F", 0, 4.5],
@@ -806,7 +808,7 @@ scp_specialists = createHashMap;
 
 // --- SCP Base Loadout ---
 scp_specialists set ["base loadout", { 
-    params ["_this"];
+    params ["_this", ["_uniform", "U_B_CTRG_Soldier_Arid_F"], ["_vest", "V_PlateCarrier2_rgr_noflag_F"]];
 
     _this setVariable ["role", "base"];
 
@@ -819,14 +821,17 @@ scp_specialists set ["base loadout", {
     removeHeadgear _this;
     removeGoggles _this;
 
+    _this forceAddUniform _uniform;
+
     _this addWeapon "arifle_MXC_F";
     _this addPrimaryWeaponItem "acc_pointer_IR";
     _this addPrimaryWeaponItem "optic_Hamr";
     _this addPrimaryWeaponItem "100Rnd_65x39_caseless_mag";
     _this addWeapon "hgun_Rook40_F";
     _this addHandgunItem "30Rnd_9x21_Green_Mag";
-    _this forceAddUniform "U_B_CTRG_Soldier_Arid_F";
-    _this addVest "V_PlateCarrier2_rgr_noflag_F";
+
+
+    _this addVest _vest;
     _this addBackpack "B_Kitbag_rgr";
     _this addItemToUniform "FirstAidKit";
     _this addItemToUniform "B_UavTerminal";
@@ -894,6 +899,20 @@ scp_specialists set ["AT", [
     for "_i" from 1 to 2 do {_this addItemToBackpack "Titan_AT";};
 }]];
 
+//-------------------
+scp_specialists set ["AA", [
+    "B_soldier_AA_F", {
+    params ["_this"];
+    //_this addWeapon "launch_B_Titan_F";
+    //_this addSecondaryWeaponItem "Titan_AA";
+    //for "_i" from 1 to 2 do {_this addItemToBackpack "Titan_AA";};
+
+    _this addWeapon "launch_MRAWS_sand_rail_F";
+    _this addSecondaryWeaponItem "MRAWS_HEAT_F";
+    _this addItemToBackpack "MRAWS_HE_F";
+    _this addItemToBackpack "MRAWS_HE_F";
+}]];
+
 scp_specialists set ["LAT", [
     "B_soldier_LAT2_F", {
     params ["_this"];
@@ -905,13 +924,54 @@ scp_specialists set ["LAT", [
     _this addItemToBackpack "MRAWS_HE_F";
 }]];
 
+scp_specialists set ["HMG", [
+    "B_Patrol_HeavyGunner_F", {
+    params ["_this"];
+    _this setVariable ["role", "HMG"];
+    removeAllWeapons _this;
+    _this addWeapon "LMG_Zafir_F";
+    _this addPrimaryWeaponItem "acc_pointer_IR";
+    _this addPrimaryWeaponItem "optic_Holosight";
+    _this addPrimaryWeaponItem "150Rnd_762x54_Box";
+    _this addWeapon "hgun_Rook40_F";
+    _this addHandgunItem "30Rnd_9x21_Green_Mag";
+    _this addItemToUniform "FirstAidKit";
+
+    for "_i" from 1 to 2 do {_this addItemToVest "150Rnd_762x54_Box";};
+}]];
+
+scp_specialists set ["Marksman", [
+    "B_Patrol_Soldier_M_F", {
+    params ["_this"];
+    _this setVariable ["role", "Marksman"];
+    removeAllWeapons _this;
+    _this addWeapon "srifle_EBR_F";
+    _this addPrimaryWeaponItem "muzzle_snds_B";
+    _this addPrimaryWeaponItem "acc_pointer_IR";
+    _this addPrimaryWeaponItem "optic_DMS";
+    _this addPrimaryWeaponItem "20Rnd_762x51_Mag";
+    _this addPrimaryWeaponItem "bipod_01_F_snd";
+    _this addWeapon "Rangefinder";
+
+    _this addWeapon "hgun_Rook40_F";
+    _this addHandgunItem "30Rnd_9x21_Green_Mag";
+    _this addItemToUniform "FirstAidKit";
+
+    _this addItemToUniform "20Rnd_762x51_Mag";
+    for "_i" from 1 to 6 do {_this addItemToVest "20Rnd_762x51_Mag";};
+}]];
+
 publicVariable "scp_specialists";
 
 scp_support_units = [
     "Engineer",
-    "Engineer",
     "UAV", 
     "UGV", 
     "Medic", 
-    "LAT"
+    "HMG",
+    "AA"
 ];
+
+
+
+

@@ -45,8 +45,10 @@ if ((random 100) < 65) then {
         if (! isNil "_building") then {
             _pos = getPosATL _building;
             if (! isNil "_pos") then { 
-                [_building] call pcb_fnc_add_loot_boxes_to_building;
-                _tries = -10;
+                if (([_pos] call pcb_fnc_is_valid_position)) then {
+                    [_building] call pcb_fnc_add_loot_boxes_to_building;
+                    _tries = -10;
+                };
             };
         };
     };

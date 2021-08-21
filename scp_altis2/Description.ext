@@ -19,6 +19,8 @@ reviveRequiredTrait = 0; // 1 to require medic
 reviveRequiredItems = 0;
 reviveRequiredItemsFakConsumed = 1;
 reviveMedicSpeedMultiplier = 2;
+//reviveUnconsciousStateMode = 1;
+reviveUnconsciousStateMode = 0;
 reviveDelay = 10;
 
 class CfgFunctions
@@ -54,6 +56,7 @@ class CfgFunctions
             class get_player_direction {};
             class get_random_position {};
             class get_random_vehicle {};
+            class get_small_base_pos {};
             class goblins {};
             class is_valid_position {};
             class loadout_clone {};
@@ -73,12 +76,15 @@ class CfgFunctions
             class paradrop_stuff {};
             class player_in_vehicle {};
             class players_in_area {};
+            class portable_base_crate {};
             class preinit_setup { preInit = 1; };
             class random_start_pos {};
+            class random_start_pos_small {};
             class scp_new_unit {};
             class sog_tunnels {};
             class start_base_setup {};
             class start_base_setup2 {};
+            class start_base_setup3 {};
             class send_mail {};
             class server_state_manager {};
             class set_behaviour {};

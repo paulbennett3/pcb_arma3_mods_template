@@ -58,7 +58,7 @@ while {_tries > 0} do {
 }; 
 
 // test if we have utterly failed ... 
-if ((_tries > -10) or (isNull _target)) exitWith { _result };
+if ((_tries > -10) or (isNull _target) or (! ([_pos] call pcb_fnc_is_valid_position))) exitWith { _result };
 
 private _desc = objNull;
 _desc = [ "Locate and eliminate the source of incursions", "Eliminate source", ""];
@@ -90,7 +90,7 @@ private _n_troops = selectRandom [3,3,3,4,5];
 private _types = types_hash get "weaker spooks";
 private _ctypes = [];
 private _nt = 0;
-for [{_nt = 0}, {_nt < _n_troups}, {_nt = _nt + 1}] do {
+for [{_nt = 0}, {_nt < _n_troops}, {_nt = _nt + 1}] do {
     _ctypes pushBack (selectRandom _types);
 };
 private _group = [_ctypes, _pos, east, false] call pcb_fnc_spawn_squad;
@@ -113,7 +113,8 @@ if ((! (isNil "_types")) && ((count _types) > 0)) then {
     private _type = selectRandom _types;
     private _nv = 1;
     for [{_nv = selectRandom [3,2,2,2,1,1,1,1]}, {_nv > -1}, {_nv = _nv - 1}] do {
-        private _stuff = [_pos vectorAdd [20, 20], 0, _type, _group] call BIS_fnc_spawnVehicle;
+        private _vpos = [_pos, 20, 2000, false] call pcb_fnc_get_small_base_pos;
+        private _stuff = [[_vpos select 0, _vpos select 1], 0, _type, _group] call BIS_fnc_spawnVehicle;
     };
 };
 // spawn drones if they exist
@@ -121,7 +122,8 @@ _types = types_hash get "drone spooks";
 if ((! (isNil "_types")) && ((count _types) > 0)) then {
     private _type = selectRandom _types;
     for [{_nv = selectRandom [3,2,2,2,1]}, {_nv > -1}, {_nv = _nv - 1}] do {
-        private _stuff = [_pos vectorAdd [30, 15], 0, _type, _group] call BIS_fnc_spawnVehicle;
+        private _vpos = [_pos, 20, 2000, false] call pcb_fnc_get_small_base_pos;
+        private _stuff = [[_vpos select 0, _vpos select 1], 0, _type, _group] call BIS_fnc_spawnVehicle;
     };
 };
 
@@ -185,14 +187,20 @@ private _types = types_hash get "weaker spooks";
                     if ((! isNil "_veh_types") && ((count _veh_types) > 0)) then {
                         private _type = selectRandom _veh_types;
                         [( " vehicle <" + _type + "> ...")] call pcb_fnc_debug;
-                        private _foo = [_pos, random 360, _type, _group] call BIS_fnc_spawnVehicle;
+                        private _vpos = [_pos, 20, 2000, false] call pcb_fnc_get_small_base_pos;
+                        private _foo = [
+                            [_vpos select 0, _vpos select 1], random 360, _type, _group
+                        ] call BIS_fnc_spawnVehicle;
                     };
                 } else {
                     private _veh_types = types_hash get "drone spooks";
                     if ((! isNil "_veh_types") && ((count _veh_types) > 0)) then {
                         private _type = selectRandom _veh_types;
                         [( " drone <" + _type + "> ...")] call pcb_fnc_debug;
-                        private _foo = [_pos, random 360, _type, _group] call BIS_fnc_spawnVehicle;
+                        private _vpos = [_pos, 20, 2000, false] call pcb_fnc_get_small_base_pos;
+                        private _foo = [
+                            [_vpos select 0, _vpos select 1], random 360, _type, _group
+                        ] call BIS_fnc_spawnVehicle;
                     };
                 };
             } else {

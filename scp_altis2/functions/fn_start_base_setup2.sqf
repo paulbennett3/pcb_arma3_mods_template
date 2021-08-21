@@ -136,6 +136,10 @@ _start_crate setVariable ["type", _crate_type];
 _start_crate setVariable ["base", _desk];
 _start_crate setVariable ["packed", false];
 
+// create a portable base box
+private _bbpos = _desk getPos [10, 0];
+[_bbpos, true] call pcb_fnc_portable_base_crate;
+
 
 // ------------------------------------------------------------------
 // Add pack / unpack command
