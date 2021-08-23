@@ -27,7 +27,7 @@ _equip_crate setPosASL getPosASL _equip_crate;  // synch for MP
 // ------------------------------------------------------------------
 // Spawn our "base" crate
 // ------------------------------------------------------------------
-[start_pos] call pcb_fnc_portable_base_crate;
+[(start_pos getPos [5, 90])] call pcb_fnc_portable_base_crate;
 
 // ------------------------------------------------------------------
 //                     Boat Box

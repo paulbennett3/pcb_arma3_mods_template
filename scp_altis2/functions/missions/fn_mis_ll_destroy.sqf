@@ -42,7 +42,6 @@ params ["_state"];
 
 private _ok = false;
 
-diag_log (str _state);
 if (pcb_DEBUG) then {
     hint ("DESTROY " + (str (_state get "target")));
 };

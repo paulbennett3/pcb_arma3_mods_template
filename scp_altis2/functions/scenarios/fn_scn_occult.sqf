@@ -150,6 +150,7 @@ switch (_action) do {
             // update our mission list (what we can choose from)
             _sobj set ["Mission List", []];
             (_sobj get "Mission List") pushBackUnique "functions\missions\fn_mis_monster_hunt.sqf";
+            (_sobj get "Mission List") pushBackUnique "functions\missions\fn_mis_rescue_scp.sqf";
             (_sobj get "Mission List") pushBackUnique "functions\missions\fn_mis_spawner.sqf";
 
             _sobj set ["Total Missions", 1];

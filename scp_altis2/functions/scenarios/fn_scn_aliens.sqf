@@ -43,8 +43,6 @@ switch (_action) do {
         scenario_created = true;
         publicVariable "scenario_created";
 
-       
-//        _sobj set ["Start Base", pcb_fnc_start_base_setup3];  
         private _decorate = {
             params ["_pos", ["_building", objNull]];
         };
@@ -84,7 +82,25 @@ switch (_action) do {
         private _boss_info = selectRandom [
             ["sga_prior1", ["sga_ori_soldier1"], [ "sga_needlethreader_normal" ], ["SG_gouald_drone"]],
             ["", ["WL_SG_Replicator"], [], ["SG_gouald_drone"]],
-            ["sga_jaffa_black_leader", ["sga_jaffa_serpent_guard_closed"], ["SG_DeathGlider_heli"], ["SG_gouald_drone"]],
+            ["sga_jaffa_leader", 
+                [ "sga_jaffa_serpent_guard_open", "sga_jaffa_serpent_guard_closed", "sga_jaffa"],
+                ["SG_DeathGlider_heli"],["SG_gouald_drone"]
+            ],
+            ["sga_jaffa_black_leader", 
+                [ "sga_jaffa_black", "sga_jaffa_black_serpent_guard_open", "sga_jaffa_black_serpent_guard_closed"],
+                ["SG_DeathGlider_heli"],["SG_gouald_drone"]
+            ],
+            ["sga_jaffa_gold_leader", 
+                [ "sga_jaffa_gold", "sga_jaffa_gold_serpent_guard_closed", "sga_jaffa_gold_serpent_guard_open"],
+                ["SG_DeathGlider_heli"],["SG_gouald_drone"]
+            ],
+            ["sga_jaffa_red_leader", 
+                [ "sga_jaffa_red", "sga_jaffa_red_serpent_guard_closed", "sga_jaffa_red_serpent_guard_open"],
+                ["SG_DeathGlider_heli"],["SG_gouald_drone"]
+            ],
+            [ "sga_bratac", [ "sga_lucian_carry", "sga_jaffa_free", "sga_lucian_carry" ],
+                [ "sga_osiris_cruiser" ], ["SG_gouald_drone"]
+            ],
             ["Wraith_Leader", ["Wraith_Drone"], ["sg_wraith_dart_normal"], ["SG_gouald_drone"]]
         ];
         private _ambient = [
@@ -131,8 +147,9 @@ switch (_action) do {
 
             // update our mission list (what we can choose from)
             _sobj set ["Mission List",  []]; 
+            (_sobj get "Mission List") pushBackUnique "functions\missions\fn_mis_rescue_scp.sqf";
             (_sobj get "Mission List") pushBackUnique "functions\missions\fn_mis_interview.sqf";
-            _sobj set ["Total Missions", 2];
+            _sobj set ["Total Missions", selectRandom [1, 2]];
             _sobj set ["Mission Select", "random"];
         }; 
         if (((_sobj get "Scenario State") == 2) && ((_sobj get "Total Missions") == 0)) then {

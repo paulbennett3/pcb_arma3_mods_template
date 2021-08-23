@@ -1,7 +1,8 @@
 /* ------------------------------------------------------------------
-                            Mission: goto
+                            Mission: rescue
 
-Get at least one player to area (as opposed to an object / type string, which would use "put item")
+Get at least one player to within range of one or more AI units, which
+   will join the player group.  
 
 Arguments:
    _state     (hashmap) State and parameters for the mission
@@ -12,20 +13,22 @@ Returns:
 
 
 State Object:
-   "taskpos"    (position) location of container (and target)
+   "taskpos"    (position) location of rescue (and target(s))
    "taskradius" (number) radius of "acceptable area" if in_area is true 
    "taskdesc"   [(string),(string),(string)]  task description, task name, task marker
    "taskpid"    (string)  parent id of task ("" for no parent)
+   "targetlist" (array of AI objects) list of one or more units to rescue (objects must exist!)
 
 Example:
     private _state = createHashMapFromArray [
         ["taskpos", getPosATL _crate],
         ["taskradius", 5],
         ["taskdesc", [
-            "Report to the research lab",
-            "Go to lab",
+            "Rescue scientists from research lab",
+            "Rescue scientists",
             "markername"]],
         ["taskpid", ""],
+        ["targetlist", [_sci1, _sci2]]
     ];
     _result = [_state] call pcb_fnc_mis_ll_goto;
     _ok = _result select 0; _state = _result select 1;
@@ -37,14 +40,14 @@ params ["_state"];
 private _ok = false;
 
 if (pcb_DEBUG) then {
-   ["Goto mission called"] call pcb_fnc_debug;
+   ["Rescue mission called"] call pcb_fnc_debug;
 };
 
 
 // ---------------
 // set up our task
 // ---------------
-private _tid = "MIS_GOTO_" + (str ([] call pcb_fnc_get_next_UID));
+private _tid = "MIS_RESCUE_" + (str ([] call pcb_fnc_get_next_UID));
 if ((_state get "taskpid") isEqualTo "") then {
     _state set ["taskid", _tid];
 } else {
@@ -59,15 +62,24 @@ private _pos = (_state get "taskpos");
 [_state] spawn {
     params ["_state"];
 
-    // at least one player in area?
-    private _center = _state get "taskpos";
-    private _radius = _state get "taskradius";
+    // done when either all targets are dead (fail), or all targets in player_group (succeed)
     private _done = false;
+    private _target_list = _state get "targetlist";
     while { sleep 5; ! _done } do {
-        if ([[_center, _radius]] call pcb_fnc_players_in_area) then {
+        private _targets = _target_list select { alive _x };;
+        if ((isNil "_targets") || {(count _targets) < 1}) then {
+            _state set ["failed", true];
             [_state] call pcb_fnc_end_mission;
             _done = true;
-        }; 
+        };
+        private _rescued = _targets select { (group _x) != player_group };
+        if (! (isNil "_rescued")) then {
+            if ((count _rescued) < 1) then {
+                _state set ["failed", false];
+                [_state] call pcb_fnc_end_mission;
+                _done = true;
+            };
+        };
     };
 };
 

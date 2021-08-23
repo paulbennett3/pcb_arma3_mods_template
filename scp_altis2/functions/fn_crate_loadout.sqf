@@ -64,16 +64,10 @@ _obj addItemCargoGlobal ["optic_tws_mg", 4];
 _obj addItemCargoGlobal ["ToolKit", 2];
 _obj addItemCargoGlobal ["MineDetector", 2];
 _obj addItemCargoGlobal ["acc_flashlight", 2];
+_obj addItemCargoGlobal ["B_UavTerminal", 2];
 
 // backpack
 _obj addBackpackCargoGlobal ["B_Kitbag_rgr", 2];
 _obj addBackpackCargoGlobal ["B_UAV_06_backpack_F", 1];
 _obj addBackpackCargoGlobal ["B_UGV_02_Demining_backpack_F", 1];
 _obj addBackpackCargoGlobal ["B_UGV_02_Science_backpack_F", 1];
-
-_obj addItemCargoGlobal ["H_Shemag_olive", 2];
-_obj addItemCargoGlobal ["H_Watchcap_blk", 2];
-_obj addItemCargoGlobal ["vn_g_spectacles_01", 2];
-_obj addItemCargoGlobal ["G_Shades_Blue", 2];
-
-

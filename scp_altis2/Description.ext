@@ -135,8 +135,9 @@ class CfgFunctions
             file = "functions\missions";
             class mission_generator {};
             class end_mission {};
-            class occult_decorate {};
             class mission_encounter {};
+            class occult_decorate {};
+            class spawn_cultists {};
             // --------------------------------------------------------------
             //              "low level" building blocks
             // --------------------------------------------------------------
@@ -148,24 +149,25 @@ class CfgFunctions
             class mis_ll_interact {};
             class mis_ll_nop {};  // no-op mission -- for use with scn_drongo
             class mis_ll_put_item {};
+            class mis_ll_rescue {};
             // --------------------------------------------------------------
             // true missions -- just need UID (and start_pos, epicenter, ...)
             // --------------------------------------------------------------
+            class mis_alien_hunt {};
             class mis_boss {};
             class mis_building_search {};
-            class mis_desk_evidence {};
             class mis_deliver_evidence {};
+            class mis_desk_evidence {};
             class mis_exfil {};
             class mis_get_laptop_from_base {};
-            class mis_investigate {};
             class mis_interview {};
-            class mis_alien_hunt {};
+            class mis_investigate {};
             class mis_monster_hunt {};
-            class mis_zombie_hunt {};
             class mis_alien_spawner {};
+            class mis_rescue_scp {};
             class mis_spawner {};
-            class spawn_cultists {};
             class mis_tunnels {};
+            class mis_zombie_hunt {};
         }; 
     };
 };

@@ -17,6 +17,12 @@ if (! isServer) exitWith {};
     mission_active = false; // set to true when mission created.  Mission sets it to false when completed.
     publicVariable "mission_active";
 
+    // ------------------------------------------------------
+    // wait for types_hash to be parsed and loaded
+    // ------------------------------------------------------
+    waitUntil { sleep 1; ! isNil "types_hash_loaded" };
+    waitUntil { sleep 1; types_hash_loaded };
+
     // --------------------------------------------------------
     // use the default scenario to initialize our methods etc
     // --------------------------------------------------------

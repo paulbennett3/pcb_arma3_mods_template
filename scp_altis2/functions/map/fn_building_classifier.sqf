@@ -12,7 +12,7 @@ params ["_building"];
 private _classes = [
     "MILITARY", "MIL", "USARMY", 
     "INDUSTRIAL", "IND", "CULTURAL", "CEMETERIES", "DOMINANTS",
-    "CIVILIAN", "CIV", "COMMERCIAL", "HOUSEHOLDS", "HOUSE", "RUINS"
+    "CIVILIAN", "CIV", "COMMERCIAL", "HOUSEHOLDS", "HOUSE", "HOUSEBLOCKS", "RUINS"
 ];
 private _type = typeOf _building;
 private _config = configOf _building;

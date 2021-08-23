@@ -6,7 +6,6 @@
 //["start base being made, please be patient ..." + (str (isServer))] call pcb_fnc_debug;
 ["start_pos <" + (str start_pos) + ">"] call pcb_fnc_debug;
 if (! isServer) exitWith {};
-["teleporting to start base area  ..."] call pcb_fnc_debug;
 
 player_group = group (playableUnits select 0);
 publicVariable "player_group";
@@ -14,6 +13,7 @@ publicVariable "player_group";
 // ------------------------------------------------------------------
 // move everybody to the start position
 // ------------------------------------------------------------------
+["teleporting to start base area  ..."] call pcb_fnc_debug;
 private _id = 0;
 private _unitslist = units player_group;
 for [{_id = 0}, {_id < (count (_unitslist))}, {_id = _id + 1}] do {
@@ -135,10 +135,6 @@ publicVariable "base_desk";
 _start_crate setVariable ["type", _crate_type];
 _start_crate setVariable ["base", _desk];
 _start_crate setVariable ["packed", false];
-
-// create a portable base box
-private _bbpos = _desk getPos [10, 0];
-[_bbpos, true] call pcb_fnc_portable_base_crate;
 
 
 // ------------------------------------------------------------------
@@ -283,6 +279,12 @@ if (_sc_dir < 0) then { _sc_dir = _sc_dir + 360; };
 private _sc = "B_Slingload_01_Ammo_F" createVehicle (_start_crate getPos [20, _sc_dir]); _sc setDir start_dir;
 _sc = "B_Slingload_01_Fuel_F" createVehicle (_start_crate getPos [25, _sc_dir]); _sc setDir start_dir;
 _sc = "B_Slingload_01_Repair_F" createVehicle (_start_crate getPos [30, _sc_dir]); _sc setDir start_dir;
+
+// create a portable base box
+private _pbb_dir = (getDir _start_crate) + 90;
+if (_pbb_dir >= 360) then { _pbb_dir = _sc_dir - 360; };
+private _bbpos = _start_crate getPos [10, _pbb_dir];
+[_bbpos, true] call pcb_fnc_portable_base_crate;
 
 
 // ------------------------------------------------------------------

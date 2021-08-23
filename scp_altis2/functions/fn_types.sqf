@@ -5,7 +5,10 @@
 For defining types and groups thereof
 ********************************************************************* */
 
+[] spawn {
+
 types_hash = createHashMap;
+
 
 // --------------------------------
 // Occult Large Items - outdoors only!
@@ -611,7 +614,11 @@ types_hash set ["hangars", [
     "Land_TentHangar_V1_F",
     "Land_vn_airport_02_hangar_left_f",
     "Land_vn_airport_02_hangar_right_f",
-    "Land_vn_airport_01_hangar_f"
+    "Land_vn_airport_01_hangar_f",
+    "Land_Ss_hangard",
+    "Land_Ss_hangar",
+    "Land_Mil_hangar_EP1",
+    "WarfareBAirport"
 ]];
 
 
@@ -863,6 +870,8 @@ scp_specialists set ["Engineer", [
     _this addItemToBackpack "MineDetector";
     _this addItemToBackpack "SatchelCharge_Remote_Mag";
     for "_i" from 1 to 2 do {_this addItemToBackpack "DemoCharge_Remote_Mag";};
+    _this setUnitTrait ["engineer", true];
+    _this setUnitTrait ["explosiveSpecialist", true];
 }]];
 
 scp_specialists set ["UAV", [
@@ -888,6 +897,7 @@ scp_specialists set ["Medic", [
     _this setVariable ["role", "Medic"];
     _this addItemToBackpack "Medikit";
     for "_i" from 1 to 10 do {_this addItemToBackpack "FirstAidKit";};
+    _this setUnitTrait ["medic", true];
 }]];
 
 scp_specialists set ["AT", [
@@ -971,7 +981,11 @@ scp_support_units = [
     "HMG",
     "AA"
 ];
+publicVariable "scp_support_units";
 
+types_hash_loaded = true;
+publicVariable "types_hash_loaded";
 
+};
 
 
