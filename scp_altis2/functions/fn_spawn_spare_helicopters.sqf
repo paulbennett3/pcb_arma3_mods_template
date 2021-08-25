@@ -71,7 +71,8 @@ for [{_hdx = 0}, {_hdx < (count _hangars)}, {_hdx = _hdx + 1}] do {
 
     private _x = _hangars select _hdx;
     private _pos = getPosATL _x;
-    private _dir = getDir _x;
+    private _dir = (getDir _x) + 180;
+    if (_dir > 360) then { _dir = _dir - 360; };
     private _near_military = [_pos] call pcb_fnc_near_military;
 
     _pos = [_pos select 0, _pos select 1];

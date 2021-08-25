@@ -976,9 +976,9 @@ publicVariable "scp_specialists";
 scp_support_units = [
     "Engineer",
     "UAV", 
-    "UGV", 
+    "Marksman", 
     "Medic", 
-    "HMG",
+    "AT",
     "AA"
 ];
 publicVariable "scp_support_units";

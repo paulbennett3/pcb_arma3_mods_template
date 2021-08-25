@@ -1,0 +1,28 @@
+// run using:
+//  steamcmd +runscript /home/Arma3server/workshop.tx
+@ShutdownOnFailedCommand 0
+@NoPromptForPassword 1
+// steam guard 86988
+//login nazghash JT1$sklearn 86988
+login nazghash JT1$sklearn 
+force_install_dir /home/Arma3server/steamcmd_files/
+//app_update 233780 validate                        // Arma3 server
+//app_update 233780 -beta creatordlc " validate     // S.O.G. Prairie Fire
+//workshop_download_item 107410 450814997  //  CBA-A3
+//workshop_download_item 107410 583496184    // Cup Terrains - Core 1.5G
+//workshop_download_item 107410 583544987    // Cup Terrains - Maps 3.3G
+//workshop_download_item 107410 1990653162   // Drongo's Map Population 
+//workshop_download_item 107410 2262255106   // Drongo's Spooks and Anomalies 
+//workshop_download_item 107410 815366548    // Stargate Mod 
+//workshop_download_item 107410 1451755886   // Max Women
+//workshop_download_item 107410 2561708057   // Drongo's DYEL 
+//workshop_download_item 107410 2187272188   // Not What They Seem 
+//workshop_download_item 107410 501966277    // Zombies and Demons 
+//workshop_download_item 107410 639837898  // Advanced Towing 
+workshop_download_item 107410 463939057  //  ACE 3
+workshop_download_item 107410 730310357  // Advanced Urban Rappelling
+workshop_download_item 107410 642457233   // ASR AI3
+workshop_download_item 107410 779520435  // Multi-play Uniforms
+//workshop_download_item 107410   // 
+ 
+quit
