@@ -4,9 +4,6 @@ if (! local player) exitWith {};
 private _paradrop = player getVariable "paradrop";
 if (isNil "_paradrop") then { player setVariable ["paradrop", -1]; };
 
-private _pararesupply = player getVariable "pararesupply";
-if (isNil "_pararesupply") then { player setVariable ["pararesupply", -1]; };
-
 
 private _lsave = player getVariable "lsave";
 if (isNil "_lsave") then { player setVariable ["lsave", -1]; };
@@ -73,12 +70,6 @@ if (((getPosATL player) distance2D (markerPos "respawn_west")) < 50) then {
     };
 };
 
-
-// Para-resupply
-private _item = player getVariable "pararesupply";
-if ((isNil "_item") || (_item < 0)) then {
-    player setVariable ["pararesupply", [player, "myParaResupply", nil, nil, ""]  call BIS_fnc_addCommMenuItem ];
-};
 
 // -------------------------------------------
 //    Leader check

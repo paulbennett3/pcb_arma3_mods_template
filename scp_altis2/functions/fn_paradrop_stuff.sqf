@@ -4,15 +4,15 @@
 Parameters:
     _unit (object) : the unit to be parachuted
 ******************************************************************* */
-params ["_unit", ["_pos", [0,0, 500]],["_obj", objNull]];
+params ["_unit", ["_pos", [0,0, 500]],["_obj", objNull], ["_dispersion", 300]];
 
-[_unit, _pos, _obj] spawn {
-    params ["_unit", "_pos", "_obj"];
+[_unit, _pos, _obj, _dispersion] spawn {
+    params ["_unit", "_pos", "_obj", "_dispersion"];
 
 
     // teleport to position, but up high
     if (! ([_pos] call pcb_fnc_is_valid_position)) then { _pos = getPosATL _unit; };
-    _pos = _pos getPos [random 300, random 360]; 
+    _pos = _pos getPos [random _dispersion, random 360]; 
     private _up_pos = [_pos select 0, _pos select 1, 1000];
     if (isNull _obj) then {
         //private _payload = "B_CargoNet_01_ammo_F";

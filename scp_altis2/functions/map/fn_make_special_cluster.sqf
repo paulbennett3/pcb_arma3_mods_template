@@ -13,13 +13,15 @@ params ["_special_clusters", "_map", "_label"];
 
 // select a cluster at random from our map
 private _cluster_id = selectRandom (keys _map);
+if (isNil "_cluster_id") exitWith {};
+
 private _cluster = _map get _cluster_id;
 private _buildings = _cluster get "obj_list";
 
 _special_clusters set [[_label, _cluster_id], true];
 
 // insurgents
-if (true) then {
+if ((! isNil "_buildings") && { (count _buildings) > 0} ) then {
     private _scale = ceil ((ln (count _buildings)) / (ln 2));
     private _types = types_hash get "insurgents";
     private _n_squads = 1 + (ceil (random _scale));

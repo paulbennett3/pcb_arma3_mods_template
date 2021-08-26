@@ -20,3 +20,10 @@ if (! isNull _oldUnit) then {
         _newUnit setUnitRank "SERGEANT";
     };
 };
+
+/*
+_newUnit addEventHandler ["Fired", {
+    params ["_unit", "_weapon", "_muzzle", "_mode", "_ammo", "_magazine", "_projectile", "_gunner"];
+    hint ("fired: " + (str _ammo));
+}];
+*/

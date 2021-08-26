@@ -124,6 +124,8 @@ for [{_i = 0 }, {_i < _n_stuff}, {_i = _i + 1}] do { _cabinet addItemCargoGlobal
 //private _boat_box = [_desk, "Box_B_UAV_06_F",[-5, -3.5, -.2], 0] call _attachIt;
 private _boat_box1 = [_desk, "Land_MetalCase_01_large_F",[-5, -3.0, -.2], 0] call _attachIt;
 private _boat_box2 = [_desk, "Land_MetalCase_01_large_F",[-5, -4.5, -.2], 0] call _attachIt;
+[_desk, "ACE_medicalSupplyCrate_advanced",[-5, -6, -.3], 0] call _attachIt;
+[_desk, "ACE_Box_Misc",[-5, -6.75, -.2], 0] call _attachIt;
 [_desk, "TargetP_Alien1_F",[-5, -20, 0.4], 270] call _attachIt;
 [_desk, "TargetP_Zom_F",[-5, -25, 0.4], 270] call _attachIt;
 [_desk, "TargetP_Inf9_F",[-5, -30, 0.4], 270] call _attachIt;

@@ -39,7 +39,9 @@ _desk setPosASL getPosASL _desk;
 [_desk, "Land_PortableWeatherStation_01_white_F", [-2,-.5,.75], 180] call _attachIt;
 [_desk, "Land_Router_01_black_F", [-.4,.05,-.03], 15] call _attachIt;
 [_desk, "Land_SatellitePhone_F", [.48,.05,0.025], 135] call _attachIt;
-[_desk, "Box_NATO_Ammo_F", [-1.75,1.75, -.625], 15] call _attachIt;
+//[_desk, "Box_NATO_Ammo_F", [-1.75,1.75, -.625], 15] call _attachIt;
+//[_desk, "ACE_Box_Misc", [1.5, 1.5, -.65], 0] call _attachIt;
+//[_desk, "ACE_medicalSupplyCrate_advanced", [1.5, 2.25, -.9], 0] call _attachIt;
 
 _base_crate setVariable ["type", _crate_type];
 _base_crate setVariable ["base", _desk];
