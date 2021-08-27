@@ -9,3 +9,4 @@ params ["_new_rating", "_unit"];
 private _cur_rating = rating _unit;
 private _delta = _new_rating - _cur_rating;
 _unit addRating _delta;
+[_unit, _delta] remoteExec ["addRating", owner _unit];

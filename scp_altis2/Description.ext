@@ -58,6 +58,7 @@ class CfgFunctions
             class get_random_vehicle {};
             class get_small_base_pos {};
             class goblins {};
+            class handle_resupply {};
             class is_valid_position {};
             class loadout_clone {};
             class loadout_save_restore {};

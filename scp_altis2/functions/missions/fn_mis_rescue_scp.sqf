@@ -102,10 +102,42 @@ private _opos = _pos getPos [100 + random 50, random 360];
 private _foo = [_opos, 101, 20] call (_sobj get "Mission Encounter");
 private _ogroup = group ((_foo select 0) select 0); 
 
-private _wp = _ogroup addWaypoint [leader _group, -1];
-_wp setWaypointType "DESTROY";
-_wp setWaypointCombatMode "RED";
-_wp setWaypointBehaviour "COMBAT";
+if (isNil "_group") then {
+    ["RESCUE :: _group is nil"] call pcb_fnc_debug;
+} else {
+    private _units = units _group;
+    if (isNil "_units") then {
+        ["RESCUE :: _units is nil"] call pcb_fnc_debug;
+    } else {
+        if ((count _units) < 1) then {
+            ["RESCUE :: count _units is < 1"] call pcb_fnc_debug;
+        } else {
+            [_ogroup, _units] spawn {
+                params ["_ogroup", "_units"];
+                private _done = false;
+                while { sleep 10; ! _done } do {
+                    private _ounits = (units _ogroup) select { alive _x };
+                    private _aunits = _units select { alive _x };
+                    if ((isNil "_ounits") || { (count _ounits) < 1 } ) then { _done = true; };
+                    if ((isNil "_aunits") || { (count _aunits) < 1 } ) then { _done = true; };
+                    if (! _done) then {
+["RESCUE loop " + (str (count _ounits)) + " enemy, " + (str (count _aunits)) + " allies"] call pcb_fnc_debug;
+                        if ((count (waypoints _ogroup)) < 1) then {
+                            private _t = selectRandom _aunits;
+["Setting <" + (str _t) + "> as target for DESTROY waypoint"] call pcb_fnc_debug;
+                            private _wp = _ogroup addWaypoint [_t, -1];
+//                            _wp waypointAttachVehicle _t;
+                            _wp setWaypointType "DESTROY";
+                            _wp setWaypointCombatMode "RED";
+                            _wp setWaypointBehaviour "COMBAT";
+                        };
+                    };
+                };
+["RESCUE Destroy loop exiting"] call pcb_fnc_debug;
+            };
+        };
+    };
+};
 
 [_building] call pcb_fnc_add_loot_boxes_to_building;
 

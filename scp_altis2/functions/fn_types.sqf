@@ -556,7 +556,7 @@ types_hash set ["static cargo mil", [
 
 // Helicopters
 types_hash set ["heli civ", [
-    "B_Heli_Light_dynamicLoadout_01_F",
+    "B_Heli_Light_01_F",
     "C_Heli_Light_01_civil_F",
     "C_Heli_Light_01_civil_F",
     "C_IDAP_Heli_Transport_02_F"

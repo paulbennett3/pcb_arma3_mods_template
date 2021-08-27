@@ -66,6 +66,7 @@ if ((count destroyable_list) == 1) then {
         while { sleep 15; (count destroyable_list) > 0 } do {
             // remove anything already destroyed ...
             destroyable_list = destroyable_list select { alive _x };
+            ["make destroyable monitor running with " + (str (count destroyable_list)) + " items"] call pcb_fnc_debug;
             private _list = allMissionObjects "#crater";
             private _dldx = 0;
             private _target = objNull;
@@ -73,7 +74,7 @@ if ((count destroyable_list) == 1) then {
             for [{_dldx = 0}, {_dldx < (count destroyable_list)}, {_dldx = _dldx + 1}] do {
                 _target = destroyable_list select _dldx;
                 private _filtered_list = _list select {
-                    if ((_x distance2D _target) < 2) then { true } else { false };
+                    if ((_x distance2D _target) < 4) then { true } else { false };
                 };
                 if ((count _filtered_list) > 0) then {
                     _destroyed pushBackUnique _target;

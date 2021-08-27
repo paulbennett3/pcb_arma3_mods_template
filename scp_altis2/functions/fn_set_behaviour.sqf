@@ -3,6 +3,8 @@
 ******************************************************** */
 params ["_group", "_pos", "_mode", ["_veh", objNull], ["_player", objNull]];
 
+if (isNull _player) then { _player = selectRandom playableUnits; };
+
 _mode = toUpper _mode;
 switch (_mode) do {
     case "SAD": {
@@ -29,7 +31,7 @@ switch (_mode) do {
         _wp setWaypointType "GETOUT";
 
         _wp = _group addWaypoint [_player, -1];
-        _wp setWaypointType "DESTROY";
+        _wp setWaypointType "SAD";
         _wp setWaypointBehaviour "STEALTH";
         _wp setWaypointCombatMode "RED";
     };

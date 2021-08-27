@@ -27,3 +27,13 @@ _newUnit addEventHandler ["Fired", {
     hint ("fired: " + (str _ammo));
 }];
 */
+
+addMissionEventHandler ["HandleChatMessage", {
+    params ["_channel", "_owner", "_from", "_text", "_person",
+            "_name", "_strID", "_forcedDisplay", "_isPlayerMessage",
+            "_sentenceType", "_chatMessageType"];
+    if ("resupply" in _text) then {
+        private _msg = ["resupply_request", _name, _text, _owner];
+        [_msg] call pcb_fnc_send_mail;
+    };
+}];
