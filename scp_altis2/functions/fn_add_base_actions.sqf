@@ -119,6 +119,11 @@ private _cmd = {
     ]
 ] remoteExec ["addAction", 0, true];   // Server only!
 
+// ------------------------------------
+//    ACE Arsenal
+// ------------------------------------
+[_obj, true] remoteExec ["ace_arsenal_fnc_initBox", 0, true];
+//[_obj, true] call ace_arsenal_fnc_initBox;
 
 // ------------------------------------
 //            Set Role: Single Player
