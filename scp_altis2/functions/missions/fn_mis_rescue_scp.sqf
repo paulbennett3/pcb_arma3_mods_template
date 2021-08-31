@@ -51,8 +51,10 @@ private _target = objNull;
 
 // -----------------------------------------------------------------
 
-private _n = 1 + (ceil (random 5));
+private _n = 1 + (ceil (random 3));
 private _group = grpNull;
+
+private _trg = objNull;
 
 if (true) then {
     private _types = [];
@@ -74,20 +76,36 @@ if (true) then {
             params ["_unit", "_building", "_base_loadout"];
             [_unit] call _base_loadout;    
 
+            private _mstr = "MR" + (str _unit);
+            private _m = createMarker [_mstr, _unit];
+            _m setMarkerType "b_inf";
+            _m setMarkerSize [1, 1];
+
             // player group in range?  Join it!
             while { sleep 5; alive _unit} do {
+                _m setMarkerPos (getPosATL _unit);
+
                 {
                     if ((_unit distance _x) < 5) exitWith { 
                         [_unit] join player_group;
                         true;
                     };
                 } forEach playableUnits;
+
                 if ((group _unit) == player_group) exitWith {};
             }; 
+            deleteMarker _mstr;
         };
     } forEach (units _group);
     _group selectLeader (selectRandom (units _group));
+
+    private _wp = _group addWaypoint [_pos, 10];
+    _wp setWaypointType "GUARD";
+    _trg = createTrigger ["WEST G", _pos];
+    _trg setTriggerArea [50, 50, 0, false]; 
 };
+
+
 
 ["Spawned squad"] call pcb_fnc_debug;
 
@@ -101,6 +119,11 @@ _state set ["taskpid", _taskpid];
 private _opos = _pos getPos [100 + random 50, random 360];
 private _foo = [_opos, 101, 20] call (_sobj get "Mission Encounter");
 private _ogroup = group ((_foo select 0) select 0); 
+_ogroup selectLeader ((units _ogroup) select 0);
+private _owp = _ogroup addWaypoint [_pos, 1];
+_owp setWaypointType "SAD";
+_owp setWaypointCombatMode "RED";
+_owp setWaypointBehaviour "COMBAT";
 
 if (isNil "_group") then {
     ["RESCUE :: _group is nil"] call pcb_fnc_debug;
@@ -117,7 +140,7 @@ if (isNil "_group") then {
                 private _done = false;
                 while { sleep 10; ! _done } do {
                     private _ounits = (units _ogroup) select { alive _x };
-                    private _aunits = _units select { alive _x };
+                    private _aunits = _units select { (alive _x) && {(group _x) != player_group} };
                     if ((isNil "_ounits") || { (count _ounits) < 1 } ) then { _done = true; };
                     if ((isNil "_aunits") || { (count _aunits) < 1 } ) then { _done = true; };
                     if (! _done) then {
@@ -141,6 +164,7 @@ if (isNil "_group") then {
 
 [_building] call pcb_fnc_add_loot_boxes_to_building;
 
+_state set ["trigger", _trg];
 private _result = [_state] call pcb_fnc_mis_ll_rescue;
 
 _result

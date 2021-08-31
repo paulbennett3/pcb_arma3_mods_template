@@ -83,7 +83,40 @@ if ("LEADER" in (toUpper (roleDescription player))) then {
         if ((leader player_group) != player) then {
             player_group selectLeader player;
             [player_group, player] remoteExec ["selectLeader", 0, true];
-            player setUnitRank "SERGEANT";
+            player setUnitRank "CAPTAIN";
+        };
+    };
+};
+
+
+// -------------------------------------------
+//   Run a local process to check on 
+//    destroyable objects
+//
+//  entry format:
+//    [target object, position, destroyed flag]
+// -------------------------------------------
+if (isNil "destroyable_monitor") then {
+
+    destroyable_monitor = true;
+
+    [] spawn {
+        while { sleep 5; true } do {
+            hint "running monitor ...";
+            systemChat (str destroyable_list);
+            {
+                private _pos = _x select 1;
+                _pos = [_pos select 0, _pos select 1];
+                private _found = nearestObject [_pos, "#crater"];
+                if (! isNull _found) then {
+                    if ((_found distance2D _pos) < 4) then {
+                        _x set [2, true];
+                        publicVariable "destroyable_list";
+                        destroyable_flag = true;
+                        publicVariable "destroyable_flag";
+                    };
+                };    
+            } forEach destroyable_list;
         };
     };
 };

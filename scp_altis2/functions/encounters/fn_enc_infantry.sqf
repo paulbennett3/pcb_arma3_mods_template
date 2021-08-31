@@ -57,9 +57,6 @@ if (true) then {
     // get a UID to identify the encounter
     private _UID = "S" + str ([] call pcb_fnc_get_next_UID);
 
-    // make a list of all the stuff we spawn
-    private _obj_list = [];
-
     private _group_size = objNull;
     if (_exact) then { 
         _group_size = count _types; 
@@ -74,7 +71,8 @@ if (true) then {
     // create a group
     private _group = [_ctypes, _pos, _side, false] call pcb_fnc_spawn_squad;
     [_group, _pos, _action] call pcb_fnc_set_behaviour;
-
+    private _obj_list = units _group;
+    if (isNil "_obj_list") then { _obj_list = []; };
     _entry = [false, objNull, _obj_list, false, objNull, objNull, _label];
 
     // record our encounter in the list so we can delete it later

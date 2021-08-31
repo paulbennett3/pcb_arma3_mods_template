@@ -17,6 +17,11 @@ if (isNil "_cluster_id") exitWith {};
 
 private _cluster = _map get _cluster_id;
 private _buildings = _cluster get "obj_list";
+private _center = _cluster get "center";
+private _a = _cluster get "a";
+private _b = _cluster get "b";
+private _area = [_center, _a + 500, _b + 500, 0, false, -1];
+if ([_area] call pcb_fnc_players_in_area) exitWith { _special_clusters };
 
 _special_clusters set [[_label, _cluster_id], true];
 

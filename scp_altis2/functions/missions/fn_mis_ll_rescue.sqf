@@ -81,6 +81,10 @@ private _pos = (_state get "taskpos");
             };
         };
     };
+    private _trg = _state get "trigger";
+    if (! (isNil "_trg")) then {
+        deleteVehicle _trg;
+    };
 };
 
 // -----------------------------------------

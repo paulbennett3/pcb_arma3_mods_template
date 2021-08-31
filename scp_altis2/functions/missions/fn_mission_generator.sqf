@@ -32,7 +32,7 @@ if (! isServer) exitWith {};
      // Make a list of possible scenarios to run
     _sobj set ["Scenarios", []];
     (_sobj get "Scenarios") pushBackUnique "functions\scenarios\fn_scn_zombies.sqf";
-    (_sobj get "Scenarios") pushBackUnique "functions\scenarios\fn_scn_occult.sqf";
+//    (_sobj get "Scenarios") pushBackUnique "functions\scenarios\fn_scn_occult.sqf";
     (_sobj get "Scenarios") pushBackUnique "functions\scenarios\fn_scn_aliens.sqf";
 
     // pick a scenario to run at random from our list, and compile it

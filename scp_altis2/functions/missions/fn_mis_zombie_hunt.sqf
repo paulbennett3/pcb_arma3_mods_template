@@ -74,6 +74,12 @@ if (! ([_pos] call pcb_fnc_is_valid_position)) exitWith { [false, _state] };
 //private _enc_info = [_pos, 101, 30] call pcb_fnc_mission_encounter;
 private _enc_info = [_pos, 101, 30] call (_sobj get "Mission Encounter");
 private _obj_list = _enc_info select 0;
+private _ogroup = group (_obj_list select 0);
+_ogroup selectLeader ((units _ogroup) select 0);
+[_ogroup, _pos, 20] call BIS_fnc_taskPatrol;
+private _cwp = _ogroup addWaypoint [_pos, 10];
+_cwp setWaypointType "CYCLE";
+
 private _type = _enc_info select 1;
 private _n = _enc_info select 2;
 private _did = _enc_info select 3;

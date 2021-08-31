@@ -7,10 +7,17 @@ as this is fairly expensive to run ...
 ----------------------------------------------------------- */
 params ["_target"];
 
+if (! isServer) exitWith {};
+
 if (isNil "destroyable_list") then {
     destroyable_list = [];
 };
-destroyable_list pushBackUnique _target;
+
+// [ object, position, destroyed flag]
+destroyable_list pushBackUnique [_target, getPosATL _target, false];
+publicVariable "destroyable_list";
+destroyable_flag = false;
+publicVariable "destroyable_flag";
 
 private _smoke_cloud = {
     params ["_target"];
@@ -58,37 +65,37 @@ private _smoke_cloud = {
 };
 
 
-if ((count destroyable_list) == 1) then {
-    [_smoke_cloud] spawn {
-        params ["_smoke_cloud"];
-        ["make destroyable monitor started"] call pcb_fnc_debug;
+[_smoke_cloud] spawn {
+    params ["_smoke_cloud"];
+    ["make destroyable monitor started"] call pcb_fnc_debug;
 
-        while { sleep 15; (count destroyable_list) > 0 } do {
-            // remove anything already destroyed ...
-            destroyable_list = destroyable_list select { alive _x };
-            ["make destroyable monitor running with " + (str (count destroyable_list)) + " items"] call pcb_fnc_debug;
-            private _list = allMissionObjects "#crater";
-            private _dldx = 0;
-            private _target = objNull;
-            private _destroyed = [];
-            for [{_dldx = 0}, {_dldx < (count destroyable_list)}, {_dldx = _dldx + 1}] do {
-                _target = destroyable_list select _dldx;
-                private _filtered_list = _list select {
-                    if ((_x distance2D _target) < 4) then { true } else { false };
-                };
-                if ((count _filtered_list) > 0) then {
-                    _destroyed pushBackUnique _target;
-                };
-            };
-            destroyable_list = destroyable_list - _destroyed;
-            for [{_dldx = 0}, {_dldx < (count _destroyed)}, {_dldx = _dldx + 1}] do {
-                private _target = _destroyed select _dldx;
-                private _pos = getPosATL _target;
-                [_target] call _smoke_cloud;
-            };
+    while { true } do {
+        // we wait until a client tells us they saw a crater near one of our objects
+        waitUntil { sleep 5; destroyable_flag };
+        ["make destroyable monitor processing ..." + (str destroyable_list)] call pcb_fnc_debug;
+
+        // note everything destroyed (dead or noted near a crater) ...
+        private _destroyed = destroyable_list select { (! alive (_x select 0)) || { _x select 2} };
+        ["  destroyed: " + (str _destroyed)] call pcb_fnc_debug;
+       
+        private _dldx = 0;
+        for [{}, {_dldx < (count _destroyed)}, {_dldx = _dldx + 1}] do {
+            private _entry = _destroyed select _dldx;
+            private _target =  _entry select 0;
+            ["make destroyable monitor destroying <" + (str _target) + "> ..."] call pcb_fnc_debug;
+// should mutex protect this!
+            destroyable_list  = destroyable_list - [ _entry ];
+
+            ["      target <" + (str _target) + ">"] call pcb_fnc_debug;
+            [_target] call _smoke_cloud;
+
         };
-
-        ["make destroyable monitor exiting"] call pcb_fnc_debug;
+        
+        ["make destroyable monitor done ..." + (str destroyable_list)] call pcb_fnc_debug;
+// should mutex protect this!
+        publicVariable "destroyable_list";
+        destroyable_flag = false;
+        publicVariable "destroyable_flag";
     };
 };
 

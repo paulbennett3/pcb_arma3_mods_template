@@ -49,8 +49,11 @@ spare vehicles and encounters.
 
     // get density of clustered buildings by "class" (MIL, CIV, IND, UNK)
     map_inspector_done = false;
+["launching map inspector"] call pcb_fnc_debug;
     [] call pcb_fnc_map_inspector;
+["waiting on map inspector"] call pcb_fnc_debug;
     waitUntil { sleep 1; map_inspector_done };
+["map inspector finished"] call pcb_fnc_debug;
 
     bck_trg_fired = [];
     publicVariable "bck_trg_fired";

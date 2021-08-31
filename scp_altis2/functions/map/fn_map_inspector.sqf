@@ -6,12 +6,12 @@
     private _density_map = [_size] call pcb_fnc_find_building_density;
 ["... done building density map"] call pcb_fnc_debug;
     if (isNil "_density_map") then {
-        ["Failed to generate density map"] remoteExec ["systemChat", 0];
+        ["Failed to generate density map"] call pcb_fnc_debug;
     } else {
 ["Merging density clusters ..."] call pcb_fnc_debug;
         private _map = _density_map get "CIV";
         private _values = (values _map) apply { _x select 0 };
-        if ((! (isNil "_values)) && { (count _values) > 0 } then {
+        if ((! (isNil "_values")) && { (count _values) > 0 }) then {
             _values sort true;
             private _uq = _values select (floor (3* (count _values) / 4));
             if (isNil "_uq") then { _uq = count _values; };
@@ -24,7 +24,7 @@
 
         _map = _density_map get "MIL";
         _values = (values _map) apply { _x select 0 };
-        if ((! (isNil "_values)) && { (count _values) > 0 } then {
+        if ((! (isNil "_values")) && { (count _values) > 0 }) then {
             _values sort true;
             private _uq = _values select (floor (3* (count _values) / 4));
             mil_clusters = [_map, "MIL", _uq] call pcb_fnc_merge_clusters;
@@ -36,7 +36,7 @@
 
         _map = _density_map get "IND";
         _values = (values _map) apply { _x select 0 };
-        if ((! (isNil "_values)) && { (count _values) > 0 } then {
+        if ((! (isNil "_values")) && { (count _values) > 0 }) then {
             _values sort true;
             private _uq = _values select (floor (3* (count _values) / 4));
             ind_clusters = [_map, "IND", _uq] call pcb_fnc_merge_clusters;

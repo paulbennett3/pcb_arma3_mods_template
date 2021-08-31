@@ -33,8 +33,6 @@ sleep .1;
 // ------------------------------------------------------------------
 [getPosATL (playableUnits select 0), player_group] call pcb_fnc_spawn_support_units;
 
-
-
 // figure out position along the line of the runway
 private _offset = 15; 
 private _next_pos = (playableUnits select 0) getPos [_offset, start_dir]; _offset = _offset + 10;
@@ -292,35 +290,36 @@ private _bbpos = _start_crate getPos [10, _pbb_dir];
 // ------------------------------------------------------------------
 //    Base Guard Squad (not under player control) 
 // ------------------------------------------------------------------
-private _guard_types_inf = [
-    "B_Soldier_GL_F",
-    "B_Soldier_F"
-];
-
 _offset = -20;
 _next_pos = (playableUnits select 0) getPos [_offset, start_dir]; _offset = _offset + 20;
-private _code = {
-    params ["_types", "_n", "_pos", "_side"];
-    private _group = createGroup _side;
-    for [{_ii = 0 }, {_ii < _n}, {_ii = _ii + 1}] do {
-        private _type = _types select _ii;
-        private _veh = _group createUnit [_type, _pos, [], 10, 'NONE'];
-        _veh triggerDynamicSimulation false; // won't wake up enemy units
-        [_veh] joinSilent _group;
+
+[_offset, _next_pos, start_pos] spawn {
+    params ["_offset", "_next_pos", "_pos"];
+    sleep (30 + random 30);
+
+    private _guard_types_inf = [
+        "B_Soldier_GL_F",
+        "B_Soldier_F",
+        "B_Soldier_F"
+    ];
+
+    private _i = 0;
+    for [{}, {_i < 3}, {_i = _i + 1}] do {
+        private _group = [_guard_types_inf, _next_pos, west, false] call pcb_fnc_spawn_squad;
+        _next_pos = (playableUnits select 0) getPos [_offset, start_dir]; _offset = _offset + 20;
+        _group selectLeader ((units _group) select 0);
+        private _wp = _group addWaypoint [_pos getPos [100 + random 50, start_dir], 20];
+        _wp setWaypointType "MOVE"; _wp setWaypointBehaviour "SAFE"; _wp setWaypointSpeed "LIMITED";
+        _wp = _group addWaypoint [_pos, 20];
+        _wp setWaypointType "CYCLE";
+        sleep (5 + random 2);
     };
-
-    // there is a limit to the number of groups, so we will mark this to delete
-    //  when empty
-    _group deleteGroupWhenEmpty true;
-
-    _group enableDynamicSimulation true;
-    [_group, _pos, 50] call BIS_fnc_taskPatrol;
-    sleep .1;
-};
-for [{_i = 0 }, {_i < 5}, {_i = _i + 1}] do {
-    [_guard_types_inf, count _guard_types_inf, _next_pos, west] call _code;
-    _next_pos = (playableUnits select 0) getPos [_offset, start_dir]; _offset = _offset + 20;
-    sleep .1;
 };
 
 [] call pcb_fnc_convenience;
+
+
+// test make destroyable
+private _mdtype = selectRandom (types_hash get "occult large items");
+private _mdveh = _mdtype createVehicle ((playableUnits select 0) getPos [90, 50]);
+[_mdveh] call pcb_fnc_make_destroyable;

@@ -31,13 +31,6 @@ ENC_MIN_PLAYER_DIST_CREATE = 500;
 ENC_MIN_PLAYER_DIST_DELETE = 1500;
 ENC_MAX_ACTIVE_ENC = 20;
 
-//publicVariable "TICKS_BETWEEN_ENCOUNTERS";
-//publicVariable "P_ENCOUNTER";
-//publicVariable "ENC_DIST";
-//publicVariable "ENC_RADIUS";
-//publicVariable "ENC_MIN_PLAYER_DIST_CREATE";
-//publicVariable "ENC_MIN_PLAYER_DIST_DELETE";
-//publicVariable "ENC_MAX_ACTIVE_ENC";
 // *****************************************************
 
 // for tracking groups for deletion as we get full
@@ -47,7 +40,7 @@ publicVariable "group_stack";
 [] spawn {
     private _count = 0;
     private _sleep_time = 10;
-    private _trigger_group_gc = 250; // max groups is ~288
+    private _trigger_group_gc = 200; // max groups is ~288
     sleep _sleep_time;
 
     spawned_encounters = createHashMap;
@@ -94,13 +87,12 @@ publicVariable "group_stack";
             // don't delete "static" entries
             if (! (_y select 0)) then {
                 // are there any players within range?
-                private _area = [getPos ((_y select 2) select 0)] + (triggerArea _trg);
+                private _area = [getPosATL ((_y select 2) select 0)] + (triggerArea _trg);
                 if (! ([_area] call pcb_fnc_players_in_area)) then {
                     // delete the hashmap entry!
-                    if (pcb_DEBUG) then {
-                        hint ("Deleting encounter - no players in area " + (str _y) + " <" + (str _area) + ">" + (str (getPosATL ((_y select 2) select 0))));
-                    };
-                    [("Deleting encounter " + (str _y))] call pcb_fnc_debug;
+                    ["Deleting encounter - no players in area " + (str _y) + 
+                     " <" + (str _area) + ">" + 
+                     (str (getPosATL ((_y select 2) select 0)))] call pcb_fnc_debug;
 
                     // so not static and no players within 2k -- delete!
                     //  Note!  can't use nested forEach!!!
