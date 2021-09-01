@@ -181,7 +181,13 @@ types_hash set ["civilians", [
     "C_man_polo_4_F_afro", "C_man_polo_5_F_afro", "C_man_polo_6_F_afro", "C_man_shorts_1_F_afro",
     "C_man_p_fugitive_F_afro", "C_man_p_shorts_1_F_afro", "C_man_shorts_2_F_afro", "C_Man_1_enoch_F",
     "C_Man_2_enoch_F", "C_Man_3_enoch_F", "C_Man_4_enoch_F", "C_Man_5_enoch_F",
-    "C_Man_6_enoch_F", "C_Farmer_01_enoch_F"
+    "C_Man_6_enoch_F", "C_Farmer_01_enoch_F",
+    "CUP_C_TK_Man_04", "CUP_C_TK_Man_04_Jack", "CUP_C_TK_Man_04_Waist", "CUP_C_TK_Man_07",
+    "CUP_C_TK_Man_07_Coat", "CUP_C_TK_Man_07_Waist", "CUP_C_TK_Man_08", "CUP_C_TK_Man_08_Jack",
+    "CUP_C_TK_Man_08_Waist", "CUP_C_TK_Man_05_Coat", "CUP_C_TK_Man_05_Waist", "CUP_C_TK_Man_06_Coat",
+    "CUP_C_TK_Man_06_Jack", "CUP_C_TK_Man_06_Waist", "CUP_C_TK_Man_02", "CUP_C_TK_Man_02_Waist",
+    "CUP_C_TK_Man_01_Waist", "CUP_C_TK_Man_01_Coat", "CUP_C_TK_Man_01_Jack", "CUP_C_TK_Man_03_Coat",
+    "CUP_C_TK_Man_03_Jack", "CUP_C_TK_Man_03_Waist"
 ]];
 
 types_hash set ["civ infected", [
@@ -369,7 +375,16 @@ types_hash set ["civ vehicles", [
     "C_Van_02_service_F", "C_Van_02_transport_F", "C_Truck_02_fuel_F", "C_Truck_02_box_F",
     "C_Truck_02_transport_F", "C_Truck_02_covered_F", "C_Van_02_medevac_F", "vn_c_bicycle_01",
     "vn_b_wheeled_m151_02", "vn_o_wheeled_z157_02_nva65", "vn_o_wheeled_z157_01_nva65",
-    "vn_c_wheeled_m151_02", "vn_c_wheeled_m151_01", "C_Van_01_fuel_F", "C_Offroad_01_F"
+    "vn_c_wheeled_m151_02", "vn_c_wheeled_m151_01", "C_Van_01_fuel_F", "C_Offroad_01_F",
+    "CUP_C_TT650_CIV", "CUP_C_Skoda_CR_CIV", "CUP_C_Skoda_Blue_CIV", "CUP_C_Skoda_Green_CIV",
+    "CUP_C_Skoda_Red_CIV", "CUP_C_Skoda_White_CIV", "CUP_C_S1203_CIV_CR", "CUP_B_S1203_Ambulance_CR",
+    "CUP_C_S1203_Militia_CIV", "CUP_C_Datsun_Covered", "CUP_C_Datsun_Plain", "CUP_C_Datsun_Tubeframe",
+    "CUP_C_Volha_CR_CIV", "CUP_C_Golf4_red_Civ", "CUP_C_Golf4_CR_Civ", "CUP_C_Golf4_Sport_CR_Civ",
+    "CUP_O_Hilux_unarmed_CR_CIV", "CUP_O_Hilux_unarmed_CR_CIV_Red", "CUP_O_Hilux_unarmed_CR_CIV_Tan",
+    "CUP_O_Hilux_unarmed_CR_CIV_White", "CUP_C_Ikarus_Chernarus", "CUP_C_Bus_City_CRCIV",
+    "CUP_C_SUV_CIV", "CUP_C_Tractor_Old_CIV", "CUP_C_Ural_Civ_03", "CUP_C_Ural_Open_Civ_03",
+    "CUP_C_Lada_CIV", "CUP_LADA_LM_CIV", "CUP_C_Lada_Red_CIV", "CUP_C_Lada_White_CIV",
+    "RDS_JAWA353_Civ_01", "RDS_MMT_Civ_01", "RDS_Old_bike_Civ_01"
 ]];
 
 
@@ -378,7 +393,8 @@ types_hash set ["civ vehicles", [
 // --------------------------------
 types_hash set ["police", [
     "B_GEN_Commander_F",
-    "B_GEN_Soldier_F"
+    "B_GEN_Soldier_F",
+    "CUP_C_R_Policeman_02"
 ]];
 
 // --------------------------------
@@ -396,14 +412,17 @@ types_hash set ["police vehicles", [
 // --------------------------------
 types_hash set ["civ air", [
     "C_Plane_Civil_01_F",
-    "C_Heli_Light_01_civil_F"
+    "C_Heli_Light_01_civil_F",
+    "CUP_C_AN2_CIV",
+    "CUP_C_DC3_ChernAvia_CIV"
 ]];
 
 // --------------------------------
 //   Ambulance
 // --------------------------------
 types_hash set ["ambulance", [
-    "C_Van_02_medevac_F"
+    "C_Van_02_medevac_F",
+    "CUP_B_S1203_Ambulance_CR"
 ]];
 
 
@@ -559,7 +578,8 @@ types_hash set ["heli civ", [
     "B_Heli_Light_01_F",
     "C_Heli_Light_01_civil_F",
     "C_Heli_Light_01_civil_F",
-    "C_IDAP_Heli_Transport_02_F"
+    "C_IDAP_Heli_Transport_02_F",
+    "CUP_C_SA330_Puma_HC1_ChernAvia"
 ]];
 
 types_hash set ["heli mil", [
@@ -618,7 +638,9 @@ types_hash set ["hangars", [
     "Land_Ss_hangard",
     "Land_Ss_hangar",
     "Land_Mil_hangar_EP1",
-    "WarfareBAirport"
+    "WarfareBAirport",
+    "Land_ServiceHangar_01_L_F",
+    "Land_ServiceHangar_01_R_F"
 ]];
 
 
@@ -638,7 +660,11 @@ types_hash set ["car large civ", [
     "vn_o_wheeled_z157_02_nva65",
     "vn_o_wheeled_z157_01_nva65",
     "vn_c_wheeled_m151_02",
-    "vn_c_wheeled_m151_01"
+    "vn_c_wheeled_m151_01",
+    "CUP_C_Ikarus_Chernarus",
+    "CUP_C_Bus_City_CRCIV",
+    "CUP_C_Ural_Civ_03",
+    "CUP_C_Ural_Open_Civ_03"
 ]];
 
 types_hash set ["car large mil", [
@@ -679,7 +705,15 @@ types_hash set ["car medium civ", [
     "C_Offroad_01_repair_F",
     "C_Van_01_box_F",
     "C_Tractor_01_F",
-    "C_Van_01_transport_F"
+    "C_Van_01_transport_F",
+    "CUP_C_S1203_CIV_CR",
+    "CUP_B_S1203_Ambulance_CR",
+    "CUP_C_S1203_Militia_CIV",
+    "CUP_O_Hilux_unarmed_CR_CIV",
+    "CUP_O_Hilux_unarmed_CR_CIV_Red",
+    "CUP_O_Hilux_unarmed_CR_CIV_Tan",
+    "CUP_O_Hilux_unarmed_CR_CIV_White",
+    "CUP_C_SUV_CIV"
 ]];
 
 types_hash set ["car medium mil", [
@@ -699,7 +733,27 @@ types_hash set ["car small civ", [
     "C_Hatchback_01_F",
     "C_Hatchback_01_sport_F",
     "C_Offroad_02_unarmed_F",
-    "C_Quadbike_01_F"
+    "C_Quadbike_01_F",
+    "CUP_C_TT650_CIV",
+    "CUP_C_Skoda_CR_CIV",
+    "CUP_C_Skoda_Blue_CIV",
+    "CUP_C_Skoda_Red_CIV",
+    "CUP_C_Skoda_White_CIV",
+    "CUP_C_Datsun_Covered",
+    "CUP_C_Datsun_Plain",
+    "CUP_C_Datsun_Tubeframe",
+    "CUP_C_Volha_CR_CIV",
+    "CUP_C_Golf4_red_Civ",
+    "CUP_C_Golf4_CR_Civ",
+    "CUP_C_Golf4_Sport_CR_Civ",
+    "CUP_C_Tractor_Old_CIV",
+    "CUP_C_Lada_CIV",
+    "CUP_LADA_LM_CIV",
+    "CUP_C_Lada_Red_CIV",
+    "CUP_C_Lada_White_CIV",
+    "RDS_JAWA353_Civ_01",
+    "RDS_MMT_Civ_01",
+    "RDS_Old_bike_Civ_01"
 ]];
 
 types_hash set ["car small mil", [
@@ -750,7 +804,8 @@ types_hash set ["boat civ", [
     "C_Boat_Civil_01_rescue_F",
     "C_Rubberboat",
     "C_Boat_Transport_02_F",
-    "C_Scooter_Transport_01_F"    
+    "C_Scooter_Transport_01_F",
+    "CUP_C_Fishing_Boat_Chernarus"
 ]];
 
 types_hash set ["boat mil", [

@@ -14,9 +14,10 @@ private _classes = [
     "INDUSTRIAL", "IND", "CULTURAL", "CEMETERIES", "DOMINANTS",
     "CIVILIAN", "CIV", "COMMERCIAL", "HOUSEHOLDS", "HOUSE", "HOUSEBLOCKS", "RUINS"
 ];
-private _type = typeOf _building;
-private _config = configOf _building;
-private _model = [_config >> "model"] call BIS_fnc_getCfgData;
+//private _type = typeOf _building;
+//private _config = configOf _building;
+//private _model = [_config >> "model"] call BIS_fnc_getCfgData;
+private _model = (getModelInfo _building) select 1;
 
 private _fields = (_model splitString "\") apply { toUpper _x };
 private _class = _fields arrayIntersect _classes;

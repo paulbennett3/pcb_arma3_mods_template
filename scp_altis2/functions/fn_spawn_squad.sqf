@@ -23,6 +23,12 @@ for [{_ij = 0 }, {_ij < (count _types)}, {_ij = _ij + 1}] do {
 };
 [_group] call pcb_fnc_log_group;
 
+// possible dedicated server "freeze" workaround ...
+{ _x setUnconscious true; } forEach (units _group);
+sleep 3;
+{ _x setUnconscious false; } forEach (units _group);
+
+
 if (_do_task) then {
     [_group, _pos] call BIS_fnc_taskDefend;
 };

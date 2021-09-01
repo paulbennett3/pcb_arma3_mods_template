@@ -102,8 +102,8 @@ if (isNil "destroyable_monitor") then {
 
     [] spawn {
         while { sleep 5; true } do {
-            hint "running monitor ...";
-            systemChat (str destroyable_list);
+//            hint "running monitor ...";
+//            systemChat (str destroyable_list);
             {
                 private _pos = _x select 1;
                 _pos = [_pos select 0, _pos select 1];

@@ -37,7 +37,12 @@ publicVariable "message_box";
        private _msg = message_box deleteAt 0;
        publicVariable "message_box";
        ["release", _my_mutex_id, server_mail_mutex] call pcb_fnc_mutex;
-["Server State processing " + (str _msg)] call pcb_fnc_debug;
+
+       // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+       // Don't use pcb_fnc_debug -- it echos the message to chat !!!! causes infinite loop on chat handlers ... !!!!
+       // ["Server State processing " + (str _msg)] call pcb_fnc_debug;
+       diag_log ("PCB :: Server State processing " + (str _msg));
+       // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
        private _msg_type = _msg select 0;
 
        switch (_msg_type) do {

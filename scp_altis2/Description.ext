@@ -49,6 +49,7 @@ class CfgFunctions
             class destroy_building {};
             class enable_ai_respawn {};
             class find_object_clusters {};
+            class force_squad_resupply {};
             class get_cool_building_location {};
             class get_city_positions {};
             class get_empty_pos {};

@@ -21,13 +21,14 @@ params ["_name", "_text", "_owner"];
 // Set up a handler for chat messages (resupply et al)
 //addMissionEventHandler ["HandleChatMessage", _handler ];
 
-private _mode = "";
+private _mode = "UNKNOWN";
 private _temp = toLowerANSI _text;
 if ("resupply ammo" in _temp) then { _mode = "ammo"; };
 if ("resupply support" in _temp) then { _mode = "support"; };
 if ("resupply medical" in _temp) then { _mode = "medical"; };
-    
-if (! (_mode isEqualTo "")) then {
+if ("resupply there" in _temp) then { _mode = "squad_resupply"; };
+
+if (_mode in ["ammo", "support", "medical"]) then {
     private _fields = _temp splitString " ";
     private _grid = _fields select 3;
     // returns [[x, y], [width, height]]
@@ -79,4 +80,10 @@ if (! (_mode isEqualTo "")) then {
             [_unit, _pos, _crate, _dispersion] call pcb_fnc_paradrop_stuff;       
         };
     };
+};
+    
+// Used to command squad to resupply at object pointed to
+if (_mode in ["squad_resupply"]) then {
+    hint ("squad resupply requested");
+    [] remoteExec ["pcb_fnc_force_squad_resupply", _owner];
 };

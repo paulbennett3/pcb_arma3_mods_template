@@ -64,6 +64,7 @@ private _types = types_hash get "hangars";
 for [{_hdx = 0}, {_hdx < (count _types)}, {_hdx = _hdx + 1 }] do {
     private _type = _types select _hdx;
     _hangars = _hangars + (world_center nearObjects [_type, worldSize]);
+    sleep 1;
 };
 ["Found " + (str (count _hangars)) + " hangars"] call pcb_fnc_debug;
 for [{_hdx = 0}, {_hdx < (count _hangars)}, {_hdx = _hdx + 1}] do {
