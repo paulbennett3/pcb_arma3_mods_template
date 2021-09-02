@@ -323,3 +323,4 @@ _next_pos = (playableUnits select 0) getPos [_offset, start_dir]; _offset = _off
 private _mdtype = selectRandom (types_hash get "occult large items");
 private _mdveh = _mdtype createVehicle ((playableUnits select 0) getPos [90, 50]);
 [_mdveh] call pcb_fnc_make_destroyable;
+

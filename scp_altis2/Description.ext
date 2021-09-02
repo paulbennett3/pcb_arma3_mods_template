@@ -103,6 +103,7 @@ class CfgFunctions
             class spawn_spare_helicopters {};
             class spawn_spare_vehicles {};
             class spawn_squad {};
+            class spawn_squadron {};
             class spawn_support_units {};
             class types {};
         };

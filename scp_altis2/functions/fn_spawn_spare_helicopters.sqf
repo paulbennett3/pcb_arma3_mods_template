@@ -99,12 +99,16 @@ for [{_hdx = 0}, {_hdx < (count _hangars)}, {_hdx = _hdx + 1}] do {
         private _vtype = selectRandom [ 
             "C_Van_01_fuel_F",
             "C_Offroad_01_repair_F",
-            "C_Quadbike_01_F"     
-        ];
+            "C_Quadbike_01_F",
+            "CUP_B_TowingTractor_USA",
+            "CUP_B_TowingTractor_USA",
+            "CUP_B_TowingTractor_USA",
+            "CUP_B_TowingTractor_USA"
+       ];
         private _sveh = _vtype createVehicle _svpos;
         _sveh setDir _dir;
     };
-
+ 
     if (pcb_DEBUG) then {
         private _mn = "M" + str ([] call pcb_fnc_get_next_UID);
         private _m = createMarker [_mn, _pos];
