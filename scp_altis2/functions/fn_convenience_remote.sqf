@@ -102,21 +102,21 @@ if (isNil "destroyable_monitor") then {
 
     [] spawn {
         while { sleep 5; true } do {
-//            hint "running monitor ...";
-//            systemChat (str destroyable_list);
-            {
-                private _pos = _x select 1;
-                _pos = [_pos select 0, _pos select 1];
-                private _found = nearestObject [_pos, "#crater"];
-                if (! isNull _found) then {
-                    if ((_found distance2D _pos) < 4) then {
-                        _x set [2, true];
-                        publicVariable "destroyable_list";
-                        destroyable_flag = true;
-                        publicVariable "destroyable_flag";
-                    };
-                };    
-            } forEach destroyable_list;
+            if (! isNil "destroyable_list") then {
+                {
+                    private _pos = _x select 1;
+                    _pos = [_pos select 0, _pos select 1];
+                    private _found = nearestObject [_pos, "#crater"];
+                    if (! isNull _found) then {
+                        if ((_found distance2D _pos) < 4) then {
+                            _x set [2, true];
+                            publicVariable "destroyable_list";
+                            destroyable_flag = true;
+                            publicVariable "destroyable_flag";
+                        };
+                    };    
+                } forEach destroyable_list;
+            };
         };
     };
 };
