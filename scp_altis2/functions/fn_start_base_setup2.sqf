@@ -104,6 +104,8 @@ private _tent_type = _tent_type_rot select 0; private _tent_rot = _tent_type_rot
 [_desk, "B_CargoNet_01_ammo_F", [5, 10, 0.4], 45 + (random 90)] call _attachIt;
 [_desk, "B_CargoNet_01_ammo_F", [0, 10, 0.4], 45 + (random 90)] call _attachIt;
 [_desk, "B_CargoNet_01_ammo_F", [-5, 10, 0.4], 45 + (random 90)] call _attachIt;
+[_desk, "CUP_BOX_US_ARMY_WpsLaunch_F", [-8, 10, .7], 45 + (random 90)] call _attachIt;
+[_desk, "Box_NATO_WpsLaunch_F", [-9, 10, 0.0], 45 + (random 90)] call _attachIt;
 _cabinet = [_desk, "Land_PortableCabinet_01_medical_F", [3.5, 2.55, 0], 35] call _attachIt;
 _cabinet addItemCargoGlobal ["FirstAidKit", 10]; _cabinet addItemCargoGlobal ["Medikit", 1];
 private _stuff = [ "dmpAntibiotics", "dmpAntidote", "RyanZombiesAntiVirusCure_Item", "RyanZombiesAntiVirusTemporary_Item", "dmpBandage", "dmpHeatpack", "dmpPainkillers", "dmpStims"];
@@ -208,33 +210,34 @@ _marker_respawn_veh setMarkerType "respawn_air";
 // ------------------------------------------------------------------
 private _vehicle_list = [];
 
-// We need a ground transport for 10+ troops always
-private _gt = selectRandom [
-    "O_Truck_03_transport_F",
-    "B_G_Van_02_transport_F",
-    "O_Truck_03_covered_F",
-    "O_T_APC_Wheeled_02_rcws_v2_ghex_F",
-    "O_APC_Wheeled_02_rcws_v2_F"
-];
-_vehicle_list pushBack ["Group Transport", _gt, 15];
+// Transport filter clauses (for use with config data and configClasses function)
+private _is_military = " (getNumber (_x >> 'side') != 3) ";
+private _transport4plus = " (getNumber (_x >> 'transportSoldier') >= 4) ";
+private _transport8plus = " (getNumber (_x >> 'transportSoldier') >= 8) ";
+private _ground_vehicle = " (getText (_x >> 'vehicleClass') in ['Armored','Car']) ";
+private _airground_vehicle = " (getText (_x >> 'vehicleClass') in ['Air','Armored','Car']) ";
 
-private _ft_types = [
-    "B_LSV_01_unarmed_F",
-    "O_LSV_02_unarmed_F",
-    "B_G_Van_01_transport_F",
-    "B_G_Offroad_01_F",
-    "O_MRAP_02_F",
-    "O_LSV_02_unarmed_F",
-    "O_T_APC_Wheeled_02_rcws_v2_ghex_F"
-];
-_vehicle_list pushBack ["Transport", selectRandom _ft_types, 15];
-_vehicle_list pushBack ["Transport", selectRandom _ft_types, 15];
+// At least one vehicle that can transport 8 (plus driver and "gunner", so usually 10+)
+private _ground_transport8_f = [_is_military, _transport8plus, _ground_vehicle] joinString " && ";
+private _gt_types = (_ground_transport8_f configClasses (configFile >> "CfgVehicles")) apply { configName _x };
+private _gt = selectRandom _gt_types;
+_vehicle_list pushBack ["Group Transport", _gt, 20];
+
+private _ground_transport4_f = [_is_military, _transport4plus, _ground_vehicle] joinString " && ";
+private _ft_types = (_ground_transport4_f configClasses (configFile >> "CfgVehicles")) apply { configName _x };
+private _ft1 = selectRandom _ft_types;
+_vehicle_list pushBack ["Transport", _ft1, 25];
+
+private _airground_transport4_f = [_is_military, _transport4plus, _airground_vehicle] joinString " && ";
+private _aft_types = (_airground_transport4_f configClasses (configFile >> "CfgVehicles")) apply { configName _x };
+private _ft2 = selectRandom _aft_types;
+_vehicle_list pushBack ["Transport", _ft2, 25];
 
 // Large air transport
-//_vehicle_list pushBack ["SUPPORT", "B_Heli_Transport_03_F", 20];
 _vehicle_list pushBack ["Cargo Heli", "O_Heli_Transport_04_F", 20];
 _vehicle_list pushBack ["SPACER", "SPACER", 30];
-_vehicle_list pushBack ["VTOL", "B_T_VTOL_01_vehicle_F", 30];
+
+systemChat (str _vehicle_list);
 
 private _vdx = 0;
 for [{_vdx = 0}, {_vdx < (count _vehicle_list)}, { _vdx = _vdx + 1 }] do {
@@ -317,10 +320,4 @@ _next_pos = (playableUnits select 0) getPos [_offset, start_dir]; _offset = _off
 };
 
 [] call pcb_fnc_convenience;
-
-
-// test make destroyable
-private _mdtype = selectRandom (types_hash get "occult large items");
-private _mdveh = _mdtype createVehicle ((playableUnits select 0) getPos [90, 50]);
-[_mdveh] call pcb_fnc_make_destroyable;
 

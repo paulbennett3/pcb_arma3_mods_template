@@ -8,7 +8,8 @@ if (! isServer) exitWith {};
 
 // dawn ~ 4am, dark ~8pm
 setDate [2021, 7, 10, 4, 0]; // 4 am
-skipTime (random 16);
+// start mission with no less than 4 hours of day light
+skipTime (random 12);
 
 private _rnd = random 1;
 

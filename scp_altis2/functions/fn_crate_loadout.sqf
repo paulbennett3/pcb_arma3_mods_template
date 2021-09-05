@@ -38,6 +38,7 @@ _obj addMagazineAmmoCargo ["100Rnd_65x39_caseless_mag_Tracer", 60, 100];
 _obj addMagazineAmmoCargo ["30Rnd_65x39_caseless_mag", 60, 30];
 _obj addMagazineAmmoCargo ["30Rnd_9x21_Green_Mag", 20, 30];
 
+_obj addMagazineAmmoCargo ["CUP_1Rnd_HEDP_M203", 40, 1];
 _obj addMagazineAmmoCargo ["1Rnd_HE_Grenade_shell", 40, 1];
 _obj addMagazineAmmoCargo ["1Rnd_SmokeGreen_Grenade_shell", 8, 1];
 _obj addMagazineAmmoCargo ["ClaymoreDirectionalMine_Remote_Mag", 4, 1];

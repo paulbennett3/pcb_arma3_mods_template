@@ -94,7 +94,7 @@ for [{_hdx = 0}, {_hdx < (count _hangars)}, {_hdx = _hdx + 1}] do {
     _veh setDir _dir;
     sleep .1;
 
-    if ((random 100) < 34) then {
+    if ((random 100) < 50) then {
         private _svpos = _pos getPos [15, 90];
         private _vtype = selectRandom [ 
             "C_Van_01_fuel_F",

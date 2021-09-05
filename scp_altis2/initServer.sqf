@@ -14,8 +14,8 @@ mworld_center = createMarker ["MWORLD_CENTER", world_center];
 "MWORLD_CENTER" setMarkerType "Empty";
 publicVariable "mworld_center";
 
-pcb_DEBUG = true;
-//pcb_DEBUG = false;
+//pcb_DEBUG = true;
+pcb_DEBUG = false;
 publicVariable "pcb_DEBUG";
 
 [] call pcb_fnc_types; // initialize our type lists
@@ -29,7 +29,7 @@ publicVariable "pcb_DEBUG";
 // epicenter is set in fn_preinit_setup.sqf
 // ------------------------------------------
 _marker = createMarker ["mEPI", epicenter];
-"mEPI" setMarkerSize [5000, 5000];
+"mEPI" setMarkerSize [mission_radius, mission_radius];
 
 if (pcb_DEBUG) then {
     "mEPI" setMarkerShapeLocal "ELLIPSE";
