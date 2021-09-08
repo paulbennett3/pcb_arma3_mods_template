@@ -46,19 +46,23 @@ while {_tries > 0} do {
 
     if ( ([_rpos] call pcb_fnc_is_valid_position) && { surfaceIsWater _rpos } ) then {
         private _type = ["boat", "any", _civ] call pcb_fnc_get_random_vehicle;
-        _veh = createVehicle [_type, [_rpos select 0, _rpos select 1], [], 5, "NONE"];
-        _veh setDir (random 360);
+        _rpos = _rpos findEmptyPosition [0, 5, _type];
 
-        // doesn't count if it blows up on spawn in ...
-        sleep 0.1;
-        if ((damage _veh) > 0.1) then {
-            // d'oh -- it gots some dings.  try again ...
-            deleteVehicle _veh;
-            _veh = objNull;
-        } else {
-            _tries = -10;
+        if ( ([_rpos] call pcb_fnc_is_valid_position) && { surfaceIsWater _rpos } ) then {
+            _veh = createVehicle [_type, [_rpos select 0, _rpos select 1], [], 0, "NONE"];
+            _veh setDir (random 360);
+
+            // doesn't count if it blows up on spawn in ...
+            sleep 0.1;
+            if ((damage _veh) > 0.1) then {
+                // d'oh -- it gots some dings.  try again ...
+                deleteVehicle _veh;
+                _veh = objNull;
+            } else {
+                _tries = -10;
+            };
+
         };
-
     };
 };
 

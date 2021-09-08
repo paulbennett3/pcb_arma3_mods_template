@@ -101,9 +101,8 @@ spare vehicles and encounters.
         } else {
             private _cluster_num = _cid select 1;
             private _cluster = objNull;
-            private _chance = .10;
+            private _chance = .20;
             if (_label isEqualTo "MIL") then {
-                _chance = .15;
                 _cluster = mil_clusters get _cluster_num;
             } else {
                 if (_label isEqualTo "IND") then {

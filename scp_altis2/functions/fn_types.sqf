@@ -573,7 +573,31 @@ types_hash set ["static cargo mil", [
     "Land_Pod_Heli_Transport_04_box_F"
 ]];
 
-// Helicopters
+// Helicopters and Planes 
+private _air_vehicle = " (getText (_x >> 'vehicleClass') in ['Air']) ";
+private _heli_vehicle = " (getText (_x >> 'textSingular') in ['helicopter']) ";
+private _is_military = " (getNumber (_x >> 'side') != 3) ";
+private _is_civ = " (getNumber (_x >> 'side') == 3) ";
+
+private _civ_heli_f = [_is_civ, _heli_vehicle] joinString " && ";
+private _mil_heli_f = [_is_military, _heli_vehicle] joinString " && ";
+private _civ_air_f = [_is_civ, _air_vehicle] joinString " && ";
+private _mil_air_f = [_is_military, _air_vehicle] joinString " && ";
+
+types_hash set ["heli civ", 
+    (_civ_heli_f configClasses (configFile >> "CfgVehicles")) apply { configName _x }
+];
+types_hash set ["heli mil", 
+    (_mil_heli_f configClasses (configFile >> "CfgVehicles")) apply { configName _x }
+];
+types_hash set ["air civ", 
+    (_civ_air_f configClasses (configFile >> "CfgVehicles")) apply { configName _x }
+];
+types_hash set ["air mil",
+    (_mil_air_f configClasses (configFile >> "CfgVehicles")) apply { configName _x }
+];
+
+/*
 types_hash set ["heli civ", [
     "B_Heli_Light_01_F",
     "C_Heli_Light_01_civil_F",
@@ -627,6 +651,7 @@ types_hash set ["plane mil", [
     "O_Plane_Fighter_02_F", "O_Plane_Fighter_02_Stealth_F", "O_T_VTOL_02_infantry_dynamicLoadout_F",
     "O_T_VTOL_02_vehicle_dynamicLoadout_F", "I_Plane_Fighter_03_dynamicLoadout_F", "I_Plane_Fighter_04_F"
 ]];
+*/
 
 types_hash set ["hangars", [
     "Land_Airport_01_hangar_F",
@@ -634,15 +659,18 @@ types_hash set ["hangars", [
     "Land_Airport_02_hangar_right_F",
     "Land_Hangar_F",
     "Land_TentHangar_V1_F",
-    "Land_vn_airport_02_hangar_left_f",
-    "Land_vn_airport_02_hangar_right_f",
-    "Land_vn_airport_01_hangar_f",
     "Land_Ss_hangard",
     "Land_Ss_hangar",
     "Land_Mil_hangar_EP1",
     "WarfareBAirport",
     "Land_ServiceHangar_01_L_F",
-    "Land_ServiceHangar_01_R_F"
+    "Land_ServiceHangar_01_R_F",
+    "Land_vn_airport_01_hangar_f",
+    "Land_vn_airport_02_hangar_left_f",
+    "Land_vn_airport_02_hangar_right_f",
+    "Land_vn_usaf_hangar_01",
+    "Land_vn_usaf_hangar_02",
+    "Land_vn_usaf_hangar_03"
 ]];
 
 
@@ -889,6 +917,15 @@ types_hash set ["boat mil", [
     "B_Boat_Transport_01_F",
     "CUP_B_MK10_GB",
     "CUP_B_ZUBR_CDF"
+]];
+
+// vehicles *not* to randomly spawn ...
+types_hash set ["air exclude", [
+    "SG_DeathGlider_heli", "SG_f302_plane", "sg_hatak",
+    "sga_needlethreader_normal", "sga_osiris_cruiser",
+    "ssa_Jumper", "ssa_Jumper_unarmed", "teltac_heli",
+    "sg_wraith_dart_normal", "deathglider_normal",
+    "SG_Daedalus"
 ]];
 
 // -----------------------------------------------------

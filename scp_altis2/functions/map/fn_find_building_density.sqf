@@ -28,6 +28,10 @@ sleep .1;
 _buildings = _buildings arrayIntersect _buildings;
 sleep .1;
 
+// use this to keep lists of specific buildings / types of buildings
+private _hangar_types = (types_hash get "hangars") apply { toLowerANSI _x };
+hangar_list = [];
+
 if (! isNil "_buildings") then {
     private _bidx = 0;
     for [{_bidx = 0}, { _bidx < (count _buildings) }, { _bidx = _bidx + 1 }] do {
@@ -39,6 +43,11 @@ if (! isNil "_buildings") then {
             if ((isNil "_n_pos") || (_n_pos < 1)) then {
             } else { 
                 private _type = typeOf _x;
+ 
+                // track certain types of buildings so we don't have to look for them later ...
+                if ((toLowerANSI _type) in _hangar_types) then {
+                    hangar_list pushBackUnique _x;
+                };
 
                 private _my_class = _building_type_class get _type;
                 if (isNil "_my_class") then {
@@ -59,4 +68,8 @@ if (! isNil "_buildings") then {
         };
     }; // forEach _buildings;
 };
+
+// let the helicopter thread know we have gathered all the hangars
+hangar_list_done = true;
+
 _density_map

@@ -230,14 +230,13 @@ _vehicle_list pushBack ["Transport", _ft1, 25];
 
 private _airground_transport4_f = [_is_military, _transport4plus, _airground_vehicle] joinString " && ";
 private _aft_types = (_airground_transport4_f configClasses (configFile >> "CfgVehicles")) apply { configName _x };
+_aft_types = _aft_types - (types_hash get "air exclude");
 private _ft2 = selectRandom _aft_types;
 _vehicle_list pushBack ["Transport", _ft2, 25];
 
 // Large air transport
 _vehicle_list pushBack ["Cargo Heli", "O_Heli_Transport_04_F", 20];
 _vehicle_list pushBack ["SPACER", "SPACER", 30];
-
-systemChat (str _vehicle_list);
 
 private _vdx = 0;
 for [{_vdx = 0}, {_vdx < (count _vehicle_list)}, { _vdx = _vdx + 1 }] do {

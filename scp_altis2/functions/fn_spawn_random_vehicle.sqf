@@ -55,22 +55,24 @@ while {_tries > 0} do {
         _code
     ] call BIS_fnc_randomPos;
 
-    if (((_rpos select 0) != 0) or ((_rpos select 1) != 0)) then {
+    if (([_rpos] call pcb_fnc_is_valid_position)) then {
         private _type = ["car", "any", _civ] call pcb_fnc_get_random_vehicle;
-        _veh = createVehicle [_type, _rpos, [], 5, "NONE"];
-        // _veh setVariable ["BIS_enableRandomization", false];
-        _veh setDir (random 360);
+        _rpos = _rpos findEmptyPosition [0, 5, _type];
+        if (([_rpos] call pcb_fnc_is_valid_position)) then {
+            _veh = createVehicle [_type, _rpos, [], 0, "NONE"];
+            // _veh setVariable ["BIS_enableRandomization", false];
+            _veh setDir (random 360);
 
-        // doesn't count if it blows up on spawn in ...
-        sleep 0.1;
-        if ((damage _veh) > 0.1) then {
-            // d'oh -- it gots some dings.  try again ...
-            deleteVehicle _veh;
-            _veh = objNull;
-        } else {
-            _tries = -10;
+            // doesn't count if it blows up on spawn in ...
+            sleep 0.1;
+            if ((damage _veh) > 0.1) then {
+                // d'oh -- it gots some dings.  try again ...
+                deleteVehicle _veh;
+                _veh = objNull;
+            } else {
+                _tries = -10;
+            };
         };
-
     };
 };
 
