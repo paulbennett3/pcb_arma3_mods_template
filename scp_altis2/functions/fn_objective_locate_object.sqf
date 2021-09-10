@@ -33,7 +33,7 @@ if (_radius == 0) then {
     // don't make a trigger with radius 0 -- use completion of child tasks instead
 } else {
     _trg = createTrigger ["EmptyDetector", _pos];
-    _trg setTriggerArea [_radius, _radius, 0, false];
+    _trg setTriggerArea [_radius, _radius, 0, false, 2];
     _trg setVariable ["payload", ['simple_task', _taskID, 'DONE', _trg]];
     _trg setTriggerActivation ["ANYPLAYER", "PRESENT", false];
     _trg setTriggerStatements [

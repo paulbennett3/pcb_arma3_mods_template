@@ -24,11 +24,14 @@ params ["_name", "_text", "_owner"];
 private _mode = "UNKNOWN";
 private _temp = toLowerANSI _text;
 if ("resupply ammo" in _temp) then { _mode = "ammo"; };
+if ("resupply grenades" in _temp) then { _mode = "grenades"; };
+if ("resupply explosives" in _temp) then { _mode = "explosives"; };
+if ("resupply launchers" in _temp) then { _mode = "launchers"; };
 if ("resupply support" in _temp) then { _mode = "support"; };
 if ("resupply medical" in _temp) then { _mode = "medical"; };
 if ("resupply there" in _temp) then { _mode = "squad_resupply"; };
 
-if (_mode in ["ammo", "support", "medical"]) then {
+if (_mode in ["ammo", "grenades", "explosives", "launchers", "support", "medical"]) then {
     private _fields = _temp splitString " ";
     private _grid = _fields select 3;
     // returns [[x, y], [width, height]]
@@ -54,6 +57,24 @@ if (_mode in ["ammo", "support", "medical"]) then {
         switch (_mode) do {
             case "ammo": { 
                 _crate = "B_supplyCrate_F" createVehicle [0, 0, 0];
+                _crate addItemCargoGlobal ["launch_RPG7_F", 1];
+                _crate addItemCargoGlobal ["SmokeShellGreen", 4];
+                _crate addItemCargoGlobal ["SmokeShellRed", 4];
+                _crate addMagazineAmmoCargo ["30Rnd_762x39_AK12_Mag_F",10,30];
+                _crate addMagazineAmmoCargo ["75rnd_762x39_AK12_Mag_Tracer_F",4,75];
+                _crate addMagazineAmmoCargo ["CUP_1Rnd_HEDP_M203",10,1];
+                _crate addMagazineAmmoCargo ["CUP_OG7_M",2,1];
+                _crate addMagazineAmmoCargo ["CUP_PG7V_M",2,1];
+                _crate addMagazineAmmoCargo ["CUP_1Rnd_HE_GP25_M",10,1];
+            };
+            case "grenades": { 
+                _crate = "Box_NATO_Grenades_F" createVehicle [0, 0, 0];
+            };
+            case "explosives": { 
+                _crate = "Box_NATO_AmmoOrd_F" createVehicle [0, 0, 0];
+            };
+            case "launchers": { 
+                _crate = "Box_NATO_WpsLaunch_F" createVehicle [0, 0, 0];
             };
             case "medical": { 
                 _crate = "ACE_medicalSupplyCrate_advanced" createVehicle [0, 0, 0];

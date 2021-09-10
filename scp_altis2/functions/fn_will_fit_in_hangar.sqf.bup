@@ -1,0 +1,108 @@
+/* ****************************************************************************
+                        will fit in hangar
+
+Test if the given object type will fit in the given hangar
+
+Parameters:
+    _hangar (object) : building to try to fit object into
+    _obj (object) : thing (object) to fit in _hangar
+    _type (string) : type string of object, for debug
+
+Returns:
+   bool :  true if it seems like it will fit, false else
+**************************************************************************** */
+params ["_hangar", "_obj", "_type"];
+
+// ----------------------------
+// ----------------------------
+private _hangar_type = typeOf _hangar;
+if (isNil "hangar_dims") then { hangar_dims = createHashMap; };
+private _dims = hangar_dims get _hangar_type;
+if (isNil "_dims") then {
+    private _pos = getPosATL _hangar;
+    private _bb = boundingBoxReal _hangar;
+    private _bl = [(_bb select 0) select 0, (_bb select 0) select 1, 1] vectorAdd _pos;
+    private _bu = [(_bb select 1) select 0, (_bb select 1) select 1, 1] vectorAdd _pos;
+
+    // need ASL for the surface intersect test
+    private _poss = ATLToASL _pos; _poss = [_poss select 0, _poss select 1, 1];
+    private _bls = ATLToASL _bl;
+    private _bus = ATLToASL _bu;
+
+    // find the upper and lower bounds -- either the bounding box of our hangar, or
+    //  where we first encounter a wall
+    private _lb = _bl;
+    private _dist = _pos distance2D _lb;
+    private _intersections_l = lineIntersectsSurfaces [_bls, _poss, objNull, objNull, true, -1, "GEOM", "VIEW", false];
+    {
+        if ((_pos distance2D _x) < _dist) then {
+            _lb = _x;
+            _dist = _pos distance2D _lb;
+        };
+    } forEach (_intersections_l apply { ASLToATL (_x select 0) });
+    private _ub = _bu;
+    private _dist = _pos distance2D _ub;
+    private _intersections_u = lineIntersectsSurfaces [_poss, _bus, objNull, objNull, true, -1, "GEOM", "VIEW", false];
+    {
+        if ((_pos distance2D _x) < _dist) then {
+            _ub = _x;
+            _dist = _pos distance2D _ub;
+        };
+    } forEach (_intersections_u apply { ASLToATL (_x select 0) });
+    private _minx = _lb select 0;
+    private _miny = _lb select 1;
+    private _maxx = _ub select 0;
+    private _maxy = _ub select 1;
+
+    private _midx = (_minx + _maxx) / 2;
+    private _midy = (_miny + _maxy) / 2;
+
+    private _dx = _maxx - _minx;
+    private _dy = _maxy - _miny;
+    private _cdx = (_pos select 0) - _midx;
+    private _cdy = (_pos select 1) - _midy;
+    _dims = [_dx, _dy, 999, _cdx, _cdy];
+    hangar_dims set [_hangar_type, _dims];
+};
+_dims = hangar_dims get _hangar_type;
+_dx = _dims select 0;
+_dy = _dims select 1;
+_dz = _dims select 2;
+_cdx = _dims select 3;
+_cdy = _dims select 4;
+
+// ----------------------------
+// ----------------------------
+private _pos = getPosATL _hangar;
+private _center = [(_pos select 0) + _cdx, (_pos select 1) + _cdy, 0];
+private _halfx = _dx / 2;
+private _halfy = _dy / 2;
+private _minx = (_center select 0) - _halfx;
+private _maxx = (_center select 0) + _halfx;
+private _miny = (_center select 1) - _halfy;
+private _maxy = (_center select 1) + _halfy;
+"Sign_Arrow_Green_F" createVehicle [_minx, _miny, 0.1];
+"Sign_Arrow_Green_F" createVehicle [_minx, _maxy, 0.1];
+"Sign_Arrow_Green_F" createVehicle [_maxx, _miny, 0.1];
+"Sign_Arrow_Green_F" createVehicle [_maxx, _maxy, 0.1];
+"Sign_Arrow_Blue_F" createVehicle _center;
+"Sign_Arrow_F" createVehicle _pos;
+
+// ----------------------------
+// ----------------------------
+
+// gets the X, Y, and Z dimensions of the bounding boxes
+private _hdims = _hangar call BIS_fnc_boundingBoxDimensions;
+// private _hdims = [_dx, _dy, _dz];
+private _odims = _obj call BIS_fnc_boundingBoxDimensions;
+
+private _will_fit = true;
+// add some margins
+private _margin = 2;
+_odims = _odims vectorAdd [_margin, _margin, _margin];
+private _too_big = (_hdims vectorDiff _odims) select { _x < 0 };
+if ((count _too_big) > 0) then {
+    _will_fit = false;
+};
+
+_will_fit

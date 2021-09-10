@@ -9,7 +9,12 @@ Parameters:
 ******************************************************************* */
 params ["_size"];
 
+
+// temporary, local mapping
 private _building_type_class = createHashMap;
+
+// more long term info -- for use by other functions
+building_info_map = createHashMap;
 
 private _density_map = createHashMap;
 _density_map set ["MIL", createHashMap];
@@ -50,9 +55,31 @@ if (! isNil "_buildings") then {
                 };
 
                 private _my_class = _building_type_class get _type;
+                // have we seen this class of building before? If not, make a note of it
                 if (isNil "_my_class") then {
                     _my_class = [_x] call pcb_fnc_building_classifier;
                     _building_type_class set [_type, _my_class];
+
+                    private _positions = _x buildingPos -1;
+                    private _zlevels = _positions apply { _x select 2 };
+                    _zlevels = _zlevels arrayIntersect _zlevels;
+                    private _n = 0;
+                    if (_x inArea active_area) then { _n = 1; };
+                    
+                    building_info_map set [_type, createHashMapFromArray [ 
+                        ["type", _type],
+                        ["class", _my_class],
+                        ["npositions", count _positions],
+                        ["zlevels", _zlevels],
+                        ["n", _n]
+                    ]];
+                } else {
+                    if (_x inArea active_area) then {
+                        // keep track of the number of this type of building we've seen
+                        private _temp = building_info_map get _type;
+                        private _n = _temp get "n";
+                        _temp set ["n", _n + 1];
+                    };
                 };
 
                 private _xx = floor ((_pos select 0) / _size); 

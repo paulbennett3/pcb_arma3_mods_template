@@ -159,7 +159,8 @@ switch (_action) do {
 
             // update our mission list (what we can choose from)
             _sobj set ["Mission List",  []]; 
-            (_sobj get "Mission List") pushBackUnique "functions\missions\fn_mis_alien_hunt.sqf";
+            //(_sobj get "Mission List") pushBackUnique "functions\missions\fn_mis_alien_hunt.sqf";
+            (_sobj get "Mission List") pushBackUnique "functions\missions\fn_mis_box_deliver.sqf";
             _sobj set ["Total Missions", 1];
             _sobj set ["Mission Select", "random"];
         }; 

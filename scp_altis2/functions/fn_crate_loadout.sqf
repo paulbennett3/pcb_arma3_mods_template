@@ -31,12 +31,22 @@ _obj addItemCargoGlobal ["vn_m72_mag", 8];
 _obj addItemCargoGlobal ["vn_m1897", 4];
 _obj addItemCargoGlobal ["vn_m1897_fl_mag", 4]; // magazineAmmo?!?
 _obj addItemCargoGlobal ["vn_m1897_buck_mag", 4]; // magazineAmmo?!?
+_obj addItemCargoGlobal ["launch_RPG7_F", 4];
+_obj addItemCargoGlobal ["RPG7_F", 4];
 
 sleep .1;
 // mag
 _obj addMagazineAmmoCargo ["100Rnd_65x39_caseless_mag_Tracer", 60, 100];
 _obj addMagazineAmmoCargo ["30Rnd_65x39_caseless_mag", 60, 30];
 _obj addMagazineAmmoCargo ["30Rnd_9x21_Green_Mag", 20, 30];
+_obj addMagazineAmmoCargo ["30Rnd_762x39_AK12_Mag_F",20,30];
+_obj addMagazineAmmoCargo ["75rnd_762x39_AK12_Mag_Tracer_F",10,75];
+_obj addMagazineAmmoCargo ["CUP_1Rnd_HEDP_M203",10,1];
+_obj addMagazineAmmoCargo ["CUP_OG7_M",10,1];
+_obj addMagazineAmmoCargo ["CUP_PG7V_M",10,1];
+_obj addMagazineAmmoCargo ["CUP_1Rnd_SmokeGreen_GP25_M",10,1];
+_obj addMagazineAmmoCargo ["CUP_IlumFlareGreen_GP25_M",10,1];
+_obj addMagazineAmmoCargo ["CUP_1Rnd_HE_GP25_M",10,1];
 
 _obj addMagazineAmmoCargo ["CUP_1Rnd_HEDP_M203", 40, 1];
 _obj addMagazineAmmoCargo ["1Rnd_HE_Grenade_shell", 40, 1];

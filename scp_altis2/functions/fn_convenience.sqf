@@ -6,7 +6,7 @@
     _x createDiaryRecord [
         "diary", [
             "Resupply", 
-            "Resupply chat commands:<br /> resupply X at Y <br /> where X is ammo, medical, or support, and " +
+            "Resupply chat commands:<br /> resupply X at Y <br /> where X is ammo, explosives, grenades, launchers, medical, quad, or support, and " +
             "Y is grid coordinates.  <br /> Example:  resupply ammo at 124125<br /> resupply there <br /> " + 
             "will cause the squad to attempt to move to the item pointed to and resupply"
         ]

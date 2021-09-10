@@ -6,8 +6,8 @@ This is done to script Drongo's fantastic mods at random locations.
 --------------------------------------------------------------------------- */
 
 if (! isServer) exitWith {};
-//mission_radius = 5000;
-mission_radius = selectRandom [2000, 2000, 2000, 3000, 3000, 5000];
+//mission_radius = selectRandom [2000, 2000, 2000, 3000, 3000, 5000];
+mission_radius = 5000;
 publicVariable "mission_radius";
 
 // Pick a random location (not in the water) to place the "epicenter"

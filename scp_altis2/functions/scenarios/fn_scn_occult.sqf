@@ -139,6 +139,7 @@ switch (_action) do {
             (_sobj get "Mission List") pushBackUnique "functions\missions\fn_mis_desk_evidence.sqf";
             (_sobj get "Mission List") pushBackUnique "functions\missions\fn_mis_investigate.sqf";
             (_sobj get "Mission List") pushBackUnique "functions\missions\fn_mis_building_search.sqf";
+            (_sobj get "Mission List") pushBackUnique "functions\missions\fn_mis_box_deliver.sqf";
             (_sobj get "Mission List") pushBackUnique "functions\missions\fn_mis_interview.sqf";
 
             _sobj set ["Total Missions", selectRandom [2, 3]];

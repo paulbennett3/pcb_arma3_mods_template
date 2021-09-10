@@ -245,6 +245,7 @@ for [{_vdx = 0}, {_vdx < (count _vehicle_list)}, { _vdx = _vdx + 1 }] do {
     private _type = _x select 1;
     private _delta = _x select 2;
     _next_pos = (playableUnits select 0) getPos [_offset, start_dir]; _offset = _offset + _delta;
+    _next_pos = [_next_pos select 0, _next_pos select 1, 0.1];
     if (! (_type isEqualTo "SPACER")) then {
         private _veh = _type createVehicle _next_pos;
         if ((unitIsUAV _veh) || (_label isEqualTo "SUPPORT")) then {
